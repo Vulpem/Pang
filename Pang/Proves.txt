@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 
 Pos mu bien
+=======
+estic fen una prova, aixo sera un joc molt guai del paraguai
+>>>>>>> origin/master
