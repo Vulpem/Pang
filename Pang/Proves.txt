@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 Pos mu bien DAVID ES TOONTO
-=======
+
+
 estic fen una prova, aixo sera un joc molt guai del paraguai
->>>>>>> origin/master
-=======
-estic fen una prova, aixo sera un joc molt guai del mariachi
->>>>>>> ae3ef2d53b1ef6d89140b2d7db7352fc4cb65f5c
