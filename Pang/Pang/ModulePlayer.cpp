@@ -93,98 +93,114 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	//Shot
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-	{
-		current_animation = &shot;
-	}
+//Shot
+if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+{
+	current_animation = &shot;
+}
 
-	//Fall
-	if (playerState == falling)
+//Fall
+if (playerState == falling)
+{
+	speed = 1;
+	fallCounter++;
+	position.y += 2;
+
+	if (fallCounter > 8)
 	{
-		speed = 1;
-		fallCounter++;
 		position.y += 2;
-
-		if (fallCounter > 8)
-		{
-			position.y += 2;
-		}
-
-		if (map1[position.y / 8 + 4][position.x / 8] == 1)
-		{
-			fallCounter = 0;
-			playerState = standing;
-			speed = 2;
-		}
 	}
 
-	//Climb
-
-	if (playerState != falling)
+	if (map1[position.y / 8 + 4][position.x / 8] == 1)
 	{
-		if (map1[(position.y + 15) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 15) / 8][(position.x + 12) / 8] == 2 ||
-			map1[(position.y + 31) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 31) / 8][(position.x + 12) / 8] == 2)
+		fallCounter = 0;
+		playerState = standing;
+		speed = 2;
+	}
+}
+
+//Climb
+
+if (playerState != falling)
+{
+	if (map1[(position.y + 15) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 15) / 8][(position.x + 12) / 8] == 2 ||
+		map1[(position.y + 31) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 31) / 8][(position.x + 12) / 8] == 2)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 		{
-			if (App->input->keyboard[SDL_SCANCODE_W] == 1)
-			{		
-				//Align position with the ladder
-				if (!ladderAlign)
+			//Align position with the ladder
+			if (!ladderAlign)
+			{
+				int x = position.x / 8;
+				int y = (position.y / 8) + 1;
+
+				int i = 0;
+				int j = 0;
+
+				//Search for a 2
+				for (int k = 0; k != 2; i++)
 				{
-					int x = position.x / 8;
-					int y = (position.y / 8) + 1;
-
-					int i = 0;
-					int j = 0;
-
-					//Search for a 2
-					for (int k = 0; k != 2; i++)
+					for (j = 0; k != 2; j++)
 					{
-						for (j = 0; k != 2; j++)
-						{
-							k = map1[y+i][x+j];
-						}
+						k = map1[y + i][x + j];
 					}
-					i--;
-					j--;
+				}
+				i--;
+				j--;
 
-					//Correct the position of the character
-					if (map1[y+i][x+j-1] != 2)
-					{
-						position.x = ((position.x / 8) + j) * 8;
-					}
-
-					else
-					{
-						position.x = ((position.x / 8) + j - 1)* 8;
-					}	
-					ladderAlign = true;
+				//Correct the position of the character
+				if (map1[y + i][x + j - 1] != 2)
+				{
+					position.x = ((position.x / 8) + j) * 8;
 				}
 
-				
-				
-				climb.speed = 0.16f;
-				playerState = climbing;
-				current_animation = &climb;
-
-				//Check if the ladder ends
-				if ((map1[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
-					(map1[(position.y + 29) / 8][(position.x + 12) / 8] != 2))
+				else
 				{
-					current_animation = &endclimb;
-					playerState = standing;
-					ladderAlign = false;
+					position.x = ((position.x / 8) + j - 1) * 8;
 				}
-				position.y-=2;
-
+				ladderAlign = true;
 			}
 
+
+
+			climb.speed = 0.16f;
+			playerState = climbing;
+			current_animation = &climb;
+
+			//Check if the ladder ends
+			if ((map1[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
+				(map1[(position.y + 29) / 8][(position.x + 12) / 8] != 2))
+			{
+				current_animation = &endclimb;
+				playerState = standing;
+				ladderAlign = false;
+			}
+			position.y -= 2;
+
 		}
 
-		if (map1[position.y / 8 + 4][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 4][(position.x + 12) / 8] == 2)
+	}
+
+	if (map1[position.y / 8 + 4][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 4][(position.x + 12) / 8] == 2)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_S] == 1)
 		{
-			if (App->input->keyboard[SDL_SCANCODE_S] == 1)
+			//Align position with the ladder
+			if (!ladderAlign)
 			{
+				int x = position.x / 8;
+				int y = (position.y / 8);
+
+				if (map1[y + 4][x] != 2)
+				{
+					position.x = (position.x / 8 + 2) * 8;
+				}
+				else
+					position.x = (position.x / 8 - 1) * 8;
+
+				ladderAlign = true;
+			}
+
 				climb.speed = 0.16f;
 				playerState = climbing;
 				current_animation = &climb;
