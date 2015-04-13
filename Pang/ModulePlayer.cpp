@@ -21,16 +21,38 @@ ModulePlayer::ModulePlayer(Application* app) : Module(app)
 	// idle animation
 	idle.frames.PushBack({ 10, 112, 32, 32 });
 
+	// idle2 animation
+	idle2.frames.PushBack({ 14, 179, 28, 32 });
 	// forward animation
 	forward.frames.PushBack({ 10, 2, 32, 32 });
 	forward.frames.PushBack({ 44, 2, 32, 32 });
 	forward.frames.PushBack({ 78, 2, 32, 32 });
 	forward.frames.PushBack({ 112, 2, 32, 32 });
+	forward.frames.PushBack({ 10, 2, 32, 32 });
+	forward.frames.PushBack({ 44, 2, 32, 32 });
+	forward.frames.PushBack({ 78, 2, 32, 32 });
+	forward.frames.PushBack({ 112, 2, 32, 32 });
 	forward.frames.PushBack({ 146, 2, 32, 32 });
-	forward.speed = 0.16f;
+	forward.speed = 0.32f;
+
+	// backward animation
+	backward.frames.PushBack({ 10, 146, 32, 32 });
+	backward.frames.PushBack({ 44, 146, 32, 32 });
+	backward.frames.PushBack({ 78, 146, 32, 32 });
+	backward.frames.PushBack({ 112, 146, 32, 32 });
+	backward.frames.PushBack({ 10, 146, 32, 32 });
+	backward.frames.PushBack({ 44, 146, 32, 32 });
+	backward.frames.PushBack({ 78, 146, 32, 32 });
+	backward.frames.PushBack({ 112, 146, 32, 32 });
+	backward.frames.PushBack({ 146, 146, 32, 32 });
+	backward.speed = 0.32f;
+
 
 	// shot animation
 	shot.frames.PushBack({ 44, 112, 32, 32 });
+
+	// shot2 animation
+	shot2.frames.PushBack({ 44, 179, 32, 32 });
 
 	// climb animation
 	climb.frames.PushBack({ 80, 36, 30, 32 });
@@ -51,7 +73,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("../Image_Sources/Player.png"); // arcade version
+	graphics = App->textures->Load("./Image_Sources/Player.png"); // arcade version
 	return ret;
 }
 
@@ -76,28 +98,46 @@ update_status ModulePlayer::Update()
 
 	if (playerState != climbing)
 	{
-		current_animation = &idle;
+		if (movementDirection == 1)
+			current_animation = &idle;
+		if (movementDirection == -1)
+			current_animation = &idle2;
 
 		//Move right
-		if (App->input->keyboard[SDL_SCANCODE_D] == 1)
+		if (App->input->keyboard[SDL_SCANCODE_D] == 1 )
 		{
-			current_animation = &forward;
-			if (map1[position.y / 8][(position.x + 25) / 8] != 1)
+			if (App->input->keyboard[SDL_SCANCODE_A] != 1 && map1[position.y / 8][(position.x + 25) / 8] != 1)
+			{
+				current_animation = &forward;
 				position.x += speed;
+				movementDirection = 1;
+			}
+
 		}
 
 		//Move left
-		if (App->input->keyboard[SDL_SCANCODE_A] == 1 && map1[position.y / 8][(position.x - 1) / 8] != 1)
+		if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 		{
-			position.x -= speed;
+			if (App->input->keyboard[SDL_SCANCODE_D] != 1 && map1[position.y / 8][(position.x - 1) / 8] != 1)
+			{
+				current_animation = &backward;	
+				position.x -= speed;
+				movementDirection = - 1;
+			}
+
 		}
 	}
 
 //Shot
+	
 if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 {
-	current_animation = &shot;
+	if (movementDirection == 1)
+		current_animation = &shot;
+	else if (movementDirection == -1)
+		current_animation = &shot2;
 }
+
 
 //Fall
 if (playerState == falling)
@@ -181,7 +221,9 @@ if (playerState != falling)
 
 	}
 
-	if (map1[position.y / 8 + 4][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 4][(position.x + 12) / 8] == 2)
+
+	if (map1[position.y / 8 + 4][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 4][(position.x + 12) / 8] == 2 ||
+		map1[position.y / 8 + 2][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 2][(position.x + 12) / 8] == 2)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_S] == 1)
 		{
@@ -189,15 +231,28 @@ if (playerState != falling)
 			if (!ladderAlign)
 			{
 				int x = position.x / 8;
-				int y = (position.y / 8);
+				int y = (position.y / 8) + 4;
 
-				if (map1[y + 4][x] != 2)
+				int i = 0;
+
+				//Search for a 2
+				for (int k = 0; k != 2; i++)
 				{
-					position.x = (position.x / 8 + 2) * 8;
+					k = map1[y][x + i];
 				}
-				else
-					position.x = (position.x / 8 - 1) * 8;
 
+				i--;
+
+				//Correct the position of the character
+				if (map1[y + i][x + i - 1] != 2)
+				{
+					position.x = ((position.x / 8) + i) * 8;
+				}
+
+				else
+				{
+					position.x = ((position.x / 8) + i - 1) * 8;
+				}
 				ladderAlign = true;
 			}
 
@@ -206,7 +261,7 @@ if (playerState != falling)
 				current_animation = &climb;
 
 				//Check if the ladder ends
-				if ((map1[(position.y + 34) / 8][(position.x + 11) / 8] != 2))
+				if ((map1[(position.y + 34) / 8][(position.x + 11) / 8] == 1) || (map1[(position.y / 8) + 2][(position.x + 11) / 8] == 1))
 				{
 					playerState = standing;
 					ladderAlign = false;
@@ -215,12 +270,14 @@ if (playerState != falling)
 			}
 		}
 
+
 		//Stop the climbing animation
 		if (playerState == climbing && App->input->keyboard[SDL_SCANCODE_W] != 1 && App->input->keyboard[SDL_SCANCODE_S] != 1)
 		{
 			climb.speed = 0.0f;
 		}
-	}
+}
+
 
 	if (current_animation != NULL)
 	{

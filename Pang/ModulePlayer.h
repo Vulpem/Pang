@@ -23,6 +23,7 @@ public:
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;
+	int movementDirection = 1;
 
 public:
 	Animation* current_animation = NULL;
@@ -30,11 +31,13 @@ public:
 	SDL_Texture* graphics;
 
 	Animation idle;
+	Animation idle2;
 	Animation forward;
 	Animation backward;
 	Animation climb;
 	Animation endclimb;
 	Animation shot;
+	Animation shot2;
 	p2Point<int> position;
 
 };

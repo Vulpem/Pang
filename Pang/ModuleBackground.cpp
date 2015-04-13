@@ -37,7 +37,7 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("../Image_Sources/Backgrounds.png");
+	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	return ret;
 }
 
