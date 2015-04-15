@@ -137,6 +137,7 @@ if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 		current_animation = &shot;
 	else if (movementDirection == -1)
 		current_animation = &shot2;
+	App->gun->Shoot(position);
 	
 }
 

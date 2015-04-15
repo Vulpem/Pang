@@ -132,7 +132,7 @@ public:
 			}
 		}
 
-		RELEASE(item);
+		delete item;
 		--size;
 		return(true);
 	}

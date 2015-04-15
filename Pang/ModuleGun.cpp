@@ -2,6 +2,9 @@
 #include "Application.h"
 #include "ModuleGun.h"
 #include "List.h"
+#include "Maps2.h"
+
+#include <iostream>
 
 bool ModuleGun::Start()
 {
@@ -25,24 +28,65 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 	b->end_rect.y = b->end.y;
 	b->end_rect.w = 10;
 	b->end_rect.h = 10;
+
+	active.add(b);
+}
+
+void ModuleGun::Shoot(p2Point<int> startPoint)
+{
+	if (active.count() == 0)
+	{
+		AddBullet(startPoint);
+	}
 }
 
 update_status ModuleGun::Update()
 {
+
 	p2List_item<Bullet*>* tmp = active.getFirst();
-	p2List_item<Bullet*>* tmp_next  = active.getFirst();
+	p2List_item<Bullet*>* tmp_next = active.getFirst();
 	while (tmp != NULL)
 	{
+		Bullet* b = tmp->data;
 		tmp_next = tmp->next;
-		tmp->data->end.y--;
+
+		if (b->Update() == false)
+		{
+			std::cout << "Destroying Bullet";
+			delete b;
+			active.del(tmp);
+		}
+		else
+			App->renderer->DrawQuad(tmp->data->end_rect, 255, 255, 255, 255);
+		tmp = tmp_next;
 	}
 
-	tmp = tmp_next;
 	return UPDATE_CONTINUE;
 }
 
-//ModuleGun(Application* app);
-//~ModuleGun();
+ModuleGun::ModuleGun(Application* app) :Module(app)
+{
+
+}
+ModuleGun::~ModuleGun()
+{
+
+}
+
+bool Bullet::Update()
+{
+	bool ret = true;
+	std::cout << "Updating bullet";
+	if (map2[(end.y - 1) / 8][end.x] == 1)
+	{
+		ret = false;
+	}
+	else
+		end.y--;
+		end_rect.y = end.y;
+	
+	return ret;
+}
 
 
 

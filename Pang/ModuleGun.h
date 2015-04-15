@@ -3,7 +3,7 @@
 #include "p2Point.h"
 #include "List.h"
 #include "Globals.h"
-
+//#include "Maps.h"
 
 struct Bullet
 {
@@ -14,12 +14,15 @@ struct Bullet
 
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
+
+	bool Update();
 };
 
 
 class ModuleGun : public Module
 {
 public:
+
 	ModuleGun(Application* app);
 	~ModuleGun();
 
@@ -27,6 +30,8 @@ public:
 	update_status Update();
 
 	void AddBullet(p2Point<int>);
+
+	void Shoot(p2Point<int>);
 
 public:
 
