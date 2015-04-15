@@ -83,7 +83,7 @@ bool Bullet::Update()
 {
 	bool ret = true;
 	std::cout << "Updating bullet";
-	if (map2[(end.y - 1) / 8][end.x] == 1)
+	if (map2[(end.y - 1) / 8][end.x/8] != 0)
 	{
 		ret = false;
 	}
