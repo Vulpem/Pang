@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 #include "Maps.h"
+#include "ModuleGun.h"
 
 #include <iostream>
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -136,6 +137,7 @@ if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 		current_animation = &shot;
 	else if (movementDirection == -1)
 		current_animation = &shot2;
+	
 }
 
 

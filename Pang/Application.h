@@ -9,6 +9,7 @@
 #include "ModuleInput.h"
 #include "ModuleBackground.h"
 #include "ModulePlayer.h"
+#include "ModuleGun.h"
 
 class Application
 {
@@ -19,6 +20,7 @@ public:
 	ModuleInput* input;
 	ModuleBackground* background;
 	ModulePlayer* player;
+	ModuleGun* gun;
 
 private:
 
