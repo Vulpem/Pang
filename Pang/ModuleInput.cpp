@@ -2,9 +2,12 @@
 #include "Application.h"
 #include "ModuleInput.h"
 
+#define MAX_KEYS 300
+
 ModuleInput::ModuleInput(Application* app) : Module(app)
 {
-	keyboard = NULL;
+	keyboard = new KEY_STATE[MAX_KEYS];
+	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 }
 
 // Destructor
@@ -32,9 +35,27 @@ update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
 
-	keyboard = SDL_GetKeyboardState(NULL);
+	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-	if(keyboard[SDL_SCANCODE_ESCAPE] == 1)
+	for (int i = 0; i < MAX_KEYS; ++i)
+	{
+		if (keys[i] == 1)
+		{
+			if (keyboard[i] == KEY_IDLE)
+				keyboard[i] = KEY_DOWN;
+			else
+				keyboard[i] = KEY_REPEAT;
+		}
+		else
+		{
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboard[i] = KEY_UP;
+			else
+				keyboard[i] = KEY_IDLE;
+		}
+	}
+
+	if (keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
 
 	return UPDATE_CONTINUE;

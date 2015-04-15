@@ -26,6 +26,9 @@ public:
 	ModuleGun(Application* app);
 	~ModuleGun();
 
+	bool shootAvailable = true;
+
+public:
 	bool Start();
 	update_status Update();
 

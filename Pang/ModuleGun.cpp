@@ -37,6 +37,7 @@ void ModuleGun::Shoot(p2Point<int> startPoint)
 	if (active.count() == 0)
 	{
 		AddBullet(startPoint);
+		shootAvailable = false;
 	}
 }
 
@@ -55,9 +56,14 @@ update_status ModuleGun::Update()
 			std::cout << "Destroying Bullet";
 			delete b;
 			active.del(tmp);
+			shootAvailable = true;
 		}
 		else
-			App->renderer->DrawQuad(tmp->data->end_rect, 255, 255, 255, 255);
+		{
+			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
+			App->renderer->DrawQuad(tmp->data->start_rect, 255, 0, 0, 255);
+		}
+
 		tmp = tmp_next;
 	}
 
@@ -82,8 +88,11 @@ bool Bullet::Update()
 		ret = false;
 	}
 	else
+	{
 		end.y--;
 		end_rect.y = end.y;
+	}
+
 	
 	return ret;
 }
