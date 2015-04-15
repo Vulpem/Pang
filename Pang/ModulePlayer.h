@@ -24,8 +24,10 @@ public:
 	int fallCounter = 0;
 	bool ladderAlign = false;
 	int movementDirection = 1;
+	p2Point<int> position;
 
 public:
+
 	Animation* current_animation = NULL;
 
 	SDL_Texture* graphics;
@@ -38,6 +40,7 @@ public:
 	Animation endclimb;
 	Animation shot;
 	Animation shot2;
-	p2Point<int> position;
+
+
 
 };
