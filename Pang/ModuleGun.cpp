@@ -17,17 +17,18 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 
 	b->start = startPoint;
 	b->end = startPoint;
+	b->end.y -= 24;
 
 	//Creating the rectangle references
 	b->start_rect.x = b->start.x;
 	b->start_rect.y = b->start.y;
-	b->start_rect.w = 10;
-	b->start_rect.h = 10;
+	b->start_rect.w = 1;
+	b->start_rect.h = 1;
 
 	b->end_rect.x = b->end.x;
 	b->end_rect.y = b->end.y;
-	b->end_rect.w = 10;
-	b->end_rect.h = 10;
+	b->end_rect.w = 1;
+	b->end_rect.h = 1;
 
 	active.add(b);
 }
@@ -83,7 +84,7 @@ bool Bullet::Update()
 {
 	bool ret = true;
 	std::cout << "Updating bullet";
-	if (map2[(end.y - 1) / 8][end.x/8] != 0)
+	if (map2[(end.y - 1) / 8][end.x/8] == 1)
 	{
 		ret = false;
 	}

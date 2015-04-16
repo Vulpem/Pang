@@ -130,7 +130,8 @@ update_status ModulePlayer::Update()
 	}
 
 	//Shot
-	if (App->gun->shootAvailable == true)
+
+	if (playerState != climbing && App->gun->shootAvailable == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
@@ -138,15 +139,15 @@ update_status ModulePlayer::Update()
 			if (movementDirection == 1)
 			{
 				current_animation = &shot;
-				offset.x = 10;
-				offset.y = 0;
+				offset.x = 14;
+				offset.y = 31;
 			}
 
 			else if (movementDirection == -1)
 			{
 				current_animation = &shot2;
-				offset.x = 5;
-				offset.y = 0;
+				offset.x = 9;
+				offset.y = 31;
 			}
 
 			App->gun->Shoot((position+offset));
@@ -224,7 +225,7 @@ update_status ModulePlayer::Update()
 
 				//Check if the ladder ends
 				if ((map1[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
-					(map1[(position.y + 29) / 8][(position.x + 12) / 8] != 2))
+					(map1[(position.y + 29) / 8][(position.x + 12) / 8] == 0))
 				{
 					current_animation = &endclimb;
 					playerState = standing;
@@ -276,8 +277,10 @@ update_status ModulePlayer::Update()
 					current_animation = &climb;
 
 					//Check if the ladder ends
-					if ((map1[(position.y + 34) / 8][(position.x + 11) / 8] == KEY_REPEAT) || (map1[(position.y / 8) + 2][(position.x + 11) / 8] == KEY_REPEAT))
+					if ((map1[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
+			
 					{
+						if ((map1[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
 						playerState = standing;
 						ladderAlign = false;
 					}
