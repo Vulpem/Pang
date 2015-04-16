@@ -76,8 +76,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int) (camera.x * speed) + x * SCREEN_SIZE;
-	rect.y = (int) (camera.y * speed) + y * SCREEN_SIZE;
+	rect.x = x * SCREEN_SIZE;
+	rect.y = y * SCREEN_SIZE;
 
 	if(section != NULL)
 	{

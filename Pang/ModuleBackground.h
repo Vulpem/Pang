@@ -16,6 +16,5 @@ public:
 	
 	SDL_Texture* graphics;
 	SDL_Rect background;
-//	Animation flag;
 
 };

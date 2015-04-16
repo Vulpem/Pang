@@ -6,13 +6,12 @@
 
 ModuleBackground::ModuleBackground(Application* app) : Module(app)
 {
-
 	graphics = NULL;
 
 	background.x = 8;
 	background.y = 8;
 	background.w = SCREEN_WIDTH;
-	background.h = SCREEN_HEIGHT - 4*TILE;
+	background.h = SCREEN_HEIGHT - 4 * TILE;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -31,7 +30,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	App->renderer->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
+	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 
 	return UPDATE_CONTINUE;
 }

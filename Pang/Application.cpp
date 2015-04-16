@@ -30,8 +30,9 @@ Application::~Application()
 	delete textures;
 	delete input;
 	delete background;
-	delete player;
 	delete gun;
+	delete player;
+
 }
 
 bool Application::Init()
