@@ -66,6 +66,9 @@
     <ClInclude Include="Maps2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleMaps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleGun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMaps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

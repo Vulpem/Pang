@@ -78,6 +78,7 @@
     <ClInclude Include="ModuleBackground.h" />
     <ClInclude Include="ModuleGun.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleMaps.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleTextures.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="ModuleBackground.cpp" />
     <ClCompile Include="ModuleGun.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleMaps.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />

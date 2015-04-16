@@ -10,6 +10,7 @@
 #include "ModuleBackground.h"
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
+#include "ModuleMaps.h"
 
 class Application
 {
@@ -21,6 +22,7 @@ public:
 	ModuleBackground* background;
 	ModulePlayer* player;
 	ModuleGun* gun;
+	ModuleMaps* maps;
 
 private:
 

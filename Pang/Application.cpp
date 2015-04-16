@@ -10,6 +10,7 @@ Application::Application()
 	background = new ModuleBackground(this);
 	player = new ModulePlayer(this);
 	gun = new ModuleGun(this);
+	maps = new ModuleMaps(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -21,6 +22,7 @@ Application::Application()
 	AddModule(background);
 	AddModule(player);
 	AddModule(gun);
+	AddModule(maps);
 }
 
 Application::~Application()
@@ -32,6 +34,7 @@ Application::~Application()
 	delete background;
 	delete gun;
 	delete player;
+	delete maps;
 
 }
 
