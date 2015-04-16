@@ -22,12 +22,12 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 	//Creating the rectangle references
 	b->start_rect.x = b->start.x;
 	b->start_rect.y = b->start.y;
-	b->start_rect.w = 1;
-	b->start_rect.h = 1;
+	b->start_rect.w = 5;
+	b->start_rect.h = -24;
 
 	b->end_rect.x = b->end.x;
 	b->end_rect.y = b->end.y;
-	b->end_rect.w = 1;
+	b->end_rect.w = 5;
 	b->end_rect.h = 1;
 
 	active.add(b);
@@ -54,7 +54,7 @@ update_status ModuleGun::Update()
 
 		if (b->Update() == false)
 		{
-			std::cout << "Destroying Bullet";
+			std::cout << "-- Destroying Bullet --" << std::endl;
 			delete b;
 			active.del(tmp);
 			shootAvailable = true;
@@ -83,15 +83,14 @@ ModuleGun::~ModuleGun()
 bool Bullet::Update()
 {
 	bool ret = true;
-	std::cout << "Updating bullet";
 	if (map2[(end.y - 1) / 8][end.x/8] == 1)
 	{
 		ret = false;
 	}
 	else
 	{
-		end.y--;
-		end_rect.y = end.y;
+		end.y-=2;
+		end_rect.h-=2;
 	}
 
 	

@@ -139,15 +139,15 @@ update_status ModulePlayer::Update()
 			if (movementDirection == 1)
 			{
 				current_animation = &shot;
-				offset.x = 14;
-				offset.y = 31;
+				offset.x = 12;
+				offset.y = 32;
 			}
 
 			else if (movementDirection == -1)
 			{
 				current_animation = &shot2;
-				offset.x = 9;
-				offset.y = 31;
+				offset.x = 7;
+				offset.y = 32;
 			}
 
 			App->gun->Shoot((position+offset));
