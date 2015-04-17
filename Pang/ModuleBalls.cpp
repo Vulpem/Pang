@@ -4,6 +4,8 @@
 #include "ModuleBalls.h"
 #include "Application.h"
 
+#include <iostream>
+
 ModuleBalls::ModuleBalls(Application* app) : Module(app)
 {
 
@@ -33,17 +35,23 @@ update_status ModuleBalls::Update()
 
 	while (pointer!=NULL)
 	{
+	//	Ball* ball = pointer->data;
 		pointer_next = pointer->next;
+
 		if (pointer->data->Update() == false)
 		{
-
+			std::cout << "-- Destroying ball --" << std::endl;
+			if (pointer->data->type > 1)
+			{
 			Ball* newBall1 = new Ball(pointer->data, -1);
 			Ball* newBall2 = new Ball(pointer->data, 1);
 
 			ballsList.add(newBall1);
 			ballsList.add(newBall2);
+			}
 
-			delete pointer;
+
+		//	delete ball;
 			ballsList.del(pointer);
 		}
 		else

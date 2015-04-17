@@ -33,7 +33,8 @@ update_status ModuleBackground::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		App->balls->ballsList.getFirst()->data->dead = true;
+		if (App->balls->ballsList.count() > 0)
+			App->balls->ballsList.getFirst()->data->dead = true;
 	}
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);

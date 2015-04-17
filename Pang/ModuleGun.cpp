@@ -49,13 +49,11 @@ update_status ModuleGun::Update()
 	p2List_item<Bullet*>* tmp_next = active.getFirst();
 	while (tmp != NULL)
 	{
-		Bullet* b = tmp->data;
 		tmp_next = tmp->next;
 
-		if (b->Update() == false)
+		if (tmp->data->Update() == false)
 		{
 			std::cout << "-- Destroying Bullet --" << std::endl;
-			delete b;
 			active.del(tmp);
 			shootAvailable = true;
 		}
