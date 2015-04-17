@@ -69,6 +69,9 @@
     <ClInclude Include="ModuleMaps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleBalls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="ModuleMaps.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBalls.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

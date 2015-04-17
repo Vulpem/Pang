@@ -76,6 +76,7 @@
     <ClInclude Include="Maps2.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleBackground.h" />
+    <ClInclude Include="ModuleBalls.h" />
     <ClInclude Include="ModuleGun.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleMaps.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleBackground.cpp" />
+    <ClCompile Include="ModuleBalls.cpp" />
     <ClCompile Include="ModuleGun.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleMaps.cpp" />
