@@ -6,10 +6,17 @@
 
 enum BallTypes
 {
-	little,
+	little = 0,
 	medium,
 	big,
 	huge
+};
+
+enum BallColours
+{
+	red = 0,
+	blue,
+	green
 };
 
 class Ball
@@ -41,7 +48,11 @@ public:
 	void AddBall(int position_x, int position_y, int _type, int _direction);
 
 	p2List<Ball*> ballsList;
+	SDL_Texture* ballsGraphics;
+	SDL_Rect ballsRects[3][4];
+
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 
 

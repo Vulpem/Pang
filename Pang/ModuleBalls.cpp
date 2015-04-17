@@ -24,8 +24,28 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direct
 
 bool ModuleBalls::Start()
 {
+	ballsRects[red][huge].x = ballsRects[red][huge].y = 0; ballsRects[red][huge].w = ballsRects[red][huge].h = 48;
+	ballsRects[red][big].x = ballsRects[red][big].y = 48; ballsRects[red][big].w = ballsRects[red][big].h = 32;
+	ballsRects[red][medium].x = ballsRects[red][medium].y = 80; ballsRects[red][medium].w = ballsRects[red][medium].h = 16;
+	ballsRects[red][little].x = ballsRects[red][little].y = 76; ballsRects[red][little].w = ballsRects[red][little].h = 8;
+
+	ballsRects[blue][huge].x = 0; ballsRects[blue][huge].y = 48; ballsRects[blue][huge].w = ballsRects[blue][huge].h = 48;
+	ballsRects[blue][big].x = 48; ballsRects[blue][big].y = 48; ballsRects[blue][big].w = ballsRects[blue][big].h = 32;
+	ballsRects[blue][medium].x = 80; ballsRects[blue][medium].y = 48; ballsRects[blue][medium].w = ballsRects[blue][medium].h = 16;
+	ballsRects[blue][little].x = 76; ballsRects[blue][little].y = 48; ballsRects[blue][little].w = ballsRects[blue][little].h = 8;
+
+	ballsRects[green][huge].x = 0;  ballsRects[green][huge].y = 96; ballsRects[green][huge].w = ballsRects[green][huge].h = 48;
+	ballsRects[green][big].x = 48;  ballsRects[green][big].y = 96; ballsRects[green][big].w = ballsRects[green][big].h = 32;
+	ballsRects[green][medium].x = 80;  ballsRects[green][medium].y = 96; ballsRects[green][medium].w = ballsRects[green][medium].h = 16;
+	ballsRects[green][little].x = 76;  ballsRects[green][little].y = 96; ballsRects[green][little].w = ballsRects[green][little].h = 8;
 
 	return true;
+}
+
+update_status ModuleBalls::PreUpdate()
+{
+	ballsGraphics = App->textures->Load(". / Image_Sources / Balls.png");
+	return UPDATE_CONTINUE;
 }
 
 update_status ModuleBalls::Update()
@@ -59,6 +79,8 @@ update_status ModuleBalls::Update()
 			pointer->data->start_rect.x = pointer->data->position.x;
 			pointer->data->start_rect.y = pointer->data->position.y;
 			App->renderer->DrawQuad(pointer->data->start_rect, 50, 150, 50, 255);
+			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type]);
+			
 		}
 		
 		pointer = pointer_next;
@@ -78,8 +100,8 @@ Ball::Ball(Ball* parent, int offsetDirection)
 		offset = 8;
 
 	speed.x = type * offsetDirection;
-//	speed.y = type * offsetDirection;
-	speed.y = 0;
+	speed.y = type;
+	//speed.y = 0;
 
 	//Creating the rect
 
@@ -105,8 +127,8 @@ Ball::Ball(int x, int y, int _type, int direction)
 		offset = 8;
 
 	speed.x = type * direction;
-	//	speed.y = type * offsetDirection;
-	speed.y = 0;
+	speed.y = type;
+	//speed.y = 0;
 
 	//Creating the rect
 	start_rect.x = x;
@@ -119,10 +141,17 @@ bool Ball::Update()
 {
 	if (dead == false)
 	{
-		if (position.x > 300 || position.x < 10)
+		if (position.x > 364 || position.x < 8)
 			speed.x *= -1;
-		
+		if (position.y > 200)
+		{
+			speed.y = -15;
+			position.y = 199;
+		}
+
 		position.x += speed.x;
+		position.y += speed.y;
+		speed.y += 1;
 		return true;
 	}
 	else return false;

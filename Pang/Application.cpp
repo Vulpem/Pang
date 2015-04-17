@@ -21,10 +21,11 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(background);
+	AddModule(balls);
 	AddModule(player);
 	AddModule(gun);
 //	AddModule(maps);
-	AddModule(balls);
+
 }
 
 Application::~Application()
