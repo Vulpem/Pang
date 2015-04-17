@@ -148,7 +148,7 @@ bool Ball::Update()
 		if (position.y > SCREEN_HEIGHT - 5 * TILE)
 		{
 			speed.y = -15;
-			position.y = (SCREEN_HEIGHT - 5 * TILE) + 1;
+			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1;
 		}
 
 		position.x += speed.x;
