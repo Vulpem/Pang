@@ -100,7 +100,7 @@ Ball::Ball(Ball* parent, int offsetDirection)
 		offset = 8;
 
 	speed.x = type * offsetDirection;
-	speed.y = type / 2;
+	speed.y = (type + 4) / 2;
 	//speed.y = 0;
 
 	//Creating the rect
@@ -127,7 +127,7 @@ Ball::Ball(int x, int y, int _type, int direction)
 		offset = 8;
 
 	speed.x = type * direction;
-	speed.y = type;
+	speed.y = (type + 4) / 2;
 	//speed.y = 0;
 
 	//Creating the rect
@@ -139,14 +139,16 @@ Ball::Ball(int x, int y, int _type, int direction)
 
 bool Ball::Update()
 {
+
+	// S'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
 	if (dead == false)
 	{
 		if (position.x > 364 || position.x < 8)
 			speed.x *= -1;
-		if (position.y > 200)
+		if (position.y > SCREEN_HEIGHT - 5 * TILE)
 		{
 			speed.y = -15;
-			position.y = 199;
+			position.y = (SCREEN_HEIGHT - 5 * TILE) + 1;
 		}
 
 		position.x += speed.x;
