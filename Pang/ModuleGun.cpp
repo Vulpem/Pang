@@ -4,6 +4,9 @@
 #include "List.h"
 #include "Maps2.h"
 #include "Module.h"
+#include "List.h"
+#include "ModuleBalls.h"
+//#include "Application.h"
 
 #include <iostream>
 
@@ -52,12 +55,13 @@ update_status ModuleGun::Update()
 	{
 		tmp_next = tmp->next;
 
-		if (tmp->data->Update() == false)
+		if (tmp->data->Update(App) == false)
 		{
 			std::cout << "-- Destroying Bullet --" << std::endl;
 			active.del(tmp);
 			shootAvailable = true;
 		}
+
 		else
 		{
 			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
@@ -79,7 +83,7 @@ ModuleGun::~ModuleGun()
 
 }
 
-bool Bullet::Update()
+bool Bullet::Update(Application* App)
 {
 	bool ret = true;
 	if (map2[(end.y - 1) / 8][end.x/8] == 1)
@@ -93,6 +97,19 @@ bool Bullet::Update()
 
 /////////////////////////////////////////////////
 		
+		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+
+		while (tmp != NULL)
+		{	
+			if ((tmp->data->position.y >= end.y) &&
+				(tmp->data->position.y <= start.y) &&
+				(tmp->data->position.x == end.x))
+			{
+				tmp->data->dead = true;
+				return false;
+			}
+			tmp = tmp->next;
+		}
 ////////////////////////////////////////////////
 
 	}

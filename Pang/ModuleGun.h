@@ -15,7 +15,7 @@ struct Bullet
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
 
-	bool Update();
+	bool Update(Application* App);
 };
 
 

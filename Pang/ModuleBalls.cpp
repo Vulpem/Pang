@@ -78,7 +78,7 @@ update_status ModuleBalls::Update()
 		{
 			pointer->data->start_rect.x = pointer->data->position.x;
 			pointer->data->start_rect.y = pointer->data->position.y;
-			App->renderer->DrawQuad(pointer->data->start_rect, 50, 150, 50, 255);
+			App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 255);
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type]);
 			
 		}
@@ -100,7 +100,7 @@ Ball::Ball(Ball* parent, int offsetDirection)
 		offset = 8;
 
 	speed.x = type * offsetDirection;
-	speed.y = type;
+	speed.y = type / 2;
 	//speed.y = 0;
 
 	//Creating the rect
