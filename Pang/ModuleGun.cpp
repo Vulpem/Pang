@@ -3,6 +3,7 @@
 #include "ModuleGun.h"
 #include "List.h"
 #include "Maps2.h"
+#include "Module.h"
 
 #include <iostream>
 
@@ -22,12 +23,12 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 	//Creating the rectangle references
 	b->start_rect.x = b->start.x;
 	b->start_rect.y = b->start.y;
-	b->start_rect.w = 5;
-	b->start_rect.h = -24;
+	b->start_rect.w = 1;
+	b->start_rect.h = -30;
 
 	b->end_rect.x = b->end.x;
 	b->end_rect.y = b->end.y;
-	b->end_rect.w = 5;
+	b->end_rect.w = 1;
 	b->end_rect.h = 1;
 
 	active.add(b);
@@ -89,6 +90,11 @@ bool Bullet::Update()
 	{
 		end.y-=2;
 		end_rect.h-=2;
+
+/////////////////////////////////////////////////
+		
+////////////////////////////////////////////////
+
 	}
 
 	
