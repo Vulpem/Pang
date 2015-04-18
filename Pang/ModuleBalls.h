@@ -4,27 +4,13 @@
 #include "Globals.h"
 #include "p2Point.h"
 
-enum BallTypes
-{
-	little = 0,
-	medium,
-	big,
-	huge
-};
-
-enum BallColours
-{
-	red = 0,
-	blue,
-	green
-};
-
 class Ball
 {
 public:
 	p2Point<int> position;
 	p2Point<int> speed;
 
+	int radius;
 	int type;
 	bool dead = false;
 

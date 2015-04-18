@@ -13,6 +13,21 @@ enum update_status
 	UPDATE_ERROR
 };
 
+enum BallTypes
+{
+	little = 0,
+	medium,
+	big,
+	huge
+};
+
+enum BallColours
+{
+	red = 0,
+	blue,
+	green
+};
+
 // Configuration -----------
 #define TILE 8
 #define SCREEN_WIDTH 384
@@ -24,3 +39,4 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "Pang"
+

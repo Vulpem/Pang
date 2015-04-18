@@ -23,9 +23,10 @@ bool ModuleBackground::Start()
 	
 	LOG("Loading background assets");
 	bool ret = true;
+
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	
-	App->balls->AddBall(150, 100, 4, 1);
+	App->balls->AddBall(150, 100, huge, 1);
 	return ret;
 }
 
