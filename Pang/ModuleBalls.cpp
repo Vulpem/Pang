@@ -160,8 +160,8 @@ Ball::Ball(int x, int y, int _type, int direction)
 	//Creating the rect
 	start_rect.x = x;
 	start_rect.y = y;
-	start_rect.w = 2 * type;
-	start_rect.h = 2 * type;
+	start_rect.w = radius * 2;
+	start_rect.h = radius * 2;
 }
 
 bool Ball::Update()
