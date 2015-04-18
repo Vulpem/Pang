@@ -30,15 +30,15 @@ Application::Application()
 
 Application::~Application()
 {
-	delete renderer;
-	delete window;
-	delete textures;
-	delete input;
-	delete background;
+	//	delete maps;
 	delete gun;
 	delete player;
-//	delete maps;
 	delete balls;
+	delete background;
+	delete input;
+	delete textures;
+	delete renderer;
+	delete window;
 
 }
 
