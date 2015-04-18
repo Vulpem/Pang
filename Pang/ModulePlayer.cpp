@@ -166,9 +166,10 @@ update_status ModulePlayer::Update()
 		{
 			position.y += 2;
 		}
-
+		//Arreglar perque caigui be
 		if (App->maps->map[position.y / 8 + 4][position.x / 8] == 1)
 		{
+			int b = App->maps->map[25][1];
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;
