@@ -313,6 +313,12 @@ update_status ModulePlayer::Update()
 		return UPDATE_CONTINUE;
 }
 
+bool ModulePlayer::CleanUp()
+{
+	LOG("Deleting the Player");
+	return true;
+}
+
 void ModulePlayer::CheckBallCollision()
 {
 		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
