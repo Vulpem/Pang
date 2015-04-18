@@ -13,7 +13,15 @@ ModuleBalls::ModuleBalls(Application* app) : Module(app)
 
 ModuleBalls::~ModuleBalls()
 {
+	p2List_item<Ball*>* pointer = ballsList.getFirst();
+	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 
+	while (pointer != NULL)
+	{
+		delete pointer->data;
+		pointer = pointer->next;
+	}
+	ballsList.clear();
 }
 
 void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direction)
@@ -77,7 +85,10 @@ update_status ModuleBalls::Update()
 
 
 		//	delete ball;
+			
+			delete pointer->data;
 			ballsList.del(pointer);
+			
 		}
 
 		else
@@ -175,7 +186,7 @@ bool Ball::Update()
 			speed.x *= -1;
 			//position.x += speed.x;
 		}
-		if (position.y +radius > SCREEN_HEIGHT - 5 * TILE)
+		if (position.y +radius >= SCREEN_HEIGHT - 5 * TILE)
 		{
 			speed.y = -7;
 			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
