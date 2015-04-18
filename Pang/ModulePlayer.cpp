@@ -6,7 +6,7 @@
 #include <iostream>
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModulePlayer::ModulePlayer(Application* app) : Module(app)
+ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app)
 {
 	graphics = NULL;
 

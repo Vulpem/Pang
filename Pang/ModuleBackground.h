@@ -6,7 +6,7 @@
 class ModuleBackground : public Module
 {
 public:
-	ModuleBackground(Application* app);
+	ModuleBackground(Application* app, bool start_enabled = true);
 	~ModuleBackground();
 
 	bool Start();

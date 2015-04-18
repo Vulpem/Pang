@@ -4,11 +4,36 @@ class Application;
 
 class Module
 {
+private:
+	bool enabled;
 public:
 	Application* App;
-
-	Module(Application* parent) : App(parent)
+	
+	Module(Application* parent, bool start_enabled = true) : App(parent), enabled(start_enabled)
 	{
+	}
+
+	bool IsEnabled() const
+	{
+		return enabled;
+	}
+
+	void Enable()
+	{
+		if (enabled == false)
+		{
+			enabled = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (enabled == true)
+		{
+			enabled = false;
+			CleanUp();
+		}
 	}
 
 	virtual bool Init() 

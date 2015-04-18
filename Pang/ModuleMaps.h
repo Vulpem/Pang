@@ -6,7 +6,7 @@
 class ModuleMaps : public Module
 {
 public:
-	ModuleMaps(Application* app);
+	ModuleMaps(Application* app, bool start_enabled = true);
 	~ModuleMaps();
 
 	bool Start();

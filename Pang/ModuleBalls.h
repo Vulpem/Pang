@@ -29,7 +29,7 @@ public:
 class ModuleBalls : public Module
 {
 public:
-	ModuleBalls(Application* app);
+	ModuleBalls(Application* app, bool start_enabled = true);
 	~ModuleBalls();
 
 	void AddBall(int position_x, int position_y, int _type, int _direction);

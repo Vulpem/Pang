@@ -14,7 +14,7 @@ class ModuleInput : public Module
 {
 public:
 	
-	ModuleInput(Application* app);
+	ModuleInput(Application* app, bool start_enabled = true);
 	~ModuleInput();
 
 	bool Init();

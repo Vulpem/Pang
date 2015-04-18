@@ -9,6 +9,15 @@
 
 #include <iostream>
 
+ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app)
+{
+
+}
+ModuleGun::~ModuleGun()
+{
+
+}
+
 bool ModuleGun::Start()
 {
 	return true;
@@ -73,14 +82,7 @@ update_status ModuleGun::Update()
 	return UPDATE_CONTINUE;
 }
 
-ModuleGun::ModuleGun(Application* app) :Module(app)
-{
 
-}
-ModuleGun::~ModuleGun()
-{
-
-}
 
 bool Bullet::Update(Application* app)
 {

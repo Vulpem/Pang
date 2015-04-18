@@ -4,7 +4,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleBackground::ModuleBackground(Application* app) : Module(app)
+ModuleBackground::ModuleBackground(Application* app, bool start_enabled) : Module(app)
 {
 	graphics = NULL;
 

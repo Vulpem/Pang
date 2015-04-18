@@ -4,7 +4,7 @@
 
 #define MAX_KEYS 300
 
-ModuleInput::ModuleInput(Application* app) : Module(app)
+ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app)
 {
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);

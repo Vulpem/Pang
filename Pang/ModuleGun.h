@@ -23,7 +23,7 @@ class ModuleGun : public Module
 {
 public:
 
-	ModuleGun(Application* app);
+	ModuleGun(Application* app, bool start_enabled = true);
 	~ModuleGun();
 
 	bool shootAvailable = true;

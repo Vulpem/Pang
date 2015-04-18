@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-ModuleMaps::ModuleMaps(Application* app) : Module(app)
+ModuleMaps::ModuleMaps(Application* app, bool start_enabled) : Module(app)
 {
 
 }
