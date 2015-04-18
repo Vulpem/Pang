@@ -85,7 +85,7 @@ update_status ModuleBalls::Update()
 			pointer->data->start_rect.x = pointer->data->position.x;
 			pointer->data->start_rect.y = pointer->data->position.y;
 			App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 255);
-			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type]);
+			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
 		}
 		
 		pointer = pointer_next;
