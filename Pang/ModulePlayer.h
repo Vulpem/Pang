@@ -22,6 +22,8 @@ public:
 	void CheckBallCollision();
 	void Kill();
 
+	int deaths = 0;
+	bool dead = false;
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;

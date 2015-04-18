@@ -316,8 +316,7 @@ update_status ModulePlayer::Update()
 void ModulePlayer::CheckBallCollision()
 {
 		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-
-		while (tmp != NULL)
+		while (tmp != NULL /*&& !dead*/)
 		{
 			if ((tmp->data->position.y + tmp->data->radius >= position.y) &&
 				(tmp->data->position.y - tmp->data->radius <= position.y + 32) &&
@@ -325,7 +324,7 @@ void ModulePlayer::CheckBallCollision()
 				(tmp->data->position.x - tmp->data->radius) < position.x + 30)
 			{
 				Kill();
-				break;d
+				dead = true;
 			}
 			tmp = tmp->next;
 		}
@@ -333,5 +332,12 @@ void ModulePlayer::CheckBallCollision()
 
 void ModulePlayer::Kill()
 {
-	std::cout << "Player has died" << std::endl;
+	if (deaths > 30)
+		std::cout << "Oh, fuck off, you are so bad" << std::endl;
+	else
+	{
+		std::cout << "Player has died" << std::endl;
+		deaths++;
+	}
+
 }
