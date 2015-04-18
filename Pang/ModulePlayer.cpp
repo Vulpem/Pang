@@ -88,9 +88,9 @@ update_status ModulePlayer::Update()
 	//////////////////////
 
 
-	/////////////////
-	//Player states//
-	/////////////////
+		/////////////////
+		//Player states//
+		/////////////////
 
 	if (map1[position.y / 8 + 4][(position.x + 6) / 8] == 0 && map1[position.y / 8 + 4][(position.x + 17) / 8] == 0 && playerState != climbing)
 	{
@@ -303,6 +303,35 @@ update_status ModulePlayer::Update()
 			App->renderer->Blit(graphics, position.x - 2, position.y, &r);
 
 		}
-		//App->renderer->Blit(graphics, position.x-2, position.y, &r);
+
+		///////////////////////////
+		//Checking Ball collision//
+		///////////////////////////		
+		CheckBallCollision();
+
+
 		return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::CheckBallCollision()
+{
+		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+
+		while (tmp != NULL)
+		{
+			if ((tmp->data->position.y + tmp->data->radius >= position.y) &&
+				(tmp->data->position.y - tmp->data->radius <= position.y + 32) &&
+				((tmp->data->position.x + tmp->data->radius) > position.x) &&
+				(tmp->data->position.x - tmp->data->radius) < position.x + 30)
+			{
+				Kill();
+				break;d
+			}
+			tmp = tmp->next;
+		}
+}
+
+void ModulePlayer::Kill()
+{
+	std::cout << "Player has died" << std::endl;
 }

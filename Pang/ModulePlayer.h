@@ -19,6 +19,9 @@ public:
 	bool Start();
 	update_status Update();
 
+	void CheckBallCollision();
+	void Kill();
+
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;
