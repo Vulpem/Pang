@@ -21,19 +21,20 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(background);
+	AddModule(maps);
 	AddModule(balls);
 	AddModule(player);
 	AddModule(gun);
-	AddModule(maps);
+
 
 }
 
 Application::~Application()
 {
-	//	delete maps;
 	delete gun;
 	delete player;
 	delete balls;
+	delete maps;
 	delete background;
 	delete input;
 	delete textures;
