@@ -55,7 +55,7 @@ update_status ModuleBalls::PreUpdate()
 	ballsGraphics = App->textures->Load("./Image_Sources/Balls.png");
 	if (ballsGraphics == NULL)
 	{
-		LOG("Could not load balls Graphics.")
+		LOG("-------------------------Could not load balls Graphics.------------------------------")
 	}
 	return UPDATE_CONTINUE;
 }
@@ -115,20 +115,21 @@ Ball::Ball(Ball* parent, int offsetDirection)
 	else
 		offset = 8;
 
-	speed.x = (type + 1) * offsetDirection;
-	speed.y = -1 * (type + 1);
+	speed.x = (5 - type) * offsetDirection;
+	speed.y = (5 - type) * -1;
 
 	switch (type)
 	{
-		case little:
-		{ radius = 4; break; }
-		case medium:
-		{ radius = 8; break; }
-		case big:
-		{ radius = 16; break; }
-		case huge:
-		{ radius = 24; break; }
+	case little:
+	{ radius = 4; YBaseSpeed = -4; break; }
+	case medium:
+	{ radius = 8; YBaseSpeed = -6; break; }
+	case big:
+	{ radius = 16; YBaseSpeed = -7; break; }
+	case huge:
+	{ radius = 24; YBaseSpeed = -8; break; }
 	}
+
 
 	//Creating the rect
 
@@ -153,19 +154,19 @@ Ball::Ball(int x, int y, int _type, int direction)
 	else
 		offset = 8;
 
-	speed.x = (type + 1) * direction;
-	speed.y = (type + 1) * direction;
+	speed.x = (5 - type) * direction;
+	speed.y = (5 - type) * direction;
 
 	switch (type)
 	{
 	case little:
-	{ radius = 4; break; }
+	{ radius = 4; YBaseSpeed = -5; break; }
 	case medium:
-	{ radius = 8; break; }
+	{ radius = 8; YBaseSpeed = -6; break; }
 	case big:
-	{ radius = 16; break; }
+	{ radius = 16; YBaseSpeed = -7; break; }
 	case huge:
-	{ radius = 24; break; }
+	{ radius = 24; YBaseSpeed = -8; break; }
 	}
 
 	//Creating the rect
@@ -188,7 +189,7 @@ bool Ball::Update()
 		}
 		if (position.y +radius >= SCREEN_HEIGHT - 5 * TILE)
 		{
-			speed.y = -7;
+			speed.y = YBaseSpeed;
 			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
 		}
 

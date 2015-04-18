@@ -10,6 +10,7 @@ public:
 	p2Point<int> position;
 	p2Point<float> speed;
 
+	int YBaseSpeed;
 	int radius;
 	int type;
 	bool dead = false;
