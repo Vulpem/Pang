@@ -10,7 +10,7 @@ Application::Application()
 	background = new ModuleBackground(this);
 	player = new ModulePlayer(this);
 	gun = new ModuleGun(this);
-//	maps = new ModuleMaps(this);
+	maps = new ModuleMaps(this);
 	balls = new ModuleBalls(this);
 
 	// The order of calls is very important!
@@ -24,7 +24,7 @@ Application::Application()
 	AddModule(balls);
 	AddModule(player);
 	AddModule(gun);
-//	AddModule(maps);
+	AddModule(maps);
 
 }
 

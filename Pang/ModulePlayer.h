@@ -3,6 +3,8 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+
+
 enum PlayerStates
 {
 	standing,

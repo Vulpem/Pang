@@ -23,7 +23,7 @@ public:
 	ModuleBackground* background;
 	ModulePlayer* player;
 	ModuleGun* gun;
-//	ModuleMaps* maps;
+	ModuleMaps* maps;
 	ModuleBalls* balls;
 
 private:

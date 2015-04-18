@@ -1,7 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePlayer.h"
-#include "Maps.h"
 #include "ModuleGun.h"
 
 #include <iostream>
@@ -92,7 +91,7 @@ update_status ModulePlayer::Update()
 		//Player states//
 		/////////////////
 
-	if (map1[position.y / 8 + 4][(position.x + 6) / 8] == 0 && map1[position.y / 8 + 4][(position.x + 17) / 8] == 0 && playerState != climbing)
+	if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 && playerState != climbing)
 	{
 		playerState = falling;
 	}
@@ -107,7 +106,7 @@ update_status ModulePlayer::Update()
 		//Move right
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT && map1[position.y / 8][(position.x + 25) / 8] != 1)
+			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT && App->maps->map[position.y / 8][(position.x + 25) / 8] != 1)
 			{
 				current_animation = &forward;
 				position.x += speed;
@@ -119,7 +118,7 @@ update_status ModulePlayer::Update()
 		//Move left
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT && map1[position.y / 8][(position.x - 1) / 8] != 1)
+			if (App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT && App->maps->map[position.y / 8][(position.x - 1) / 8] != 1)
 			{
 				current_animation = &backward;	
 				position.x -= speed;
@@ -167,7 +166,7 @@ update_status ModulePlayer::Update()
 			position.y += 2;
 		}
 
-		if (map1[position.y / 8 + 4][position.x / 8] == 1)
+		if (App->maps->map[position.y / 8 + 4][position.x / 8] == 1)
 		{
 			fallCounter = 0;
 			playerState = standing;
@@ -179,8 +178,8 @@ update_status ModulePlayer::Update()
 
 	if (playerState != falling)
 	{
-		if (map1[(position.y + 15) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 15) / 8][(position.x + 12) / 8] == 2 ||
-			map1[(position.y + 31) / 8][(position.x + 11) / 8] == 2 && map1[(position.y + 31) / 8][(position.x + 12) / 8] == 2)
+		if (App->maps->map[(position.y + 15) / 8][(position.x + 11) / 8] == 2 && App->maps->map[(position.y + 15) / 8][(position.x + 12) / 8] == 2 ||
+			App->maps->map[(position.y + 31) / 8][(position.x + 11) / 8] == 2 && App->maps->map[(position.y + 31) / 8][(position.x + 12) / 8] == 2)
 		{
 			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			{
@@ -198,14 +197,14 @@ update_status ModulePlayer::Update()
 					{
 						for (j = 0; k != 2; j++)
 						{
-							k = map1[y + i][x + j];
+							k = App->maps->map[y + i][x + j];
 						}
 					}
 					i--;
 					j--;
 
 					//Correct the position of the character
-					if (map1[y + i][x + j - 1] != 2)
+					if (App->maps->map[y + i][x + j - 1] != 2)
 					{
 						position.x = ((position.x / 8) + j) * 8;
 					}
@@ -224,8 +223,8 @@ update_status ModulePlayer::Update()
 				current_animation = &climb;
 
 				//Check if the ladder ends
-				if ((map1[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
-					(map1[(position.y + 29) / 8][(position.x + 12) / 8] == 0))
+				if ((App->maps->map[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
+					(App->maps->map[(position.y + 29) / 8][(position.x + 12) / 8] == 0))
 				{
 					current_animation = &endclimb;
 					playerState = standing;
@@ -238,8 +237,8 @@ update_status ModulePlayer::Update()
 		}
 
 
-		if (map1[position.y / 8 + 4][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 4][(position.x + 12) / 8] == 2 ||
-			map1[position.y / 8 + 2][(position.x + 11) / 8] == 2 && map1[position.y / 8 + 2][(position.x + 12) / 8] == 2)
+		if (App->maps->map[position.y / 8 + 4][(position.x + 11) / 8] == 2 && App->maps->map[position.y / 8 + 4][(position.x + 12) / 8] == 2 ||
+			App->maps->map[position.y / 8 + 2][(position.x + 11) / 8] == 2 && App->maps->map[position.y / 8 + 2][(position.x + 12) / 8] == 2)
 		{
 			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 			{
@@ -254,13 +253,13 @@ update_status ModulePlayer::Update()
 					//Search for a 2
 					for (int k = 0; k != 2; i++)
 					{
-						k = map1[y][x + i];
+						k = App->maps->map[y][x + i];
 					}
 
 					i--;
 
 					//Correct the position of the character
-					if (map1[y + i][x + i - 1] != 2)
+					if (App->maps->map[y + i][x + i - 1] != 2)
 					{
 						position.x = ((position.x / 8) + i) * 8;
 					}
@@ -277,10 +276,10 @@ update_status ModulePlayer::Update()
 					current_animation = &climb;
 
 					//Check if the ladder ends
-					if ((map1[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
+					if ((App->maps->map[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
 			
 					{
-						if ((map1[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
+						if ((App->maps->map[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
 						playerState = standing;
 						ladderAlign = false;
 					}
