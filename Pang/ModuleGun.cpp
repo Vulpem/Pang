@@ -2,11 +2,10 @@
 #include "Application.h"
 #include "ModuleGun.h"
 #include "List.h"
-#include "Maps2.h"
 #include "Module.h"
 #include "List.h"
 #include "ModuleBalls.h"
-//#include "Application.h"
+
 
 #include <iostream>
 
@@ -83,10 +82,10 @@ ModuleGun::~ModuleGun()
 
 }
 
-bool Bullet::Update(Application* App)
+bool Bullet::Update(Application* app)
 {
 	bool ret = true;
-	if (map2[(end.y - 1) / 8][end.x/8] == 1)
+	if (app->maps->map[(end.y - 1) / 8][end.x/8] == 1)
 	{
 		ret = false;
 	}
@@ -97,7 +96,7 @@ bool Bullet::Update(Application* App)
 
 /////////////////////////////////////////////////
 		
-		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+		p2List_item<Ball*>* tmp = app->balls->ballsList.getFirst();
 
 		while (tmp != NULL)
 		{	

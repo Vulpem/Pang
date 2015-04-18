@@ -57,13 +57,7 @@
     <ClInclude Include="ModulePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maps.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleGun.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Maps2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModuleMaps.h">

@@ -3,7 +3,6 @@
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
 
-#include "Maps.h"
 #include <iostream>
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 

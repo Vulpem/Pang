@@ -3,7 +3,7 @@
 #include "p2Point.h"
 #include "List.h"
 #include "Globals.h"
-//#include "Maps.h"
+
 
 struct Bullet
 {
@@ -15,7 +15,7 @@ struct Bullet
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
 
-	bool Update(Application* App);
+	bool Update(Application* app);
 };
 
 

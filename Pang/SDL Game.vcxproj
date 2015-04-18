@@ -72,8 +72,6 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="Maps.h" />
-    <ClInclude Include="Maps2.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleBackground.h" />
     <ClInclude Include="ModuleBalls.h" />
