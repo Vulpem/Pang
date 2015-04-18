@@ -167,7 +167,7 @@ Ball::Ball(int x, int y, int _type, int direction)
 bool Ball::Update()
 {
 
-	// S'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
+	// S'ha de mirar si s'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
 	if (dead == false)
 	{
 		if (position.x + radius > SCREEN_WIDTH - TILE || position.x - radius < TILE)
