@@ -103,7 +103,8 @@ bool Bullet::Update(Application* App)
 		{	
 			if ((tmp->data->position.y >= end.y) &&
 				(tmp->data->position.y <= start.y) &&
-				(tmp->data->position.x == end.x))
+				((tmp->data->position.x - tmp->data->radius) < end.x) &&
+				(tmp->data->position.x + tmp->data->radius) > end.x)
 			{
 				tmp->data->dead = true;
 				return false;
