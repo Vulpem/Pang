@@ -82,9 +82,9 @@ update_status ModuleBalls::Update()
 
 		else
 		{
-			pointer->data->start_rect.x = pointer->data->position.x;
-			pointer->data->start_rect.y = pointer->data->position.y;
-			App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 255);
+			pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
+			pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
+			App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 100);
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
 		}
 		
@@ -121,8 +121,8 @@ Ball::Ball(Ball* parent, int offsetDirection)
 
 	//Creating the rect
 
-	start_rect.x = position.x;
-	start_rect.y = position.y;
+	start_rect.x = position.x - radius;
+	start_rect.y = position.y - radius;
 	start_rect.w = radius * 2;
 	start_rect.h = radius * 2;
 
@@ -158,8 +158,8 @@ Ball::Ball(int x, int y, int _type, int direction)
 	}
 
 	//Creating the rect
-	start_rect.x = x;
-	start_rect.y = y;
+	start_rect.x = x - radius;
+	start_rect.y = y - radius;
 	start_rect.w = radius * 2;
 	start_rect.h = radius * 2;
 }
