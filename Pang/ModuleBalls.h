@@ -8,7 +8,7 @@ class Ball
 {
 public:
 	p2Point<int> position;
-	p2Point<int> speed;
+	p2Point<float> speed;
 
 	int radius;
 	int type;
