@@ -101,7 +101,7 @@ bool Bullet::Update(Application* App)
 
 		while (tmp != NULL)
 		{	
-			if ((tmp->data->position.y >= end.y) &&
+			if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
 				(tmp->data->position.y <= start.y) &&
 				((tmp->data->position.x - tmp->data->radius) < end.x) &&
 				(tmp->data->position.x + tmp->data->radius) > end.x)
