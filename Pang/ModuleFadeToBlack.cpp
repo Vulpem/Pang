@@ -55,7 +55,7 @@ void ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float
 {
 	fading_in = true;
 	start_time = SDL_GetTicks();
-	total_time = (Uint32)(time * 0.5f * 1000.0f);
+	total_time = (Uint32)(time * 0.5f * 100.0f);
 	mod_on = module_on;
 	mod_off = module_off;
 }

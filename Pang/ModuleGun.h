@@ -39,7 +39,7 @@ public:
 public:
 
 private:
-	p2List<Bullet*> active;
+	p2List<Bullet*> activeBullet;
 
 
 };

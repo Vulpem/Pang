@@ -3,7 +3,6 @@
 #include "ModuleGun.h"
 #include "List.h"
 #include "Module.h"
-#include "List.h"
 #include "ModuleBalls.h"
 
 
@@ -42,12 +41,12 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 	b->end_rect.w = 1;
 	b->end_rect.h = 1;
 
-	active.add(b);
+	activeBullet.add(b);
 }
 
 void ModuleGun::Shoot(p2Point<int> startPoint)
 {
-	if (active.count() == 0)
+	if (activeBullet.count() == 0)
 	{
 		AddBullet(startPoint);
 		shootAvailable = false;
@@ -57,8 +56,8 @@ void ModuleGun::Shoot(p2Point<int> startPoint)
 update_status ModuleGun::Update()
 {
 
-	p2List_item<Bullet*>* tmp = active.getFirst();
-	p2List_item<Bullet*>* tmp_next = active.getFirst();
+	p2List_item<Bullet*>* tmp = activeBullet.getFirst();
+	p2List_item<Bullet*>* tmp_next = activeBullet.getFirst();
 	while (tmp != NULL)
 	{
 		tmp_next = tmp->next;
@@ -66,7 +65,7 @@ update_status ModuleGun::Update()
 		if (tmp->data->Update(App) == false)
 		{
 			std::cout << "-- Destroying Bullet --" << std::endl;
-			active.del(tmp);
+			activeBullet.del(tmp);
 			shootAvailable = true;
 		}
 
