@@ -22,6 +22,8 @@ public:
 	Ball(int x, int y, int _type, int direction);
 	Ball(Ball* parent, int offsetDirection);
 	bool Update(bool pause);
+private:
+	void createBall(int direction);
 
 };
 

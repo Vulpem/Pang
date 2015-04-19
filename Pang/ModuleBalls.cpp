@@ -126,60 +126,36 @@ pointer = pointer_next;
 }
 */
 
+
+////  CLASS BALL  //////////////////////////////////////
+
+//Create a child ball
 Ball::Ball(Ball* parent, int offsetDirection)
 {
 	position.y = parent->position.y;
 	position.x = parent->position.x + (parent->offset * offsetDirection);
-
 	type = parent->type - 1;
-	if (type == medium)
-	{
-		offset = 4;
-	}
-	else
-	{
-		offset = 8;
-	}
-
-	speed.x = (5 - type) * offsetDirection;
-	speed.y = (type - 5);
-
-	switch (type)
-	{
-		case little:
-		{ radius = 4; YBaseSpeed = -4; break; }
-		case medium:
-		{ radius = 8; YBaseSpeed = -6; break; }
-		case big:
-		{ radius = 16; YBaseSpeed = -7; break; }
-		case huge:
-		{ radius = 24; YBaseSpeed = -8; break; }
-	}
-
-	//Creating the rect
-	start_rect.x = position.x - radius;
-	start_rect.y = position.y - radius;
-	start_rect.w = radius * 2;
-	start_rect.h = radius * 2;
-
-
+	createBall(offsetDirection);
 }
 
-
-
+//Create the ball when initializing the level
 Ball::Ball(int x, int y, int _type, int direction)
 {
 	position.y = y;
 	position.x = x;
 	type = _type;
+	createBall(direction);
+}
 
+void Ball::createBall(int direction)
+{
 	if (type == medium)
 		offset = 4;
 	else
 		offset = 8;
 
 	speed.x = (5 - type) * direction;
-	speed.y = (5 - type) * direction;
+	speed.y = (type - 5);
 
 	switch (type)
 	{
@@ -194,15 +170,15 @@ Ball::Ball(int x, int y, int _type, int direction)
 	}
 
 	//Creating the rect
-	start_rect.x = x - radius;
-	start_rect.y = y - radius;
+	start_rect.x = position.x - radius;
+	start_rect.y = position.y - radius;
 	start_rect.w = radius * 2;
 	start_rect.h = radius * 2;
 }
 
+
 bool Ball::Update(bool pause)
 {
-
 	// S'ha de mirar si s'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
 	if (dead == false)
 	{
@@ -211,7 +187,7 @@ bool Ball::Update(bool pause)
 			speed.x *= -1;
 			position.x += speed.x;
 		}
-		if (position.y +radius >= SCREEN_HEIGHT - 5 * TILE)
+		if (position.y + radius >= SCREEN_HEIGHT - (5 * TILE))
 		{
 			speed.y = YBaseSpeed;
 			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
