@@ -65,6 +65,7 @@ update_status ModuleGun::Update()
 		if (tmp->data->Update(App) == false)
 		{
 			std::cout << "-- Destroying Bullet --" << std::endl;
+			delete tmp->data;
 			activeBullet.del(tmp);
 			shootAvailable = true;
 		}

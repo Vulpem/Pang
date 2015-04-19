@@ -11,6 +11,7 @@ mod_on(NULL),
 mod_off(NULL)
 {
 	screen = { 0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE };
+	started = false;
 }
 
 ModuleFadeToBlack::~ModuleFadeToBlack()
@@ -41,6 +42,7 @@ update_status ModuleFadeToBlack::Update()
 				mod_off->Disable();
 				mod_on->Enable();
 				start_time = SDL_GetTicks();
+				started = false;
 			}
 			else
 				start_time = 0;
@@ -53,9 +55,13 @@ update_status ModuleFadeToBlack::Update()
 // Fade to black. At mid point deactivate one module, then activate the other
 void ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
 {
-	fading_in = true;
-	start_time = SDL_GetTicks();
-	total_time = (Uint32)(time * 0.5f * 100.0f);
-	mod_on = module_on;
-	mod_off = module_off;
+	if (started == false)
+	{
+		started = true;
+		fading_in = true;
+		start_time = SDL_GetTicks();
+		total_time = (Uint32)(time * 0.5f * 100.0f);
+		mod_on = module_on;
+		mod_off = module_off;
+	}
 }
