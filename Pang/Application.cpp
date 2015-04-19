@@ -29,23 +29,25 @@ Application::Application()
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
 
-	AddModule(fade);
 	AddModule(maps);
 	AddModule(balls);
 	AddModule(player);
 	AddModule(gun);
+
+	AddModule(fade);
 
 
 }
 
 Application::~Application()
 {
+	delete fade;
+
 	delete gun;
 	delete player;
 	//Breaks when trying to destroy balls
 	delete balls;
 	delete maps;
-	delete fade;
 
 	delete backgroundPlay;
 	delete backgroundIntro;

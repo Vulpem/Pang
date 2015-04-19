@@ -63,7 +63,7 @@ update_status ModuleBalls::Update()
 			pointer_next = pointer->next;
 
 			//If the baall has to be destroyed, we erase it
-			if (pointer->data->Update() == false)
+			if (pointer->data->Update(pauseBalls) == false)
 			{
 				std::cout << "-- Destroying ball --" << std::endl;
 				//Ball subdivision
@@ -200,7 +200,7 @@ Ball::Ball(int x, int y, int _type, int direction)
 	start_rect.h = radius * 2;
 }
 
-bool Ball::Update()
+bool Ball::Update(bool pause)
 {
 
 	// S'ha de mirar si s'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
@@ -216,10 +216,12 @@ bool Ball::Update()
 			speed.y = YBaseSpeed;
 			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
 		}
-
-		position.x += speed.x;
-		position.y += speed.y;
-		speed.y += 0.25;
+		if (pause == false)
+		{
+			position.x += speed.x;
+			position.y += speed.y;
+			speed.y += 0.25;
+		}
 		return true;
 	}
 	else
