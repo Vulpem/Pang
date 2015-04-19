@@ -54,64 +54,77 @@ update_status ModuleBalls::PreUpdate()
 
 update_status ModuleBalls::Update()
 {
-	p2List_item<Ball*>* pointer = ballsList.getFirst();
-	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
+	
+		p2List_item<Ball*>* pointer = ballsList.getFirst();
+		p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 
-	while (pointer!=NULL)
-	{
-	//	Ball* ball = pointer->data;
-		pointer_next = pointer->next;
-
-		//If the baall has to be destroyed, we erase it
-		if (pointer->data->Update() == false)
+		while (pointer != NULL)
 		{
-			std::cout << "-- Destroying ball --" << std::endl;
-			if (pointer->data->type > 1)
+			pointer_next = pointer->next;
+
+			//If the baall has to be destroyed, we erase it
+			if (pointer->data->Update() == false)
 			{
-			Ball* newBall1 = new Ball(pointer->data, -1);
-			Ball* newBall2 = new Ball(pointer->data, 1);
+				std::cout << "-- Destroying ball --" << std::endl;
+				//Ball subdivision
+				if (pointer->data->type > 1)
+				{
+					Ball* newBall1 = new Ball(pointer->data, -1);
+					Ball* newBall2 = new Ball(pointer->data, 1);
 
-			ballsList.add(newBall1);
-			ballsList.add(newBall2);
+					ballsList.add(newBall1);
+					ballsList.add(newBall2);
+				}
+				//	delete ball;	
+				delete pointer->data;
+				ballsList.del(pointer);
+
 			}
-
-
-		//	delete ball;
-			
-			delete pointer->data;
-			ballsList.del(pointer);
-			
+			//Updating position and rendering
+			else
+			{
+				pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
+				pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
+				App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 75);
+				App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
+			}
+			pointer = pointer_next;
 		}
-
-		else
-		{
-			pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
-			pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
-			App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 100);
-			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
-		}
-		
-		pointer = pointer_next;
-	}
+	
 	return UPDATE_CONTINUE;
 }
 
 bool ModuleBalls::CleanUp()
 {
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
-	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
-
 	while (pointer != NULL)
 	{
-		pointer_next = pointer->next;
-
-		ballsList.del(pointer);
-		pointer = pointer_next;
+		//Delete ball
+		delete pointer->data;
+		pointer = pointer->next;
 	}
-//	ballsList.clear();
-
+	ballsList.clear();
 	return true;
 }
+
+/*
+He canviat la manera de fer el cleanup... es una mica més net i eficient.
+
+Aquest es l'antic.
+
+p2List_item<Ball*>* pointer = ballsList.getFirst();
+p2List_item<Ball*>* pointer_next = ballsList.getFirst();
+
+while (pointer != NULL)
+{
+pointer_next = pointer->next;
+
+//Delete ball
+delete pointer->data;
+ballsList.del(pointer);
+pointer = pointer_next;
+}
+*/
 
 Ball::Ball(Ball* parent, int offsetDirection)
 {
@@ -120,28 +133,30 @@ Ball::Ball(Ball* parent, int offsetDirection)
 
 	type = parent->type - 1;
 	if (type == medium)
+	{
 		offset = 4;
+	}
 	else
+	{
 		offset = 8;
+	}
 
 	speed.x = (5 - type) * offsetDirection;
-	speed.y = (5 - type) * -1;
+	speed.y = (type - 5);
 
 	switch (type)
 	{
-	case little:
-	{ radius = 4; YBaseSpeed = -4; break; }
-	case medium:
-	{ radius = 8; YBaseSpeed = -6; break; }
-	case big:
-	{ radius = 16; YBaseSpeed = -7; break; }
-	case huge:
-	{ radius = 24; YBaseSpeed = -8; break; }
+		case little:
+		{ radius = 4; YBaseSpeed = -4; break; }
+		case medium:
+		{ radius = 8; YBaseSpeed = -6; break; }
+		case big:
+		{ radius = 16; YBaseSpeed = -7; break; }
+		case huge:
+		{ radius = 24; YBaseSpeed = -8; break; }
 	}
 
-
 	//Creating the rect
-
 	start_rect.x = position.x - radius;
 	start_rect.y = position.y - radius;
 	start_rect.w = radius * 2;
@@ -194,7 +209,7 @@ bool Ball::Update()
 		if (position.x + radius > SCREEN_WIDTH - TILE || position.x - radius < TILE)
 		{
 			speed.x *= -1;
-			//position.x += speed.x;
+			position.x += speed.x;
 		}
 		if (position.y +radius >= SCREEN_HEIGHT - 5 * TILE)
 		{
@@ -207,6 +222,8 @@ bool Ball::Update()
 		speed.y += 0.25;
 		return true;
 	}
-	else 
+	else
+	{
 		return false;
+	}
 }

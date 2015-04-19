@@ -36,6 +36,7 @@ public:
 	p2List<Ball*> ballsList;
 	SDL_Texture* ballsGraphics;
 	SDL_Rect ballsRects[3][4];
+	bool pauseBalls = false;
 
 	bool Start();
 	update_status PreUpdate();

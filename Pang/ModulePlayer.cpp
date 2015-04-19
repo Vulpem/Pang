@@ -134,7 +134,7 @@ update_status ModulePlayer::Update()
 
 	if (App->gun->shootAvailable == true)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		{
 			p2Point<int> offset;
 			offset.y = 32;
@@ -330,12 +330,13 @@ void ModulePlayer::CheckBallCollision()
 		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
 		while (tmp != NULL && !dead)
 		{
-			if ((tmp->data->position.y + tmp->data->radius >= position.y) &&
-				(tmp->data->position.y - tmp->data->radius <= position.y + 32) &&
-				((tmp->data->position.x + tmp->data->radius) > position.x) &&
-				(tmp->data->position.x - tmp->data->radius) < position.x + 30)
+			if ((tmp->data->position.y + tmp->data->radius >= position.y + 5 ) &&
+				(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+				((tmp->data->position.x + tmp->data->radius) > position.x + 5) &&
+				(tmp->data->position.x - tmp->data->radius) < position.x + 25)
 			{
 				Kill();
+				App->balls->pauseBalls = true;
 				dead = true;
 			}
 			tmp = tmp->next;
