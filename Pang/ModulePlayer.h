@@ -35,6 +35,7 @@ public:
 	bool ladderAlign = false;
 	int movementDirection = 1;
 
+	int speed = 2;
 	bool undying = false;
 	int deaths = 0;
 	bool dead = false;
@@ -55,6 +56,11 @@ public:
 	Animation shot;
 	Animation shot2;
 
-
+private:
+	void IsFalling();
+	void Movement();
+	void Shoot();
+	void Fall();
+	void Climb();
 
 };

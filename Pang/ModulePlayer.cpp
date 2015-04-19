@@ -83,21 +83,52 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	LOG("--Updating Player")
-	int speed = 2;
-	//////////////////////
-	//Character movement//
-	//////////////////////
+	IsFalling();
+	Movement();
+	Shoot();
+	Fall();
+	Climb();
+	if (current_animation != NULL)
+	{
+		SDL_Rect r = current_animation->GetCurrentFrame();
+		App->renderer->Blit(graphics, position.x - 2, position.y, &r);
+	}
+	CheckBallCollision();
+	return UPDATE_CONTINUE;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("--Cleanup Player");
+
+	App->textures->Unload(graphics);
+
+	return true;
+}
 
 
-		/////////////////
-		//Player states//
-		/////////////////
 
+void ModulePlayer::Kill()
+{
+		std::cout << "Player has died" << std::endl;
+		if (undying == false)
+		{
+			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		}
+}
+
+
+void ModulePlayer::IsFalling()
+{
 	if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 && playerState != climbing)
 	{
 		playerState = falling;
 	}
+}
 
+
+void ModulePlayer::Movement()
+{
 	if (playerState != climbing)
 	{
 		if (movementDirection == 1)
@@ -122,16 +153,18 @@ update_status ModulePlayer::Update()
 		{
 			if (App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT && App->maps->map[position.y / 8][(position.x - 1) / 8] != 1)
 			{
-				current_animation = &backward;	
+				current_animation = &backward;
 				position.x -= speed;
-				movementDirection = - 1;
+				movementDirection = -1;
 			}
 
 		}
 	}
+}
 
-	//Shoot
 
+void ModulePlayer::Shoot()
+{
 	if (App->gun->shootAvailable == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -152,12 +185,15 @@ update_status ModulePlayer::Update()
 					current_animation = &shot2;
 				}
 			}
-			App->gun->Shoot((position+offset));
-	
+			App->gun->Shoot((position + offset));
+
 		}
 	}
+}
 
-	//Fall
+
+void ModulePlayer::Fall()
+{
 	if (playerState == falling)
 	{
 		speed = 1;
@@ -177,7 +213,11 @@ update_status ModulePlayer::Update()
 			speed = 2;
 		}
 	}
+}
 
+
+void ModulePlayer::Climb()
+{
 	//Climb
 
 	if (playerState != falling)
@@ -275,79 +315,47 @@ update_status ModulePlayer::Update()
 					ladderAlign = true;
 				}
 
-					climb.speed = 0.16f;
-					playerState = climbing;
-					current_animation = &climb;
+				climb.speed = 0.16f;
+				playerState = climbing;
+				current_animation = &climb;
 
-					//Check if the ladder ends
-					if ((App->maps->map[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
-			
-					{
-						if ((App->maps->map[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
+				//Check if the ladder ends
+				if ((App->maps->map[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
+
+				{
+					if ((App->maps->map[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
 						playerState = standing;
-						ladderAlign = false;
-					}
-					position.y+=2;
+					ladderAlign = false;
 				}
+				position.y += 2;
 			}
-
-
-			//Stop the climbing animation
-		if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
-			{
-				climb.speed = 0.0f;
-			}
-	}
-
-
-		if (current_animation != NULL)
-		{
-			SDL_Rect r = current_animation->GetCurrentFrame();
-			App->renderer->Blit(graphics, position.x - 2, position.y, &r);
-
 		}
 
-		///////////////////////////
-		//Checking Ball collision//
-		///////////////////////////		
-		CheckBallCollision();
 
-
-		return UPDATE_CONTINUE;
+		//Stop the climbing animation
+		if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
+		{
+			climb.speed = 0.0f;
+		}
+	}
 }
 
-bool ModulePlayer::CleanUp()
-{
-	LOG("--Cleanup Player");
 
-	App->textures->Unload(graphics);
-
-	return true;
-}
 
 void ModulePlayer::CheckBallCollision()
 {
-		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-		while (tmp != NULL && !dead)
+	p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+	while (tmp != NULL && !dead)
+	{
+		if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
+			(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+			((tmp->data->position.x + tmp->data->radius) > position.x + 5) &&
+			(tmp->data->position.x - tmp->data->radius) < position.x + 25)
 		{
-			if ((tmp->data->position.y + tmp->data->radius >= position.y + 5 ) &&
-				(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-				((tmp->data->position.x + tmp->data->radius) > position.x + 5) &&
-				(tmp->data->position.x - tmp->data->radius) < position.x + 25)
-			{
-				Kill();
-				App->balls->pauseBalls = true;
-				dead = true;
-			}
-			tmp = tmp->next;
+			Kill();
+			App->balls->pauseBalls = true;
+			dead = true;
 		}
-}
-
-void ModulePlayer::Kill()
-{
-		std::cout << "Player has died" << std::endl;
-		if (undying == false)
-		{
-			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-		}
+		tmp = tmp->next;
+	}
 }
