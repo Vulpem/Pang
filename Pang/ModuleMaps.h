@@ -13,5 +13,8 @@ public:
 	update_status Update();
 
 	static int map[26][48];
+	bool CleanUp();
+
+	void PrepareMap();
 
 };

@@ -45,8 +45,6 @@ Application::~Application()
 
 	delete gun;
 	delete player;
-	//Breaks when trying to delete balls
-	delete balls;
 	delete maps;
 
 	delete backgroundPlay;

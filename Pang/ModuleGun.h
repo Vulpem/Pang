@@ -12,6 +12,7 @@ struct Bullet
 	p2Point<int> start;
 	p2Point<int> end;
 
+
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
 
@@ -31,6 +32,7 @@ public:
 public:
 	bool Start();
 	update_status Update();
+	bool Cleanup();
 
 	void AddBullet(p2Point<int>);
 

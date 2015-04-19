@@ -47,7 +47,6 @@ int ModuleMaps::map[26][48] = {
 
 bool ModuleMaps::Start()
 {
-
 	//Checking maps in console
 	for (int i = 0; i < 26; i++)
 	{
@@ -65,4 +64,21 @@ update_status ModuleMaps::Update()
 {
 
 	return UPDATE_CONTINUE;
+}
+
+bool ModuleMaps::CleanUp()
+{
+	return true;
+}
+
+void ModuleMaps::PrepareMap()
+{
+	//Aqui es generara la imatge dels blocs.
+	for (int h = 1; h <= 24; h++)
+	{
+		for (int w = 1; w <= 46; w++)
+		{
+			
+		}
+	}
 }

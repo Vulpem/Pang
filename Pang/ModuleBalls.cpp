@@ -2,7 +2,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleBalls.h"
-#include "Application.h"
 
 #include <iostream>
 
