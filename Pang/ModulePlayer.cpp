@@ -134,7 +134,7 @@ update_status ModulePlayer::Update()
 
 	if (App->gun->shootAvailable == true)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			p2Point<int> offset;
 			offset.y = 32;
