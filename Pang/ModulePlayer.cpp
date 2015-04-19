@@ -74,6 +74,8 @@ bool ModulePlayer::Start()
 	position.x = TILE;
 	position.y = SCREEN_HEIGHT - 28 * TILE;
 
+	dead = false;
+
 	return ret;
 }
 
@@ -128,7 +130,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	//Shot
+	//Shoot
 
 	if (App->gun->shootAvailable == true)
 	{
@@ -326,7 +328,7 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::CheckBallCollision()
 {
 		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-		while (tmp != NULL /*&& !dead*/)
+		while (tmp != NULL && !dead)
 		{
 			if ((tmp->data->position.y + tmp->data->radius >= position.y) &&
 				(tmp->data->position.y - tmp->data->radius <= position.y + 32) &&
@@ -342,12 +344,9 @@ void ModulePlayer::CheckBallCollision()
 
 void ModulePlayer::Kill()
 {
-	if (deaths > 30)
-		std::cout << "Oh, fuck off, you are so bad" << std::endl;
-	else
-	{
 		std::cout << "Player has died" << std::endl;
-		deaths++;
-	}
-
+		if (undying == false)
+		{
+			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		}
 }

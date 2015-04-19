@@ -23,7 +23,6 @@ public:
 	Ball(int x, int y, int _type, int direction);
 	Ball(Ball* parent, int offsetDirection);
 	bool Update();
-
 };
 
 class ModuleBalls : public Module
@@ -41,7 +40,7 @@ public:
 	bool Start();
 	update_status PreUpdate();
 	update_status Update();
-
+	bool CleanUp();
 
 
 };

@@ -29,12 +29,15 @@ public:
 
 public:
 
-	int deaths = 0;
-	bool dead = false;
+
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;
 	int movementDirection = 1;
+
+	bool undying = false;
+	int deaths = 0;
+	bool dead = false;
 
 	p2Point<int> position;
 

@@ -24,6 +24,7 @@ bool ModuleSceneIntro::Start()
 
 bool ModuleSceneIntro::CleanUp()
 {
+	LOG("Unloading Intro scene")
  	App->textures->Unload(graphics);
 
 	return true;
@@ -37,7 +38,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
-		App->fade->FadeToBlack(App->backgroundIntro, App->backgroundPlay, 3.0f);
+		App->fade->FadeToBlack(this, App->backgroundPlay, 3.0f);
 	}
 
 	return UPDATE_CONTINUE;

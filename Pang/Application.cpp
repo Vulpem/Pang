@@ -42,6 +42,7 @@ Application::~Application()
 {
 	delete gun;
 	delete player;
+	//Breaks when trying to destroy balls
 	delete balls;
 	delete maps;
 	delete fade;
@@ -91,7 +92,8 @@ update_status Application::Update()
 
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = item->data->PreUpdate();
+		if (item->data->IsEnabled())
+			ret = item->data->PreUpdate();
 		item = item->next;
 	}
 
@@ -99,7 +101,8 @@ update_status Application::Update()
 
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = item->data->Update();
+		if (item->data->IsEnabled())
+			ret = item->data->Update();
 		item = item->next;
 	}
 
@@ -107,7 +110,8 @@ update_status Application::Update()
 
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = item->data->PostUpdate();
+		if (item->data->IsEnabled())
+			ret = item->data->PostUpdate();
 		item = item->next;
 	}
 

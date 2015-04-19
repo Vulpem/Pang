@@ -13,15 +13,7 @@ ModuleBalls::ModuleBalls(Application* app, bool start_enabled) : Module(app, sta
 
 ModuleBalls::~ModuleBalls()
 {
-	p2List_item<Ball*>* pointer = ballsList.getFirst();
-	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 
-	while (pointer != NULL)
-	{
-		delete pointer->data;
-		pointer = pointer->next;
-	}
-	ballsList.clear();
 }
 
 void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direction)
@@ -102,6 +94,23 @@ update_status ModuleBalls::Update()
 		pointer = pointer_next;
 	}
 	return UPDATE_CONTINUE;
+}
+
+bool ModuleBalls::CleanUp()
+{
+	p2List_item<Ball*>* pointer = ballsList.getFirst();
+	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
+
+	while (pointer != NULL)
+	{
+		pointer_next = pointer->next;
+
+		ballsList.del(pointer);
+		pointer = pointer_next;
+	}
+//	ballsList.clear();
+
+	return true;
 }
 
 Ball::Ball(Ball* parent, int offsetDirection)

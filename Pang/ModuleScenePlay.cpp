@@ -22,25 +22,27 @@ bool ModuleScenePlay::Start()
 {
 	
 	LOG("Loading background assets");
-	bool ret = true;
+
+	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 
 	App->player->Enable();
 	App->balls->Enable();
-	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
+	App->gun->Enable();
 	
 	App->balls->AddBall(150, 100, huge, 1);
-	return ret;
+
+	return true;
 }
 
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
-
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	int b = App->balls->ballsList.count();
+	if (App->balls->ballsList.count() == 0)
 	{
-		if (App->balls->ballsList.count() > 0)
-			App->balls->ballsList.getFirst()->data->dead = true;
+		App->fade->FadeToBlack(this, App->backgroundIntro, 3.0f);
 	}
+
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 
@@ -52,5 +54,6 @@ bool ModuleScenePlay::CleanUp()
 	App->textures->Unload(graphics);
 	App->player->Disable();
 	App->balls->Disable();
+	App->gun->Disable();
 	return true;
 }
