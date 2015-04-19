@@ -6,13 +6,9 @@
 #include <iostream>
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app)
+ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	graphics = NULL;
-
-	position.x = TILE;
-	position.y = SCREEN_HEIGHT - 28 * TILE;
-
 
 	//////////////
 	//Animations//
@@ -74,6 +70,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/Player.png"); // arcade version
+
+	position.x = TILE;
+	position.y = SCREEN_HEIGHT - 28 * TILE;
+
 	return ret;
 }
 
@@ -130,25 +130,26 @@ update_status ModulePlayer::Update()
 
 	//Shot
 
-	if (playerState != climbing && App->gun->shootAvailable == true)
+	if (App->gun->shootAvailable == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			p2Point<int> offset;
-			if (movementDirection == 1)
-			{
-				current_animation = &shot;
-				offset.x = 14;
-				offset.y = 32;
-			}
+			offset.y = 32;
+			offset.x = 11.5 + (2.5 * movementDirection);
 
-			else if (movementDirection == -1)
+			if (playerState != climbing)
 			{
-				current_animation = &shot2;
-				offset.x = 9;
-				offset.y = 32;
-			}
+				if (movementDirection == 1)
+				{
+					current_animation = &shot;
+				}
 
+				else if (movementDirection == -1)
+				{
+					current_animation = &shot2;
+				}
+			}
 			App->gun->Shoot((position+offset));
 	
 		}
@@ -316,6 +317,9 @@ update_status ModulePlayer::Update()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Deleting the Player");
+
+	App->textures->Unload(graphics);
+
 	return true;
 }
 

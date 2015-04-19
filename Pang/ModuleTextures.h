@@ -11,6 +11,7 @@ public:
 
 	bool Init();
 	bool CleanUp();
+	void Unload(SDL_Texture* texture);
 
 	SDL_Texture* const Load(const char* path);
 

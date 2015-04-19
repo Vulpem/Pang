@@ -3,18 +3,18 @@
 #include "Animation.h"
 #include "Globals.h"
 
-class ModuleBackground : public Module
+class ModuleSceneIntro : public Module
 {
 public:
-	ModuleBackground(Application* app, bool start_enabled = true);
-	~ModuleBackground();
+	ModuleSceneIntro(Application* app, bool start_enabled = true);
+	~ModuleSceneIntro();
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
-	
+
 	SDL_Texture* graphics;
-	SDL_Rect background;
 
 };

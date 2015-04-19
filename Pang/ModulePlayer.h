@@ -25,15 +25,19 @@ public:
 	void CheckBallCollision();
 	void Kill();
 
+
+
+public:
+
 	int deaths = 0;
 	bool dead = false;
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;
 	int movementDirection = 1;
+
 	p2Point<int> position;
 
-public:
 
 	Animation* current_animation = NULL;
 

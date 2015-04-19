@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 
-ModuleRender::ModuleRender(Application* app, bool start_enabled) : Module(app)
+ModuleRender::ModuleRender(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	renderer = NULL;
 	camera.x = camera.y = 0;

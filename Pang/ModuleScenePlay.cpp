@@ -1,10 +1,10 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleBackground.h"
+#include "ModuleScenePlay.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleBackground::ModuleBackground(Application* app, bool start_enabled) : Module(app)
+ModuleScenePlay::ModuleScenePlay(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	graphics = NULL;
 
@@ -14,16 +14,18 @@ ModuleBackground::ModuleBackground(Application* app, bool start_enabled) : Modul
 	background.h = SCREEN_HEIGHT - 4 * TILE;
 }
 
-ModuleBackground::~ModuleBackground()
+ModuleScenePlay::~ModuleScenePlay()
 {}
 
 // Load assets
-bool ModuleBackground::Start()
+bool ModuleScenePlay::Start()
 {
 	
 	LOG("Loading background assets");
 	bool ret = true;
 
+	App->player->Enable();
+	App->balls->Enable();
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	
 	App->balls->AddBall(150, 100, huge, 1);
@@ -31,7 +33,7 @@ bool ModuleBackground::Start()
 }
 
 // Update: draw background
-update_status ModuleBackground::Update()
+update_status ModuleScenePlay::Update()
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
@@ -43,4 +45,12 @@ update_status ModuleBackground::Update()
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 
 	return UPDATE_CONTINUE;
+}
+
+bool ModuleScenePlay::CleanUp()
+{
+	App->textures->Unload(graphics);
+	App->player->Disable();
+	App->balls->Disable();
+	return true;
 }

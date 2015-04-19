@@ -7,7 +7,11 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
-#include "ModuleBackground.h"
+
+#include "ModuleScenePlay.h"
+#include "ModuleSceneIntro.h"
+
+#include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
 #include "ModuleMaps.h"
@@ -20,7 +24,11 @@ public:
 	ModuleWindow* window;
 	ModuleTextures* textures;
 	ModuleInput* input;
-	ModuleBackground* background;
+
+	ModuleSceneIntro* backgroundIntro;
+	ModuleScenePlay* backgroundPlay;
+
+	ModuleFadeToBlack* fade;
 	ModulePlayer* player;
 	ModuleGun* gun;
 	ModuleMaps* maps;

@@ -73,7 +73,9 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Module.h" />
-    <ClInclude Include="ModuleBackground.h" />
+    <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="ModuleSceneIntro.h" />
+    <ClInclude Include="ModuleScenePlay.h" />
     <ClInclude Include="ModuleBalls.h" />
     <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleGun.h" />
@@ -90,7 +92,9 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ModuleBackground.cpp" />
+    <ClCompile Include="ModuleFadeToBlack.cpp" />
+    <ClCompile Include="ModuleSceneIntro.cpp" />
+    <ClCompile Include="ModuleScenePlay.cpp" />
     <ClCompile Include="ModuleBalls.cpp" />
     <ClCompile Include="ModuleCollision.cpp" />
     <ClCompile Include="ModuleGun.cpp" />

@@ -3,15 +3,20 @@
 
 Application::Application()
 {
-	renderer = new ModuleRender(this);
-	window = new ModuleWindow(this);
-	textures = new ModuleTextures(this);
-	input = new ModuleInput(this);
-	background = new ModuleBackground(this);
-	player = new ModulePlayer(this);
-	gun = new ModuleGun(this);
-	maps = new ModuleMaps(this);
-	balls = new ModuleBalls(this);
+	renderer = new ModuleRender(this, true);
+	window = new ModuleWindow(this, true);
+	textures = new ModuleTextures(this, true);
+	input = new ModuleInput(this, true);
+
+	backgroundIntro = new ModuleSceneIntro(this, true);
+	backgroundPlay = new ModuleScenePlay(this, false);
+
+	fade = new ModuleFadeToBlack(this, true);
+	player = new ModulePlayer(this, false);
+	gun = new ModuleGun(this, false);
+	maps = new ModuleMaps(this, true);
+	balls = new ModuleBalls(this, false);
+
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -20,7 +25,11 @@ Application::Application()
 	AddModule(renderer);
 	AddModule(textures);
 	AddModule(input);
-	AddModule(background);
+
+	AddModule(backgroundIntro);
+	AddModule(backgroundPlay);
+
+	AddModule(fade);
 	AddModule(maps);
 	AddModule(balls);
 	AddModule(player);
@@ -35,7 +44,11 @@ Application::~Application()
 	delete player;
 	delete balls;
 	delete maps;
-	delete background;
+	delete fade;
+
+	delete backgroundPlay;
+	delete backgroundIntro;
+
 	delete input;
 	delete textures;
 	delete renderer;
@@ -62,7 +75,8 @@ bool Application::Init()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->IsEnabled())
+			ret = item->data->Start();
 		item = item->next;
 	}
 	

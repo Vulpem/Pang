@@ -5,7 +5,7 @@
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
-ModuleTextures::ModuleTextures(Application* app, bool start_enabled) : Module(app)
+ModuleTextures::ModuleTextures(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
 
@@ -77,4 +77,21 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	}
 
 	return texture;
+}
+
+// Free texture from memory
+void ModuleTextures::Unload(SDL_Texture* texture)
+{
+	p2List_item<SDL_Texture*>* item = textures.getFirst();
+
+	while (item != NULL)
+	{
+		if (item->data == texture)
+		{
+			SDL_DestroyTexture(item->data);
+			textures.del(item);
+			break;
+		}
+		item = item->next;
+	}
 }

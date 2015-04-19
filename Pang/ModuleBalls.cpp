@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-ModuleBalls::ModuleBalls(Application* app, bool start_enabled) : Module(app)
+ModuleBalls::ModuleBalls(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
 }
