@@ -67,7 +67,7 @@ ModulePlayer::~ModulePlayer()
 // Load assets
 bool ModulePlayer::Start()
 {
-	LOG("Loading player textures");
+	LOG("--Initializing player");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/Player.png"); // arcade version
 
@@ -82,7 +82,7 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
+	LOG("--Updating Player")
 	int speed = 2;
 	//////////////////////
 	//Character movement//
@@ -318,7 +318,7 @@ update_status ModulePlayer::Update()
 
 bool ModulePlayer::CleanUp()
 {
-	LOG("Deleting the Player");
+	LOG("--Cleanup Player");
 
 	App->textures->Unload(graphics);
 

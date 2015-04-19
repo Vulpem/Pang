@@ -3,10 +3,10 @@
 
 Application::Application()
 {
-	renderer = new ModuleRender(this, true);
-	window = new ModuleWindow(this, true);
-	textures = new ModuleTextures(this, true);
-	input = new ModuleInput(this, true);
+	renderer = new ModuleRender(this);
+	window = new ModuleWindow(this);
+	textures = new ModuleTextures(this);
+	input = new ModuleInput(this);
 
 	backgroundIntro = new ModuleSceneIntro(this, true);
 	backgroundPlay = new ModuleScenePlay(this, false);

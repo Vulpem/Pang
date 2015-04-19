@@ -104,6 +104,7 @@ bool ModuleBalls::CleanUp()
 		pointer = pointer->next;
 	}
 	ballsList.clear();
+	App->textures->Unload(ballsGraphics);
 	return true;
 }
 

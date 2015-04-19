@@ -14,7 +14,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 
-	LOG("Loading Intro assets");
+	LOG("--Initializing Intro");
 	bool ret = true;
 
 	graphics = App->textures->Load("./Image_Sources/Pang_Title.png");
@@ -24,7 +24,7 @@ bool ModuleSceneIntro::Start()
 
 bool ModuleSceneIntro::CleanUp()
 {
-	LOG("Unloading Intro scene")
+	LOG("--Cleanup Intro scene")
  	App->textures->Unload(graphics);
 
 	return true;
@@ -33,6 +33,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	LOG("--Updating Intro Scene");
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, NULL);
 
