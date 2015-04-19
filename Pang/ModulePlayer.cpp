@@ -76,7 +76,7 @@ bool ModulePlayer::Start()
 	}
 
 	position.x = TILE;
-	position.y = SCREEN_HEIGHT - 28 * TILE;
+	position.y = 10 * TILE;
 
 	dead = false;
 
@@ -98,6 +98,12 @@ update_status ModulePlayer::Update()
 		App->renderer->Blit(graphics, position.x - 2, position.y, &r);
 	}
 	CheckBallCollision();
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	{
+		std::cout << "Changed undying mode" << std::endl;
+		undying = !undying;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -112,15 +118,6 @@ bool ModulePlayer::CleanUp()
 
 
 //////  Player Methods //////
-
-void ModulePlayer::Kill()
-{
-		std::cout << "Player has died" << std::endl;
-		if (undying == false)
-		{
-			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-		}
-}
 
 
 void ModulePlayer::IsFalling()
@@ -357,10 +354,21 @@ void ModulePlayer::CheckBallCollision()
 			((tmp->data->position.x + tmp->data->radius) > position.x + 5) &&
 			(tmp->data->position.x - tmp->data->radius) < position.x + 25)
 		{
-			Kill();
-			App->balls->pauseBalls = true;
-			dead = true;
+			if (undying == false)
+			{
+				Kill();
+				dead = true;
+			}
 		}
 		tmp = tmp->next;
 	}
+}
+
+void ModulePlayer::Kill()
+{
+	std::cout << "Player has died" << std::endl;
+
+		App->balls->pauseBalls = true;
+		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+	
 }

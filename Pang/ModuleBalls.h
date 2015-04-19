@@ -7,10 +7,10 @@
 class Ball
 {
 public:
-	p2Point<int> position;
+	p2Point<float> position;
 	p2Point<float> speed;
 
-	int YBaseSpeed;
+	float YBaseSpeed;
 	int radius;
 	int type;
 	bool dead = false;
@@ -23,7 +23,9 @@ public:
 	Ball(Ball* parent, int offsetDirection);
 	bool Update(bool pause);
 private:
-	void createBall(int direction);
+	void CreateBall(int direction);
+	void CheckBorderColision();
+	void CheckBricksColision();
 
 };
 

@@ -32,7 +32,7 @@ public:
 	int movementDirection = 1;
 
 	int speed = 2;
-	bool undying = false;
+	bool undying = true;
 	int deaths = 0;
 	bool dead = false;
 

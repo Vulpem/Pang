@@ -13,7 +13,6 @@ ModuleBalls::ModuleBalls(Application* app, bool start_enabled) : Module(app, sta
 
 ModuleBalls::~ModuleBalls()
 {
-
 }
 
 void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direction)
@@ -99,35 +98,19 @@ bool ModuleBalls::CleanUp()
 {
 	LOG("Cleanup Balls");
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
+	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 	while (pointer != NULL)
 	{
+		pointer_next = pointer->next;
 		//Delete ball
 		delete pointer->data;
-		pointer = pointer->next;
+		ballsList.del(pointer);
+		pointer = pointer_next;
 	}
-	ballsList.clear();
 	App->textures->Unload(ballsGraphics);
 	return true;
 }
 
-/*
-He canviat la manera de fer el cleanup... es una mica més net i eficient.
-
-Aquest es l'antic.
-
-p2List_item<Ball*>* pointer = ballsList.getFirst();
-p2List_item<Ball*>* pointer_next = ballsList.getFirst();
-
-while (pointer != NULL)
-{
-pointer_next = pointer->next;
-
-//Delete ball
-delete pointer->data;
-ballsList.del(pointer);
-pointer = pointer_next;
-}
-*/
 
 
 ////  CLASS BALL  //////////////////////////////////////
@@ -138,7 +121,7 @@ Ball::Ball(Ball* parent, int offsetDirection)
 	position.y = parent->position.y;
 	position.x = parent->position.x + (parent->offset * offsetDirection);
 	type = parent->type - 1;
-	createBall(offsetDirection);
+	CreateBall(offsetDirection);
 }
 
 //Create the ball when initializing the level
@@ -147,29 +130,26 @@ Ball::Ball(int x, int y, int _type, int direction)
 	position.y = y;
 	position.x = x;
 	type = _type;
-	createBall(direction);
+	CreateBall(direction);
 }
 
-void Ball::createBall(int direction)
+void Ball::CreateBall(int direction)
 {
 	if (type == medium)
 		offset = 4;
 	else
 		offset = 8;
 
-	speed.x = (5 - type) * direction;
-	speed.y = (type - 5);
-
 	switch (type)
 	{
-	case little:
-	{ radius = 4; YBaseSpeed = -5; break; }
-	case medium:
-	{ radius = 8; YBaseSpeed = -6; break; }
-	case big:
-	{ radius = 16; YBaseSpeed = -7; break; }
-	case huge:
-	{ radius = 24; YBaseSpeed = -8; break; }
+		case huge:
+		{speed.y = -3.0f; speed.x = 1.5f * direction; radius = 24; YBaseSpeed = -6.9f; break; }
+		case big:
+		{speed.y = -2.5f; speed.x = 2.0f * direction; radius = 16; YBaseSpeed = -6.5f; break; }
+		case medium:
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; break; }
+		case little:
+		{speed.y = -2.0f; speed.x = 1.8f * direction; radius = 4; YBaseSpeed = -5.0f; break; }
 	}
 
 	//Creating the rect
@@ -185,26 +165,35 @@ bool Ball::Update(bool pause)
 	// S'ha de mirar si s'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
 	if (dead == false)
 	{
-		if (position.x + radius > SCREEN_WIDTH - TILE || position.x - radius < TILE)
-		{
-			speed.x *= -1;
-			position.x += speed.x;
-		}
-		if (position.y + radius >= SCREEN_HEIGHT - (5 * TILE))
-		{
-			speed.y = YBaseSpeed;
-			position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
-		}
+		CheckBorderColision();
+		CheckBricksColision();
+
 		if (pause == false)
 		{
 			position.x += speed.x;
 			position.y += speed.y;
-			speed.y += 0.25;
+			speed.y += 0.2;
 		}
 		return true;
 	}
-	else
+	return false;
+}
+
+void Ball::CheckBorderColision()
+{
+	if (position.x + radius > SCREEN_WIDTH - TILE || position.x - radius < TILE)
 	{
-		return false;
+		speed.x *= -1;
+		position.x += speed.x;
 	}
+	if (position.y + radius >= SCREEN_HEIGHT - (5 * TILE))
+	{
+		speed.y = YBaseSpeed;
+		position.y = (SCREEN_HEIGHT - 5 * TILE) - 1 - radius;
+	}
+}
+
+void Ball::CheckBricksColision()
+{
+	
 }
