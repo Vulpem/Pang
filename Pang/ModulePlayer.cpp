@@ -64,12 +64,16 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 ModulePlayer::~ModulePlayer()
 {}
 
-// Load assets
+
 bool ModulePlayer::Start()
 {
 	LOG("--Initializing player");
 	bool ret = true;
-	graphics = App->textures->Load("./Image_Sources/Player.png"); // arcade version
+	graphics = App->textures->Load("./Image_Sources/Player.png");
+	if (graphics == NULL)
+	{
+		LOG("------------------Could not load player graphics----------------------");
+	}
 
 	position.x = TILE;
 	position.y = SCREEN_HEIGHT - 28 * TILE;
@@ -79,7 +83,7 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
-// Update: draw background
+
 update_status ModulePlayer::Update()
 {
 	LOG("--Updating Player")
@@ -107,6 +111,7 @@ bool ModulePlayer::CleanUp()
 }
 
 
+//////  Player Methods //////
 
 void ModulePlayer::Kill()
 {

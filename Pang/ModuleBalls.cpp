@@ -24,6 +24,7 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direct
 
 bool ModuleBalls::Start()
 {
+	LOG("Initializing Balls");
 	ballsRects[red][huge].x = 0;		ballsRects[red][huge].y = 0;		ballsRects[red][huge].w = ballsRects[red][huge].h = 48;
 	ballsRects[red][big].x = 48;		ballsRects[red][big].y = 0;			ballsRects[red][big].w = ballsRects[red][big].h = 32;
 	ballsRects[red][medium].x = 80;		ballsRects[red][medium].y = 0;		ballsRects[red][medium].w = ballsRects[red][medium].h = 16;
@@ -96,6 +97,7 @@ update_status ModuleBalls::Update()
 
 bool ModuleBalls::CleanUp()
 {
+	LOG("Cleanup Balls");
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
 	while (pointer != NULL)
 	{

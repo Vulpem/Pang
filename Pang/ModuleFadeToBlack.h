@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "Animation.h"
+#include "ModuleAnimation.h"
 #include "Globals.h"
 #include "p2Point.h"
 

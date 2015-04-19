@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "Animation.h"
+#include "ModuleAnimation.h"
 #include "Globals.h"
 #include "p2Point.h"
 
@@ -22,13 +22,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void CheckBallCollision();
 	void Kill();
 
-
-
 public:
-
 
 	int playerState = standing;
 	int fallCounter = 0;
@@ -42,10 +38,9 @@ public:
 
 	p2Point<int> position;
 
+	SDL_Texture* graphics;
 
 	Animation* current_animation = NULL;
-
-	SDL_Texture* graphics;
 
 	Animation idle;
 	Animation idle2;
@@ -62,5 +57,6 @@ private:
 	void Shoot();
 	void Fall();
 	void Climb();
+	void CheckBallCollision();
 
 };

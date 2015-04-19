@@ -45,7 +45,7 @@ Application::~Application()
 
 	delete gun;
 	delete player;
-	//Breaks when trying to destroy balls
+	//Breaks when trying to delete balls
 	delete balls;
 	delete maps;
 
@@ -122,6 +122,7 @@ update_status Application::Update()
 
 bool Application::CleanUp()
 {
+	LOG("Application Cleanup");
 	bool ret = true;
 	p2List_item<Module*>* item = list_modules.getLast();
 
