@@ -14,7 +14,7 @@ Application::Application()
 	fade = new ModuleFadeToBlack(this, true);
 	player = new ModulePlayer(this, false);
 	gun = new ModuleGun(this, false);
-	maps = new ModuleMaps(this, true);
+	maps = new ModuleMaps(this, false);
 	balls = new ModuleBalls(this, false);
 
 
@@ -30,8 +30,8 @@ Application::Application()
 	AddModule(backgroundPlay);
 
 	AddModule(maps);
-	AddModule(balls);
 	AddModule(player);
+	AddModule(balls);
 	AddModule(gun);
 
 	AddModule(fade);
@@ -43,8 +43,8 @@ Application::~Application()
 {
 	delete fade;
 
- 	delete balls;
 	delete gun;
+	delete balls;
 	delete player;
 	delete maps;
 

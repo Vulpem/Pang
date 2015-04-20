@@ -219,7 +219,7 @@ void ModulePlayer::Fall()
 			position.y += 2;
 		}
 		//Arreglar perque caigui be
-		if (App->maps->map[position.y / 8 + 4][position.x / 8] == 1)
+		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 1 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 1)
 		{
 			int b = App->maps->map[25][1];
 			fallCounter = 0;

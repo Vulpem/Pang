@@ -146,7 +146,7 @@ void Ball::CreateBall(int direction)
 		case medium:
 		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; break; }
 		case little:
-		{speed.y = -2.0f; speed.x = 1.8f * direction; radius = 4; YBaseSpeed = -5.0f; break; }
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; break; }
 	}
 
 	//Creating the rect
