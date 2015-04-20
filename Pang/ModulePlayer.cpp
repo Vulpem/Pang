@@ -74,7 +74,7 @@ bool ModulePlayer::Start()
 	{
 		LOG("------------------Could not load player graphics----------------------");
 	}
-
+	playerState = standing;
 	position.x = TILE;
 	position.y = 10 * TILE;
 
