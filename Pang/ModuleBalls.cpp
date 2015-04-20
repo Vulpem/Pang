@@ -89,12 +89,12 @@ update_status ModuleBalls::Update()
 			}
 			pointer = pointer_next;
 		}
-
+		/*
 		if (ballsList.count() == 0)
 		{
 			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
 		}
-	
+	*/
 	return UPDATE_CONTINUE;
 }
 
