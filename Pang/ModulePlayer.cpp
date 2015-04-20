@@ -30,17 +30,17 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	forward.frames.PushBack({ 112, 2, 32, 32 });
 	forward.frames.PushBack({ 146, 2, 32, 32 });
 	forward.speed = 0.32f;
-
+	
 	// backward animation
-	backward.frames.PushBack({ 10, 146, 32, 32 });
-	backward.frames.PushBack({ 44, 146, 32, 32 });
-	backward.frames.PushBack({ 78, 146, 32, 32 });
-	backward.frames.PushBack({ 112, 146, 32, 32 });
-	backward.frames.PushBack({ 10, 146, 32, 32 });
-	backward.frames.PushBack({ 44, 146, 32, 32 });
-	backward.frames.PushBack({ 78, 146, 32, 32 });
-	backward.frames.PushBack({ 112, 146, 32, 32 });
-	backward.frames.PushBack({ 146, 146, 32, 32 });
+	backward.frames.PushBack({ 14, 146, 28, 32 });
+	backward.frames.PushBack({ 48, 146, 28, 32 });
+	backward.frames.PushBack({ 82, 146, 28, 32 });
+	backward.frames.PushBack({ 116, 146, 28, 32 });
+	backward.frames.PushBack({ 14, 146, 28, 32 });
+	backward.frames.PushBack({ 48, 146, 28, 32 });
+	backward.frames.PushBack({ 82, 146, 28, 32 });
+	backward.frames.PushBack({ 116, 146, 28, 32 });
+	backward.frames.PushBack({ 150, 146, 28, 32 });
 	backward.speed = 0.32f;
 
 
@@ -103,7 +103,19 @@ update_status ModulePlayer::Update()
 		std::cout << "Changed undying mode" << std::endl;
 		undying = !undying;
 	}
-
+	if (undying == true)
+	{
+		/*
+		Player bounding box
+		*/
+		SDL_Rect boundingBox;
+		boundingBox.x = position.x + 4;
+		boundingBox.y = position.y + 5;
+		boundingBox.w = 16;
+		boundingBox.h = 27;
+		App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
+	}
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -351,8 +363,8 @@ void ModulePlayer::CheckBallCollision()
 	{
 		if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
 			(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-			((tmp->data->position.x + tmp->data->radius) > position.x + 5) &&
-			(tmp->data->position.x - tmp->data->radius) < position.x + 25)
+			((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
+			(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 		{
 			if (undying == false)
 			{

@@ -84,17 +84,10 @@ update_status ModuleBalls::Update()
 			{
 				pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
 				pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
-				App->renderer->DrawQuad(pointer->data->start_rect, 255, 255, 0, 75);
 				App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
 			}
 			pointer = pointer_next;
 		}
-		/*
-		if (ballsList.count() == 0)
-		{
-			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
-		}
-	*/
 	return UPDATE_CONTINUE;
 }
 
