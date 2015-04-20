@@ -40,12 +40,6 @@ bool ModuleScenePlay::Start()
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
-	int b = App->balls->ballsList.count();
-	if (App->balls->ballsList.count() == 0)
-	{
-		App->fade->FadeToBlack(this, App->backgroundIntro, 3.0f);
-	}
-
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 
