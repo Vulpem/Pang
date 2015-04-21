@@ -99,15 +99,24 @@ update_status ModuleMaps::Update()
 	{
 		for (int w = 1; w <= 46; w++)
 		{
-			tile.x = w*TILE;
-			tile.y = h*TILE;
 			switch (map[h][w])
 			{
-			case 0: {break; }
-			{
-			case 1:{App->renderer->DrawQuad(tile, 255, 255, 0, 255); break; }
-			case 2:{App->renderer->DrawQuad(tile, 0, 255, 0, 255); break; }
-			}
+				case 0:
+				  { break; }
+				case 1:
+				{
+						  tile.x = w*TILE;
+						  tile.y = h*TILE;
+						  App->renderer->DrawQuad(tile, 255, 255, 0, 255);
+						  break;
+				}
+				case 2:
+				{
+						  tile.x = w*TILE;
+						  tile.y = h*TILE;
+						  App->renderer->DrawQuad(tile, 0, 255, 0, 255);
+						  break;
+				}
 			}
 		}
 	}

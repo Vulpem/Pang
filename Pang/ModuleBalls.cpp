@@ -199,5 +199,25 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direct
 
 void ModuleBalls::CheckBricksColision()
 {
+	int directionX;
+	int directionY;
+	int nTiles;
+	p2List_item<Ball*>* currentBall = ballsList.getFirst();
 
+	while (currentBall != NULL)
+	{
+		if (currentBall->data->speed.x > 0) { directionX = 1; }
+		else { directionX = -1; }
+		if (currentBall->data->speed.y > 0) { directionY = 1; }
+		else { directionY = -1; }
+		switch (currentBall->data->type)
+		{
+			case huge: { nTiles = 4; break; }
+			case big: { nTiles = 3; break; }
+			case medium: { nTiles = 2; break; }
+			case little: { nTiles = 2; break; }
+		}
+
+		currentBall = currentBall->next;
+	}
 }
