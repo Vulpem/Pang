@@ -162,6 +162,7 @@ update_status ModuleBalls::Update()
 		//Updating position and rendering
 		else
 		{
+			CheckBricksColision();
 			pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
 			pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
@@ -199,25 +200,115 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direct
 
 void ModuleBalls::CheckBricksColision()
 {
-	int directionX;
-	int directionY;
-	int nTiles;
+	
 	p2List_item<Ball*>* currentBall = ballsList.getFirst();
 
 	while (currentBall != NULL)
 	{
+		int directionX;
+		int directionY;
+		int currentTileX;
+		int currentTileY;
+
 		if (currentBall->data->speed.x > 0) { directionX = 1; }
 		else { directionX = -1; }
 		if (currentBall->data->speed.y > 0) { directionY = 1; }
 		else { directionY = -1; }
+
+		currentTileX = currentBall->data->position.x / 8;
+		currentTileY = currentBall->data->position.y / 8;
+
 		switch (currentBall->data->type)
 		{
-			case huge: { nTiles = 4; break; }
-			case big: { nTiles = 3; break; }
-			case medium: { nTiles = 2; break; }
-			case little: { nTiles = 2; break; }
+		case huge:
+		{
+					 for (int h = currentTileY - 3; h <= currentTileY + 3; h++)
+					 {
+						 if (App->maps->map[currentTileX + 4 * directionX][currentTileY + h] == 1)
+						 {
+							 CheckColision(currentTileX + 4 * directionX, currentTileY + h, currentBall->data);
+						 }
+					 }
+					 for (int w = currentTileX - 3; w <= currentTileX + 3; w++)
+					 {
+						 if (App->maps->map[currentTileX + 4 * directionX][currentTileY + w] == 1)
+						 {
+							 CheckColision(currentTileX + 4 * directionX, currentTileY + w, currentBall->data);
+						 }
+					 }
+					break;
+		}
+		case big:
+		{
+					for (int h = currentTileY - 2; h <= currentTileY + 2; h++)
+					{
+						if (App->maps->map[currentTileX + 3 * directionX][currentTileY + h] == 1)
+						{
+							CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
+						}
+					}
+					for (int w = currentTileX - 2; w <= currentTileX + 2; w++)
+					{
+						if (App->maps->map[currentTileX + 3 * directionX][currentTileY + w] == 1)
+						{
+							CheckColision(currentTileX + 3 * directionX, currentTileY + w, currentBall->data);
+						}
+					}
+					break;
+		}
+		case medium:
+		{
+					   for (int w = -1; w <= 1; w++)
+					   {
+						   for (int h = -1; h <= 1; h++)
+						   {
+							   if (App->maps->map[currentTileX + w][currentTileY + h] == 1)
+							   {
+								   CheckColision(currentTileX + w, currentTileY + h, currentBall->data);
+							   }
+						   }
+					   }
+					   break;
+		}
+		case little:
+		{
+					   for (int w = 0; w <= 1; w++)
+					   {
+						   for (int h = 0; h <= 1; h++)
+						   {
+							   SDL_Rect rect;
+							   rect.x = (currentTileX + (w*directionX))*8; rect.y = (currentTileY + (h*directionY))*8; rect.h = 8; rect.w = 8;
+							   App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+							   if (App->maps->map[currentTileX + w * directionX][currentTileY + h * directionY] == 1)
+							   {
+								   CheckColision(currentTileX + w * directionX, currentTileY + h * directionY, currentBall->data);
+							   }
+						   }
+					   }
+					   break;
+		}
+
 		}
 
 		currentBall = currentBall->next;
+	}
+}
+
+void ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
+{
+	p2Point<float> points[4];
+	points[0].x = tileX * 8;		points[0].y = tileY * 8;
+	points[1].x = (tileX + 1) * 8;	points[1].y = tileY * 8;
+	points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
+	points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
+	for (int n = 0; n < 4; n++)
+	{
+		if (myBall->position.DistanceTo(points[n]) <= 0)
+		{
+			//BASURA /////////////////////////////
+			SDL_Rect rect;
+			rect.x = 0; rect.y = 0; rect.h = 100; rect.w = 100;
+			App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+		}
 	}
 }

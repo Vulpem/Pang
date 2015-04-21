@@ -33,9 +33,9 @@ bool ModuleScenePlay::Start()
 	App->balls->Enable();
 	App->gun->Enable();
 	
-	App->balls->AddBall(50, 50, huge, 1);
+	/*App->balls->AddBall(50, 50, huge, 1);
 	App->balls->AddBall(50, 50, big, 1);
-	App->balls->AddBall(50, 50, medium, 1);
+	App->balls->AddBall(50, 50, medium, 1);*/
 	App->balls->AddBall(50, 50, little, 1);
 
 	return true;
