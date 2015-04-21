@@ -33,7 +33,6 @@ public:
 
 	int speed = 2;
 	bool undying = true;
-	int deaths = 0;
 	bool dead = false;
 
 	p2Point<int> position;
@@ -63,4 +62,5 @@ private:
 	bool LadderUpEnds();
 	bool LadderDownEnds();
 	bool CanClimbUp();
+	bool CanClimbDown();
 };

@@ -214,6 +214,7 @@ void ModulePlayer::Climb()
 		if (playerState == climbing && LadderUpEnds())
 		{
 			std::cout << "LadderUpEnds" << std::endl;
+			current_animation = &endclimb;
 			playerState = standing;
 		}
 		
@@ -222,6 +223,25 @@ void ModulePlayer::Climb()
 			playerState = climbing;
 			current_animation = &climb;
 			position.y--;
+		}
+
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+
+		if (playerState == climbing && LadderDownEnds())
+		{
+			std::cout << "LadderDownEnds" << std::endl;
+			current_animation = &endclimb;
+			playerState = standing;
+		}
+
+		else if (CanClimbDown())
+		{
+			playerState = climbing;
+			current_animation = &climb;
+			position.y++;
 		}
 
 	}
@@ -291,6 +311,7 @@ bool ModulePlayer::LadderUpEnds()
 	if (App->maps->map[(position.y + 31) / 8][(position.x + 12)/ 8] == 0)
 		return true;
 	return false;
+
 	/*
 	for (int w = 0; w < 3; w++)
 	{
@@ -302,6 +323,13 @@ bool ModulePlayer::LadderUpEnds()
 	*/
 }
 
+bool ModulePlayer::LadderDownEnds()
+{
+
+	if (App->maps->map[(position.y + 32) / 8][(position.x + 12) / 8] != 2)
+		return true;
+	return false;
+}
 /*
 bool ModulePlayer::LadderUpEnds()
 {
@@ -333,6 +361,14 @@ bool ModulePlayer::LadderUpEnds()
 bool ModulePlayer::CanClimbUp()
 {
 	if ((App->maps->map[(position.y + 31) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 31) / 8][(position.x + 13) / 8] == 2))
+		return true;
+	else
+		return false;
+}
+
+bool ModulePlayer::CanClimbDown()
+{
+	if ((App->maps->map[(position.y + 32) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 32) / 8][(position.x + 13) / 8] == 2))
 		return true;
 	else
 		return false;
