@@ -90,7 +90,7 @@ update_status ModulePlayer::Update()
 	IsFalling();
 	Movement();
 	Shoot();
-//	Climb();
+	Climb();
 	Fall();
 
 	if (current_animation != NULL)
@@ -206,6 +206,10 @@ void ModulePlayer::Shoot()
 	}
 }
 
+void ModulePlayer::Climb()
+{
+
+}
 
 void ModulePlayer::Fall()
 {
@@ -223,13 +227,11 @@ void ModulePlayer::Fall()
 		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] != 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] != 0)
 		{
 			//In case its a ladder
-			if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 2 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 2 && LadderUpEnds(position.y / 8 + 4, position.x / 8 + 4)) ||
-				(App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 1 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 1))
-			{
+
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
-			}
+			
 
 
 		}
