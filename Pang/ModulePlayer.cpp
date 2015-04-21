@@ -91,7 +91,7 @@ update_status ModulePlayer::Update()
 	Movement();
 	Shoot();
 	Fall();
-	Climb();
+
 	if (current_animation != NULL)
 	{
 		SDL_Rect r = current_animation->GetCurrentFrame();
@@ -219,141 +219,74 @@ void ModulePlayer::Fall()
 			position.y += 2;
 		}
 		//Arreglar perque caigui be
-		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 1 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 1)
+		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] != 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] != 0)
 		{
-			int b = App->maps->map[25][1];
+			//In case its a ladder
+			if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 2 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 2 && LadderUpEnds(position.y / 8 + 4, position.x / 8 + 4)) ||
+				(App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 1 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 1))
+			{
 			fallCounter = 0;
 			playerState = standing;
-			speed = 2;
+			speed = 2;			
+			}
+
+
 		}
+
 	}
 }
 
-
-void ModulePlayer::Climb()
+bool ModulePlayer::LadderUpEnds(int tile_x, int tile_y)
 {
-	//Climb
+	bool ret = false;
+	int w1 = 0;
+	int tile = 2;
 
-	if (playerState != falling)
+	for (int w1 = 0; w1 < 3, tile == 2; w1--)
 	{
-		if (App->maps->map[(position.y + 15) / 8][(position.x + 11) / 8] == 2 && App->maps->map[(position.y + 15) / 8][(position.x + 12) / 8] == 2 ||
-			App->maps->map[(position.y + 31) / 8][(position.x + 11) / 8] == 2 && App->maps->map[(position.y + 31) / 8][(position.x + 12) / 8] == 2)
+		tile = App->maps->map[tile_y][tile_x + w1];
+	}
+
+	w1--;
+	
+	for (int w2 = 0; w2 < 3; w2++)
+	{
+		if (App->maps->map[tile_y - 1][tile_x - w1 + w2] == 0)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			{
-				//Align position with the ladder
-				if (!ladderAlign)
-				{
-					int x = position.x / 8;
-					int y = (position.y / 8) + 1;
+			std::cout << "LadderUpEnds" << std::endl;
+			return true;
 
-					int i = 0;
-					int j = 0;
-
-					//Search for a 2
-					for (int k = 0; k != 2; i++)
-					{
-						for (j = 0; k != 2; j++)
-						{
-							k = App->maps->map[y + i][x + j];
-						}
-					}
-					i--;
-					j--;
-
-					//Correct the position of the character
-					if (App->maps->map[y + i][x + j - 1] != 2)
-					{
-						position.x = ((position.x / 8) + j) * 8;
-					}
-
-					else
-					{
-						position.x = ((position.x / 8) + j - 1) * 8;
-					}
-					ladderAlign = true;
-				}
-
-
-
-				climb.speed = 0.16f;
-				playerState = climbing;
-				current_animation = &climb;
-
-				//Check if the ladder ends
-				if ((App->maps->map[(position.y + 30) / 8][(position.x + 12) / 8] == 2) &&
-					(App->maps->map[(position.y + 29) / 8][(position.x + 12) / 8] == 0))
-				{
-					current_animation = &endclimb;
-					playerState = standing;
-					ladderAlign = false;
-				}
-				position.y -= 2;
-
-			}
-
-		}
-
-
-		if (App->maps->map[position.y / 8 + 4][(position.x + 11) / 8] == 2 && App->maps->map[position.y / 8 + 4][(position.x + 12) / 8] == 2 ||
-			App->maps->map[position.y / 8 + 2][(position.x + 11) / 8] == 2 && App->maps->map[position.y / 8 + 2][(position.x + 12) / 8] == 2)
-		{
-			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			{
-				//Align position with the ladder
-				if (!ladderAlign)
-				{
-					int x = position.x / 8;
-					int y = (position.y / 8) + 4;
-
-					int i = 0;
-
-					//Search for a 2
-					for (int k = 0; k != 2; i++)
-					{
-						k = App->maps->map[y][x + i];
-					}
-
-					i--;
-
-					//Correct the position of the character
-					if (App->maps->map[y + i][x + i - 1] != 2)
-					{
-						position.x = ((position.x / 8) + i) * 8;
-					}
-
-					else
-					{
-						position.x = ((position.x / 8) + i - 1) * 8;
-					}
-					ladderAlign = true;
-				}
-
-				climb.speed = 0.16f;
-				playerState = climbing;
-				current_animation = &climb;
-
-				//Check if the ladder ends
-				if ((App->maps->map[((position.y + 2) / 8) + 2][(position.x + 11) / 8] != 2))
-
-				{
-					if ((App->maps->map[(position.y + 35) / 8][(position.x + 11) / 8] != 2))
-						playerState = standing;
-					ladderAlign = false;
-				}
-				position.y += 2;
-			}
-		}
-
-
-		//Stop the climbing animation
-		if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
-		{
-			climb.speed = 0.0f;
 		}
 	}
+
+	return false;
 }
 
+bool ModulePlayer::LadderDownEnds(int tile_x, int tile_y)
+{
+	bool ret = false;
+	int w1 = 0;
+	int tile = 2;
+
+	for (int w1 = 0; w1 < 3, tile == 2; w1--)
+	{
+		tile = App->maps->map[tile_y][tile_x + w1];
+	}
+
+	w1--;
+
+	for (int w2 = 0; w2 < 3; w2++)
+	{
+		if (App->maps->map[tile_y + 1][tile_x - w1 + w2] == 0)
+		{
+			std::cout << "LadderDownEnds" << std::endl;
+			return true;
+		}
+
+	}
+
+	return false;
+}
 
 
 void ModulePlayer::CheckBallCollision()

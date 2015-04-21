@@ -44,7 +44,7 @@ Application::~Application()
 	delete fade;
 
 	delete gun;
-	delete balls;
+//	delete balls;
 	delete player;
 	delete maps;
 

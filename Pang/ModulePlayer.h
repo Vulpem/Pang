@@ -56,7 +56,10 @@ private:
 	void Movement();
 	void Shoot();
 	void Fall();
+	bool LadderUpEnds(int tile_x, int tile_y);
+	bool LadderDownEnds(int tile_x, int tile_y);
 	void Climb();
 	void CheckBallCollision();
+
 
 };
