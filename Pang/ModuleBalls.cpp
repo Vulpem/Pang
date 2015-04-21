@@ -206,7 +206,7 @@ void ModuleBalls::CheckBricksColision()
 			//Huge Ball 
 		case huge:
 		{
-					for (int h = -3; h <= 3 && collided == false; h++)
+					for (int h = -2; h <= 2 && collided == false; h++)
 					 {
 						 //This piece of code in between the "VVV" and the "AAA" and all the following similar to this one are just for rendering the squares in "debug mode", not used in the actual game.
 						 //VVVVV
@@ -222,7 +222,7 @@ void ModuleBalls::CheckBricksColision()
 							 collided = CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
 						 }
 					 }
-					 for (int w = -3; w <= 3 && collided == false; w++)
+					 for (int w = -2; w <= 2 && collided == false; w++)
 					 {
 						 //VVVVV
 						 if (App->backgroundPlay->debugMode == true)
@@ -248,6 +248,28 @@ void ModuleBalls::CheckBricksColision()
 					 if (App->maps->map[currentTileY + 2 * directionY][currentTileX + 2 * directionX] == 1 && collided == false)
 					 {
 						 collided = CheckColision(currentTileX + 2 * directionX, currentTileY + 2 * directionY, currentBall->data);
+					 }
+					 if (App->backgroundPlay->debugMode == true)
+					 {
+						 SDL_Rect rect;
+						 rect.x = (currentTileX - 3 * directionX) * 8; rect.y = (currentTileY + 2 * directionY) * 8; rect.h = 8; rect.w = 8;
+						 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+					 }
+					 //AAAAA
+					 if (App->maps->map[currentTileY + 2 * directionY][currentTileX - 3 * directionX] == 1 && collided == false)
+					 {
+						 collided = CheckColision(currentTileX - 3 * directionX, currentTileY + 2 * directionY, currentBall->data);
+					 }
+					 if (App->backgroundPlay->debugMode == true)
+					 {
+						 SDL_Rect rect;
+						 rect.x = (currentTileX + 2 * directionX) * 8; rect.y = (currentTileY - 3 * directionY) * 8; rect.h = 8; rect.w = 8;
+						 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+					 }
+					 //AAAAA
+					 if (App->maps->map[currentTileY - 3 * directionY][currentTileX + 2 * directionX] == 1 && collided == false)
+					 {
+						 collided = CheckColision(currentTileX + 2 * directionX, currentTileY - 3 * directionY, currentBall->data);
 					 }
 					break;
 		}
