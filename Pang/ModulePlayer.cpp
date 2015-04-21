@@ -104,6 +104,11 @@ update_status ModulePlayer::Update()
 		std::cout << "Changed undying mode" << std::endl;
 		undying = !undying;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		std::cout << "Pause" << std::endl;
+		App->balls->pauseBalls = !App->balls->pauseBalls;
+	}
 	if (App->backgroundPlay->debugMode == true)
 	{
 		/*

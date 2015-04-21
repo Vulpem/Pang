@@ -256,6 +256,16 @@ void ModuleBalls::CheckBricksColision()
 							collided = CheckColision(currentTileX + 2 * directionX, currentTileY + w, currentBall->data);
 						}
 					}
+					if (App->backgroundPlay->debugMode == true)
+					{
+						SDL_Rect rect;
+						rect.x = (currentTileX + 1 * directionX) * 8; rect.y = (currentTileY + 1 * directionY) * 8; rect.h = 8; rect.w = 8;
+						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+					}
+					if (App->maps->map[currentTileY + 1 * directionY][currentTileX + 1 * directionX] == 1 && collided == false)
+					{
+						collided = CheckColision(currentTileX + 1 * directionX, currentTileY + 1 * directionY, currentBall->data);
+					}
 					break;
 		}
 		case medium:
