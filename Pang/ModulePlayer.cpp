@@ -104,7 +104,7 @@ update_status ModulePlayer::Update()
 		std::cout << "Changed undying mode" << std::endl;
 		undying = !undying;
 	}
-	if (undying == true)
+	if (App->backgroundPlay->debugMode == true)
 	{
 		/*
 		Player bounding box
