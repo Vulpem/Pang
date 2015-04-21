@@ -90,6 +90,7 @@ update_status ModulePlayer::Update()
 	IsFalling();
 	Movement();
 	Shoot();
+//	Climb();
 	Fall();
 
 	if (current_animation != NULL)
@@ -98,7 +99,7 @@ update_status ModulePlayer::Update()
 		App->renderer->Blit(graphics, position.x - 2, position.y, &r);
 	}
 	CheckBallCollision();
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
 	{
 		std::cout << "Changed undying mode" << std::endl;
 		undying = !undying;
