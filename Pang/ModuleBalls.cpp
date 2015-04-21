@@ -34,7 +34,7 @@ void Ball::CreateBall(int direction)
 		case big:
 		{speed.y = -2.5f; speed.x = 2.0f * direction; radius = 16; YBaseSpeed = -6.5f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; offset = 4; /*break;*/ }
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; offset = 4; break; }
 		case little:
 		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; offset = 0; break; }
 	}
