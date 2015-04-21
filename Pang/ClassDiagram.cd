@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Animation" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAQgAAEAAAQAAAAA=</HashCode>
+      <FileName>ModuleAnimation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application" Collapsed="true">
+    <Position X="24" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAABAAFAAAAAAAAEAAAQAAARCABAJAAACAEAAkAA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Module" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAHACAAAAAAAAAAAAAAiCEEgAAA=</HashCode>
+      <FileName>Module.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleFadeToBlack" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AARAAEgAAAAAAAAAAAAiAgQAAQAAAAAAAAAQAAAAABA=</HashCode>
+      <FileName>ModuleFadeToBlack.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleSceneIntro">
+    <Position X="9.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAgAIAAAAEAAgAA=</HashCode>
+      <FileName>ModuleSceneIntro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleScenePlay">
+    <Position X="13.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAACAAAAAAAAAEAAAAAAAAAggAAAAAAEAAIAA=</HashCode>
+      <FileName>ModuleScenePlay.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ball">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADSAQAAACAAAAABAAAAAIAAAAAABAQAIAAAAAAAAAIA=</HashCode>
+      <FileName>ModuleBalls.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleBalls">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAIBIAAAAAAAAAIAAAAACCAAAAAAEAIQAA=</HashCode>
+      <FileName>ModuleBalls.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleGun">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAgAAAACAIBAAAAAAAAAAAAAgAAAAAgAAAAEAAAAA=</HashCode>
+      <FileName>ModuleGun.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleInput">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAIAKAEEAAAA=</HashCode>
+      <FileName>ModuleInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleMaps">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQBEgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAgAA=</HashCode>
+      <FileName>ModuleMaps.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModulePlayer" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAiAAAGACxQAgRIEAIAggAACEAQgIHAAAJEIhAAA=</HashCode>
+      <FileName>ModulePlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleRender">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQQAAAAAAAAAAAAAAABAAAAAAAAAAIAAAAACAEMAgAA=</HashCode>
+      <FileName>ModuleRender.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleTextures">
+    <Position X="11.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgACAAEAAAAIAAAAAAAAAAAAAAAAAAAACAUAAAAA=</HashCode>
+      <FileName>ModuleTextures.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModuleWindow">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIEAACAEAAAAA=</HashCode>
+      <FileName>ModuleWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="p2List&lt;tdata&gt;" Collapsed="true">
+    <Position X="26.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAAAACCAAAAAAEgBIAAgAAAAAAAAAABAAAAAAACAAA=</HashCode>
+      <FileName>List.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="p2DynArray&lt;VALUE&gt;" Collapsed="true">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAAGAAAAAgAABAAAAAAAwAAAGAAABAAAAQAABAAAA=</HashCode>
+      <FileName>p2DynArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="p2Point&lt;TYPE&gt;" Collapsed="true">
+    <Position X="28" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAACAAAAAAQAAAAAAAAAAAABkAAAAACA=</HashCode>
+      <FileName>p2Point.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Bullet" Collapsed="true">
+    <Position X="25.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAACAAAAAAAgAAAAAAAAAAAAAAAACQAAAAAAAAA=</HashCode>
+      <FileName>ModuleGun.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="p2List_item&lt;tdata&gt;" Collapsed="true">
+    <Position X="27.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAIAAAAAAAAABQAAIAAAA=</HashCode>
+      <FileName>List.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="main_states" Collapsed="true">
+    <Position X="25.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAgAAACAAAAAAQAAAAAQAAAAA=</HashCode>
+      <FileName>Main.cpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="update_status" Collapsed="true">
+    <Position X="29" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Globals.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BallTypes" Collapsed="true">
+    <Position X="27.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAACAAAAAABAAA=</HashCode>
+      <FileName>Globals.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BallColours" Collapsed="true">
+    <Position X="25.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Globals.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KEY_STATE" Collapsed="true">
+    <Position X="29" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>ModuleInput.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayerStates" Collapsed="true">
+    <Position X="27.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>ModulePlayer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
