@@ -63,4 +63,6 @@ private:
 	bool LadderDownEnds();
 	bool CanClimbUp();
 	bool CanClimbDown();
+	void AlignLadder(int direction);
+	int GetLadderCenter(int direction);
 };
