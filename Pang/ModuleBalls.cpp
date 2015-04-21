@@ -285,12 +285,15 @@ void ModuleBalls::CheckBricksColision()
 					   {
 						   for (int h = 0; h <= 1; h++)
 						   {
-							   SDL_Rect rect;
-							   rect.x = (currentTileX + (w*directionX))*8; rect.y = (currentTileY + (h*directionY))*8; rect.h = 8; rect.w = 8;
-							   App->renderer->DrawQuad(rect, 255, 0, 0, 100);
-							   if (App->maps->map[currentTileX + w * directionX][currentTileY + h * directionY] == 1)
+							   if (App->backgroundPlay->debugMode == true)
 							   {
-								   CheckColision(currentTileX + w * directionX, currentTileY + h * directionY, currentBall->data);
+								   SDL_Rect rect;
+								   rect.x = (currentTileX + (w*directionX)) * 8; rect.y = (currentTileY + (h*directionY)) * 8; rect.h = 8; rect.w = 8;
+								   App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+							   }
+							   if (App->maps->map[currentTileY + (h * directionY)][currentTileX + (w * directionX)] == 1)
+							   {
+								   CheckColision(currentTileX + ( w * directionX ), currentTileY + ( h * directionY ), currentBall->data);
 							   }
 						   }
 					   }
@@ -305,19 +308,47 @@ void ModuleBalls::CheckBricksColision()
 
 void ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 {
-	p2Point<float> points[4];
-	points[0].x = tileX * 8;		points[0].y = tileY * 8;
-	points[1].x = (tileX + 1) * 8;	points[1].y = tileY * 8;
-	points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
-	points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
-	for (int n = 0; n < 4; n++)
+	if (tileY >= 25)
 	{
-		if (myBall->position.DistanceTo(points[n]) <= 0)
+		if (myBall->position.y + myBall->radius >= 25 * TILE)
 		{
-			//BASURA /////////////////////////////
-			SDL_Rect rect;
-			rect.x = 0; rect.y = 0; rect.h = 100; rect.w = 100;
-			App->renderer->DrawQuad(rect, 255, 0, 0, 100);
+			myBall->speed.y = myBall->YBaseSpeed;
 		}
 	}
+	else
+	{
+		p2Point<float> points[4];
+		points[0].x = tileX * 8;		points[0].y = tileY * 8;
+		points[1].x = (tileX + 1) * 8;	points[1].y = tileY * 8;
+		points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
+		points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
+
+		for (int n = 0; n < 4; n++)
+		{
+			if (myBall->radius >= myBall->position.DistanceTo(points[n]))
+			{
+				if (myBall->position.y <= points[0].y)
+				{
+					myBall->speed.y *= -1;
+					myBall->position.y = points[0].y - myBall->radius;
+				}
+				else if (myBall->position.y >= points[3].y)
+				{
+					myBall->speed.y *= -1;
+					myBall->position.y = points[3].y + myBall->radius;
+				}
+				else if (myBall->position.x <= points[0].x)
+				{
+					myBall->speed.x *= -1;
+					myBall->position.x = points[0].x - myBall->radius;
+				}
+				else
+				{
+					myBall->speed.x *= -1;
+					myBall->position.x = points[3].x + myBall->radius;
+				}
+			}
+		}
+	}
+
 }

@@ -10,6 +10,8 @@ public:
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
 
+	bool debugMode = false;
+
 	ModuleScenePlay(Application* app, bool start_enabled = true);
 	~ModuleScenePlay();
 
