@@ -208,6 +208,23 @@ void ModulePlayer::Shoot()
 
 void ModulePlayer::Climb()
 {
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		
+		if (playerState == climbing && LadderUpEnds())
+		{
+			std::cout << "LadderUpEnds" << std::endl;
+			playerState = standing;
+		}
+		
+		else if (CanClimbUp())
+		{
+			playerState = climbing;
+			current_animation = &climb;
+			position.y--;
+		}
+
+	}
 
 }
 
@@ -239,33 +256,54 @@ void ModulePlayer::Fall()
 	}
 }
 
-bool ModulePlayer::LadderUpEnds(int tile_x, int tile_y)
+void ModulePlayer::Kill()
 {
-	bool ret = false;
-	int w1 = 0;
-	int tile = 2;
+	std::cout << "Player has died" << std::endl;
 
-	for (int w1 = 0; w1 < 3, tile == 2; w1--)
-	{
-		tile = App->maps->map[tile_y][tile_x + w1];
-	}
-
-	w1--;
+		App->balls->pauseBalls = true;
+		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	
-	for (int w2 = 0; w2 < 3; w2++)
-	{
-		if (App->maps->map[tile_y - 1][tile_x - w1 + w2] == 0)
-		{
-			std::cout << "LadderUpEnds" << std::endl;
-			return true;
-
-		}
-	}
-
-	return false;
 }
 
-bool ModulePlayer::LadderDownEnds(int tile_x, int tile_y)
+void ModulePlayer::CheckBallCollision()
+{
+	p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+	while (tmp != NULL && !dead)
+	{
+		if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
+			(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+			((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
+			(tmp->data->position.x - tmp->data->radius) < position.x + 20)
+		{
+			if (undying == false)
+			{
+				Kill();
+				dead = true;
+			}
+		}
+		tmp = tmp->next;
+	}
+}
+
+bool ModulePlayer::LadderUpEnds()
+{
+
+	if (App->maps->map[(position.y + 31) / 8][(position.x + 12)/ 8] == 0)
+		return true;
+	return false;
+	/*
+	for (int w = 0; w < 3; w++)
+	{
+		if (App->maps->map[(position.y + 30) / 8 + w][position.x / 8] == 0)
+			std::cout << "Ladder up ends" << std::endl;
+			return true;
+	}
+	return false;
+	*/
+}
+
+/*
+bool ModulePlayer::LadderUpEnds()
 {
 	bool ret = false;
 	int w1 = 0;
@@ -290,33 +328,12 @@ bool ModulePlayer::LadderDownEnds(int tile_x, int tile_y)
 
 	return false;
 }
+*/
 
-
-void ModulePlayer::CheckBallCollision()
+bool ModulePlayer::CanClimbUp()
 {
-	p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-	while (tmp != NULL && !dead)
-	{
-		if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
-			(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-			((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
-			(tmp->data->position.x - tmp->data->radius) < position.x + 20)
-		{
-			if (undying == false)
-			{
-				Kill();
-				dead = true;
-			}
-		}
-		tmp = tmp->next;
-	}
-}
-
-void ModulePlayer::Kill()
-{
-	std::cout << "Player has died" << std::endl;
-
-		App->balls->pauseBalls = true;
-		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-	
+	if ((App->maps->map[(position.y + 31) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 31) / 8][(position.x + 13) / 8] == 2))
+		return true;
+	else
+		return false;
 }
