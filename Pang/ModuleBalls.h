@@ -24,8 +24,7 @@ public:
 	bool Update(bool pause);
 private:
 	void CreateBall(int direction);
-	void CheckBorderColision();
-
+	
 };
 
 class ModuleBalls : public Module
@@ -46,6 +45,6 @@ public:
 
 	void AddBall(int position_x, int position_y, int _type, int _direction);
 	void CheckBricksColision();
-	void CheckColision(int tileX, int tileY, Ball* myBall);
+	bool CheckColision(int tileX, int tileY, Ball* myBall);
 
 };
