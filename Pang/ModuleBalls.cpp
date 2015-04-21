@@ -34,7 +34,7 @@ void Ball::CreateBall(int direction)
 		case big:
 		{speed.y = -2.5f; speed.x = 2.0f * direction; radius = 16; YBaseSpeed = -6.5f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.9f; offset = 4; break; }
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; offset = 4; break; }
 		case little:
 		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; offset = 0; break; }
 	}
@@ -205,12 +205,12 @@ void ModuleBalls::CheckBricksColision()
 						 if (App->backgroundPlay->debugMode == true)
 						 {
 							 SDL_Rect rect;
-							 rect.x = (currentTileX + (4 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
+							 rect.x = (currentTileX + (3 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 							 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						 }
-						 if (App->maps->map[currentTileY + h][currentTileX + ( 4 * directionX )] == 1 && collided == false)
+						 if (App->maps->map[currentTileY + h][currentTileX + ( 3 * directionX )] == 1 && collided == false)
 						 {
-							 collided = CheckColision(currentTileX + 4 * directionX, currentTileY + h, currentBall->data);
+							 collided = CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
 						 }
 					 }
 					 for (int w = -3; w <= 3 && collided == false; w++)
@@ -218,12 +218,12 @@ void ModuleBalls::CheckBricksColision()
 						 if (App->backgroundPlay->debugMode == true)
 						 {
 							 SDL_Rect rect;
-							 rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (4 * directionY)) * 8; rect.h = 8; rect.w = 8;
+							 rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (3 * directionY)) * 8; rect.h = 8; rect.w = 8;
 							 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						 }
-						 if (App->maps->map[currentTileY + (4 * directionY)][currentTileX + w] == 1 && collided == false)
+						 if (App->maps->map[currentTileY + (3 * directionY)][currentTileX + w] == 1 && collided == false)
 						 {
-							 collided = CheckColision(currentTileX + 4 * directionX, currentTileY + w, currentBall->data);
+							 collided = CheckColision(currentTileX + 3 * directionX, currentTileY + w, currentBall->data);
 						 }
 					 }
 					break;
@@ -235,12 +235,12 @@ void ModuleBalls::CheckBricksColision()
 						if (App->backgroundPlay->debugMode == true)
 						{
 							SDL_Rect rect;
-							rect.x = (currentTileX + 3 * directionX) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
+							rect.x = (currentTileX + 2 * directionX) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 							App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						}
-						if (App->maps->map[currentTileY + h][currentTileX + 3 * directionX] == 1 && collided == false)
+						if (App->maps->map[currentTileY + h][currentTileX + 2 * directionX] == 1 && collided == false)
 						{
-							collided = CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
+							collided = CheckColision(currentTileX + 2 * directionX, currentTileY + h, currentBall->data);
 						}
 					}
 					for (int w = -2; w <= 2 && collided == false; w++)
@@ -248,12 +248,12 @@ void ModuleBalls::CheckBricksColision()
 						if (App->backgroundPlay->debugMode == true)
 						{
 							SDL_Rect rect;
-							rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + 3 * directionY) * 8; rect.h = 8; rect.w = 8;
+							rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + 2 * directionY) * 8; rect.h = 8; rect.w = 8;
 							App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						}
-						if (App->maps->map[currentTileY + 3 * directionY][currentTileX + w] == 1 && collided == false)
+						if (App->maps->map[currentTileY + 2 * directionY][currentTileX + w] == 1 && collided == false)
 						{
-							collided = CheckColision(currentTileX + 3 * directionX, currentTileY + w, currentBall->data);
+							collided = CheckColision(currentTileX + 2 * directionX, currentTileY + w, currentBall->data);
 						}
 					}
 					break;
@@ -325,7 +325,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 			myBall->position.x += myBall->speed.x;
 			ret = true;
 		}
-	}/*
+	}
 	else
 	{
 		p2Point<float> points[4];
@@ -338,32 +338,32 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		{
 			if (myBall->radius >= myBall->position.DistanceTo(points[n]))
 			{
- 				if (myBall->position.y - 2 < points[0].y)
+ 				if (myBall->position.y < points[0].y)
 				{
 					myBall->speed.y *= -1;
-					myBall->position.y = points[0].y - myBall->radius;
+					myBall->position.y += myBall->speed.y;
 					ret = true;
 				}
-				else if (myBall->position.y + 2 > points[2].y)
+				else if (myBall->position.y > points[2].y)
 				{
 					myBall->speed.y *= -1;
-					myBall->position.y = points[2].y + myBall->radius;
+					myBall->position.y += myBall->speed.y;
 					ret = true;
 				}
-				else if (myBall->position.x - 2 < points[0].x)
+				else if (myBall->position.x < points[0].x)
 				{
 					myBall->speed.x *= -1;
-					myBall->position.x = points[0].x - myBall->radius;
+					myBall->position.x += myBall->speed.x;
 					ret = true;
 				}
-				else if (myBall->position.x + 2 > points[1].x)
+				else if (myBall->position.x > points[1].x)
 				{
 					myBall->speed.x *= -1;
-					myBall->position.x = points[1].x + myBall->radius;
+					myBall->position.x += myBall->speed.x;
 					ret = true;
 				}
 			}
 		}
-	}*/
+	}
 	return ret;
 }
