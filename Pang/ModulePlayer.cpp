@@ -77,7 +77,7 @@ bool ModulePlayer::Start()
 	playerState = standing;
 	position.x = TILE;
 	position.y = 10 * TILE;
-
+	ladderAlign = false;
 	dead = false;
 
 	return ret;
@@ -208,42 +208,60 @@ void ModulePlayer::Shoot()
 
 void ModulePlayer::Climb()
 {
+	if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
+		current_animation->speed = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		
-		if (playerState == climbing && LadderUpEnds())
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			std::cout << "LadderUpEnds" << std::endl;
-			current_animation = &endclimb;
-			playerState = standing;
+			current_animation->speed = 0.0f;
 		}
-		
-		else if (CanClimbUp())
+		else
 		{
-			playerState = climbing;
-			current_animation = &climb;
-			position.y--;
+			if (playerState == climbing && LadderUpEnds())
+			{
+				std::cout << "LadderUpEnds" << std::endl;
+				current_animation = &endclimb;
+				playerState = standing;
+				ladderAlign = false;
+			}
+		
+			else if (CanClimbUp())
+			{
+				AlignLadder(1);
+				current_animation->speed = 0.16f;
+				playerState = climbing;
+				current_animation = &climb;
+				position.y-=2;
+			}
 		}
-
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-
-		if (playerState == climbing && LadderDownEnds())
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			std::cout << "LadderDownEnds" << std::endl;
-			current_animation = &endclimb;
-			playerState = standing;
+			current_animation->speed = 0.0f;
 		}
-
-		else if (CanClimbDown())
+		else
 		{
-			playerState = climbing;
-			current_animation = &climb;
-			position.y++;
-		}
+			if (playerState == climbing && LadderDownEnds())
+			{
+				std::cout << "LadderDownEnds" << std::endl;
+				current_animation = &endclimb;
+				playerState = standing;
+				ladderAlign = false;
+			}
 
+			else if (CanClimbDown())
+			{
+				AlignLadder(-1);
+				current_animation->speed = 0.16f;
+				playerState = climbing;
+				current_animation = &climb;
+				position.y+=2;
+			}
+		}
 	}
 
 }
@@ -372,4 +390,36 @@ bool ModulePlayer::CanClimbDown()
 		return true;
 	else
 		return false;
+}
+
+void ModulePlayer::AlignLadder(int direction)
+{
+	if (ladderAlign == false)
+	{
+		position.x = GetLadderCenter(direction) * (8) - 8;
+		ladderAlign = true;
+	}
+}
+
+int ModulePlayer::GetLadderCenter(int direction)
+{
+	//We ensure that in (position.x + 12 / 8) we have a 2
+	int x = (position.x + 12) / 8;
+
+	if (App->maps->map[(position.y + 32 - direction) / 8][x - 1] != 2) // Case 0 2 2
+	{
+		std::cout << "right";
+		return (x + 1);
+	}
+
+	else if (App->maps->map[(position.y + 32 - direction) / 8][x + 1] != 2) // Case 2 2 0
+	{
+		std::cout << "left";
+		return (x - 1);
+	}
+	else // Case 2 2 2
+	{
+		std::cout << "mid"; 
+		return (x);
+	}
 }
