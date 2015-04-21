@@ -76,7 +76,7 @@ bool ModulePlayer::Start()
 	}
 	playerState = standing;
 	position.x = TILE;
-	position.y = 10 * TILE;
+	position.y = 9 * TILE;
 	ladderAlign = false;
 	dead = false;
 
