@@ -25,7 +25,6 @@ public:
 private:
 	void CreateBall(int direction);
 	void CheckBorderColision();
-	void CheckBricksColision();
 
 };
 
@@ -41,12 +40,11 @@ public:
 	SDL_Rect ballsRects[3][4];
 	bool pauseBalls = false;
 
-	void AddBall(int position_x, int position_y, int _type, int _direction);
-
 	bool Start();
-	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 
+	void AddBall(int position_x, int position_y, int _type, int _direction);
+	void CheckBricksColision();
 
 };
