@@ -240,15 +240,21 @@ void ModuleBalls::CheckBricksColision()
 		}
 		case big:
 		{
-					for (int h = currentTileY - 2; h <= currentTileY + 2; h++)
+					for (int h = - 2; h <= 2; h++)
 					{
+						SDL_Rect rect;
+						rect.x = (currentTileX + 3 * directionX) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
+						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						if (App->maps->map[currentTileX + 3 * directionX][currentTileY + h] == 1)
 						{
 							CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
 						}
 					}
-					for (int w = currentTileX - 2; w <= currentTileX + 2; w++)
+					for (int w = 2; w <= 2; w++)
 					{
+						SDL_Rect rect;
+						rect.x = (currentTileX + 3 * directionX) * 8; rect.y = (currentTileY + w) * 8; rect.h = 8; rect.w = 8;
+						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 						if (App->maps->map[currentTileX + 3 * directionX][currentTileY + w] == 1)
 						{
 							CheckColision(currentTileX + 3 * directionX, currentTileY + w, currentBall->data);
@@ -262,6 +268,9 @@ void ModuleBalls::CheckBricksColision()
 					   {
 						   for (int h = -1; h <= 1; h++)
 						   {
+							   SDL_Rect rect;
+							   rect.x = (currentTileX + (w)) * 8; rect.y = (currentTileY + (h)) * 8; rect.h = 8; rect.w = 8;
+							   App->renderer->DrawQuad(rect, 255, 0, 0, 100);
 							   if (App->maps->map[currentTileX + w][currentTileY + h] == 1)
 							   {
 								   CheckColision(currentTileX + w, currentTileY + h, currentBall->data);
