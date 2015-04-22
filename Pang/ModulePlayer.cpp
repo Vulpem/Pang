@@ -342,9 +342,12 @@ void ModulePlayer::CheckBallCollision()
 
 bool ModulePlayer::LadderUpEnds()
 {
-
-	if (App->maps->map[(position.y + 31) / 8][(position.x + 12)/ 8] == 0)
+	for (int w = 0; w < 3; w++)
+	{
+	if (App->maps->map[(position.y + 31) / 8][(position.x)/ 8 + w] == 0)
 		return true;
+	}
+
 	return false;
 
 	/*
