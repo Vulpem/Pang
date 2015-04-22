@@ -365,7 +365,6 @@ bool ModulePlayer::LadderDownEnds()
 		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
 			return true;
 	}
-
 	return false;
 }
 /*

@@ -154,6 +154,8 @@ update_status ModuleBalls::Update()
 bool ModuleBalls::CleanUp()
 {
 	LOG("Cleanup Balls");
+
+	/*
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
 	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 	while (pointer != NULL)
@@ -163,7 +165,17 @@ bool ModuleBalls::CleanUp()
 		delete pointer->data;
 		ballsList.del(pointer);
 		pointer = pointer_next;
+	}*/
+
+	p2List_item<Ball*>* pointer = ballsList.getFirst();
+	while (pointer != NULL)
+	{
+		delete pointer->data;
+		pointer = pointer->next;
 	}
+
+	ballsList.clear();
+
 	App->textures->Unload(ballsGraphics);
 	return true;
 }
