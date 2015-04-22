@@ -52,9 +52,9 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 
 	// climb animation
 	climb.frames.PushBack({ 80, 36, 30, 32 });
-	climb.frames.PushBack({ 81, 78, 30, 32 });
+	climb.frames.PushBack({ 47, 77, 30, 32 });
 	climb.frames.PushBack({ 114, 36, 30, 32 });
-	climb.frames.PushBack({ 81, 78, 30, 32 });
+	climb.frames.PushBack({ 47, 77, 30, 32 });
 
 	climb.speed = 0.16f;
 
@@ -201,7 +201,10 @@ void ModulePlayer::Shoot()
 			p2Point<int> offset;
 			offset.y = 32;
 			offset.x = 11.5 + (2.5 * movementDirection);
-
+			if (playerState == climbing)
+			{
+				
+			}
 			if (playerState != climbing)
 			{
 				if (movementDirection == 1)
@@ -223,12 +226,12 @@ void ModulePlayer::Shoot()
 void ModulePlayer::Climb()
 {
 	if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
-		current_animation->speed = 0.0f;
+		climb.speed = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			current_animation->speed = 0.0f;
+			climb.speed = 0.0f;
 		}
 		else
 		{
@@ -243,7 +246,7 @@ void ModulePlayer::Climb()
 			else if (CanClimbUp())
 			{
 				AlignLadder(1);
-				current_animation->speed = 0.16f;
+				climb.speed = 0.16f;
 				playerState = climbing;
 				current_animation = &climb;
 				position.y-=2;
@@ -255,7 +258,7 @@ void ModulePlayer::Climb()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			current_animation->speed = 0.0f;
+			climb.speed = 0.0f;
 		}
 		else
 		{
@@ -270,7 +273,7 @@ void ModulePlayer::Climb()
 			else if (CanClimbDown())
 			{
 				AlignLadder(-1);
-				current_animation->speed = 0.16f;
+				climb.speed = 0.16f;
 				playerState = climbing;
 				current_animation = &climb;
 				position.y+=2;
