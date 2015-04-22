@@ -41,11 +41,10 @@ bool ModuleScenePlay::Start()
 	
 	std::cout << "M: Change undying mode" << std::endl
 		<< "N: Toggle debug mode" << std::endl
-		<< "B: Create a Ball" << std::endl 
+		<< "B: Create a Ball" << std::endl
 		<< "V: Explode big balls" << std::endl
 		<< "C: Count Balls" << std::endl
-		<< "P: Pause" << std::endl;
-
+		<< std::endl << std::endl << std::endl;
 	return true;
 }
 

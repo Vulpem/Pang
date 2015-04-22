@@ -303,9 +303,6 @@ void ModulePlayer::Fall()
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
-			
-
-
 		}
 
 	}
@@ -363,9 +360,12 @@ bool ModulePlayer::LadderUpEnds()
 
 bool ModulePlayer::LadderDownEnds()
 {
+	for (int w = 0; w < 3; w++)
+	{
+		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
+			return true;
+	}
 
-	if (App->maps->map[(position.y + 32) / 8][(position.x + 12) / 8] != 2)
-		return true;
 	return false;
 }
 /*
