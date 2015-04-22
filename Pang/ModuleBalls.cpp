@@ -425,14 +425,14 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				if (myBall->position.y < points[0].y || myBall->position.y > points[2].y)
 				{
 					myBall->speed.y *= -1;
-					myBall->speed.y += GRAVITY;
-					//myBall->position.y += myBall->speed.y;
+					myBall->speed.y += GRAVITY*2;
+					myBall->position.y += myBall->speed.y;
 					ret = true;
 				}
 				else
 				{
 					myBall->speed.x *= -1;
-					//myBall->position.x += myBall->speed.x;
+					myBall->position.x += myBall->speed.x;
 					ret = true;
 				}
 			}
