@@ -3,7 +3,6 @@
 #include "Application.h"
 #include "ModuleBalls.h"
 
-#include <iostream>
 
 #define GRAVITY 0.2
 

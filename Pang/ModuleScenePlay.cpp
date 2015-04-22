@@ -1,7 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleScenePlay.h"
-#include <iostream>
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 

@@ -6,8 +6,6 @@
 #include "ModuleBalls.h"
 
 
-#include <iostream>
-
 ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_enabled)
 {
 

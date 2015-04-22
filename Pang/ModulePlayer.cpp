@@ -3,7 +3,7 @@
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
 
-#include <iostream>
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
