@@ -107,11 +107,11 @@ update_status ModuleMaps::Update()
 				case 2:
 				{
 					if (w - 1 != 2)
-						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_l, 0.75f);
+						App->renderer->Blit(graphics, w * TILE, h * TILE, &ladder_l, 0.75f);
 					if (w + 1 != 2)
-						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_r, 0.75f);
+						App->renderer->Blit(graphics, w * TILE, h * TILE, &ladder_r, 0.75f);
 					else
-						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_m, 0.75f);
+						App->renderer->Blit(graphics, w * TILE, h * TILE, &ladder_m, 0.75f);
 					/*
 						tile.x = w*TILE;
 						tile.y = h*TILE;
