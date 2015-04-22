@@ -160,14 +160,18 @@ bool ModulePlayer::LadderFall()
 	int counter = 0;
 	for (int w = 0; w < 32; w++)
 	{
-		if (App->maps->map[position.y / 8 + 4][position.x + w / 8] == 2 && App->maps->map[position.y / 8 + 3][position.x / 8 + w] == 2)
+		if (App->maps->map[(position.y + 2)/ 8 + 4][(position.x + w) / 8] == 2 && App->maps->map[(position.y + 2)/ 8 + 3][(position.x + w)/ 8] != 2)
 		{
 			counter++;
 		}
 		else
 			counter = 0;
 		if (counter >= 8)
+		{
+			std::cout << "Falling into ladder" << std::endl;
 			return true;
+		}
+
 	}
 	return false;
 }
@@ -223,7 +227,6 @@ void ModulePlayer::Movement()
 		}
 	}
 }
-
 
 void ModulePlayer::Shoot()
 {
@@ -333,17 +336,13 @@ void ModulePlayer::Fall()
 			position.y += 2;
 		}
 		//Arreglar perque caigui be
-		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] != 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] != 0)
+		if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] != 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] != 0) || LadderFall())
 		{
-			if (!MiddleLadder())
-			{
 			//In case its a ladder
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
 			std::cout << "SpeedChange" << std::endl;
-			}
-
 		}
 
 	}
@@ -387,16 +386,6 @@ bool ModulePlayer::LadderUpEnds()
 	}
 
 	return false;
-
-	/*
-	for (int w = 0; w < 3; w++)
-	{
-		if (App->maps->map[(position.y + 30) / 8 + w][position.x / 8] == 0)
-			std::cout << "Ladder up ends" << std::endl;
-			return true;
-	}
-	return false;
-	*/
 }
 
 bool ModulePlayer::LadderDownEnds()
@@ -408,33 +397,6 @@ bool ModulePlayer::LadderDownEnds()
 	}
 	return false;
 }
-/*
-bool ModulePlayer::LadderUpEnds()
-{
-	bool ret = false;
-	int w1 = 0;
-	int tile = 2;
-
-	for (int w1 = 0; w1 < 3, tile == 2; w1--)
-	{
-		tile = App->maps->map[tile_y][tile_x + w1];
-	}
-
-	w1--;
-
-	for (int w2 = 0; w2 < 3; w2++)
-	{
-		if (App->maps->map[tile_y + 1][tile_x - w1 + w2] == 0)
-		{
-			std::cout << "LadderDownEnds" << std::endl;
-			return true;
-		}
-
-	}
-
-	return false;
-}
-*/
 
 bool ModulePlayer::CanClimbUp()
 {
