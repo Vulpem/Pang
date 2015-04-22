@@ -155,12 +155,29 @@ void ModulePlayer::IsFalling()
 	}
 }
 
+bool ModulePlayer::LadderFall()
+{
+	int counter = 0;
+	for (int w = 0; w < 32; w++)
+	{
+		if (App->maps->map[position.y / 8 + 4][position.x + w / 8] == 2 && App->maps->map[position.y / 8 + 3][position.x / 8 + w] == 2)
+		{
+			counter++;
+		}
+		else
+			counter = 0;
+		if (counter >= 8)
+			return true;
+	}
+	return false;
+}
+
 bool ModulePlayer::MiddleLadder()
 {
 	int counter = 0;
 	for (int w = 0; w < 3; w++)
 	{
-		if (App->maps->map[position.y / 8 + 4][position.x / 8] == 2 && App->maps->map[position.y / 8 + 3][position.x / 8] == 2)
+		if (App->maps->map[position.y / 8 + 4][position.x / 8 + w] == 2 && App->maps->map[position.y / 8 + 3][position.x / 8 + w] == 2)
 		{
 			counter++;
 		}
