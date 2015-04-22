@@ -32,7 +32,7 @@ public:
 	int movementDirection = 1;
 
 	int speed = 2;
-	bool undying = true;
+	bool undying = false;
 	bool dead = false;
 
 	p2Point<int> position;
