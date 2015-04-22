@@ -54,6 +54,7 @@ private:
 	void IsFalling();
 	bool MiddleLadder();
 	bool LadderFall();
+	void SecurityPosition();
 
 	void Movement();
 	void Shoot();
@@ -68,4 +69,5 @@ private:
 	bool CanClimbDown();
 	void AlignLadder(int direction);
 	int GetLadderCenter(int direction);
+
 };
