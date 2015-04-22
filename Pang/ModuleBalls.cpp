@@ -398,7 +398,6 @@ void ModuleBalls::CheckBricksColision()
 
 bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 {
-	bool ret = false;
 	//First of all, checking if the collision was casued by the floor, and if it really collides
 	if (tileY >= 25)
 	{
@@ -406,7 +405,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		{
 			myBall->speed.y = myBall->YBaseSpeed;
 			myBall->position.y += myBall->speed.y;
-			ret = true;
+			return true;
 		}
 	}
 	//Then, both walls.
@@ -416,7 +415,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		{
 			myBall->speed.x *= -1;
 			myBall->position.x += myBall->speed.x;
-			ret = true;
+			return true;
 		}
 	}
 	//Now, bricks. Checking for all 4 vertex of the tile to see if it collides with any of them.
@@ -439,18 +438,18 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 					myBall->speed.y *= -1;
 					myBall->speed.y += GRAVITY*2;
 					myBall->position.y += myBall->speed.y;
-					ret = true;
+					return true;
 				}
 				else
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x += myBall->speed.x;
-					ret = true;
+					return true;
 				}
 			}
 		}
 	}
-	return ret;
+	return false;
 }
 
 void ModuleBalls::Bomb()
