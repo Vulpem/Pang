@@ -149,10 +149,26 @@ bool ModulePlayer::CleanUp()
 
 void ModulePlayer::IsFalling()
 {
-	if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 && playerState != climbing)
+	if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 || MiddleLadder()) && playerState != climbing)
 	{
 		playerState = falling;
 	}
+}
+
+bool ModulePlayer::MiddleLadder()
+{
+	int counter = 0;
+	for (int w = 0; w < 3; w++)
+	{
+		if (App->maps->map[position.y / 8 + 4][position.x / 8] == 2 && App->maps->map[position.y / 8 + 3][position.x / 8] == 2)
+		{
+			counter++;
+		}
+	}
+	if (counter >= 2)
+		return true;
+	else
+		return false;
 }
 
 
@@ -225,6 +241,8 @@ void ModulePlayer::Shoot()
 
 void ModulePlayer::Climb()
 {
+	if (playerState != falling)
+	{
 	if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 		climb.speed = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -280,6 +298,8 @@ void ModulePlayer::Climb()
 			}
 		}
 	}
+	}
+
 
 }
 
@@ -298,11 +318,15 @@ void ModulePlayer::Fall()
 		//Arreglar perque caigui be
 		if (App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] != 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] != 0)
 		{
+			if (!MiddleLadder())
+			{
 			//In case its a ladder
-
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
+			std::cout << "SpeedChange" << std::endl;
+			}
+
 		}
 
 	}

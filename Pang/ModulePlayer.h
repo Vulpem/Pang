@@ -52,6 +52,8 @@ public:
 
 private:
 	void IsFalling();
+	bool MiddleLadder();
+
 	void Movement();
 	void Shoot();
 	void Fall();
