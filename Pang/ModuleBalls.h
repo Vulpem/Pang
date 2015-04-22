@@ -46,5 +46,6 @@ public:
 	void AddBall(int position_x, int position_y, int _type, int _direction);
 	void CheckBricksColision();
 	bool CheckColision(int tileX, int tileY, Ball* myBall);
+	void Bomb();
 
 };

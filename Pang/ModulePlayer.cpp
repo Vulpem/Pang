@@ -109,6 +109,15 @@ update_status ModulePlayer::Update()
 		std::cout << "Pause" << std::endl;
 		App->balls->pauseBalls = !App->balls->pauseBalls;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+	{
+		std::cout << "Bomb" << std::endl;
+		App->balls->Bomb();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	{
+		std::cout << "NBalls: " << App->balls->ballsList.count() << std::endl;
+	}
 	if (App->backgroundPlay->debugMode == true)
 	{
 		/*
