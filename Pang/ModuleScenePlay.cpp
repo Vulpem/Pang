@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleScenePlay.h"
+#include <iostream>
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -32,12 +33,18 @@ bool ModuleScenePlay::Start()
 	App->player->Enable();
 	App->balls->Enable();
 	App->gun->Enable();
-	/*
-	App->balls->AddBall(50, 50, huge, 1);
-	App->balls->AddBall(100, 50, big, 1);
-	App->balls->AddBall(300, 50, medium, 1);*/
-	App->balls->AddBall(200, 50, little, 1);
 	
+	App->balls->AddBall(50, 50, huge, 1);
+	/*App->balls->AddBall(100, 50, big, 1);
+	App->balls->AddBall(300, 50, medium, 1);
+	App->balls->AddBall(200, 50, little, 1);*/
+	
+	std::cout << "M: Change undying mode" << std::endl
+		<< "N: Toggle debug mode" << std::endl
+		<< "B: Create a Ball" << std::endl 
+		<< "V: Explode big balls" << std::endl
+		<< "C: Count Balls" << std::endl
+		<< "P: Pause" << std::endl;
 
 	return true;
 }

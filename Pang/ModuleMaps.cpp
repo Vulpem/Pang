@@ -78,15 +78,6 @@ int ModuleMaps::map[26][48] = {
 
 bool ModuleMaps::Start()
 {
-	//Checking maps in console
-	for (int i = 0; i < 26; i++)
-	{
-		for (int j = 0; j < 48; j++)
-		{
-			std::cout << map[i][j];
-		}
-		std::cout<<std::endl;
-	}
 
 	tile.h = tile.w = 8;
 
