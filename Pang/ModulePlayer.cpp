@@ -87,21 +87,25 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	LOG("--Updating Player")
-	IsFalling();
-	Movement();
-	Shoot();
-	Climb();
-	Fall();
+		if (dead == false)
+		{
+			IsFalling();
+			Movement();
+			Shoot();
+			Climb();
+			Fall();
+		}
 
 	if (current_animation != NULL)
 	{
 		SDL_Rect r = current_animation->GetCurrentFrame();
 		App->renderer->Blit(graphics, position.x - 2, position.y, &r);
 	}
+
 	CheckBallCollision();
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		LOG("Changed undying mode\n" );
+		LOG("Changed undying mode\n");
 		undying = !undying;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
@@ -111,12 +115,12 @@ update_status ModulePlayer::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 	{
-		LOG("Bomb \n" );
+		LOG("Bomb \n");
 		App->balls->Bomb();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		LOG( "NBalls: %i \n", App->balls->ballsList.count() );
+		LOG("NBalls: %i \n", App->balls->ballsList.count());
 	}
 	if (App->backgroundPlay->debugMode == true)
 	{
@@ -130,7 +134,7 @@ update_status ModulePlayer::Update()
 		boundingBox.h = 27;
 		App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
 	}
-	
+
 	return UPDATE_CONTINUE;
 }
 
@@ -350,9 +354,12 @@ void ModulePlayer::Fall()
 void ModulePlayer::Kill()
 {
 	LOG("Player has died\n");
+	App->balls->pauseBalls = true;
+	current_animation = &idle;
 
-		App->balls->pauseBalls = true;
-		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+	//Animacion de muerte irá aqui
+
+	App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	
 }
 
