@@ -18,4 +18,11 @@ public:
 
 	void PrepareMap();
 
+public:
+
+	SDL_Texture* graphics;
+
+	SDL_Rect ladder_l;
+	SDL_Rect ladder_m;
+	SDL_Rect ladder_r;
 };

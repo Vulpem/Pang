@@ -8,12 +8,14 @@
 
 ModuleMaps::ModuleMaps(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
+	ladder_l = { 0, 0, 8, 8 };
+	ladder_m = { 10, 0, 8, 8 };
+	ladder_r = { 20, 0, 8, 8 };
 }
 
 ModuleMaps::~ModuleMaps()
 {
-
+	
 }
 
 /*int ModuleMaps::map[26][48] = {
@@ -78,6 +80,7 @@ int ModuleMaps::map[26][48] = {
 
 bool ModuleMaps::Start()
 {
+	graphics = App->textures->Load("./Image_Sources/Ladder.png");
 
 	tile.h = tile.w = 8;
 
@@ -103,10 +106,19 @@ update_status ModuleMaps::Update()
 				}
 				case 2:
 				{
-						  tile.x = w*TILE;
-						  tile.y = h*TILE;
-						  App->renderer->DrawQuad(tile, 0, 255, 0, 255);
-						  break;
+					if (w - 1 != 2)
+						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_l, 0.75f);
+					if (w + 1 != 2)
+						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_r, 0.75f);
+					else
+						App->renderer->Blit(graphics, w*TILE, h*TILE, &ladder_m, 0.75f);
+					/*
+						tile.x = w*TILE;
+						tile.y = h*TILE;
+						App->renderer->DrawQuad(tile, 0, 255, 0, 255);
+					*/
+						break;
+					
 				}
 			}
 		}

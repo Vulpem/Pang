@@ -344,7 +344,6 @@ void ModulePlayer::Fall()
 			speed = 2;			
 			std::cout << "SpeedChange" << std::endl;
 		}
-
 	}
 }
 
