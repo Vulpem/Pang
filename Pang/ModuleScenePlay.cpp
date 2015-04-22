@@ -39,14 +39,7 @@ bool ModuleScenePlay::Start()
 	App->balls->AddBall(300, 50, medium, 1);*/
 	App->balls->AddBall(200, 50, little, 1);
 	
-	std::cout << "M: Toggle undying mode" << std::endl
-		<< "N: Toggle debug mode" << std::endl
-		<< "B: Create a Ball" << std::endl
-		<< "V: Explode big balls" << std::endl
-		<< "C: Count Balls" << std::endl
-		<< "P: Pause" << std::endl
-		<< "R: Reset" << std::endl
-		<< std::endl;
+	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;
 }
 

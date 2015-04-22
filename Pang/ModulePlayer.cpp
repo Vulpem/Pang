@@ -101,22 +101,22 @@ update_status ModulePlayer::Update()
 	CheckBallCollision();
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
 	{
-		std::cout << "Changed undying mode" << std::endl;
+		LOG("Changed undying mode\n" );
 		undying = !undying;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		std::cout << "Pause" << std::endl;
+		LOG("Pause\n");
 		App->balls->pauseBalls = !App->balls->pauseBalls;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 	{
-		std::cout << "Bomb" << std::endl;
+		LOG("Bomb \n" );
 		App->balls->Bomb();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		std::cout << "NBalls: " << App->balls->ballsList.count() << std::endl;
+		LOG( "NBalls: %i \n", App->balls->ballsList.count() );
 	}
 	if (App->backgroundPlay->debugMode == true)
 	{
@@ -168,7 +168,7 @@ bool ModulePlayer::LadderFall()
 			counter = 0;
 		if (counter >= 8)
 		{
-			std::cout << "Falling into ladder" << std::endl;
+			LOG("Falling into ladder\n");
 			return true;
 		}
 
@@ -275,7 +275,7 @@ void ModulePlayer::Climb()
 		{
 			if (playerState == climbing && LadderUpEnds())
 			{
-				std::cout << "LadderUpEnds" << std::endl;
+				LOG("LadderUpEnds\n" );
 				current_animation = &endclimb;
 				playerState = standing;
 				ladderAlign = false;
@@ -302,7 +302,7 @@ void ModulePlayer::Climb()
 		{
 			if (playerState == climbing && LadderDownEnds())
 			{
-				std::cout << "LadderDownEnds" << std::endl;
+				LOG("LadderDownEnds\n");
 				current_animation = &endclimb;
 				playerState = standing;
 				ladderAlign = false;
@@ -342,14 +342,14 @@ void ModulePlayer::Fall()
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
-			std::cout << "SpeedChange" << std::endl;
+			LOG("SpeedChange\n");
 		}
 	}
 }
 
 void ModulePlayer::Kill()
 {
-	std::cout << "Player has died" << std::endl;
+	LOG("Player has died\n");
 
 		App->balls->pauseBalls = true;
 		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
@@ -429,18 +429,18 @@ int ModulePlayer::GetLadderCenter(int direction)
 
 	if (App->maps->map[(position.y + 32 - direction) / 8][x - 1] != 2) // Case 0 2 2
 	{
-		std::cout << "right";
+		LOG("right\n");
 		return (x + 1);
 	}
 
 	else if (App->maps->map[(position.y + 32 - direction) / 8][x + 1] != 2) // Case 2 2 0
 	{
-		std::cout << "left";
+		LOG("left\n");
 		return (x - 1);
 	}
 	else // Case 2 2 2
 	{
-		std::cout << "mid"; 
+		LOG("mid\n");
 		return (x);
 	}
 }
