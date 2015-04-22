@@ -39,12 +39,14 @@ bool ModuleScenePlay::Start()
 	App->balls->AddBall(300, 50, medium, 1);
 	App->balls->AddBall(200, 50, little, 1);*/
 	
-	std::cout << "M: Change undying mode" << std::endl
+	std::cout << "M: Toggle undying mode" << std::endl
 		<< "N: Toggle debug mode" << std::endl
 		<< "B: Create a Ball" << std::endl
 		<< "V: Explode big balls" << std::endl
 		<< "C: Count Balls" << std::endl
-		<< std::endl << std::endl << std::endl;
+		<< "P: Pause" << std::endl
+		<< "R: Reset" << std::endl
+		<< std::endl;
 	return true;
 }
 
@@ -58,6 +60,10 @@ update_status ModuleScenePlay::Update()
 	if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		App->balls->AddBall(200, 50, huge, 1);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, this);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{

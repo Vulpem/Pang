@@ -40,7 +40,7 @@ void Ball::CreateBall(int direction)
 		case little:
 		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; offset = 0; break; }
 	}
-
+	dead = false;
 	//Creating the rect
 	start_rect.x = position.x - radius;
 	start_rect.y = position.y - radius;
@@ -49,20 +49,15 @@ void Ball::CreateBall(int direction)
 }
 
 
-bool Ball::Update(bool pause)
+void Ball::Update(bool pause)
 {
-	// S'ha de mirar si s'ha d'ajustar Speed a tiles (ja mentenc jo :D ja t'explicare)
-	if (dead == false)
-	{
 		if (pause == false)
 		{
 			position.x += speed.x;
 			position.y += speed.y;
 			speed.y += GRAVITY;
 		}
-		return true;
-	}
-	return false;
+	
 }
 
 
@@ -110,20 +105,38 @@ bool ModuleBalls::Start()
 	return true;
 }
 
+update_status ModuleBalls::PreUpdate()
+{
+	p2List_item<Ball*>* pointer = ballsList.getFirst();
+	p2List_item<Ball*>* pointer2 = pointer;
+
+	while (pointer != NULL)
+	{
+		pointer2 = pointer->next;
+		if (pointer->data->dead == true)
+		{
+			//	delete ball;	
+			delete pointer->data;
+			ballsList.del(pointer);
+		}
+		pointer = pointer2;
+	}
+	return UPDATE_CONTINUE;
+}
+
 update_status ModuleBalls::Update()
 {
 
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
-	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
 
 	while (pointer != NULL)
 	{
-		pointer_next = pointer->next;
+		pointer->data->Update(pauseBalls);
 
-		//If the baall has to be destroyed, we erase it
-		if (pointer->data->Update(pauseBalls) == false)
+		//If the ball has to be destroyed, we erase it
+		if (pointer->data->dead == true)
 		{
-			std::cout << "-- Destroying ball --" << std::endl;
+			LOG("-- Destroying ball --\n");
 			//Ball subdivision
 			if (pointer->data->type > 1)
 			{
@@ -133,10 +146,6 @@ update_status ModuleBalls::Update()
 				ballsList.add(newBall1);
 				ballsList.add(newBall2);
 			}
-			//	delete ball;	
-			delete pointer->data;
-			ballsList.del(pointer);
-
 		}
 		//Updating position and rendering
 		else
@@ -146,7 +155,7 @@ update_status ModuleBalls::Update()
 			pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
 		}
-		pointer = pointer_next;
+		pointer = pointer->next;
 	}
 	return UPDATE_CONTINUE;
 }
@@ -154,18 +163,6 @@ update_status ModuleBalls::Update()
 bool ModuleBalls::CleanUp()
 {
 	LOG("Cleanup Balls");
-
-	/*
-	p2List_item<Ball*>* pointer = ballsList.getFirst();
-	p2List_item<Ball*>* pointer_next = ballsList.getFirst();
-	while (pointer != NULL)
-	{
-		pointer_next = pointer->next;
-		//Delete ball
-		delete pointer->data;
-		ballsList.del(pointer);
-		pointer = pointer_next;
-	}*/
 
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
 	while (pointer != NULL)
@@ -398,14 +395,16 @@ void ModuleBalls::CheckBricksColision()
 
 bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 {
+	bool ret = false;
+	App->renderer->Blit(ballsGraphics, myBall->position.x, myBall->position.y, &ballsRects[red][myBall->type], myBall->radius, myBall->radius);
 	//First of all, checking if the collision was casued by the floor, and if it really collides
-	if (tileY >= 25)
+	if (tileY >= 20)
 	{
 		if (myBall->position.y + myBall->radius >= 25 * TILE)
 		{
 			myBall->speed.y = myBall->YBaseSpeed;
-			myBall->position.y += myBall->speed.y;
-			return true;
+			//myBall->position.y += myBall->speed.y;
+			ret = true;
 		}
 	}
 	//Then, both walls.
@@ -415,11 +414,11 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		{
 			myBall->speed.x *= -1;
 			myBall->position.x += myBall->speed.x;
-			return true;
+			ret = true;
 		}
 	}
 	//Now, bricks. Checking for all 4 vertex of the tile to see if it collides with any of them.
-	else
+	else if (ret == false)
 	{
 		p2Point<float> points[4];
 		points[0].x = tileX * 8;		points[0].y = tileY * 8;
@@ -427,29 +426,42 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
 		points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
 
-		for (int n = 0; n < 4; n++)
+		for (int n = 0; n < 4 && ret == false; n++)
 		{
 			//Comparing the distance from the center of the ball to the current vertex
 			if (myBall->radius >= myBall->position.DistanceTo(points[n]))
 			{
 				//If it does collide, detecting from which side it collides, to change speed accordingly
-				if (myBall->position.y < points[0].y || myBall->position.y > points[2].y)
+				if (myBall->position.y < points[0].y && myBall->speed.y >= 0)
 				{
 					myBall->speed.y *= -1;
-					myBall->speed.y += GRAVITY*2;
-					myBall->position.y += myBall->speed.y;
-					return true;
+					//myBall->speed.y += GRAVITY*2;
+					//myBall->position.y += myBall->speed.y;
+					ret = true;
 				}
-				else
+				else if (myBall->position.y > points[3].y&& myBall->speed.y <= 0)
+				{
+					myBall->speed.y *= -1;
+					//myBall->speed.y += GRAVITY * 2;
+					//myBall->position.y += myBall->speed.y;
+					ret = true;
+				}
+				/*else if (myBall->position.x < points[0].y && myBall->position.y > points[0].y && myBall->position.y > points[2].y)
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x += myBall->speed.x;
-					return true;
+					ret = true;
 				}
+				else if (myBall->position.x > points[1].y && myBall->position.y > points[0].y && myBall->position.y > points[2].y)
+				{
+					myBall->speed.x *= -1;
+					myBall->position.x += myBall->speed.x;
+					ret = true;
+				}*/
 			}
 		}
 	}
-	return false;
+	return ret;
 }
 
 void ModuleBalls::Bomb()

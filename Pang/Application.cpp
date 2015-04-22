@@ -31,8 +31,8 @@ Application::Application()
 
 	AddModule(maps);
 	AddModule(player);
-	AddModule(balls);
 	AddModule(gun);
+	AddModule(balls);
 
 	AddModule(fade);
 
@@ -43,8 +43,8 @@ Application::~Application()
 {
 	delete fade;
 
-	delete gun;
 //	delete balls;
+	delete gun;
 	delete player;
 	delete maps;
 

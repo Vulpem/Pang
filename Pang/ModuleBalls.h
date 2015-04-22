@@ -21,7 +21,7 @@ public:
 public:
 	Ball(int x, int y, int _type, int direction);
 	Ball(Ball* parent, int offsetDirection);
-	bool Update(bool pause);
+	void Update(bool pause);
 private:
 	void CreateBall(int direction);
 	
@@ -40,6 +40,7 @@ public:
 	bool pauseBalls = false;
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 
