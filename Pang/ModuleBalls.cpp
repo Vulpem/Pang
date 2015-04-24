@@ -138,7 +138,7 @@ update_status ModuleBalls::Update()
 		{
 			LOG("-- Destroying ball --\n");
 			//Ball subdivision
-			if (pointer->data->type > 1)
+			if (pointer->data->type > little)
 			{
 				Ball* newBall1 = new Ball(pointer->data, -1);
 				Ball* newBall2 = new Ball(pointer->data, 1);
@@ -463,10 +463,10 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 		for (int n = 0; n < 4 && ret == false; n++)
 		{
 			//Comparing the distance from the center of the ball to the current vertex
-			if (myBall->radius >= myBall->position.DistanceTo(points[n]) || myBall->type == 1)
+			if (myBall->radius >= myBall->position.DistanceTo(points[n]) || myBall->type == little)
 			{
 				//If it does collide, detecting from which side it collides, to change speed accordingly
-				if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type == 1)
+				if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type == little)
 				{
 					myBall->speed.y *= -1;
 					myBall->speed.y += GRAVITY*2;

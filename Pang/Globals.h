@@ -15,7 +15,7 @@ enum update_status
 
 enum BallTypes
 {
-	little = 1,
+	little = 0,
 	medium,
 	big,
 	huge
