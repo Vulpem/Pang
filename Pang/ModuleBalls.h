@@ -15,7 +15,6 @@ public:
 	int type;
 	bool dead = false;
 
-	SDL_Rect start_rect;
 	int offset;
 
 public:

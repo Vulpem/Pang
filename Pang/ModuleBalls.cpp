@@ -40,17 +40,12 @@ void Ball::CreateBall(int direction)
 		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; offset = 0; break; }
 	}
 	dead = false;
-	//Creating the rect
-	start_rect.x = position.x - radius;
-	start_rect.y = position.y - radius;
-	start_rect.w = radius * 2;
-	start_rect.h = radius * 2;
 }
 
 
 void Ball::Update(bool pause)
 {
-	if (speed.y > 7 && type == little) { speed.y = 7; }
+	if (speed.y > 7.5f) { speed.y = 7.5f; }
 		if (pause == false)
 		{
 			position.x += speed.x;
@@ -133,7 +128,7 @@ update_status ModuleBalls::Update()
 	{
 		pointer->data->Update(pauseBalls);
 
-		//If the ball has to be destroyed, we erase it
+		//If the ball has to be destroyed, we divide it
 		if (pointer->data->dead == true)
 		{
 			LOG("-- Destroying ball --\n");
@@ -147,12 +142,9 @@ update_status ModuleBalls::Update()
 				ballsList.add(newBall2);
 			}
 		}
-		//Updating position and rendering
 		else
 		{
 			CheckBricksColision();
-			pointer->data->start_rect.x = pointer->data->position.x - pointer->data->radius;
-			pointer->data->start_rect.y = pointer->data->position.y - pointer->data->radius;
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
 		}
 		pointer = pointer->next;
@@ -209,6 +201,10 @@ void ModuleBalls::CheckBricksColision()
 		currentTileX = currentBall->data->position.x / 8;
 		currentTileY = currentBall->data->position.y / 8;
 
+		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		{
+			currentBall->data->speed.y *= 2;
+		}
 
 		//Comparing the necessary tiles to see if there's any colision. To see the shape of each ball, enable "Debug Mode"
 		//When it may collide, call "Check collision". If it does, this ball will stop looking for anymore collisions with the surroundings.
@@ -216,7 +212,7 @@ void ModuleBalls::CheckBricksColision()
 		if ((currentBall->data->position.y + currentBall->data->radius) / TILE > 25)
 		{
 			currentBall->data->speed.y = currentBall->data->YBaseSpeed;
-			//currentBall->data->position.y += currentBall->data->speed.y;
+			currentBall->data->position.y = 25*TILE - currentBall->data->radius;
 			collided = true;
 		}
 		//Then, both walls.
@@ -225,6 +221,13 @@ void ModuleBalls::CheckBricksColision()
 		{
 			currentBall->data->speed.x *= -1;
 			currentBall->data->position.x += currentBall->data->speed.x;
+			collided = true;
+		}
+		//Ceiling
+		else if ((currentBall->data->position.y + currentBall->data->radius) / TILE < 1)
+		{
+			if (currentBall->data->speed.y < 0) { currentBall->data->speed.y *= -1; }
+			currentBall->data->position.y = TILE + currentBall->data->radius + 1;
 			collided = true;
 		}
 		else 
@@ -248,7 +251,7 @@ void ModuleBalls::CheckBricksColision()
 #pragma endregion
 					if (App->maps->map[currentTileY + h][currentTileX + (3 * directionX)] == 1 && collided == false)
 					{
-						collided = CheckColision(currentTileX + 3 * directionX, currentTileY + h, currentBall->data);
+						collided = CheckColision(currentTileX + (3 * directionX), currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
 						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
@@ -268,7 +271,7 @@ void ModuleBalls::CheckBricksColision()
 #pragma endregion
 					if (App->maps->map[currentTileY + (3 * directionY)][currentTileX + w] == 1 && collided == false)
 					{
-						collided = CheckColision(currentTileX + 3 * directionX, currentTileY + w, currentBall->data);
+						collided = CheckColision(currentTileX + w, currentTileY + (3 * directionY), currentBall->data);
 #pragma region RenderDebugTiles
 						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
@@ -357,7 +360,7 @@ void ModuleBalls::CheckBricksColision()
 #pragma endregion
 					if (App->maps->map[currentTileY + 2 * directionY][currentTileX + w] == 1 && collided == false)
 					{
-						collided = CheckColision(currentTileX + 2 * directionX, currentTileY + w, currentBall->data);
+						collided = CheckColision(currentTileX + w, currentTileY + 2 * directionY, currentBall->data);
 #pragma region RenderDebugTiles
 						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
@@ -466,26 +469,27 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 			if (myBall->radius >= myBall->position.DistanceTo(points[n]) || myBall->type == little)
 			{
 				//If it does collide, detecting from which side it collides, to change speed accordingly
-				if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type == little)
+				if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type==little)
 				{
 					myBall->speed.y *= -1;
-					myBall->speed.y += GRAVITY*2;
-					myBall->position.y += myBall->speed.y;
+					myBall->speed.y += GRAVITY;
+					myBall->position.y = points[0].y - myBall->radius;
+					//myBall->position.y += myBall->speed.y;
 					ret = true;
 				}
 				else if (myBall->position.y >= points[3].y&& myBall->speed.y <= 0)
 				{
 					myBall->speed.y *= -1;
-					myBall->position.y += myBall->speed.y;
+					myBall->position.y = points[2].y + myBall->radius;
 					ret = true;
 				}
-				/*else if (myBall->position.x < points[0].y && myBall->position.y > points[0].y && myBall->position.y > points[2].y)
+				/*else if (myBall->position.x < points[0].y && myBall->speed.x >= 0)
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x += myBall->speed.x;
 					ret = true;
 				}
-				else if (myBall->position.x > points[1].y && myBall->position.y > points[0].y && myBall->position.y > points[2].y)
+				else if (myBall->position.x > points[1].x && myBall->speed.x <= 0)
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x += myBall->speed.x;
