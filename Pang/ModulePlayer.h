@@ -10,6 +10,7 @@ enum PlayerStates
 	standing,
 	climbing,
 	falling,
+	endingclimb
 };
 
 class ModulePlayer : public Module
@@ -30,6 +31,7 @@ public:
 	int fallCounter = 0;
 	bool ladderAlign = false;
 	int movementDirection = 1;
+	int finishClimbCounter = 0;
 
 	int speed = 2;
 	bool undying = false;
@@ -60,6 +62,7 @@ private:
 	void Shoot();
 	void Fall();
 	void Climb();
+	void EndClimb();
 
 	void CheckBallCollision();
 

@@ -94,6 +94,7 @@ update_status ModulePlayer::Update()
 			Shoot();
 			Climb();
 			Fall();
+			EndClimb();
 		}
 
 	if (current_animation != NULL)
@@ -280,8 +281,7 @@ void ModulePlayer::Climb()
 			if (playerState == climbing && LadderUpEnds())
 			{
 				LOG("LadderUpEnds\n" );
-				current_animation = &endclimb;
-				playerState = standing;
+				playerState = endingclimb;
 				ladderAlign = false;
 			}
 		
@@ -348,6 +348,25 @@ void ModulePlayer::Fall()
 			speed = 2;			
 			LOG("SpeedChange\n");
 		}
+	}
+}
+
+void ModulePlayer::EndClimb()
+{
+	if (playerState == endingclimb)
+	{
+		current_animation == &endclimb;
+		if (finishClimbCounter < 20000)
+		{
+			finishClimbCounter++;
+		}
+		else
+		{
+			playerState == standing;
+			current_animation = &idle;
+			finishClimbCounter = 0;
+		}
+
 	}
 }
 
