@@ -59,6 +59,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	climb.speed = 0.16f;
 
 	endclimb.frames.PushBack({ 113, 78, 32, 32 });
+	endclimb.speed = 0.0f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -86,15 +87,18 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	LOG("--Updating Player")
 		if (dead == false)
 		{
 			IsFalling();
-			Movement();
+		
 			Shoot();
-			Climb();
+			if (!EndClimb())
+			{
+				Climb();
+				Movement();
+			}
+
 			Fall();
-			EndClimb();
 		}
 
 	if (current_animation != NULL)
@@ -287,6 +291,7 @@ void ModulePlayer::Climb()
 		
 			else if (CanClimbUp())
 			{
+				climbingDirection = 1;
 				AlignLadder(1);
 				climb.speed = 0.16f;
 				playerState = climbing;
@@ -307,13 +312,13 @@ void ModulePlayer::Climb()
 			if (playerState == climbing && LadderDownEnds())
 			{
 				LOG("LadderDownEnds\n");
-				current_animation = &endclimb;
-				playerState = standing;
+				playerState = endingclimb;
 				ladderAlign = false;
 			}
 
 			else if (CanClimbDown())
 			{
+				climbingDirection = - 1;
 				AlignLadder(-1);
 				climb.speed = 0.16f;
 				playerState = climbing;
@@ -351,23 +356,25 @@ void ModulePlayer::Fall()
 	}
 }
 
-void ModulePlayer::EndClimb()
+bool ModulePlayer::EndClimb()
 {
 	if (playerState == endingclimb)
 	{
-		current_animation == &endclimb;
-		if (finishClimbCounter < 20000)
+		current_animation = &endclimb;
+		if (finishClimbCounter < 10)
 		{
 			finishClimbCounter++;
 		}
 		else
 		{
-			playerState == standing;
+			position.y -= (6* climbingDirection);
+			playerState = standing;
 			current_animation = &idle;
 			finishClimbCounter = 0;
 		}
-
+		return true;
 	}
+	return false;
 }
 
 void ModulePlayer::Kill()
@@ -406,7 +413,7 @@ bool ModulePlayer::LadderUpEnds()
 {
 	for (int w = 0; w < 3; w++)
 	{
-	if (App->maps->map[(position.y + 31) / 8][(position.x)/ 8 + w] == 0)
+	if (App->maps->map[(position.y + 25) / 8][(position.x)/ 8 + w] == 0)
 		return true;
 	}
 
@@ -417,7 +424,7 @@ bool ModulePlayer::LadderDownEnds()
 {
 	for (int w = 0; w < 3; w++)
 	{
-		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
+		if (App->maps->map[(position.y + 38) / 8][(position.x) / 8 + w] != 2)
 			return true;
 	}
 	return false;
