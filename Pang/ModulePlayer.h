@@ -32,9 +32,10 @@ public:
 	bool ladderAlign = false;
 	int movementDirection = 1;
 	int finishClimbCounter = 0;
+	int climbingDirection = 1;
 
 	int speed = 2;
-	bool undying = false;
+	bool undying = true;
 	bool dead = false;
 
 	p2Point<int> position;
@@ -62,7 +63,7 @@ private:
 	void Shoot();
 	void Fall();
 	void Climb();
-	void EndClimb();
+	bool EndClimb();
 
 	void CheckBallCollision();
 

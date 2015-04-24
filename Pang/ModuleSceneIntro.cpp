@@ -33,7 +33,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	LOG("--Updating Intro Scene");
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, NULL);
 
