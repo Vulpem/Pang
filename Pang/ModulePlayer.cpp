@@ -92,12 +92,10 @@ update_status ModulePlayer::Update()
 			IsFalling();
 		
 			Shoot();
-			if (!EndClimbUp() && !StartClimbDown())
-			{
-				Climb();
-				Movement();
-			}
-
+			EndClimbUp();
+			StartClimbDown();
+			Climb();
+			Movement();
 			Fall();
 		}
 
@@ -158,7 +156,7 @@ bool ModulePlayer::CleanUp()
 
 void ModulePlayer::IsFalling()
 {
-	if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 || MiddleLadder()) && playerState != climbing)
+	if ((App->maps->map[position.y / 8 + 4][(position.x + 6) / 8] == 0 && App->maps->map[position.y / 8 + 4][(position.x + 17) / 8] == 0 || MiddleLadder()) && (playerState != climbing && playerState != climbingUp && playerState != climbingDown))
 	{
 		playerState = falling;
 	}
@@ -204,7 +202,7 @@ bool ModulePlayer::MiddleLadder()
 
 void ModulePlayer::Movement()
 {
-	if (playerState != climbing)
+	if (playerState != climbing && playerState != climbingUp && playerState != climbingDown)
 	{
 		if (movementDirection == 1)
 			current_animation = &idle;
@@ -270,10 +268,10 @@ void ModulePlayer::Shoot()
 
 void ModulePlayer::Climb()
 {
-	if (playerState != falling)
+	if (playerState != falling && playerState != climbingUp && playerState != climbingDown)
 	{
-	if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
-		climb.speed = 0.0f;
+		if (playerState == climbing && App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
+			climb.speed = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
@@ -394,7 +392,7 @@ bool ModulePlayer::StartClimbDown()
 		}
 		else
 		{
-			position.y += 6;
+			position.y += 4;
 			playerState = climbing;
 			current_animation = &climb;
 			finishClimbCounter = 0;
