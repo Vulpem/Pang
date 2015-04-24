@@ -92,7 +92,7 @@ update_status ModulePlayer::Update()
 			IsFalling();
 		
 			Shoot();
-			if (!EndClimb())
+			if (!EndClimbUp() && !StartClimbDown())
 			{
 				Climb();
 				Movement();
@@ -285,13 +285,12 @@ void ModulePlayer::Climb()
 			if (playerState == climbing && LadderUpEnds())
 			{
 				LOG("LadderUpEnds\n" );
-				playerState = endingclimb;
+				playerState = climbingUp;
 				ladderAlign = false;
 			}
 		
 			else if (CanClimbUp())
 			{
-				climbingDirection = 1;
 				AlignLadder(1);
 				climb.speed = 0.16f;
 				playerState = climbing;
@@ -312,18 +311,25 @@ void ModulePlayer::Climb()
 			if (playerState == climbing && LadderDownEnds())
 			{
 				LOG("LadderDownEnds\n");
-				playerState = endingclimb;
+				playerState = standing;
 				ladderAlign = false;
 			}
 
 			else if (CanClimbDown())
 			{
-				climbingDirection = - 1;
-				AlignLadder(-1);
+				if (AlignLadder(-1))
+				{
+					position.y += 6;
+					playerState = climbingDown;
+				}
+				else
+				{
 				climb.speed = 0.16f;
 				playerState = climbing;
 				current_animation = &climb;
 				position.y+=2;
+				}
+
 			}
 		}
 	}
@@ -356,20 +362,41 @@ void ModulePlayer::Fall()
 	}
 }
 
-bool ModulePlayer::EndClimb()
+bool ModulePlayer::EndClimbUp()
 {
-	if (playerState == endingclimb)
+	if (playerState == climbingUp)
 	{
 		current_animation = &endclimb;
-		if (finishClimbCounter < 10)
+		if (finishClimbCounter < 7)
 		{
 			finishClimbCounter++;
 		}
 		else
 		{
-			position.y -= (6* climbingDirection);
+			position.y -= 6;
 			playerState = standing;
 			current_animation = &idle;
+			finishClimbCounter = 0;
+		}
+		return true;
+	}
+	return false;
+}
+
+bool ModulePlayer::StartClimbDown()
+{
+	if (playerState == climbingDown)
+	{
+		current_animation = &endclimb;
+		if (finishClimbCounter < 7)
+		{
+			finishClimbCounter++;
+		}
+		else
+		{
+			position.y += 6;
+			playerState = climbing;
+			current_animation = &climb;
 			finishClimbCounter = 0;
 		}
 		return true;
@@ -424,7 +451,7 @@ bool ModulePlayer::LadderDownEnds()
 {
 	for (int w = 0; w < 3; w++)
 	{
-		if (App->maps->map[(position.y + 38) / 8][(position.x) / 8 + w] != 2)
+		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
 			return true;
 	}
 	return false;
@@ -446,13 +473,15 @@ bool ModulePlayer::CanClimbDown()
 		return false;
 }
 
-void ModulePlayer::AlignLadder(int direction)
+bool ModulePlayer::AlignLadder(int direction)
 {
 	if (ladderAlign == false)
 	{
 		position.x = GetLadderCenter(direction) * (8) - 8;
 		ladderAlign = true;
+		return true;
 	}
+	return false;
 }
 
 int ModulePlayer::GetLadderCenter(int direction)
@@ -462,18 +491,15 @@ int ModulePlayer::GetLadderCenter(int direction)
 
 	if (App->maps->map[(position.y + 32 - direction) / 8][x - 1] != 2) // Case 0 2 2
 	{
-		LOG("right\n");
 		return (x + 1);
 	}
 
 	else if (App->maps->map[(position.y + 32 - direction) / 8][x + 1] != 2) // Case 2 2 0
 	{
-		LOG("left\n");
 		return (x - 1);
 	}
 	else // Case 2 2 2
 	{
-		LOG("mid\n");
 		return (x);
 	}
 }
