@@ -457,46 +457,51 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 {
 	bool ret = false;
 	//Now, bricks. Checking for all 4 vertex of the tile to see if it collides with any of them.
-		p2Point<float> points[4];
-		points[0].x = tileX * 8;		points[0].y = tileY * 8;
-		points[1].x = (tileX + 1) * 8;	points[1].y = tileY * 8;
-		points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
-		points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
+	float distance[4];
+	p2Point<float> points[4];
+	points[0].x = tileX * 8;		points[0].y = tileY * 8;
+	points[1].x = (tileX + 1) * 8;	points[1].y = tileY * 8;
+	points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
+	points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
 
-		for (int n = 0; n < 4 && ret == false; n++)
+	for (int n = 0; n < 4; n++)
+	{
+		distance[n] = myBall->position.DistanceTo(points[n]);
+	}
+	for (int n = 0; n < 4 && ret == false; n++)
+	{
+		//Comparing the distance from the center of the ball to the current vertex
+		if (distance[n] <= myBall->radius || myBall->type == little)
 		{
-			//Comparing the distance from the center of the ball to the current vertex
-			if (myBall->radius >= myBall->position.DistanceTo(points[n]) || myBall->type == little)
+			//If it does collide, detecting from which side it collides, to change speed accordingly
+			if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type == little)
 			{
-				//If it does collide, detecting from which side it collides, to change speed accordingly
-				if (myBall->position.y <= points[0].y && myBall->speed.y >= 0 || myBall->type==little)
-				{
-					myBall->speed.y *= -1;
-					myBall->speed.y += GRAVITY;
-					myBall->position.y = points[0].y - myBall->radius;
-					//myBall->position.y += myBall->speed.y;
-					ret = true;
-				}
-				else if (myBall->position.y >= points[3].y&& myBall->speed.y <= 0)
-				{
-					myBall->speed.y *= -1;
-					myBall->position.y = points[2].y + myBall->radius;
-					ret = true;
-				}
-				/*else if (myBall->position.x < points[0].y && myBall->speed.x >= 0)
-				{
-					myBall->speed.x *= -1;
-					myBall->position.x += myBall->speed.x;
-					ret = true;
-				}
-				else if (myBall->position.x > points[1].x && myBall->speed.x <= 0)
-				{
-					myBall->speed.x *= -1;
-					myBall->position.x += myBall->speed.x;
-					ret = true;
-				}*/
+				myBall->speed.y *= -1;
+				myBall->speed.y += GRAVITY * 2;
+				myBall->position.y = points[0].y - myBall->radius;
+				//myBall->position.y += myBall->speed.y;
+				ret = true;
 			}
+			else if (myBall->position.y >= points[3].y&& myBall->speed.y <= 0)
+			{
+				myBall->speed.y *= -1;
+				myBall->position.y = points[2].y + myBall->radius;
+				ret = true;
+			}
+			/*else if (myBall->position.x < points[0].y && myBall->speed.x >= 0)
+			{
+			myBall->speed.x *= -1;
+			myBall->position.x += myBall->speed.x;
+			ret = true;
+			}
+			else if (myBall->position.x > points[1].x && myBall->speed.x <= 0)
+			{
+			myBall->speed.x *= -1;
+			myBall->position.x += myBall->speed.x;
+			ret = true;
+			}*/
 		}
+	}
 	return ret;
 }
 
