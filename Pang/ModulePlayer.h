@@ -52,7 +52,6 @@ public:
 	Animation endclimb;
 	Animation shot;
 	Animation shot2;
-	Animation dead;
 
 private:
 	void IsFalling();
@@ -66,7 +65,6 @@ private:
 	void Climb();
 	bool EndClimbUp();
 	bool StartClimbDown();
-	
 
 	void CheckBallCollision();
 
