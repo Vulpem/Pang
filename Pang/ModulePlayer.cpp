@@ -60,6 +60,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 
 	endclimb.frames.PushBack({ 113, 78, 32, 32 });
 	endclimb.speed = 0.0f;
+
+	//dead animation
+
+	dead.frames.PushBack({147,78,32,32})
+
 }
 
 ModulePlayer::~ModulePlayer()
