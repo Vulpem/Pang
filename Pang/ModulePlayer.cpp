@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
+#include <math.h>
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -430,11 +431,15 @@ void ModulePlayer::Kill()
 
 	if (movementDirection == 1)
 	{
-		current_animation = &killDead;
-		position.y += speed;
-		position.x += speed;
-		deadFinish = true;
-		//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		if (App->maps->map[position.y / 8][(position.x + 25) / 8] != 1)
+		{
+			current_animation = &killDead;
+			//position.y += speed;
+			position.x += speed;
+			position.y = 3 / 4 * position.x ^ 2 - 4 * position.x + 8;
+			deadFinish = true;
+			//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		}
 	}
 	else if (movementDirection == -1)
 	{
