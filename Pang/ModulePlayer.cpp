@@ -64,10 +64,10 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	//killDead animation
 	//killDead back
 	killDead.frames.PushBack({ 147, 78, 32, 32 });
-	killDead.frames.PushBack({ 78, 112, 47, 33 });
+	killDead.frames.PushBack({ 78, 112, 47, 32 });
 	//killDead front
-	//killDead2.frames.PushBack({ 113, 78, 32, 32 });
-	//killDead2.frames.PushBack({ 113, 78, 32, 32 });
+	killDead2.frames.PushBack({ 78, 178, 32, 32 });
+	killDead2.frames.PushBack({ 129, 111, 47, 32 });
 
 }
 
@@ -106,6 +106,12 @@ update_status ModulePlayer::Update()
 			Climb();
 			Movement();
 			Fall();
+		}
+
+		if (dead == true)
+		{
+			App->player->Kill();
+			
 		}
 
 
@@ -417,6 +423,7 @@ void ModulePlayer::Kill()
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
 	current_animation = &idle;
+	//playerState = dead;
 
 	//Animacion de muerte irá aqui
 
@@ -425,27 +432,15 @@ void ModulePlayer::Kill()
 		current_animation = &killDead;
 		position.y += speed;
 		position.x += speed;
-		//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	}
 	else if (movementDirection == -1)
 	{
 
-		//current_animation = &killDead2;
+		current_animation = &killDead2;
 		position.y += speed;
 		position.x -= speed;
 	}
-	
-	
-	
-
-	// if dead back
-	//current_animation = &killDead;
-	//position.x += speed;
-	
-
-
-
-	
 
 	//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	

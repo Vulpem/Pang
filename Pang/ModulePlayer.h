@@ -11,7 +11,8 @@ enum PlayerStates
 	climbing,
 	falling,
 	climbingUp,
-	climbingDown
+	climbingDown,
+	dead
 };
 
 class ModulePlayer : public Module
@@ -53,6 +54,7 @@ public:
 	Animation shot;
 	Animation shot2;
 	Animation killDead;
+	Animation killDead2;
 
 private:
 	void IsFalling();
@@ -75,5 +77,7 @@ private:
 	bool CanClimbDown();
 	bool AlignLadder(int direction);
 	int GetLadderCenter(int direction);
+
+
 
 };
