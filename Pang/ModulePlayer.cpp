@@ -60,6 +60,14 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 
 	endclimb.frames.PushBack({ 113, 78, 32, 32 });
 	endclimb.speed = 0.0f;
+
+	//killDead animation
+	//killDead back
+	killDead.frames.PushBack({ 147, 78, 32, 32 });
+	killDead.frames.PushBack({ 78, 112, 47, 33 });
+	//killDead front
+	//killDead.frames.PushBack({ 113, 78, 32, 32 });
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -98,6 +106,7 @@ update_status ModulePlayer::Update()
 			Movement();
 			Fall();
 		}
+
 
 	if (current_animation != NULL)
 	{
@@ -410,6 +419,15 @@ void ModulePlayer::Kill()
 
 	//Animacion de muerte irá aqui
 
+	// if dead back
+	//current_animation = &killDead;
+	//position.x += speed;
+	
+
+
+
+	
+
 	App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	
 }
@@ -426,8 +444,9 @@ void ModulePlayer::CheckBallCollision()
 		{
 			if (undying == false)
 			{
-				Kill();
 				dead = true;
+				Kill();
+				
 			}
 		}
 		tmp = tmp->next;

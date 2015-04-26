@@ -52,6 +52,7 @@ public:
 	Animation endclimb;
 	Animation shot;
 	Animation shot2;
+	Animation killDead;
 
 private:
 	void IsFalling();
