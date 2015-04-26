@@ -89,6 +89,7 @@ bool ModulePlayer::Start()
 	position.y = 9 * TILE;
 	ladderAlign = false;
 	dead = false;
+	deadFinish = false;
 
 	return ret;
 }
@@ -432,7 +433,8 @@ void ModulePlayer::Kill()
 		current_animation = &killDead;
 		position.y += speed;
 		position.x += speed;
-		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		deadFinish = true;
+		//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	}
 	else if (movementDirection == -1)
 	{
@@ -440,6 +442,9 @@ void ModulePlayer::Kill()
 		current_animation = &killDead2;
 		position.y += speed;
 		position.x -= speed;
+		deadFinish = true;
+		
+		//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	}
 
 	//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
@@ -460,6 +465,10 @@ void ModulePlayer::CheckBallCollision()
 			{
 				dead = true;
 				Kill();
+				if (deadFinish == true)
+				{
+					App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+				}
 				
 			}
 		}

@@ -38,6 +38,7 @@ public:
 	int speed = 2;
 	bool undying = true;
 	bool dead = false;
+	bool deadFinish = false;
 
 	p2Point<int> position;
 
