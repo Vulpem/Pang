@@ -100,6 +100,7 @@ update_status ModulePlayer::Update()
 {
 		if (dead == false)
 		{
+			SecurityPosition();
 			IsFalling();
 		
 			Shoot();
@@ -200,6 +201,12 @@ bool ModulePlayer::LadderFall()
 	return false;
 }
 
+void ModulePlayer::SecurityPosition()
+{
+	if (position.y > SCREEN_HEIGHT - 9 * TILE)
+		position.y = SCREEN_HEIGHT - 9 * TILE;
+}
+
 bool ModulePlayer::MiddleLadder()
 {
 	int counter = 0;
@@ -297,6 +304,7 @@ void ModulePlayer::Climb()
 		}
 		else
 		{
+			
 			if (playerState == climbing && LadderUpEnds())
 			{
 				LOG("LadderUpEnds\n" );
@@ -484,8 +492,9 @@ bool ModulePlayer::LadderUpEnds()
 {
 	for (int w = 0; w < 3; w++)
 	{
-	if (App->maps->map[(position.y + 25) / 8][(position.x)/ 8 + w] == 0)
-		return true;
+		if (App->maps->map[(position.y + 25) / 8][(position.x) / 8 + w] == 0)
+			if (App->maps->map[(position.y + 15) / 8][(position.x) / 8] == 0)
+				return true;
 	}
 
 	return false;
@@ -505,8 +514,9 @@ bool ModulePlayer::CanClimbUp()
 {
 	if ((App->maps->map[(position.y + 31) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 31) / 8][(position.x + 13) / 8] == 2))
 		return true;
-	else
-		return false;
+	if ((App->maps->map[(position.y + 15) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 15) / 8][(position.x + 13) / 8] == 2))
+		return true;
+	return false;
 }
 
 bool ModulePlayer::CanClimbDown()
