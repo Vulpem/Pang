@@ -16,6 +16,7 @@
 #include "ModuleGun.h"
 #include "ModuleMaps.h"
 #include "ModuleBalls.h"
+#include "ModuleAudio.h"
 
 class Application
 {
@@ -24,6 +25,8 @@ public:
 	ModuleWindow* window;
 	ModuleTextures* textures;
 	ModuleInput* input;
+	ModuleAudio* audio;
+	
 
 	ModuleSceneIntro* backgroundIntro;
 	ModuleScenePlay* backgroundPlay;

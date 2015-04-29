@@ -7,6 +7,7 @@ Application::Application()
 	window = new ModuleWindow(this);
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
+	audio = new ModuleAudio(this);
 
 	backgroundIntro = new ModuleSceneIntro(this, true);
 	backgroundPlay = new ModuleScenePlay(this, false);
@@ -25,6 +26,7 @@ Application::Application()
 	AddModule(renderer);
 	AddModule(textures);
 	AddModule(input);
+	AddModule(audio);
 
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
@@ -51,6 +53,7 @@ Application::~Application()
 	delete backgroundPlay;
 	delete backgroundIntro;
 
+	delete audio;
 	delete input;
 	delete textures;
 	delete renderer;
