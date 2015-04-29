@@ -109,8 +109,7 @@ update_status ModulePlayer::Update()
 			Movement();
 			Fall();
 		}
-
-		if (dead == true)
+		else
 		{
 			App->player->Kill();
 			
