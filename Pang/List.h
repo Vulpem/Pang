@@ -73,6 +73,17 @@ public:
 		return size;
 	}
 
+	tdata at(unsigned int index)
+	{
+		p2List_item* currentNode = start;
+		for (int n = 0; n < index; n++)
+		{
+			currentNode = currentNode->next;
+		}
+		return currentNode->data;
+	}
+
+
 	/**
 	* Add new item
 	*/
