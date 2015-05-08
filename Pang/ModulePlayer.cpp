@@ -311,7 +311,7 @@ void ModulePlayer::Climb()
 				playerState = climbingUp;
 				ladderAlign = false;
 			}
-		
+			
 			else if (CanClimbUp())
 			{
 				AlignLadder(1);
@@ -320,6 +320,7 @@ void ModulePlayer::Climb()
 				current_animation = &climb;
 				position.y-=2;
 			}
+			
 		}
 	}
 
@@ -331,13 +332,14 @@ void ModulePlayer::Climb()
 		}
 		else
 		{
+			
 			if (playerState == climbing && LadderDownEnds())
 			{
 				LOG("LadderDownEnds\n");
 				playerState = standing;
 				ladderAlign = false;
 			}
-
+			
 			else if (CanClimbDown())
 			{
 				if (AlignLadder(-1))
@@ -348,8 +350,6 @@ void ModulePlayer::Climb()
 				else
 				{
 				climb.speed = 0.16f;
-				playerState = climbing;
-				current_animation = &climb;
 				position.y+=2;
 				}
 
@@ -493,7 +493,7 @@ bool ModulePlayer::LadderUpEnds()
 	for (int w = 0; w < 3; w++)
 	{
 		if (App->maps->map[(position.y + 25) / 8][(position.x) / 8 + w] == 0)
-			if (App->maps->map[(position.y + 15) / 8][(position.x) / 8] == 0)
+			if (App->maps->map[(position.y + 15) / 8][(position.x) / 8 + w] == 0)
 				return true;
 	}
 
@@ -505,7 +505,7 @@ bool ModulePlayer::LadderDownEnds()
 	for (int w = 0; w < 3; w++)
 	{
 		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
-			return true;
+		return true;
 	}
 	return false;
 }
@@ -540,15 +540,28 @@ bool ModulePlayer::AlignLadder(int direction)
 
 int ModulePlayer::GetLadderCenter(int direction)
 {
-	//We ensure that in (position.x + 12 / 8) we have a 2
+	//We search for a 2
 	int x = (position.x + 12) / 8;
+	int y = (position.y + 32) / 8;
 
-	if (App->maps->map[(position.y + 32 - direction) / 8][x - 1] != 2) // Case 0 2 2
+	if (direction == 1)
+	{
+		int tile = 0;
+		for (y = (position.y / 8); y < ((position.y / 8) + 4) && tile != 2; y++)
+		{
+			tile = App->maps->map[y][x];
+		}
+	}
+	
+	
+	int b = App->maps->map[y][x];
+
+	if (App->maps->map[y][x - 1] != 2) // Case 0 2 2
 	{
 		return (x + 1);
 	}
 
-	else if (App->maps->map[(position.y + 32 - direction) / 8][x + 1] != 2) // Case 2 2 0
+	else if (App->maps->map[y][x + 1] != 2) // Case 2 2 0
 	{
 		return (x - 1);
 	}
