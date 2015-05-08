@@ -540,28 +540,28 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 	{
 		distance[n] = myBall->position.DistanceTo(points[n]);
 	}
+
 	for (int n = 0; n < 4 && ret == false; n++)
 	{
-		//Comparing the distance from the center of the ball to the current vertex
+		//Changing the speed of the ball dependin on the 2 closest vertex to the ball
 		if (distance[n] <= myBall->radius + 3)
 		{
-			distance[n] = 10000;
+			distance[n] = 1000000;
 			float closest = MIN(distance[0], MIN(distance[1], MIN(distance[2], distance[3])));
-
+	//Collided at bottom
 			if ((n == 0 || n == 1) && ret == false)
 			{
-				if (closest + 1 > distance[0] || closest + 1 > distance[1])
+				if (closest + 0.5f > distance[0] || closest + 0.5f > distance[1])
 				{
 					myBall->speed.y *= -1;
 					myBall->position.y = points[0].y - myBall->radius;
 					ret = true;
 				}
 			}
-
-
+	//Collided at top
 			if ((n == 2 || n == 3) && ret == false)
 			{
-				if (closest + 1 > distance[2] || closest + 1 > distance[3])
+				if (closest + 0.5f > distance[2] || closest + 0.5f > distance[3])
 				{
 					myBall->speed.y *= -1;
 					myBall->position.y = points[2].y + myBall->radius;
@@ -569,21 +569,20 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				}
 			}
 
-
+	//Collided right
 			if ((n == 0 || n == 2) && ret == false)
 			{
-				if (closest + 1 > distance[0] || closest + 1 > distance[2])
+				if (closest + 0.5f > distance[0] || closest + 0.5f > distance[2])
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x = points[0].x - myBall->radius;
 					ret = true;
 				}
 			}
-
-
+	//Collided at left
 			if ((n == 1 || n == 3) && ret == false)
 			{
-				if (closest + 1 > distance[1] || closest + 1 > distance[3])
+				if (closest + 0.5f > distance[1] || closest + 0.5f > distance[3])
 				{
 					myBall->speed.x *= -1;
 					myBall->position.x = points[1].x + myBall->radius;

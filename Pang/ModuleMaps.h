@@ -16,8 +16,6 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void PrepareMap();
-
 public:
 
 	SDL_Texture* ladderGraphics;
