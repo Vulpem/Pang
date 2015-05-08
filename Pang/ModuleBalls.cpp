@@ -45,13 +45,13 @@ void Ball::CreateBall(int direction)
 
 void Ball::Update(bool pause)
 {
-	if (speed.y > 7.5f) { speed.y = 7.5f; }
-		if (pause == false)
-		{
-			position.x += speed.x;
-			position.y += speed.y;
-			speed.y += GRAVITY;
-		}
+	if (speed.y > 7.0f) { speed.y = 7.0f; }
+	if (pause == false)
+	{
+		position.x += speed.x;
+		position.y += speed.y;
+		speed.y += GRAVITY;
+	}
 	
 }
 
@@ -218,10 +218,10 @@ void ModuleBalls::CheckBricksColision()
 		//Comparing the necessary tiles to see if there's any colision. To see the shape of each ball, enable "Debug Mode"
 		//When it may collide, call "Check collision". If it does, this ball will stop looking for anymore collisions with the surroundings.
 
-		if ((currentBall->data->position.y + currentBall->data->radius) / TILE > 25)
+		if ((currentBall->data->position.y + currentBall->data->radius*1.25) / TILE > 25)
 		{
 			currentBall->data->speed.y = currentBall->data->YBaseSpeed;
-			currentBall->data->position.y = 25*TILE - currentBall->data->radius;
+			currentBall->data->position.y = 25 * TILE - currentBall->data->radius;
 			collided = true;
 		}
 		//Then, both walls.
@@ -512,16 +512,16 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				myBall->position.y = points[2].y + myBall->radius;
 				ret = true;
 			}
-			else if (myBall->position.x < points[0].y && myBall->speed.x >= 0)
+			else if (myBall->position.x < points[0].x && myBall->speed.x >= 0)
 			{
 			myBall->speed.x *= -1;
-			myBall->position.x += myBall->speed.x;
+			myBall->position.x = points[0].x - myBall->radius;
 			ret = true;
 			}
 			else if (myBall->position.x > points[1].x && myBall->speed.x <= 0)
 			{
 			myBall->speed.x *= -1;
-			myBall->position.x += myBall->speed.x;
+			myBall->position.x = points[1].x + myBall->radius;
 			ret = true;
 			}
 		}
