@@ -193,7 +193,6 @@ bool ModulePlayer::LadderFall()
 			counter = 0;
 		if (counter >= 8)
 		{
-			LOG("Falling into ladder\n");
 			return true;
 		}
 
@@ -340,19 +339,16 @@ void ModulePlayer::Climb()
 				ladderAlign = false;
 			}
 			
-			else if (CanClimbDown())
+			else if (playerState == climbing && CanClimbDown())
 			{
-				if (AlignLadder(-1))
-				{
-					position.y += 6;
-					playerState = climbingDown;
-				}
-				else
-				{
-				climb.speed = 0.16f;
-				position.y+=2;
-				}
-
+					climb.speed = 0.16f;
+					position.y += 2;
+			}
+			else if (playerState == standing && CanStartClimbingDown())
+			{
+				AlignLadder(-1);
+				position.y += 6;
+				playerState = climbingDown;
 			}
 		}
 	}
@@ -380,7 +376,6 @@ void ModulePlayer::Fall()
 			fallCounter = 0;
 			playerState = standing;
 			speed = 2;			
-			LOG("SpeedChange\n");
 		}
 	}
 }
@@ -504,7 +499,8 @@ bool ModulePlayer::LadderDownEnds()
 {
 	for (int w = 0; w < 3; w++)
 	{
-		if (App->maps->map[(position.y + 32) / 8][(position.x) / 8 + w] != 2)
+		if (((App->maps->map[(position.y + 32) / 8][(position.x + 13) / 8] != 2) && (App->maps->map[(position.y + 16) / 8][(position.x + 13) / 8] != 2)) ||
+			(App->maps->map[(position.y + 32) / 8][(position.x + 13) / 8] == 1))
 		return true;
 	}
 	return false;
@@ -521,6 +517,14 @@ bool ModulePlayer::CanClimbUp()
 
 bool ModulePlayer::CanClimbDown()
 {
+	if ((App->maps->map[(position.y + 32) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 16) / 8][(position.x + 12) / 8] == 2)) 
+		return true;
+	else
+		return false;
+}
+
+bool ModulePlayer::CanStartClimbingDown()
+{
 	if ((App->maps->map[(position.y + 32) / 8][(position.x + 12) / 8] == 2) || (App->maps->map[(position.y + 32) / 8][(position.x + 13) / 8] == 2))
 		return true;
 	else
@@ -532,6 +536,7 @@ bool ModulePlayer::AlignLadder(int direction)
 	if (ladderAlign == false)
 	{
 		position.x = GetLadderCenter(direction) * (8) - 8;
+		LOG("%i", position.x/8);
 		ladderAlign = true;
 		return true;
 	}
@@ -542,15 +547,36 @@ int ModulePlayer::GetLadderCenter(int direction)
 {
 	//We search for a 2
 	int x = (position.x + 12) / 8;
-	int y = (position.y + 32) / 8;
+	int y = 0;
+	int tile = 0;
+
+	if (direction == -1)
+	{
+		y = (position.y + 32) / 8;
+		int w = 0;
+		for (; w < 2 && tile != 2; ++w)
+		{
+			tile = App->maps->map[y][x + w];
+
+		}
+		if (w > 1)
+			x++;
+	}
+
 
 	if (direction == 1)
 	{
-		int tile = 0;
-		for (y = (position.y / 8); y < ((position.y / 8) + 4) && tile != 2; y++)
+
+		for (int w = 0; w < 2, tile != 2; w++)
 		{
-			tile = App->maps->map[y][x];
+			for (y = (position.y / 8); y < position.y / 8 + 4 && tile != 2; y++)
+			{
+				tile = App->maps->map[y][x + w];
+			}
+			if (w >= 1)
+				x++;
 		}
+
 	}
 	
 	
