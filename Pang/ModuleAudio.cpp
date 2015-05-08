@@ -144,7 +144,7 @@ unsigned int ModuleAudio::LoadFx(const char* path)
 
 	return ret;
 }
-/*
+
 // Play WAV
 bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 {
@@ -162,4 +162,4 @@ bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 	}
 
 	return ret;
-}*/
+}

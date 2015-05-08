@@ -17,6 +17,7 @@
 #include "ModuleMaps.h"
 #include "ModuleBalls.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 class Application
 {
@@ -26,6 +27,7 @@ public:
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleAudio* audio;
+	ModuleParticles* particles;
 	
 
 	ModuleSceneIntro* backgroundIntro;
