@@ -44,10 +44,11 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 
 void ModuleGun::Shoot(p2Point<int> startPoint)
 {
-	if (activeBullet.count() == 0)
+	if (activeBullet.count() < 2)
 	{
 		AddBullet(startPoint);
-		shootAvailable = false;
+		if (activeBullet.count() == 2)
+			shootAvailable = false;
 	}
 }
 

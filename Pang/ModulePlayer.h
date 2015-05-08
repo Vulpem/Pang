@@ -70,12 +70,14 @@ private:
 	bool EndClimbUp();
 	bool StartClimbDown();
 
+
 	void CheckBallCollision();
 
 	bool LadderUpEnds();
 	bool LadderDownEnds();
 	bool CanClimbUp();
 	bool CanClimbDown();
+	bool CanStartClimbingDown();
 	bool AlignLadder(int direction);
 	int GetLadderCenter(int direction);
 
