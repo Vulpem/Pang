@@ -41,6 +41,5 @@ private:
 public:
 
 	Particle explosion;
-	Particle laser;
 
 };
