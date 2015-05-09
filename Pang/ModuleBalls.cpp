@@ -200,8 +200,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 	bool collided;
 	SDL_Rect rect;
 
-	//while (currentBall != NULL)
-	//{
+	
 		collided = false;
 		//Deciding which sides of the ball we'll check for colisions
 		if (currentBall->data->speed.x >= 0) { directionX = 1; }
@@ -502,8 +501,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 
 			}//End of switch (type)
 		}
-		//currentBall = currentBall->next; 
-	//}
+		
 }
 
 bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
@@ -544,6 +542,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				if (closest + 0.2f > distance[0] || closest + 0.2f > distance[1])
 				{
 					myBall->speed.y *= -1;
+					myBall->speed.y += 0.1f;
 					myBall->position.y = points[0].y - myBall->radius;
 					ret = true;
 				}

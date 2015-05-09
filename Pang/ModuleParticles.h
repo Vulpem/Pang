@@ -35,7 +35,7 @@ public:
 
 private:
 
-	SDL_Texture* graphics;
+	SDL_Texture* explosionGraphics;
 	p2List<Particle*> active;
 
 public:

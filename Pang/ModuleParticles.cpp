@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleParticles.h"
 
-ModuleParticles::ModuleParticles(Application* app, bool start_enabled) : Module(app, start_enabled), graphics(NULL)
+ModuleParticles::ModuleParticles(Application* app, bool start_enabled) : Module(app, start_enabled), explosionGraphics(NULL)
 {}
 
 ModuleParticles::~ModuleParticles()
@@ -13,7 +13,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	explosionGraphics = App->textures->Load("Image_Sources/Explosions.png");
 
 	// Explosion particle
 
@@ -37,7 +37,7 @@ bool ModuleParticles::Start()
 bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
-	App->textures->Unload(graphics);
+	App->textures->Unload(explosionGraphics);
 	return true;
 }
 
@@ -59,7 +59,7 @@ update_status ModuleParticles::Update()
 		}
 		else if(SDL_GetTicks() >= p->born)
 		{
-			App->renderer->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->renderer->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if(p->fx_played == false)
 			{
 				p->fx_played = true;
