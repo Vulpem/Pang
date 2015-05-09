@@ -147,7 +147,7 @@ update_status ModuleBalls::Update()
 		}
 		else
 		{
-			CheckBricksColision();
+			CheckBricksColision(pointer);
 			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
 			if (App->backgroundPlay->debugMode == true)
 			{
@@ -189,10 +189,10 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _color=
 	ballsList.add(newBall);
 }
 
-void ModuleBalls::CheckBricksColision()
+void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 {
 	
-	p2List_item<Ball*>* currentBall = ballsList.getLast();
+	
 	int directionX;
 	int directionY;
 	int currentTileX;
@@ -200,8 +200,8 @@ void ModuleBalls::CheckBricksColision()
 	bool collided;
 	SDL_Rect rect;
 
-	while (currentBall != NULL)
-	{
+	//while (currentBall != NULL)
+	//{
 		collided = false;
 		//Deciding which sides of the ball we'll check for colisions
 		if (currentBall->data->speed.x >= 0) { directionX = 1; }
@@ -222,22 +222,6 @@ void ModuleBalls::CheckBricksColision()
 			collided = true;
 		}
 		
-		/*
-		//Then, both walls.
-		else if ((currentBall->data->position.x - currentBall->data->radius) <= 1*TILE
-			|| (currentBall->data->position.x + currentBall->data->radius) >= 47*TILE)
-		{
-			currentBall->data->speed.x *= -1;
-			currentBall->data->position.x += currentBall->data->speed.x;
-			collided = true;
-		}
-		//Ceiling
-		else if ((currentBall->data->position.y + currentBall->data->radius) / TILE < 1)
-		{
-			if (currentBall->data->speed.y < 0) { currentBall->data->speed.y *= -1; }
-			currentBall->data->position.y = TILE + currentBall->data->radius + 1;
-			collided = true;
-		}*/
 		else 
 		{
 			switch (currentBall->data->type)
@@ -518,8 +502,8 @@ void ModuleBalls::CheckBricksColision()
 
 			}//End of switch (type)
 		}
-		currentBall = currentBall->prev; 
-	}
+		//currentBall = currentBall->next; 
+	//}
 }
 
 bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
@@ -555,7 +539,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 			distance[n] = 1000000;
 			float closest = MIN(distance[0], MIN(distance[1], MIN(distance[2], distance[3])));
 	//Collided at bottom
-			if ((n == 0 || n == 1) && ret == false)
+			if ((n == 0 || n == 1) && ret == false && myBall->speed.y >= 0)
 			{
 				if (closest + 0.2f > distance[0] || closest + 0.2f > distance[1])
 				{
@@ -565,7 +549,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				}
 			}
 	//Collided at top
-			if ((n == 2 || n == 3) && ret == false)
+			if ((n == 2 || n == 3) && ret == false && myBall->speed.y <= 0)
 			{
 				if (closest + 0.2f > distance[2] || closest + 0.2f > distance[3])
 				{
@@ -576,7 +560,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 			}
 
 	//Collided right
-			if ((n == 0 || n == 2) && ret == false)
+			if ((n == 0 || n == 2) && ret == false && myBall->speed.x >= 0)
 			{
 				if (closest + 0.2f > distance[0] || closest + 0.2f > distance[2])
 				{
@@ -586,7 +570,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 				}
 			}
 	//Collided at left
-			if ((n == 1 || n == 3) && ret == false)
+			if ((n == 1 || n == 3) && ret == false && myBall->speed.x <= 0)
 			{
 				if (closest + 0.2f > distance[1] || closest + 0.2f > distance[3])
 				{
