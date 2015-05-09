@@ -13,12 +13,13 @@ public:
 	float YBaseSpeed;
 	int radius;
 	int type;
+	int color;
 	bool dead = false;
 
 	int offset;
 
 public:
-	Ball(int x, int y, int _type, int direction);
+	Ball(int x, int y, int _type, int _color, int direction);
 	Ball(Ball* parent, int offsetDirection);
 	void Update(bool pause);
 private:
@@ -43,7 +44,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddBall(int position_x, int position_y, int _type, int _direction);
+	void AddBall(int position_x, int position_y, int _type, int _color, int _direction);
 	void CheckBricksColision();
 	bool CheckColision(int tileX, int tileY, Ball* myBall);
 	void Bomb();

@@ -14,14 +14,16 @@ Ball::Ball(Ball* parent, int offsetDirection)
 	position.y = parent->position.y;
 	position.x = parent->position.x + (parent->offset * offsetDirection);
 	type = parent->type - 1;
+	color = parent->color;
 	CreateBall(offsetDirection);
 }
 
 //Create the ball when initializing the level
-Ball::Ball(int x, int y, int _type, int direction)
+Ball::Ball(int x, int y, int _type, int _color = red, int direction = 1)
 {
 	position.y = y;
 	position.x = x;
+	color = _color;
 	type = _type;
 	CreateBall(direction);
 }
@@ -146,7 +148,7 @@ update_status ModuleBalls::Update()
 		else
 		{
 			CheckBricksColision();
-			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[red][pointer->data->type], pointer->data->radius, pointer->data->radius);
+			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
 			if (App->backgroundPlay->debugMode == true)
 			{
 				SDL_Rect myBallPos;
@@ -181,16 +183,16 @@ bool ModuleBalls::CleanUp()
 
 //Other methods
 
-void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _direction)
+void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _color=red, int _direction=1)
 {
-	Ball* newBall = new Ball(position_x, position_y, _type, _direction);
+	Ball* newBall = new Ball(position_x, position_y, _type, _color, _direction);
 	ballsList.add(newBall);
 }
 
 void ModuleBalls::CheckBricksColision()
 {
 	
-	p2List_item<Ball*>* currentBall = ballsList.getFirst();
+	p2List_item<Ball*>* currentBall = ballsList.getLast();
 	int directionX;
 	int directionY;
 	int currentTileX;
@@ -209,11 +211,6 @@ void ModuleBalls::CheckBricksColision()
 		//Getting the current tile of the center of the ball
 		currentTileX = currentBall->data->position.x / 8;
 		currentTileY = currentBall->data->position.y / 8;
-
-		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-		{
-			currentBall->data->speed.y *= 2;
-		}
 
 		//Comparing the necessary tiles to see if there's any colision. To see the shape of each ball, enable "Debug Mode"
 		//When it may collide, call "Check collision". If it does, this ball will stop looking for anymore collisions with the surroundings.
@@ -422,7 +419,7 @@ void ModuleBalls::CheckBricksColision()
 
 			case medium:
 			{
-				for (int h = -1; h <= 1 && collided == false; h++)
+				for (int h = -1; h <= 1 && collided == false; h+=2)
 				{
 
 #pragma region RenderDebugTiles
@@ -443,7 +440,7 @@ void ModuleBalls::CheckBricksColision()
 					}
 
 				}
-				for (int w = -1; w <= 1 && collided == false; w++)
+				for (int w = -1; w <= 1 && collided == false; w+=2)
 				{
 
 #pragma region RenderDebugTiles
@@ -521,7 +518,7 @@ void ModuleBalls::CheckBricksColision()
 
 			}//End of switch (type)
 		}
-		currentBall = currentBall->next; 
+		currentBall = currentBall->prev; 
 	}
 }
 

@@ -36,7 +36,7 @@ bool ModuleScenePlay::Start()
 	/*App->balls->AddBall(50, 50, huge, 1);
 	App->balls->AddBall(100, 50, big, 1);
 	App->balls->AddBall(300, 50, medium, 1);*/
-	App->balls->AddBall(200, 50, little, 1);
+	App->balls->AddBall(200, 50, little, blue, 1);
 	
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;
@@ -51,19 +51,19 @@ update_status ModuleScenePlay::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		App->balls->AddBall(200, 50, huge, 1);
+		App->balls->AddBall(200, 50, huge, rand()%3 ,1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		App->balls->AddBall(200, 50, big, 1);
+		App->balls->AddBall(200, 50, big, rand() % 3, 1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
-		App->balls->AddBall(200, 50, medium, 1);
+		App->balls->AddBall(200, 50, medium, rand() % 3, 1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
-		App->balls->AddBall(200, 50, little, 1);
+		App->balls->AddBall(200, 50, little, rand() % 3, 1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
