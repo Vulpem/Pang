@@ -28,6 +28,7 @@ public:
 	~ModuleGun();
 
 	bool shootAvailable = true;
+	int maxShots;
 
 public:
 	bool Start();
@@ -39,8 +40,6 @@ public:
 	void Shoot(p2Point<int>);
 
 public:
-
-private:
 	p2List<Bullet*> activeBullet;
 
 

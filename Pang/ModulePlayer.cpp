@@ -62,13 +62,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	endclimb.frames.PushBack({ 113, 78, 32, 32 });
 	endclimb.speed = 0.0f;
 
-	//killDead animation
+	// animation
 	//killDead back
-	killDead.frames.PushBack({ 147, 78, 32, 32 });
 	killDead.frames.PushBack({ 78, 112, 47, 32 });
 	//killDead front
-	killDead2.frames.PushBack({ 78, 178, 32, 32 });
-	killDead2.frames.PushBack({ 129, 111, 47, 32 });
+	killDead2.frames.PushBack({ 129, 112, 47, 32 });
 
 }
 
@@ -90,7 +88,7 @@ bool ModulePlayer::Start()
 	position.y = 9 * TILE;
 	ladderAlign = false;
 	dead = false;
-	deadFinish = false;
+	deadAnimEnd = false;
 
 	return ret;
 }
@@ -112,10 +110,16 @@ update_status ModulePlayer::Update()
 		}
 		else
 		{
-			App->player->Kill();
-			
+			position.x += deadAnimXSpeed;
+			position.y += deadAnimYSpeed;
+			deadAnimYSpeed += 0.2;
+			deadCounter++;
+			if (deadCounter >= 120)
+			{
+				deadAnimEnd = true;
+				deadCounter = 0;
+			}
 		}
-
 
 	if (current_animation != NULL)
 	{
@@ -124,6 +128,7 @@ update_status ModulePlayer::Update()
 	}
 
 	CheckBallCollision();
+
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		LOG("Changed undying mode\n");
@@ -422,40 +427,26 @@ bool ModulePlayer::StartClimbDown()
 	return false;
 }
 
-void ModulePlayer::Kill()
+void ModulePlayer::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
 	current_animation = &idle;
-	//playerState = dead;
+	playerState = dead;
 
 	//Animacion de muerte irá aqui
 
-	if (movementDirection == 1)
+	if (xBallPos < position.x+16)
 	{
-		if (App->maps->map[position.y / 8][(position.x + 25) / 8] != 1)
-		{
-			current_animation = &killDead;
-			//position.y += speed;
-			position.x += speed;
-			position.y = 3 / 4 * position.x ^ 2 - 4 * position.x + 8;
-			deadFinish = true;
-			//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-		}
+			current_animation = &killDead2;
+			deadAnimXSpeed = 1;
 	}
-	else if (movementDirection == -1)
+	else
 	{
-
-		current_animation = &killDead2;
-		position.y += speed;
-		position.x -= speed;
-		deadFinish = true;
-		
-		//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-	}
-
-	//App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-	
+		current_animation = &killDead;
+		deadAnimXSpeed = -1;
+	}	
+	deadAnimYSpeed = -4;
 }
 
 void ModulePlayer::CheckBallCollision()
@@ -471,15 +462,14 @@ void ModulePlayer::CheckBallCollision()
 			if (undying == false)
 			{
 				dead = true;
-				Kill();
-				if (deadFinish == true)
-				{
-					App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-				}
-				
+				Kill(tmp->data->position.x);
 			}
 		}
 		tmp = tmp->next;
+	}
+	if (deadAnimEnd == true)
+	{
+		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 	}
 }
 

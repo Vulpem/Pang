@@ -27,6 +27,7 @@ bool ModuleScenePlay::Start()
 	LOG("Loading background assets");
 
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
+	App->audio->PlayMusic("./Sounds/1Mt_Fuji.mp3");
 
 	App->maps->Enable();
 	App->player->Enable();

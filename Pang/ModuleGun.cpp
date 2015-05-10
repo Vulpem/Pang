@@ -17,6 +17,7 @@ ModuleGun::~ModuleGun()
 
 bool ModuleGun::Start()
 {
+	maxShots = 1;
 	return true;
 }
 
@@ -44,10 +45,10 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 
 void ModuleGun::Shoot(p2Point<int> startPoint)
 {
-	if (activeBullet.count() < 2)
+	if (activeBullet.count() < maxShots)
 	{
 		AddBullet(startPoint);
-		if (activeBullet.count() == 2)
+		if (activeBullet.count() == maxShots)
 			shootAvailable = false;
 	}
 }

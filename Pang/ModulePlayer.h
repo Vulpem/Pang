@@ -25,8 +25,6 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void Kill();
-
 public:
 
 	int playerState = standing;
@@ -34,11 +32,14 @@ public:
 	bool ladderAlign = false;
 	int movementDirection = 1;
 	int finishClimbCounter = 0;
+	int deadCounter = 0;
 
 	int speed = 2;
 	bool undying = true;
 	bool dead = false;
-	bool deadFinish = false;
+	bool deadAnimEnd = false;
+	float deadAnimYSpeed;
+	int deadAnimXSpeed;
 
 	p2Point<int> position;
 
@@ -72,6 +73,7 @@ private:
 
 
 	void CheckBallCollision();
+	void Kill(int);
 
 	bool LadderUpEnds();
 	bool LadderDownEnds();
