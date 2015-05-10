@@ -214,9 +214,9 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 		//Comparing the necessary tiles to see if there's any colision. To see the shape of each ball, enable "Debug Mode"
 		//When it may collide, call "Check collision". If it does, this ball will stop looking for anymore collisions with the surroundings.
 
-		if ((currentBall->data->position.y + currentBall->data->radius*1.25) / TILE > 25)
+		if ((currentBall->data->position.y + currentBall->data->radius + 4) / TILE >= 25)
 		{
-			currentBall->data->speed.y = currentBall->data->YBaseSpeed;
+ 			currentBall->data->speed.y = currentBall->data->YBaseSpeed;
 			currentBall->data->position.y = 25 * TILE - currentBall->data->radius;
 			collided = true;
 		}

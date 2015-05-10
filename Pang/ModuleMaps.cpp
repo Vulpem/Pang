@@ -159,11 +159,13 @@ update_status ModuleMaps::Update()
 bool ModuleMaps::CleanUp()
 {
 	App->textures->Unload(ladderGraphics);
+	App->balls->Disable();
 	return true;
 }
 
 void ModuleMaps::LoadMap(int nMap)
 {
+	App->balls->Disable();
 	for (int h = 0; h < 26; h++)
 	{
 		for (int w = 0; w < 48; w++)
@@ -171,5 +173,18 @@ void ModuleMaps::LoadMap(int nMap)
 			map[h][w] = lvl[nMap][h][w];
 		}
 	}
-
+	App->balls->Enable();
+	switch (nMap)
+	{
+	case 0:
+	{
+		App->balls->AddBall(200, 50, little, blue, 1);
+		break;
+	}
+	case 1:
+	{
+		App->balls->AddBall(200, 50, huge, red, 1);
+		break;
+	}
+	}
 }
