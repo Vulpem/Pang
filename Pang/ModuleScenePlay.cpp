@@ -34,6 +34,8 @@ bool ModuleScenePlay::Start()
 	App->balls->Enable();
 	App->gun->Enable();
 
+	App->maps->LoadMap(1);
+
 	App->balls->AddBall(200, 50, little, blue, 1);
 	
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");

@@ -8,6 +8,8 @@ class ModuleMaps : public Module
 public:
 	SDL_Rect tile;
 	static int map[26][48];
+	static int lvl[2][26][48];
+	
 
 	ModuleMaps(Application* app, bool start_enabled = true);
 	~ModuleMaps();
@@ -15,6 +17,8 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+
+	void LoadMap(int);
 
 public:
 
