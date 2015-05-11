@@ -7,8 +7,12 @@ class ModuleScenePlay : public Module
 {
 public:
 	SDL_Texture* graphics;
+	SDL_Texture* livesGraphics;
+	SDL_Rect livesRect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
+
+	int lives;
 
 	bool debugMode = false;
 
@@ -18,5 +22,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+
+	void UpdateInterface();
 
 };

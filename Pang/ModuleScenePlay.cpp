@@ -27,14 +27,21 @@ bool ModuleScenePlay::Start()
 	LOG("Loading background assets");
 
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
+	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
 	App->audio->PlayMusic("./Sounds/1Mt_Fuji.mp3");
 
 	App->maps->Enable();
 	App->player->Enable();
-
 	App->gun->Enable();
 
 	App->maps->LoadMap(0);
+
+	livesRect.x = 154;
+	livesRect.y = 44;
+	livesRect.w = 16;
+	livesRect.h = 16;
+
+	lives = 3;
 	
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;
@@ -43,6 +50,7 @@ bool ModuleScenePlay::Start()
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
+#pragma region DebugCode
 	if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 	{
 		debugMode = !debugMode;
@@ -69,6 +77,8 @@ update_status ModuleScenePlay::Update()
 	{
 		App->fade->FadeToBlack(this, this);
 	}
+#pragma endregion
+
 	if (App->balls->ballsList.count() == 0)
 	{
 		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
@@ -77,6 +87,13 @@ update_status ModuleScenePlay::Update()
 	// Draw everything --------------------------------------
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 	App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
+
+	for (int n = 0; n < lives; n++)
+	{
+		App->renderer->Blit(livesGraphics, (3 + n * 2) * TILE, 26 * TILE, &livesRect);
+	}
+
+	UpdateInterface();
 
 	return UPDATE_CONTINUE;
 }
@@ -89,5 +106,12 @@ bool ModuleScenePlay::CleanUp()
 	App->player->Disable();
 	App->maps->Disable();
 
+	App->textures->Unload(livesGraphics);
+
 	return true;
+}
+
+void ModuleScenePlay::UpdateInterface()
+{
+
 }

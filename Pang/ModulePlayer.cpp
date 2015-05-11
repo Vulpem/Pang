@@ -78,7 +78,7 @@ bool ModulePlayer::Start()
 {
 	LOG("--Initializing player");
 	bool ret = true;
-	graphics = App->textures->Load("./Image_Sources/Player.png");
+	graphics = App->backgroundPlay->livesGraphics;
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -129,6 +129,8 @@ update_status ModulePlayer::Update()
 
 	CheckBallCollision();
 
+#pragma region DebugCode
+
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		LOG("Changed undying mode\n");
@@ -160,6 +162,7 @@ update_status ModulePlayer::Update()
 		boundingBox.h = 27;
 		App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
 	}
+#pragma endregion
 
 	return UPDATE_CONTINUE;
 }
@@ -167,8 +170,6 @@ update_status ModulePlayer::Update()
 bool ModulePlayer::CleanUp()
 {
 	LOG("--Cleanup Player");
-
-	App->textures->Unload(graphics);
 
 	return true;
 }
@@ -469,7 +470,18 @@ void ModulePlayer::CheckBallCollision()
 	}
 	if (deadAnimEnd == true)
 	{
-		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		if (App->backgroundPlay->lives > 0)
+		{
+			App->backgroundPlay->lives -= 1;
+			App->player->Disable();
+			App->player->Enable();
+			App->maps->LoadMap(1);
+			App->balls->pauseBalls = false;
+		}
+		else
+		{
+			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+		}
 	}
 }
 
