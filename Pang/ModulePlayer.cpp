@@ -434,6 +434,7 @@ void ModulePlayer::Kill(int xBallPos)
 	App->balls->pauseBalls = true;
 	current_animation = &idle;
 	playerState = dead;
+	App->audio->PlayMusic("./Sounds/Death.wav");
 
 	//Animacion de muerte irá aqui
 
