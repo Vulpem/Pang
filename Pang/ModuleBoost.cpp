@@ -54,7 +54,7 @@ update_status ModuleBoost::Update()
 }
 
 
-bool ModuleBoost::Cleanup()
+bool ModuleBoost::CleanUp()
 {
 	p2List_item<Boost*>* tmp = activeBoost.getFirst();
 	p2List_item<Boost*>* tmp_next = activeBoost.getFirst();
@@ -102,7 +102,9 @@ void Boost::Fall(Application* app)
 bool Boost::Update(Application* app)
 {
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] == 0)
+	{
 		Fall(app);
+	}
 	return true;
 }
 

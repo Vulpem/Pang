@@ -18,7 +18,7 @@ Application::Application()
 	gun = new ModuleGun(this, false);
 	maps = new ModuleMaps(this, false);
 	balls = new ModuleBalls(this, false);
-	boosts = new ModuleBoost(this, true);
+	boosts = new ModuleBoost(this, false);
 
 
 	// The order of calls is very important!

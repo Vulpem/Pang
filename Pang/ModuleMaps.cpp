@@ -218,11 +218,13 @@ bool ModuleMaps::CleanUp()
 {
 	App->textures->Unload(ladderGraphics);
 	App->balls->Disable();
+	App->boosts->Disable();
 	return true;
 }
 
 void ModuleMaps::LoadMap(int nMap)
 {
+	App->boosts->Disable();
 	App->balls->Disable();
 	for (int h = 0; h < 26; h++)
 	{
@@ -231,6 +233,7 @@ void ModuleMaps::LoadMap(int nMap)
 			map[h][w] = lvl[nMap][h][w];
 		}
 	}
+	App->boosts->Enable();
 	App->balls->Enable();
 	switch (nMap)
 	{

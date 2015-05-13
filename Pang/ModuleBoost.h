@@ -26,7 +26,7 @@ public:
 public:
 	bool Start();
 	update_status Update();
-	bool Cleanup();
+	bool CleanUp();
 
 	void AddBoost(int x, int y);
 
