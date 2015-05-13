@@ -18,6 +18,7 @@ Application::Application()
 	gun = new ModuleGun(this, false);
 	maps = new ModuleMaps(this, false);
 	balls = new ModuleBalls(this, false);
+	boosts = new ModuleBoost(this, true);
 
 
 	// The order of calls is very important!
@@ -37,6 +38,7 @@ Application::Application()
 	AddModule(player);
 	AddModule(gun);
 	AddModule(balls);
+	AddModule(boosts);
 
 	AddModule(fade);
 
@@ -47,6 +49,7 @@ Application::~Application()
 {
 	delete fade;
 
+	delete boosts;
 	delete balls;
 	delete gun;
 	delete player;

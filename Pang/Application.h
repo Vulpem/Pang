@@ -18,6 +18,7 @@
 #include "ModuleBalls.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModuleBoost.h"
 
 class Application
 {
@@ -38,6 +39,7 @@ public:
 	ModuleGun* gun;
 	ModuleMaps* maps;
 	ModuleBalls* balls;
+	ModuleBoost* boosts;
 
 private:
 
