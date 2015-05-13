@@ -40,6 +40,6 @@ private:
 
 public:
 
-	Particle explosion;
+	Particle explosion[3][4];
 
 };

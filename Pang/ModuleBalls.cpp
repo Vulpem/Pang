@@ -144,6 +144,7 @@ update_status ModuleBalls::Update()
 				ballsList.add(newBall1);
 				ballsList.add(newBall2);
 			}
+			App->particles->AddParticle(App->particles->explosion[pointer->data->color][pointer->data->type], pointer->data->position.x, pointer->data->position.y);
 		}
 		else
 		{

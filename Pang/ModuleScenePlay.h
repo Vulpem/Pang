@@ -13,12 +13,14 @@ public:
 	SDL_Rect interfaceRect;
 
 	int lives;
+	int currentLvl;
 
 	bool debugMode = false;
 
 	ModuleScenePlay(Application* app, bool start_enabled = true);
 	~ModuleScenePlay();
 
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();

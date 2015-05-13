@@ -17,6 +17,12 @@ ModuleScenePlay::ModuleScenePlay(Application* app, bool start_enabled) : Module(
 ModuleScenePlay::~ModuleScenePlay()
 {}
 
+bool ModuleScenePlay::Init()
+{
+	currentLvl = 1;
+	return UPDATE_CONTINUE;
+}
+
 // Load assets
 bool ModuleScenePlay::Start()
 {
@@ -34,7 +40,7 @@ bool ModuleScenePlay::Start()
 	App->player->Enable();
 	App->gun->Enable();
 
-	App->maps->LoadMap(0);
+	App->maps->LoadMap(currentLvl);
 
 	livesRect.x = 154;
 	livesRect.y = 44;
@@ -75,13 +81,22 @@ update_status ModuleScenePlay::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, this);
+		App->maps->LoadMap(0);
 	}
 #pragma endregion
 
 	if (App->balls->ballsList.count() == 0)
 	{
-		App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
+		if (currentLvl >= 3)
+		{
+			currentLvl = 1;
+			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
+		}
+		else
+		{
+			currentLvl++;
+			App->maps->LoadMap(currentLvl);
+		}
 	}
 
 	// Draw everything --------------------------------------

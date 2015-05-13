@@ -14,21 +14,43 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	explosionGraphics = App->textures->Load("Image_Sources/Explosions.png");
+	/*if (explosionGraphics == NULL)
+		LOG("Error loading particle graphics");
+		assert(false);
+	}*/
 
 	// Explosion particle
 
 
 	//explosion.fx = App->audio->LoadFx("rtype/explosion.wav");
+	for (int n = 0; n < 3; n++)
+	{
+		explosion[n][huge].anim.frames.PushBack({ 90, 30 * n, 30, 30 });
+		explosion[n][huge].anim.frames.PushBack({ 60, 30 * n, 30, 30 });
+		explosion[n][huge].anim.frames.PushBack({ 30, 30 * n, 30, 30 });
+		explosion[n][huge].anim.frames.PushBack({ 0, 30 * n, 30, 30 });
 
+		explosion[n][big].anim.frames.PushBack({ 90, 30 * n, 30, 30 });
+		explosion[n][big].anim.frames.PushBack({ 60, 30 * n, 30, 30 });
+		explosion[n][big].anim.frames.PushBack({ 30, 30 * n, 30, 30 });
+		explosion[n][big].anim.frames.PushBack({ 0, 30 * n, 30, 30 });
 
-	explosion.anim.frames.PushBack({274, 296, 33, 30});
-	explosion.anim.frames.PushBack({313, 296, 33, 30});
-	explosion.anim.frames.PushBack({346, 296, 33, 30});
-	explosion.anim.frames.PushBack({382, 296, 33, 30});
-	explosion.anim.frames.PushBack({419, 296, 33, 30});
-	explosion.anim.frames.PushBack({457, 296, 33, 30});
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+		explosion[n][medium].anim.frames.PushBack({ 90, 30 * n, 30, 30 });
+		explosion[n][medium].anim.frames.PushBack({ 60, 30 * n, 30, 30 });
+		explosion[n][medium].anim.frames.PushBack({ 30, 30 * n, 30, 30 });
+		explosion[n][medium].anim.frames.PushBack({ 0, 30 * n, 30, 30 });
+
+		explosion[n][little].anim.frames.PushBack({ 240, 30 * n, 30, 30 });
+		explosion[n][little].anim.frames.PushBack({ 210, 30 * n, 30, 30 });
+		explosion[n][little].anim.frames.PushBack({ 180, 30 * n, 30, 30 });
+		explosion[n][little].anim.frames.PushBack({ 150, 30 * n, 30, 30 });
+		for (int m = 0; m < 4; m++)
+		{
+			explosion[n][m].anim.loop = false;
+			explosion[n][m].anim.speed = 0.3f;
+		}
+	}
+	
 
 	return true;
 }
@@ -81,6 +103,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32
 	p->position.y = y;
 
 	active.add(p);
+	LOG("\nCreated New Particle\n")
 }
 
 // -------------------------------------------------------------

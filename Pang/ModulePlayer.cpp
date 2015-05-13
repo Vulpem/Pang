@@ -475,7 +475,7 @@ void ModulePlayer::CheckBallCollision()
 			App->backgroundPlay->lives -= 1;
 			App->player->Disable();
 			App->player->Enable();
-			App->maps->LoadMap(1);
+			App->maps->LoadMap(App->backgroundPlay->currentLvl);
 			App->balls->pauseBalls = false;
 		}
 		else
