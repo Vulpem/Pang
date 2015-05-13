@@ -26,7 +26,7 @@ update_status ModuleBoost::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-		AddBoost(100, 100);
+		AddBoost(100, 101);
 	}
 
 	p2List_item<Boost*>* tmp = activeBoost.getFirst();
@@ -56,6 +56,17 @@ update_status ModuleBoost::Update()
 
 bool ModuleBoost::Cleanup()
 {
+	p2List_item<Boost*>* tmp = activeBoost.getFirst();
+	p2List_item<Boost*>* tmp_next = activeBoost.getFirst();
+	while (tmp != NULL)
+	{
+		tmp_next = tmp->next;
+		delete tmp->data;
+		activeBoost.del(tmp);
+		tmp = tmp_next;
+	}
+
+
 	return true;
 }
 
@@ -75,15 +86,23 @@ void ModuleBoost::AddBoost(int x, int y)
 	activeBoost.add(b);
 }
 
+void Boost::Fall(Application* app)
+{
+
+	position.y += 2;
+
+
+	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] != 0)
+	{
+		position.y = (((position.y + 16) / 8) - 2) * 8;
+	}
+	rect.y = position.y;
+}
+
 bool Boost::Update(Application* app)
 {
-	int b = app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8];
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] == 0)
-	{
-		position.y++;
-		rect.y = position.y;
-	}
-
+		Fall(app);
 	return true;
 }
 

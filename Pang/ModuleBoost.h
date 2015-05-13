@@ -13,6 +13,7 @@ struct Boost
 
 	SDL_Rect rect;
 
+	void Fall(Application* app);
 	bool Update(Application* app);
 };
 
