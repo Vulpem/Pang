@@ -14,10 +14,11 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	explosionGraphics = App->textures->Load("Image_Sources/Explosions.png");
-	/*if (explosionGraphics == NULL)
+	if (explosionGraphics == NULL)
+	{
 		LOG("Error loading particle graphics");
 		assert(false);
-	}*/
+	}
 
 	// Explosion particle
 

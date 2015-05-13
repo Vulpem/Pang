@@ -89,7 +89,7 @@ update_status ModuleScenePlay::Update()
 	{
 		if (currentLvl >= 3)
 		{
-			currentLvl = 1;
+			currentLvl = 0;
 			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
 		}
 		else

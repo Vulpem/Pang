@@ -481,6 +481,8 @@ void ModulePlayer::CheckBallCollision()
 		else
 		{
 			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+			App->backgroundPlay->lives = 3;
+			App->backgroundPlay->currentLvl = 1;
 		}
 	}
 }
