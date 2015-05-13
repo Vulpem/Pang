@@ -15,6 +15,9 @@ struct Particle
 	Uint32 life;
 	bool fx_played;
 
+	int offsetX;
+	int offsetY;
+
 	Particle();
 	Particle(const Particle& p);
 	~Particle();
@@ -31,7 +34,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, int _offsetX = 0, int _offsetY = 0, Uint32 delay = 0);
 
 private:
 

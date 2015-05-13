@@ -20,10 +20,12 @@ bool ModuleParticles::Start()
 		assert(false);
 	}
 
+
+
 	// Explosion particle
 
 
-	//explosion.fx = App->audio->LoadFx("rtype/explosion.wav");
+	explosion[0][0].fx = App->audio->LoadFx("Sounds/Title_Screen.mp3");
 	for (int n = 0; n < 3; n++)
 	{
 		explosion[n][huge].anim.frames.PushBack({ 90, 30 * n, 30, 30 });
@@ -48,7 +50,8 @@ bool ModuleParticles::Start()
 		for (int m = 0; m < 4; m++)
 		{
 			explosion[n][m].anim.loop = false;
-			explosion[n][m].anim.speed = 0.3f;
+			explosion[n][m].anim.speed = 0.2f;
+			explosion[n][m].fx = explosion[0][0].fx;
 		}
 	}
 	
@@ -70,6 +73,7 @@ update_status ModuleParticles::Update()
 	p2List_item<Particle*>* tmp = active.getFirst();
 	p2List_item<Particle*>* tmp_next = active.getFirst();
 
+
 	while(tmp != NULL)
 	{
 		Particle* p = tmp->data;
@@ -82,7 +86,7 @@ update_status ModuleParticles::Update()
 		}
 		else if(SDL_GetTicks() >= p->born)
 		{
-			App->renderer->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->renderer->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), p->offsetX, p->offsetY);
 			if(p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -96,12 +100,14 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int _offsetX, int _offsetY, Uint32 delay)
 {
-	Particle* p = new Particle(particle);
+ 	Particle* p = new Particle(particle);
 	p->born = SDL_GetTicks() + delay;
 	p->position.x = x;
 	p->position.y = y;
+	p->offsetX = _offsetX;
+	p->offsetY = _offsetY;
 
 	active.add(p);
 	LOG("\nCreated New Particle\n")

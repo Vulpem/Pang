@@ -34,7 +34,7 @@ bool ModuleScenePlay::Start()
 
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
-	App->audio->PlayMusic("./Sounds/1Mt_Fuji.mp3");
+	
 
 	App->maps->Enable();
 	App->player->Enable();

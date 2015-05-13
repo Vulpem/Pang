@@ -18,6 +18,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	graphics = App->textures->Load("./Image_Sources/Pang_Title.png");
+	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
 
 	return ret;
 }

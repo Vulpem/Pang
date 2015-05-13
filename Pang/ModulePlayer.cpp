@@ -114,7 +114,7 @@ update_status ModulePlayer::Update()
 			position.y += deadAnimYSpeed;
 			deadAnimYSpeed += 0.2;
 			deadCounter++;
-			if (deadCounter >= 120)
+			if (deadCounter >= 150)
 			{
 				deadAnimEnd = true;
 				deadCounter = 0;

@@ -8,7 +8,6 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
-	particles = new ModuleParticles(this);
 
 	backgroundIntro = new ModuleSceneIntro(this, true);
 	backgroundPlay = new ModuleScenePlay(this, false);
@@ -18,6 +17,7 @@ Application::Application()
 	gun = new ModuleGun(this, false);
 	maps = new ModuleMaps(this, false);
 	balls = new ModuleBalls(this, false);
+	particles = new ModuleParticles(this);
 	boosts = new ModuleBoost(this, false);
 
 
@@ -29,7 +29,6 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(particles);
 
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
@@ -38,6 +37,7 @@ Application::Application()
 	AddModule(player);
 	AddModule(gun);
 	AddModule(balls);
+	AddModule(particles);
 	AddModule(boosts);
 
 	AddModule(fade);
@@ -50,6 +50,7 @@ Application::~Application()
 	delete fade;
 
 	delete boosts;
+	delete particles;
 	delete balls;
 	delete gun;
 	delete player;
@@ -58,7 +59,6 @@ Application::~Application()
 	delete backgroundPlay;
 	delete backgroundIntro;
 
-	delete particles;
 	delete audio;
 	delete input;
 	delete textures;

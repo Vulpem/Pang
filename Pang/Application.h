@@ -28,7 +28,6 @@ public:
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleAudio* audio;
-	ModuleParticles* particles;
 	
 
 	ModuleSceneIntro* backgroundIntro;
@@ -39,6 +38,7 @@ public:
 	ModuleGun* gun;
 	ModuleMaps* maps;
 	ModuleBalls* balls;
+	ModuleParticles* particles;
 	ModuleBoost* boosts;
 
 private:
