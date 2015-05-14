@@ -86,6 +86,7 @@ void ModuleBoost::AddBoost(int x, int y)
 		b->anim.frames.PushBack({ 32, 0, 16, 16 });
 		b->anim.frames.PushBack({ 48, 0, 16, 16 }); 
 		b->anim.frames.PushBack({ 64, 0, 16, 16 }); break;
+		b->anim.speed = 10.0f;
 	}
 	case pause:
 	{
@@ -120,7 +121,7 @@ bool Boost::Update(Application* app)
 	{
 		Fall(app);
 	}
-	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32)
+	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
 	{
 		switch (type)
 		{

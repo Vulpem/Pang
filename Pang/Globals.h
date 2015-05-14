@@ -52,4 +52,4 @@ enum Boosts
 #define VSYNC true
 #define TITLE "Buster Bros"
 
-# define PAUSE_BOOST_TIME 500
+# define PAUSE_BOOST_TIME 300
