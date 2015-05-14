@@ -34,6 +34,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void Clear();
 	void AddParticle(const Particle& particle, int x, int y, int _offsetX = 0, int _offsetY = 0, Uint32 delay = 0);
 
 private:

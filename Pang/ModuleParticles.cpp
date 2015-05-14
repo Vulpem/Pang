@@ -100,6 +100,19 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModuleParticles::Clear()
+{
+	p2List_item<Particle*>* tmp = active.getFirst();
+	p2List_item<Particle*>* tmp_next;
+	while (tmp != NULL)
+	{
+		tmp_next = tmp->next;
+		delete tmp->data;
+		active.del(tmp);
+		tmp = tmp_next;
+	}
+}
+
 void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int _offsetX, int _offsetY, Uint32 delay)
 {
  	Particle* p = new Particle(particle);

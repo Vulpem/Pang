@@ -4,7 +4,7 @@
 #include "ModuleBalls.h"
 
 
-#define GRAVITY 0.2
+#define GRAVITY 0.12f
 
 ////  CLASS BALL  //////////////////////////////////////
 
@@ -33,13 +33,13 @@ void Ball::CreateBall(int direction)
 	switch (type)
 	{
 		case huge:
-		{speed.y = -3.0f; speed.x = 1.5f * direction; radius = 24; YBaseSpeed = -6.9f; offset = 8; break; }
+		{speed.y = -2.0f; speed.x = 1.6f * direction; radius = 24; YBaseSpeed = -5.7f; offset = 8; break; }
 		case big:
-		{speed.y = -2.5f; speed.x = 2.0f * direction; radius = 16; YBaseSpeed = -6.5f; offset = 8; break; }
+		{speed.y = -2.5f; speed.x = 1.8f * direction; radius = 16; YBaseSpeed = -5.5f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -6.0f; offset = 4; break; }
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -4.6f; offset = 4; break; }
 		case little:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 4; YBaseSpeed = -5.0f; offset = 0; break; }
+		{speed.y = -1.5f; speed.x = 1.4f * direction; radius = 4; YBaseSpeed = -3.0f; offset = 0; break; }
 	}
 	dead = false;
 }
@@ -215,7 +215,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 		//Comparing the necessary tiles to see if there's any colision. To see the shape of each ball, enable "Debug Mode"
 		//When it may collide, call "Check collision". If it does, this ball will stop looking for anymore collisions with the surroundings.
 
-		if ((currentBall->data->position.y + currentBall->data->radius + 4) / TILE >= 25)
+		if ((currentBall->data->position.y + currentBall->data->radius + 1) / TILE >= 25)
 		{
  			currentBall->data->speed.y = currentBall->data->YBaseSpeed;
 			currentBall->data->position.y = 25 * TILE - currentBall->data->radius;
