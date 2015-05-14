@@ -127,6 +127,30 @@ update_status ModuleBalls::Update()
 
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
 
+	if (pauseBoost == true)
+	{
+		pauseCounter++;
+		if (pauseCounter >= PAUSE_BOOST_TIME)
+		{
+			pauseBalls = false;
+			pauseBoost = false;
+			pauseCounter = 0;
+		}
+	}
+	if (bombBoost == true)
+	{
+		bombCounter++;
+		if (bombCounter == 30 || bombCounter == 60 || bombCounter == 90)
+		{
+			Bomb();
+		}
+		if (bombCounter >= 120)
+		{
+			Bomb();
+			bombBoost = false;
+		}
+	}
+
 	while (pointer != NULL)
 	{
 		pointer->data->Update(pauseBalls);
@@ -596,4 +620,17 @@ void ModuleBalls::Bomb()
 		}
 		currentBall = currentBall->next;
 	}
+}
+
+void ModuleBalls::BombBoost()
+{
+	bombBoost = true;
+	bombCounter = 0;
+}
+
+void ModuleBalls::PauseBoost()
+{
+	pauseCounter = 0;
+	pauseBalls = true;
+	pauseBoost = true;
 }

@@ -38,6 +38,10 @@ public:
 	SDL_Texture* ballsGraphics;
 	SDL_Rect ballsRects[3][4];
 	bool pauseBalls = false;
+	int pauseCounter;
+	bool pauseBoost;
+	int bombCounter;
+	bool bombBoost;
 
 	bool Start();
 	update_status PreUpdate();
@@ -48,5 +52,7 @@ public:
 	void CheckBricksColision(p2List_item<Ball*>*);
 	bool CheckColision(int tileX, int tileY, Ball* myBall);
 	void Bomb();
+	void PauseBoost();
+	void BombBoost();
 
 };

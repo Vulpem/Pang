@@ -42,7 +42,6 @@ update_status ModuleBoost::Update()
 			delete tmp->data;
 			activeBoost.del(tmp);
 		}
-
 		else
 		{
 			App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
@@ -75,12 +74,11 @@ void ModuleBoost::AddBoost(int x, int y)
 {
 	Boost* b = new Boost();
 
-	b->type = rand() % 4 + 1;
+	b->type = rand() % 3 + 1;
 	switch (b->type)
 	{
 	case doubleHook:
 	{
-		b->anim.frames.PushBack({ 16, 0, 16, 16 });
 		b->anim.frames.PushBack({ 16, 0, 16, 16 }); break;
 	}
 	case bomb:
@@ -89,19 +87,12 @@ void ModuleBoost::AddBoost(int x, int y)
 		b->anim.frames.PushBack({ 48, 0, 16, 16 }); 
 		b->anim.frames.PushBack({ 64, 0, 16, 16 }); break;
 	}
-	case clock:
-	{
-		b->anim.frames.PushBack({ 80, 0, 16, 16 });
-		b->anim.frames.PushBack({ 80, 0, 16, 16 }); break;
-	}
 	case pause:
 	{
-		b->anim.frames.PushBack({ 96, 0, 16, 16 });
 		b->anim.frames.PushBack({ 96, 0, 16, 16 }); break;
 	}
 	case life:
 	{
-		b->anim.frames.PushBack({ 112, 0, 16, 16 });
 		b->anim.frames.PushBack({ 112, 0, 16, 16 }); break;
 	}
 	}
@@ -128,6 +119,29 @@ bool Boost::Update(Application* app)
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] == 0)
 	{
 		Fall(app);
+	}
+	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32)
+	{
+		switch (type)
+		{
+		case doubleHook:
+		{
+			app->player->boost = doubleHook; break;
+		}
+		case life:
+		{
+			app->backgroundPlay->lives += 1; break;
+		}
+		case pause:
+		{
+			app->balls->PauseBoost(); break;
+		}
+		case bomb:
+		{
+			app->balls->BombBoost();
+		}
+		}
+	return false;
 	}
 	return true;
 }

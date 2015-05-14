@@ -33,7 +33,7 @@ public:
 public:
 	bool Start();
 	update_status Update();
-	bool Cleanup();
+	bool CleanUp();
 
 	void AddBullet(p2Point<int>);
 

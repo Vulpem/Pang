@@ -37,7 +37,6 @@ enum Boosts
 	doubleHook,
 	life,
 	pause,
-	clock,
 	bomb
 };
 
@@ -53,3 +52,4 @@ enum Boosts
 #define VSYNC true
 #define TITLE "Buster Bros"
 
+# define PAUSE_BOOST_TIME 500

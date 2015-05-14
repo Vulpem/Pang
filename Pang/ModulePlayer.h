@@ -27,6 +27,8 @@ public:
 
 public:
 
+	int boost = none;
+	int prevBoost = none;
 	int playerState = standing;
 	int fallCounter = 0;
 	bool ladderAlign = false;
@@ -71,6 +73,7 @@ private:
 	bool EndClimbUp();
 	bool StartClimbDown();
 
+	void UpdateBoosts();
 
 	void CheckBallCollision();
 	void Kill(int);

@@ -89,6 +89,7 @@ bool ModulePlayer::Start()
 	ladderAlign = false;
 	dead = false;
 	deadAnimEnd = false;
+	boost = none;
 
 	return ret;
 }
@@ -100,13 +101,13 @@ update_status ModulePlayer::Update()
 		{
 			SecurityPosition();
 			IsFalling();
-		
 			Shoot();
 			EndClimbUp();
 			StartClimbDown();
 			Climb();
 			Movement();
 			Fall();
+			UpdateBoosts();
 		}
 		else
 		{
@@ -599,4 +600,22 @@ int ModulePlayer::GetLadderCenter(int direction)
 	{
 		return (x);
 	}
+}
+
+void ModulePlayer::UpdateBoosts()
+{
+
+	if (boost != prevBoost)
+	{
+		App->gun->maxShots = 1;
+
+		switch (boost)
+		{
+		case doubleHook:
+		{
+			App->gun->maxShots = 2;
+		}
+		}
+	}
+	prevBoost = boost;
 }

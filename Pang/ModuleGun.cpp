@@ -120,13 +120,13 @@ bool Bullet::Update(Application* app)
 	return ret;
 }
 
-bool ModuleGun::Cleanup()
+bool ModuleGun::CleanUp()
 {
 	p2List_item<Bullet*>* tmp = activeBullet.getFirst();
 	p2List_item<Bullet*>* tmp_next = activeBullet.getFirst();
 	while (tmp != NULL)
 	{
-		tmp_next = tmp->next;
+ 		tmp_next = tmp->next;
 		delete tmp->data;
 		activeBullet.del(tmp);
 		tmp = tmp_next;
