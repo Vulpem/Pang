@@ -25,7 +25,7 @@ bool ModuleParticles::Start()
 	// Explosion particle
 
 
-	explosion[0][0].fx = App->audio->LoadFx("Sounds/Explosion.wav");
+	explosion[0][0].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	for (int n = 0; n < 3; n++)
 	{
 		explosion[n][huge].anim.frames.PushBack({ 90, 30 * n, 30, 30 });
