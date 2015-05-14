@@ -140,11 +140,11 @@ update_status ModuleBalls::Update()
 	if (bombBoost == true)
 	{
 		bombCounter++;
-		if (bombCounter == 30 || bombCounter == 60 || bombCounter == 90)
+		if (bombCounter == 1 || bombCounter == 30 || bombCounter == 60)
 		{
 			Bomb();
 		}
-		if (bombCounter >= 120)
+		if (bombCounter >= 90)
 		{
 			Bomb();
 			bombBoost = false;

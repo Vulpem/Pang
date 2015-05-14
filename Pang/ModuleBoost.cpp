@@ -74,7 +74,7 @@ void ModuleBoost::AddBoost(int x, int y)
 {
 	Boost* b = new Boost();
 
-	b->type = rand() % 3 + 1;
+	b->type = rand() % 4 + 1;
 	switch (b->type)
 	{
 	case doubleHook:
