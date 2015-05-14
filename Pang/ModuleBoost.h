@@ -5,13 +5,14 @@
 #include "Globals.h"
 
 
-struct Boost
+class Boost
 {
+public:
+
+	int type;
 	Animation anim;
 
 	p2Point<int> position;
-
-	SDL_Rect rect;
 
 	void Fall(Application* app);
 	bool Update(Application* app);
@@ -32,4 +33,5 @@ public:
 
 public:
 	p2List<Boost*> activeBoost;
+	SDL_Texture* graphics;
 };

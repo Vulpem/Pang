@@ -123,8 +123,7 @@ update_status ModulePlayer::Update()
 
 	if (current_animation != NULL)
 	{
-		SDL_Rect r = current_animation->GetCurrentFrame();
-		App->renderer->Blit(graphics, position.x - 2, position.y, &r);
+			App->renderer->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 	}
 
 	CheckBallCollision();

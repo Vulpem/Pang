@@ -31,6 +31,16 @@ enum BallColours
 	green
 };
 
+enum Boosts
+{
+	none = 0,
+	doubleHook,
+	life,
+	pause,
+	clock,
+	bomb
+};
+
 // Configuration -----------
 #define TILE 8
 #define SCREEN_WIDTH 384

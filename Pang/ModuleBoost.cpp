@@ -17,6 +17,7 @@ ModuleBoost::~ModuleBoost()
 
 bool ModuleBoost::Start()
 {
+	graphics = App->textures->Load("./Image_Sources/PowerUps.png");
 	return true;
 }
 
@@ -26,7 +27,7 @@ update_status ModuleBoost::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-		AddBoost(100, 101);
+		AddBoost(rand()%300 + 16, 101);
 	}
 
 	p2List_item<Boost*>* tmp = activeBoost.getFirst();
@@ -44,7 +45,7 @@ update_status ModuleBoost::Update()
 
 		else
 		{
-			App->renderer->DrawQuad(tmp->data->rect, 0, 0, 255, 130);
+			App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
 		}
 
 		tmp = tmp_next;
@@ -74,14 +75,38 @@ void ModuleBoost::AddBoost(int x, int y)
 {
 	Boost* b = new Boost();
 
+	b->type = rand() % 4 + 1;
+	switch (b->type)
+	{
+	case doubleHook:
+	{
+		b->anim.frames.PushBack({ 16, 0, 16, 16 });
+		b->anim.frames.PushBack({ 16, 0, 16, 16 }); break;
+	}
+	case bomb:
+	{
+		b->anim.frames.PushBack({ 32, 0, 16, 16 });
+		b->anim.frames.PushBack({ 48, 0, 16, 16 }); 
+		b->anim.frames.PushBack({ 64, 0, 16, 16 }); break;
+	}
+	case clock:
+	{
+		b->anim.frames.PushBack({ 80, 0, 16, 16 });
+		b->anim.frames.PushBack({ 80, 0, 16, 16 }); break;
+	}
+	case pause:
+	{
+		b->anim.frames.PushBack({ 96, 0, 16, 16 });
+		b->anim.frames.PushBack({ 96, 0, 16, 16 }); break;
+	}
+	case life:
+	{
+		b->anim.frames.PushBack({ 112, 0, 16, 16 });
+		b->anim.frames.PushBack({ 112, 0, 16, 16 }); break;
+	}
+	}
 	b->position.x = x;
 	b->position.y = y;
-
-	//Creating the rectangle references
-	b->rect.x = b->position.x;
-	b->rect.y = b->position.y;
-	b->rect.w = 16;
-	b->rect.h = 16;
 
 	activeBoost.add(b);
 }
@@ -96,7 +121,6 @@ void Boost::Fall(Application* app)
 	{
 		position.y = (((position.y + 16) / 8) - 2) * 8;
 	}
-	rect.y = position.y;
 }
 
 bool Boost::Update(Application* app)
