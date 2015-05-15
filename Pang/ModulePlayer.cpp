@@ -470,6 +470,7 @@ void ModulePlayer::CheckBallCollision()
 			}
 			tmp = tmp->next;
 		}
+	}
 		if (deadAnimEnd == true)
 		{
 			if (App->backgroundPlay->lives > 0)
@@ -489,7 +490,7 @@ void ModulePlayer::CheckBallCollision()
 		}
 	}
 
-}
+
 
 bool ModulePlayer::LadderUpEnds()
 {
