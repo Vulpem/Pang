@@ -94,6 +94,7 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
+			int punt = App->player->punctuation;
 			currentLvl++;
 			App->maps->LoadMap(currentLvl);
 		}
