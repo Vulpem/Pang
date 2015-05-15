@@ -18,6 +18,7 @@ ModuleBoost::~ModuleBoost()
 bool ModuleBoost::Start()
 {
 	graphics = App->textures->Load("./Image_Sources/PowerUps.png");
+	pickedUp = App->audio->LoadFx("./Sounds/Death.wav");
 	return true;
 }
 
@@ -146,6 +147,7 @@ bool Boost::Update(Application* app)
 			app->balls->BombBoost();
 		}
 		}
+		app->audio->PlayFx(app->boosts->pickedUp);
 	return false;
 	}
 	return true;

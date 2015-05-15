@@ -11,8 +11,8 @@ ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_en
 	graphics = NULL;
 
 	current_animation = &hook;
-	hook.frames.PushBack({ 19, 1, 9, 199 });
-	hook.frames.PushBack({ 91, 1, 9, 199 });
+	hook.frames.PushBack({ 0, 0, 9, 199 });
+	hook.frames.PushBack({ 9, 0, 9, 199 });
 
 
 	hook.speed = 0.07f;
