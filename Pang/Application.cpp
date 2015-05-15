@@ -34,8 +34,9 @@ Application::Application()
 	AddModule(backgroundPlay);
 
 	AddModule(maps);
-	AddModule(player);
+	
 	AddModule(gun);
+	AddModule(player);
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);
@@ -52,8 +53,8 @@ Application::~Application()
 	delete boosts;
 	delete particles;
 	delete balls;
-	delete gun;
 	delete player;
+	delete gun;
 	delete maps;
 
 	delete backgroundPlay;
