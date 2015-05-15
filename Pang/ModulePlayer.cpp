@@ -452,39 +452,43 @@ void ModulePlayer::Kill(int xBallPos)
 
 void ModulePlayer::CheckBallCollision()
 {
-	p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-	while (tmp != NULL && !dead)
+	if (!App->balls->pauseBalls)
 	{
-		if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
-			(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-			((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
-			(tmp->data->position.x - tmp->data->radius) < position.x + 20)
+		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+		while (tmp != NULL && !dead)
 		{
-			if (undying == false)
+			if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
+				(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+				((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
+				(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 			{
-				dead = true;
-				Kill(tmp->data->position.x);
+				if (undying == false)
+				{
+					dead = true;
+					Kill(tmp->data->position.x);
+				}
+			}
+			tmp = tmp->next;
+		}
+		if (deadAnimEnd == true)
+		{
+			if (App->backgroundPlay->lives > 0)
+			{
+				App->backgroundPlay->lives -= 1;
+				App->player->Disable();
+				App->player->Enable();
+				App->maps->LoadMap(App->backgroundPlay->currentLvl);
+				App->balls->pauseBalls = false;
+			}
+			else
+			{
+				App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
+				App->backgroundPlay->lives = 3;
+				App->backgroundPlay->currentLvl = 1;
 			}
 		}
-		tmp = tmp->next;
 	}
-	if (deadAnimEnd == true)
-	{
-		if (App->backgroundPlay->lives > 0)
-		{
-			App->backgroundPlay->lives -= 1;
-			App->player->Disable();
-			App->player->Enable();
-			App->maps->LoadMap(App->backgroundPlay->currentLvl);
-			App->balls->pauseBalls = false;
-		}
-		else
-		{
-			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
-			App->backgroundPlay->lives = 3;
-			App->backgroundPlay->currentLvl = 1;
-		}
-	}
+
 }
 
 bool ModulePlayer::LadderUpEnds()
