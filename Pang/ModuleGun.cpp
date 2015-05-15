@@ -12,6 +12,11 @@ ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_en
 
 	current_animation = &hook;
 	hook.frames.PushBack({ 19, 1, 9, 199 });
+	hook.frames.PushBack({ 91, 1, 9, 199 });
+
+
+	hook.speed = 0.07f;
+	hook.loop = true;
 }
 ModuleGun::~ModuleGun()
 {
@@ -85,9 +90,9 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			App->renderer->Blit(graphics, tmp->data->end_rect.x, tmp->data->end_rect.y, &current_animation->GetCurrentFrame());
-			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
-			App->renderer->DrawQuad(tmp->data->start_rect, 255, 0, 0, 255);
+			App->renderer->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
+//			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
+//			App->renderer->DrawQuad(tmp->data->start_rect, 255, 0, 0, 255);
 		}
 
 		tmp = tmp_next;
@@ -109,6 +114,8 @@ bool Bullet::Update(Application* app)
 	{
 		end.y-=2;
 		end_rect.h-=2;
+		app->gun->hook.frames[0].h = -(end.y - start.y);
+		app->gun->hook.frames[1].h = -(end.y - start.y);
 
 /////////////////////////////////////////////////
 		
