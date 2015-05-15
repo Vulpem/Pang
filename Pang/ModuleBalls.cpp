@@ -99,6 +99,8 @@ bool ModuleBalls::Start()
 		LOG("-------------------------Could not load balls Graphics.------------------------------")
 	}
 	pauseBalls = false;
+	pauseBoost = false;
+	pauseCounter = 0;
 	
 	return true;
 }
@@ -152,7 +154,15 @@ update_status ModuleBalls::Update()
 		else
 		{
 			CheckBricksColision(pointer);
-			App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
+			// Blink balls when pause counter ends
+			if (pauseCounter > 250)
+			{
+				if ((pauseCounter / 8) %2 == 0)
+					App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
+			}
+			// Render as always
+			else
+				App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
 			if (App->backgroundPlay->debugMode == true)
 			{
 				SDL_Rect myBallPos;

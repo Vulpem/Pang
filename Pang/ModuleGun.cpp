@@ -14,8 +14,7 @@ ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_en
 	hook.frames.PushBack({ 0, 0, 9, 199 });
 	hook.frames.PushBack({ 9, 0, 9, 199 });
 
-
-	hook.speed = 0.07f;
+	hook.speed = 0.21f;
 	hook.loop = true;
 }
 ModuleGun::~ModuleGun()
