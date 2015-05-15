@@ -74,6 +74,8 @@ void ModuleBoost::AddBoost(int x, int y)
 {
 	Boost* b = new Boost();
 
+	if (y > TILE * 23) { y = TILE * 23 - 4; }
+
 	b->type = rand() % 4 + 1;
 	switch (b->type)
 	{

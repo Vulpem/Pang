@@ -37,7 +37,7 @@ void Ball::CreateBall(int direction)
 		case big:
 		{speed.y = -2.5f; speed.x = 1.8f * direction; radius = 16; YBaseSpeed = -5.5f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -4.6f; offset = 4; break; }
+		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = 0/*-4.6f*/; offset = 4; break; }
 		case little:
 		{speed.y = -1.5f; speed.x = 1.4f * direction; radius = 4; YBaseSpeed = -3.0f; offset = 0; break; }
 	}
@@ -127,29 +127,7 @@ update_status ModuleBalls::Update()
 
 	p2List_item<Ball*>* pointer = ballsList.getFirst();
 
-	if (pauseBoost == true)
-	{
-		pauseCounter++;
-		if (pauseCounter >= PAUSE_BOOST_TIME)
-		{
-			pauseBalls = false;
-			pauseBoost = false;
-			pauseCounter = 0;
-		}
-	}
-	if (bombBoost == true)
-	{
-		bombCounter++;
-		if (bombCounter == 1 || bombCounter == 30 || bombCounter == 60)
-		{
-			Bomb();
-		}
-		if (bombCounter >= 90)
-		{
-			Bomb();
-			bombBoost = false;
-		}
-	}
+	CheckBoosts();
 
 	while (pointer != NULL)
 	{
@@ -169,6 +147,7 @@ update_status ModuleBalls::Update()
 				ballsList.add(newBall2);
 			}
 			App->particles->AddParticle(App->particles->explosion[pointer->data->color][pointer->data->type], pointer->data->position.x, pointer->data->position.y, 15, 15);
+			if (rand() % 100 <= 25) { App->boosts->AddBoost(pointer->data->position.x, pointer->data->position.y); }
 		}
 		else
 		{
@@ -213,6 +192,7 @@ void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _color=
 	Ball* newBall = new Ball(position_x, position_y, _type, _color, _direction);
 	ballsList.add(newBall);
 }
+
 
 void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 {
@@ -609,16 +589,30 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 	return ret;
 }
 
-void ModuleBalls::Bomb()
+void ModuleBalls::CheckBoosts()
 {
-	p2List_item<Ball*>* currentBall = ballsList.getFirst();
-	while (currentBall != NULL)
+	if (pauseBoost == true)
 	{
-		if (currentBall->data->type != little)
+		pauseCounter++;
+		if (pauseCounter >= PAUSE_BOOST_TIME)
 		{
-			currentBall->data->dead = true;
+			pauseBalls = false;
+			pauseBoost = false;
+			pauseCounter = 0;
 		}
-		currentBall = currentBall->next;
+	}
+	if (bombBoost == true)
+	{
+		bombCounter++;
+		if (bombCounter == 1 || bombCounter == 30 || bombCounter == 60)
+		{
+			Bomb();
+		}
+		if (bombCounter >= 90)
+		{
+			Bomb();
+			bombBoost = false;
+		}
 	}
 }
 
@@ -633,4 +627,17 @@ void ModuleBalls::PauseBoost()
 	pauseCounter = 0;
 	pauseBalls = true;
 	pauseBoost = true;
+}
+
+void ModuleBalls::Bomb()
+{
+	p2List_item<Ball*>* currentBall = ballsList.getFirst();
+	while (currentBall != NULL)
+	{
+		if (currentBall->data->type != little)
+		{
+			currentBall->data->dead = true;
+		}
+		currentBall = currentBall->next;
+	}
 }

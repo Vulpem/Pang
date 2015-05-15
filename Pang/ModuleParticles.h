@@ -45,5 +45,6 @@ private:
 public:
 
 	Particle explosion[3][4];
+	Particle shot;
 
 };

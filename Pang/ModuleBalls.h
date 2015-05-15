@@ -51,8 +51,9 @@ public:
 	void AddBall(int position_x, int position_y, int _type, int _color, int _direction);
 	void CheckBricksColision(p2List_item<Ball*>*);
 	bool CheckColision(int tileX, int tileY, Ball* myBall);
-	void Bomb();
+	void CheckBoosts();
 	void PauseBoost();
 	void BombBoost();
+	void Bomb();
 
 };
