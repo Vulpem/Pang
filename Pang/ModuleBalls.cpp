@@ -99,6 +99,8 @@ bool ModuleBalls::Start()
 		LOG("-------------------------Could not load balls Graphics.------------------------------")
 	}
 	pauseBalls = false;
+	pauseBoost = false;
+	pauseCounter = 0;
 	
 	return true;
 }

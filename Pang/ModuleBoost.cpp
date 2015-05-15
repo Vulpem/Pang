@@ -44,7 +44,15 @@ update_status ModuleBoost::Update()
 		}
 		else
 		{
-			App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
+			//Blink after disappearing
+			if (tmp->data->lifeTime > 450)
+			{
+				if (tmp->data->lifeTime / 8 % 2 == 0)
+					App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
+			}
+			//Render as normal
+			else
+				App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
 		}
 
 		tmp = tmp_next;
@@ -109,7 +117,6 @@ void Boost::Fall(Application* app)
 {
 
 	position.y += 2;
-
 
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] != 0)
 	{
