@@ -199,7 +199,8 @@ void ModuleMaps::LoadMap(int nMap)
 	App->particles->Clear();
 	App->boosts->Disable();
 	App->balls->Disable();
-	App->gun->CleanUp();
+	App->gun->Disable();
+	App->gun->Enable();
 	for (int h = 0; h < 26; h++)
 	{
 		for (int w = 0; w < 48; w++)
