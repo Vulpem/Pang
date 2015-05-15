@@ -170,7 +170,7 @@ update_status ModulePlayer::Update()
 bool ModulePlayer::CleanUp()
 {
 	LOG("--Cleanup Player");
-
+	App->textures->Unload(graphics);
 	return true;
 }
 

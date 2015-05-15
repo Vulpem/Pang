@@ -29,6 +29,12 @@ public:
 
 	bool shootAvailable = true;
 	int maxShots;
+	int bulletWidth;
+
+	SDL_Texture* graphics;
+
+	Animation* current_animation;
+	Animation hook;
 
 public:
 	bool Start();

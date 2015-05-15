@@ -8,7 +8,10 @@
 
 ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_enabled)
 {
+	graphics = NULL;
 
+	current_animation = &hook;
+	hook.frames.PushBack({ 19, 1, 9, 199 });
 }
 ModuleGun::~ModuleGun()
 {
@@ -17,30 +20,40 @@ ModuleGun::~ModuleGun()
 
 bool ModuleGun::Start()
 {
+	graphics = App->textures->Load("./Image_Sources/Hook.png");
+	if (graphics == NULL)
+	{
+		LOG("------------------Could not load gun graphics----------------------");
+	}
 	maxShots = 1;
+	bulletWidth = 3;
 	return true;
 }
 
 void ModuleGun::AddBullet(p2Point<int> startPoint)
 {
+
 	Bullet* b = new Bullet();
 
 	b->start = startPoint;
+	b->start.x = startPoint.x - bulletWidth / 2;
 	b->end = startPoint;
+	b->end.x = startPoint.x - bulletWidth / 2;
 	b->end.y -= 24;
 
 	//Creating the rectangle references
 	b->start_rect.x = b->start.x;
 	b->start_rect.y = b->start.y;
-	b->start_rect.w = 1;
+	b->start_rect.w = bulletWidth;
 	b->start_rect.h = -30;
 
 	b->end_rect.x = b->end.x;
 	b->end_rect.y = b->end.y;
-	b->end_rect.w = 1;
+	b->end_rect.w = bulletWidth;
 	b->end_rect.h = 1;
 
 	activeBullet.add(b);
+	App->particles->AddParticle(App->particles->shot, startPoint.x, startPoint.y - TILE * 4, 8, 8);
 }
 
 void ModuleGun::Shoot(p2Point<int> startPoint)
@@ -72,6 +85,7 @@ update_status ModuleGun::Update()
 
 		else
 		{
+			App->renderer->Blit(graphics, tmp->data->end_rect.x, tmp->data->end_rect.y, &current_animation->GetCurrentFrame());
 			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
 			App->renderer->DrawQuad(tmp->data->start_rect, 255, 0, 0, 255);
 		}
@@ -104,7 +118,7 @@ bool Bullet::Update(Application* app)
 		{	
 			if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
 				(tmp->data->position.y <= start.y) &&
-				((tmp->data->position.x - tmp->data->radius) < end.x) &&
+				((tmp->data->position.x - tmp->data->radius) < end.x + end_rect.w) &&
 				(tmp->data->position.x + tmp->data->radius) > end.x)
 			{
 				tmp->data->dead = true;
@@ -133,6 +147,7 @@ bool ModuleGun::CleanUp()
 	}
 	shootAvailable = true;
 
+	App->textures->Unload(graphics);
 	return true;
 }
 
