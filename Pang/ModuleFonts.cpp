@@ -1,4 +1,6 @@
-#include "ModuleFonts.h"
+
+//#include "ModuleFonts.h"
+/*
 #include "Application.h"
 #include "Globals.h"
 
@@ -26,3 +28,4 @@ bool ModuleFonts::CleanUp()
 {
 	return true;
 }
+*/

@@ -79,6 +79,7 @@
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleBoost.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleScenePlay.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleBoost.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
+    <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleScenePlay.cpp" />
