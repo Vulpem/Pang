@@ -13,8 +13,11 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	int timeCounter;
+
 public:
 
 	SDL_Texture* graphics;
+	SDL_Texture* graphics2;
 
 };

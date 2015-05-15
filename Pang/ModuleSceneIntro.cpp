@@ -5,6 +5,8 @@
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	graphics = NULL;
+	graphics2 = NULL;
+	timeCounter = 0;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -17,7 +19,8 @@ bool ModuleSceneIntro::Start()
 	LOG("--Initializing Intro");
 	bool ret = true;
 
-	graphics = App->textures->Load("./Image_Sources/Pang_Title.png");
+	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
+	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
 
 	return ret;
@@ -35,7 +38,11 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
-	App->renderer->Blit(graphics, 0, 0, NULL);
+	timeCounter++;
+	if (timeCounter / 25 % 2 == 0)
+		App->renderer->Blit(graphics, 0, 0, NULL);
+	else
+		App->renderer->Blit(graphics2, 0, 0, NULL);
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
