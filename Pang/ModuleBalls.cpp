@@ -142,6 +142,8 @@ update_status ModuleBalls::Update()
 			//Ball subdivision
 			if (pointer->data->type > little)
 			{
+				App->player->punctuation += (50 * 5 - pointer->data->type);
+
 				Ball* newBall1 = new Ball(pointer->data, -1);
 				Ball* newBall2 = new Ball(pointer->data, 1);
 

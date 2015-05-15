@@ -9,6 +9,8 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	punctuation = 0;
+
 	graphics = NULL;
 
 	//////////////

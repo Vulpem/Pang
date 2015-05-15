@@ -42,6 +42,7 @@ public:
 	bool deadAnimEnd = false;
 	float deadAnimYSpeed;
 	int deadAnimXSpeed;
+	int punctuation;
 
 	p2Point<int> position;
 
