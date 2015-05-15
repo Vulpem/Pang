@@ -29,7 +29,7 @@ bool ModuleParticles::Start()
 	shot.anim.frames.PushBack({ 48, 90, 16, 16 });
 	shot.anim.loop = false;
 	shot.anim.speed = 0.4f;
-	shot.fx = App->audio->LoadFx("Sounds/Shot.wav");
+	shot.fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	  
 	explosion[0][0].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	for (int n = 0; n < 3; n++)

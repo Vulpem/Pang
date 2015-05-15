@@ -75,7 +75,7 @@ void ModuleBoost::AddBoost(int x, int y)
 	Boost* b = new Boost();
 
 	if (y > TILE * 23) { y = TILE * 23 - 4; }
-
+	b->lifeTime = 0;
 	b->type = rand() % 4 + 1;
 	switch (b->type)
 	{
@@ -119,6 +119,8 @@ void Boost::Fall(Application* app)
 
 bool Boost::Update(Application* app)
 {
+	lifeTime++;
+	if (lifeTime >= 500) { return false; }
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] == 0)
 	{
 		Fall(app);
