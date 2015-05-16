@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleFonts.h"
+#include "String.h"
 
 #include "SDL_TTF\include\SDL_ttf.h"
 
@@ -15,7 +16,7 @@ bool ModuleFonts::Init()
 {
 	TTF_Init();
 	textColor = { 255, 255, 255 };
-	font = loadFont("Fonts/Arial.ttf", 10);
+	font = LoadFont("Fonts/Arial.ttf", 10);
 	return true;
 }
 
@@ -26,7 +27,7 @@ update_status ModuleFonts::PreUpdate()
 
 update_status ModuleFonts::Update()
 {
-	message = TTF_RenderText_Solid(font, "Points: ", textColor);
+	message = TTF_RenderText_Solid(font, ToString(App->player->punctuation), textColor);
 
 	if (message == NULL)
 	{
@@ -49,7 +50,7 @@ bool ModuleFonts::CleanUp()
 	return true;
 }
 
-TTF_Font* ModuleFonts::loadFont(char* file, int size)
+TTF_Font* ModuleFonts::LoadFont(char* file, int size)
 {
 	TTF_Font* tmpfont;
 	tmpfont = TTF_OpenFont("Fonts/Arial.ttf", size);
@@ -58,4 +59,10 @@ TTF_Font* ModuleFonts::loadFont(char* file, int size)
 		LOG("Could not load font");
 	}
 	return tmpfont;
+}
+
+char* ModuleFonts::ToString(int number)
+{
+	String tmp("%i", number);
+	return tmp.str;
 }
