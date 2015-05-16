@@ -72,6 +72,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="String.h" />
     <ClInclude Include="ModuleAnimation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Globals.h" />
@@ -114,6 +115,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Punctuation.txt" />

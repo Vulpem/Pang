@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "SDL_TTF\include\SDL_ttf.h"
 
+
 class ModuleFonts : public Module
 {
 public:
@@ -25,6 +26,9 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	TTF_Font* loadFont(char* file, int size);
+	TTF_Font* LoadFont(char* file, int size);
+
+	char* ToString(int number);
+
 public:
 };
