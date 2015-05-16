@@ -27,7 +27,8 @@ update_status ModuleFonts::PreUpdate()
 
 update_status ModuleFonts::Update()
 {
-	message = TTF_RenderText_Solid(font, ToString(App->player->punctuation), textColor);
+	char* string = ToString(App->player->punctuation);
+	message = TTF_RenderText_Solid(font, string, textColor);
 
 	if (message == NULL)
 	{
