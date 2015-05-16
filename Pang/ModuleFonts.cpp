@@ -3,6 +3,8 @@
 #include "ModuleFonts.h"
 #include "String.h"
 
+#include <sstream>
+#include <string>
 #include "SDL_TTF\include\SDL_ttf.h"
 
 ModuleFonts::ModuleFonts(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -16,7 +18,7 @@ bool ModuleFonts::Init()
 {
 	TTF_Init();
 	textColor = { 255, 255, 255 };
-	font = LoadFont("Fonts/Arial.ttf", 10);
+	font = LoadFont("Fonts/Arial.ttf", 14);
 	return true;
 }
 
@@ -27,16 +29,19 @@ update_status ModuleFonts::PreUpdate()
 
 update_status ModuleFonts::Update()
 {
-	char* string = ToString(App->player->punctuation);
-	message = TTF_RenderText_Solid(font, string, textColor);
+
+	std::string caption_str = std::to_string(App->player->punctuation);
+	message = TTF_RenderText_Solid(font, caption_str.c_str(), textColor);
 
 	if (message == NULL)
 	{
 		LOG("Coult not load the message");
 	}
+
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, message); 
-	SDL_Rect rect = { 0, 0, 80, 16 };
-	App->renderer->Blit(texture, 200, 215, &rect);
+	SDL_Rect rect = { 0, 0, 60, 16 };
+
+	App->renderer->Blit(texture, 250, 215, &rect);
 	return UPDATE_CONTINUE;
 }
 
@@ -62,6 +67,12 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size)
 	return tmpfont;
 }
 
+/*
+std::string ModuleFonts::ToString(const T& var)
+{
+
+}
+*/
 char* ModuleFonts::ToString(int number)
 {
 	String tmp("%i", number);

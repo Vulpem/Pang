@@ -28,6 +28,8 @@ public:
 
 	TTF_Font* LoadFont(char* file, int size);
 
+//	std::string ToString(const T& var);
+
 	char* ToString(int number);
 
 public:
