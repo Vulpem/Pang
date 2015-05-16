@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleFonts.h"
 
+#include "SDL_TTF\include\SDL_ttf.h"
 ModuleFonts::ModuleFonts(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -11,6 +12,7 @@ ModuleFonts::~ModuleFonts()
 
 bool ModuleFonts::Init()
 {
+	//TTF_Init();
 	return true;
 }
 
