@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL2_ttf-2.0.12\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL_TTF\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL_TTF\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,7 +52,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

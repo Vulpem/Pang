@@ -19,7 +19,7 @@ Application::Application()
 	balls = new ModuleBalls(this, false);
 	particles = new ModuleParticles(this);
 	boosts = new ModuleBoost(this, false);
-
+	fonts = new ModuleFonts(this, false);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -40,6 +40,7 @@ Application::Application()
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);
+	AddModule(fonts);
 
 	AddModule(fade);
 

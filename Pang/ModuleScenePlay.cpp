@@ -39,6 +39,7 @@ bool ModuleScenePlay::Start()
 	App->maps->Enable();
 	App->player->Enable();
 	App->gun->Enable();
+	App->fonts->Enable();
 
 	App->maps->LoadMap(currentLvl);
 
@@ -121,6 +122,7 @@ bool ModuleScenePlay::CleanUp()
 	App->gun->Disable();
 	App->player->Disable();
 	App->maps->Disable();
+	App->fonts->Disable();
 
 	App->textures->Unload(livesGraphics);
 

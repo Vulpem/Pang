@@ -19,6 +19,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleBoost.h"
+#include "ModuleFonts.h"
 
 class Application
 {
@@ -40,6 +41,7 @@ public:
 	ModuleBalls* balls;
 	ModuleParticles* particles;
 	ModuleBoost* boosts;
+	ModuleFonts* fonts;
 
 private:
 
