@@ -27,10 +27,7 @@ public:
 	bool CleanUp();
 
 	TTF_Font* LoadFont(char* file, int size);
-
-//	std::string ToString(const T& var);
-
-	char* ToString(int number);
+	void PrintText(std::string text, SDL_Surface* surface);
 
 public:
 };

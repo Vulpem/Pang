@@ -27,6 +27,9 @@ public:
 
 public:
 
+	// Movement variables//
+	///////////////////////
+
 	int boost = none;
 	int prevBoost = none;
 	int playerState = standing;
@@ -42,6 +45,10 @@ public:
 	bool deadAnimEnd = false;
 	float deadAnimYSpeed;
 	int deadAnimXSpeed;
+
+	///////////////////////
+
+	SDL_Surface* punctuationMessage;
 	int punctuation;
 
 	p2Point<int> position;
@@ -62,6 +69,9 @@ public:
 	Animation killDead2;
 
 private:
+
+	//Movement methods//
+	////////////////////
 	void IsFalling();
 	bool MiddleLadder();
 	bool LadderFall();
@@ -73,11 +83,15 @@ private:
 	void Climb();
 	bool EndClimbUp();
 	bool StartClimbDown();
+	////////////////////
 
 	void UpdateBoosts();
 
 	void CheckBallCollision();
 	void Kill(int);
+
+	//Ladder Positioning//
+	//////////////////////
 
 	bool LadderUpEnds();
 	bool LadderDownEnds();
@@ -86,6 +100,8 @@ private:
 	bool CanStartClimbingDown();
 	bool AlignLadder(int direction);
 	int GetLadderCenter(int direction);
+
+	//////////////////////
 
 
 
