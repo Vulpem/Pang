@@ -48,11 +48,21 @@ public:
 
 	///////////////////////
 
-	SDL_Surface* punctuationMessage;
-	int punctuation;
+
+	int punct;
+
+
+	//Printing variables//
+
+	SDL_Surface* punctMessage;
+	SDL_Rect punctRect;
+
+	SDL_Surface* textSurf;
+	SDL_Rect textRect;
+
+	//////////////////////
 
 	p2Point<int> position;
-
 	SDL_Texture* graphics;
 
 	Animation* current_animation = NULL;

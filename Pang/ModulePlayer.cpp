@@ -9,7 +9,7 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	punctuation = 0;
+	punct = 0;
 
 	graphics = NULL;
 
@@ -78,6 +78,8 @@ ModulePlayer::~ModulePlayer()
 
 bool ModulePlayer::Start()
 {
+	punctRect = { 0, 0, 0, 8};
+	textRect = { 0, 0, 0, 8};
 	LOG("--Initializing player");
 	bool ret = true;
 	graphics = App->backgroundPlay->livesGraphics;
@@ -99,6 +101,12 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+	//Printing interface//
+	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE);
+	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE);
+	App->fonts->PrintNumbers(punct, punctMessage, punctRect, 13 * TILE, 27 * TILE);
+	//////////////////////
+
 		if (dead == false)
 		{
 			SecurityPosition();

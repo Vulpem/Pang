@@ -19,6 +19,7 @@ ModuleScenePlay::~ModuleScenePlay()
 
 bool ModuleScenePlay::Init()
 {
+	player1Rect = { 0, 0, 0, 16 };
 	currentLvl = 1;
 	return UPDATE_CONTINUE;
 }
@@ -95,7 +96,7 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
-			int punt = App->player->punctuation;
+			int punt = App->player->punct;
 			currentLvl++;
 			App->maps->LoadMap(currentLvl);
 		}
@@ -115,6 +116,10 @@ update_status ModuleScenePlay::Update()
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleScenePlay::PostUpdate()
+{
+	return UPDATE_CONTINUE;
+}
 bool ModuleScenePlay::CleanUp()
 {
 	App->textures->Unload(graphics);
