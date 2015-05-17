@@ -107,7 +107,7 @@ update_status ModuleScenePlay::Update()
 
 	for (int n = 0; n < lives; n++)
 	{
-		App->renderer->Blit(livesGraphics, (3 + n * 2) * TILE, 26 * TILE, &livesRect);
+		App->renderer->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
 	}
 
 	UpdateInterface();

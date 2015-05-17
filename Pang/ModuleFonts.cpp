@@ -67,12 +67,7 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size)
 	return tmpfont;
 }
 
-/*
-std::string ModuleFonts::ToString(const T& var)
-{
 
-}
-*/
 char* ModuleFonts::ToString(int number)
 {
 	String tmp("%i", number);
