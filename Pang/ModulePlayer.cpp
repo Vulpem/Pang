@@ -450,7 +450,6 @@ void ModulePlayer::Kill(int xBallPos)
 	playerState = dead;
 	App->audio->PlayMusic("./Sounds/Death.wav");
 
-	//Animacion de muerte irá aqui
 
 	if (xBallPos < position.x+16)
 	{
@@ -498,9 +497,9 @@ void ModulePlayer::CheckBallCollision()
 			}
 			else
 			{
-				App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro, 3.0f);
 				App->backgroundPlay->lives = 3;
-				App->backgroundPlay->currentLvl = 1;
+				App->backgroundIntro->Enable();
+				App->backgroundPlay->Disable();
 			}
 		}
 	}

@@ -40,7 +40,7 @@ bool ModuleScenePlay::Start(int level)
 	App->gun->Enable();
 	App->fonts->Enable();
 
-	App->maps->LoadMap(currentLvl);
+
 
 	livesRect.x = 154;
 	livesRect.y = 44;
@@ -48,7 +48,7 @@ bool ModuleScenePlay::Start(int level)
 	livesRect.h = 16;
 
 	lives = 3;
-	
+	App->maps->LoadMap(currentLvl);
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;
 }
