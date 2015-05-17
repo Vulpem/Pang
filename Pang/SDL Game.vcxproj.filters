@@ -90,6 +90,9 @@
     <ClInclude Include="String.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneTransition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -148,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneTransition.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

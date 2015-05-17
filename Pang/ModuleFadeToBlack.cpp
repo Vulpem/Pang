@@ -20,6 +20,7 @@ ModuleFadeToBlack::~ModuleFadeToBlack()
 // Update: draw background
 update_status ModuleFadeToBlack::Update()
 {
+
 	if (start_time > 0)
 	{
 		Uint32 now = SDL_GetTicks() - start_time;

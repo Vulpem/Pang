@@ -15,18 +15,15 @@ ModuleScenePlay::ModuleScenePlay(Application* app, bool start_enabled) : Module(
 }
 
 ModuleScenePlay::~ModuleScenePlay()
-{}
-
-bool ModuleScenePlay::Init()
 {
-	player1Rect = { 0, 0, 0, 16 };
-	currentLvl = 1;
-	return UPDATE_CONTINUE;
 }
 
 // Load assets
-bool ModuleScenePlay::Start()
+bool ModuleScenePlay::Start(int level)
 {
+	player1Rect = { 0, 0, 0, 16 };
+	currentLvl = level;
+
 	interfaceRect.x = 0;
 	interfaceRect.y = SCREEN_HEIGHT - (4 * TILE);
 	interfaceRect.w = SCREEN_WIDTH;
@@ -92,24 +89,18 @@ update_status ModuleScenePlay::Update()
 	{
 		if (currentLvl >= 3)
 		{
-			currentLvl = 0;
-			App->player->punct = 0;
-			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
+			App->backgroundIntro->Enable();
+			Disable();
 		}
 		else
 		{
-			SDL_Rect screen = { 0, 0, 384, 240 };
-			App->renderer->Blit(sceneTransition, 0, 0, &screen);
-			if (delay < 150)
-				delay++;
-			else
-			{
-				delay = 0;
-				int punt = App->player->punct;
-				currentLvl++;
-				App->maps->LoadMap(currentLvl);
-			}
-
+			App->backgroundTransition->Enable(++currentLvl);
+			Disable();
+			/*
+			int punt = App->player->punct;
+			currentLvl++;
+			App->maps->LoadMap(currentLvl);
+			*/
 		}
 	}
 	else
@@ -137,10 +128,10 @@ bool ModuleScenePlay::CleanUp()
 {
 	App->textures->Unload(graphics);
 
+	App->particles->Disable();
 	App->gun->Disable();
 	App->player->Disable();
 	App->maps->Disable();
-	App->fonts->Disable();
 
 	App->textures->Unload(livesGraphics);
 
@@ -150,4 +141,13 @@ bool ModuleScenePlay::CleanUp()
 void ModuleScenePlay::UpdateInterface()
 {
 
+}
+
+void ModuleScenePlay::Enable(int level)
+{
+		if (enabled == false)
+		{
+			enabled = true;
+			Start(level);
+		}
 }

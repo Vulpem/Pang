@@ -72,6 +72,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ModuleSceneTransition.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="ModuleAnimation.h" />
     <ClInclude Include="Application.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="ModuleMaps.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
+    <ClCompile Include="ModuleSceneTransition.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="String.cpp" />

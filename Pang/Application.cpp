@@ -11,6 +11,7 @@ Application::Application()
 
 	backgroundIntro = new ModuleSceneIntro(this, true);
 	backgroundPlay = new ModuleScenePlay(this, false);
+	backgroundTransition = new ModuleSceneTransition(this, false);
 
 	fade = new ModuleFadeToBlack(this, true);
 	player = new ModulePlayer(this, false);
@@ -32,6 +33,7 @@ Application::Application()
 
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
+	AddModule(backgroundTransition);
 
 	AddModule(maps);
 	

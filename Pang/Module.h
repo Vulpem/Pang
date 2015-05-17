@@ -4,7 +4,7 @@ class Application;
 
 class Module
 {
-private:
+public:
 	bool enabled;
 public:
 	Application* App;

@@ -10,6 +10,7 @@
 
 #include "ModuleScenePlay.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneTransition.h"
 
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
@@ -33,6 +34,7 @@ public:
 
 	ModuleSceneIntro* backgroundIntro;
 	ModuleScenePlay* backgroundPlay;
+	ModuleSceneTransition* backgroundTransition;
 
 	ModuleFadeToBlack* fade;
 	ModulePlayer* player;
