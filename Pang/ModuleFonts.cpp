@@ -40,6 +40,7 @@ update_status ModuleFonts::PostUpdate()
 
 bool ModuleFonts::CleanUp()
 {
+	TTF_Quit();
 	return true;
 }
 
