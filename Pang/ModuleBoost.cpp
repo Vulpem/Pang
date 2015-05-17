@@ -28,7 +28,7 @@ update_status ModuleBoost::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-		AddBoost(rand()%300 + 16, 101);
+		AddBoost(rand()%300 + 16, 101, none);
 	}
 
 	p2List_item<Boost*>* tmp = activeBoost.getFirst();
@@ -58,6 +58,16 @@ update_status ModuleBoost::Update()
 
 		tmp = tmp_next;
 	}
+	// Rendering current boost
+	switch (App->player->boost)
+	{
+	case doubleHook:
+		playerBoost = { 16, 0, 16, 16 };
+		App->renderer->Blit(graphics, 14 * TILE, 28 * TILE, &playerBoost);
+		break;
+	default:
+		break;
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -79,13 +89,19 @@ bool ModuleBoost::CleanUp()
 	return true;
 }
 
-void ModuleBoost::AddBoost(int x, int y)
+void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 {
 	Boost* b = new Boost();
-
+	int type;
 	if (y > TILE * 23) { y = TILE * 23 - 4; }
 	b->lifeTime = 0;
-	b->type = rand() % 4 + 1;
+
+	if (boostType == none)
+		type = rand() % 4 + 1;
+	else
+		type = boostType;
+
+	b->type = type;
 	switch (b->type)
 	{
 	case doubleHook:

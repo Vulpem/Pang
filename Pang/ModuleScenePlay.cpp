@@ -106,11 +106,10 @@ update_status ModuleScenePlay::Update()
 	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
 	App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
-	for (int n = 0; n < lives; n++)
+	for (int n = 0; n < lives && n < 4; n++)
 	{
 		App->renderer->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
 	}
-
 	UpdateInterface();
 
 	return UPDATE_CONTINUE;

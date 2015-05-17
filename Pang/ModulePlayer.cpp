@@ -105,7 +105,11 @@ update_status ModulePlayer::Update()
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE);
 	App->fonts->PrintText("MT.FUJI", textSurf, textRect, 20 * TILE, 26 * TILE);
-	App->fonts->PrintNumbers(punct, punctMessage, punctRect, 13 * TILE, 27 * TILE);
+	App->fonts->PrintNumbers(punct, punctMessage, punctRect, 15 * TILE, 27 * TILE);
+	if (App->backgroundPlay->lives > 4)
+	{
+		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 9, 29 * TILE + 1);
+	}
 	//////////////////////
 
 		if (dead == false)

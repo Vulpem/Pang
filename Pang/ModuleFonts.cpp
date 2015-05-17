@@ -57,7 +57,10 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
 void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
 {
 	std::string string = std::to_string(num);
-	rect.w = strlen(string.c_str()) * 8.5;
+	rect.w = strlen(string.c_str()) * 9;
+	x -= strlen(string.c_str()) * 9;
+
+
 	surface = TTF_RenderText_Solid(font, string.c_str(), textColor);
 	if (surface == NULL)
 	{

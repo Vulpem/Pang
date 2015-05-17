@@ -50,7 +50,7 @@ public:
 
 
 	int punct;
-
+	
 
 	//Printing variables//
 

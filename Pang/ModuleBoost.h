@@ -30,9 +30,10 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddBoost(int x, int y);
+	void AddBoost(int x, int y, Boosts boostType);
 
 public:
+	SDL_Rect playerBoost;
 	p2List<Boost*> activeBoost;
 	SDL_Texture* graphics;
 	unsigned int pickedUp;
