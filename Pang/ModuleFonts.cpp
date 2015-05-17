@@ -18,7 +18,7 @@ bool ModuleFonts::Init()
 {
 	TTF_Init();
 	textColor = { 255, 255, 255 };
-	font = LoadFont("Fonts/Arial.ttf", 14);
+	font = LoadFont("Fonts/Pang.ttf", 14);
 	return true;
 }
 
@@ -59,7 +59,7 @@ bool ModuleFonts::CleanUp()
 TTF_Font* ModuleFonts::LoadFont(char* file, int size)
 {
 	TTF_Font* tmpfont;
-	tmpfont = TTF_OpenFont("Fonts/Arial.ttf", size);
+	tmpfont = TTF_OpenFont(file, size);
 	if (tmpfont == NULL)
 	{
 		LOG("Could not load font");
