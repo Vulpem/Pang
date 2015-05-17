@@ -66,8 +66,9 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size)
 	}
 	return tmpfont;
 }
-
+/*
 void ModuleFonts::PrintText(std::string text, SDL_Surface* surface)
 {
 	surface = TTF_RenderText_Solid(font, text.c_str(), textColor);
 }
+*/

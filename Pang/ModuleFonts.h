@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 
 	TTF_Font* LoadFont(char* file, int size);
-	void PrintText(std::string text, SDL_Surface* surface);
+//	void PrintText(std::string text, SDL_Surface* surface);
 
 public:
 };
