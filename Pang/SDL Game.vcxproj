@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL_TTF\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Marc\Uni\1r\2n_semestre\Projecte\Pang\Pang\SDL_TTF\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\SDL_TTF\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\SDL_TTF\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
