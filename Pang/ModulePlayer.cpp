@@ -104,6 +104,7 @@ update_status ModulePlayer::Update()
 	//Printing interface//
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE);
+	App->fonts->PrintText("MT.FUJI", textSurf, textRect, 20 * TILE, 26 * TILE);
 	App->fonts->PrintNumbers(punct, punctMessage, punctRect, 13 * TILE, 27 * TILE);
 	//////////////////////
 
