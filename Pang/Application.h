@@ -12,7 +12,6 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneTransition.h"
 
-#include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleGun.h"
 #include "ModuleMaps.h"
@@ -36,7 +35,6 @@ public:
 	ModuleScenePlay* backgroundPlay;
 	ModuleSceneTransition* backgroundTransition;
 
-	ModuleFadeToBlack* fade;
 	ModulePlayer* player;
 	ModuleGun* gun;
 	ModuleMaps* maps;

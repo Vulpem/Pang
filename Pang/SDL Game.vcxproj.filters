@@ -66,9 +66,6 @@
     <ClInclude Include="ModuleScenePlay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -129,9 +126,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScenePlay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneIntro.cpp">

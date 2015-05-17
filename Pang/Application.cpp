@@ -13,7 +13,7 @@ Application::Application()
 	backgroundPlay = new ModuleScenePlay(this, false);
 	backgroundTransition = new ModuleSceneTransition(this, false);
 
-	fade = new ModuleFadeToBlack(this, true);
+
 	player = new ModulePlayer(this, false);
 	gun = new ModuleGun(this, false);
 	maps = new ModuleMaps(this, false);
@@ -44,15 +44,12 @@ Application::Application()
 	AddModule(boosts);
 	AddModule(fonts);
 
-	AddModule(fade);
 
 
 }
 
 Application::~Application()
 {
-	delete fade;
-
 	delete boosts;
 	delete particles;
 	delete balls;
