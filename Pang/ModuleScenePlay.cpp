@@ -35,6 +35,7 @@ bool ModuleScenePlay::Start()
 
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
+	sceneTransition = App->textures->Load("./Image_Sources/Transition_Scene.png");
 	
 
 	App->maps->Enable();
@@ -92,25 +93,38 @@ update_status ModuleScenePlay::Update()
 		if (currentLvl >= 3)
 		{
 			currentLvl = 0;
+			App->player->punct = 0;
 			App->fade->FadeToBlack(App->backgroundPlay, App->backgroundIntro);
 		}
 		else
 		{
-			int punt = App->player->punct;
-			currentLvl++;
-			App->maps->LoadMap(currentLvl);
+			SDL_Rect screen = { 0, 0, 384, 240 };
+			App->renderer->Blit(sceneTransition, 0, 0, &screen);
+			if (delay < 150)
+				delay++;
+			else
+			{
+				delay = 0;
+				int punt = App->player->punct;
+				currentLvl++;
+				App->maps->LoadMap(currentLvl);
+			}
+
 		}
 	}
-
-	// Draw everything --------------------------------------
-	App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
-	App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
-
-	for (int n = 0; n < lives && n < 4; n++)
+	else
 	{
-		App->renderer->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
+		// Draw everything --------------------------------------
+		App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
+		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
+
+		for (int n = 0; n < lives && n < 4; n++)
+		{
+			App->renderer->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
+		}
+		UpdateInterface();
+
 	}
-	UpdateInterface();
 
 	return UPDATE_CONTINUE;
 }

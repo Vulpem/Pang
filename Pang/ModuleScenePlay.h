@@ -8,6 +8,7 @@ class ModuleScenePlay : public Module
 public:
 	SDL_Texture* graphics;
 	SDL_Texture* livesGraphics;
+	SDL_Texture* sceneTransition;
 	SDL_Rect livesRect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
@@ -16,6 +17,7 @@ public:
 	SDL_Rect player1Rect;
 	int lives;
 	int currentLvl;
+	int delay = 0;
 
 	bool debugMode = false;
 
