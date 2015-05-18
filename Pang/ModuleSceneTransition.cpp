@@ -17,10 +17,11 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 {
 	textRect = { 0, 0, 0, 9 };
 	nextLevel = _nextLevel;
+	imageRect = { 0, 0, 194, 96 };
 	LOG("Scene Transition");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/TransitionScene.png");
-	graphics2 = App->textures->Load("./Image_Sources/TransitionScene2.png");
+
 	return ret;
 }
 
@@ -47,6 +48,7 @@ update_status ModuleSceneTransition::Update()
 	}
 	App->renderer->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
 	
+	//Print level stats
 	App->fonts->PrintNumbers(nextLevel - 1, textSurf, textRect, 170, 145);
 	App->fonts->PrintText("STAGE", textSurf, textRect, 170 + 4, 145);
 
@@ -57,16 +59,37 @@ update_status ModuleSceneTransition::Update()
 		App->fonts->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185);
 		App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 185);
 	}
+	///////////////////
+	//Print push button
 	if (timeCounter / 20 % 2 == 0)
 	{
 		App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220);
 	}
-	if (timeCounter / 35 % 2 == 0)
+	//////////////////
+	switch ((nextLevel - 1)% 3)
 	{
-		App->renderer->Blit(graphics2, 0, 0, NULL);
+	case 1:
+		if (timeCounter / 35 % 2 == 0)
+		{
+			imageRect.x = 0;
+			imageRect.y = 0;
+
+		}
+		else
+		{
+			imageRect.x = 194;
+			imageRect.y = 0;
+		}
+		break;
+	case 2:
+		imageRect.x = 0;
+		imageRect.y = 96;
+		break;
+	default:
+		break;
 	}
-	else
-	App->renderer->Blit(graphics, 0, 0, NULL);
+
+	App->renderer->Blit(graphics, 95, 32, &imageRect);
 
 
 	return UPDATE_CONTINUE;

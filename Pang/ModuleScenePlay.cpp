@@ -27,7 +27,7 @@ bool ModuleScenePlay::Init()
 	interfaceRect.w = SCREEN_WIDTH;
 	interfaceRect.h = 4 * TILE;
 
-	timerRect = { 0, 0, 71, 16 };
+	timerRect = { 0, 0, 71, 15 };
 	livesRect.x = 154;
 	livesRect.y = 44;
 	livesRect.w = 16;
@@ -115,7 +115,7 @@ update_status ModuleScenePlay::Update()
 		// Draw everything --------------------------------------
 
 		App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
-		App->renderer->Blit(timer, 250, 8, &timerRect, NULL);
+		App->renderer->Blit(timer, 250, 9, &timerRect, NULL);
 		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
 		for (int n = 0; n < lives && n < 4; n++)
