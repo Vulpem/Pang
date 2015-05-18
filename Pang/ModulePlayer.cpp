@@ -16,7 +16,7 @@ ModulePlayer::~ModulePlayer()
 
 bool ModulePlayer::Init()
 {
-	punct = 0;
+	punt = 0;
 
 	graphics = NULL;
 
@@ -83,7 +83,7 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
-	punctRect = { 0, 0, 0, 8};
+	puntRect = { 0, 0, 0, 8};
 	textRect = { 0, 0, 0, 8};
 	LOG("--Starting player");
 	bool ret = true;
@@ -110,7 +110,7 @@ update_status ModulePlayer::Update()
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE);
 	App->fonts->PrintText("MT.FUJI", textSurf, textRect, 20 * TILE, 26 * TILE);
-	App->fonts->PrintNumbers(punct, punctMessage, punctRect, 15 * TILE, 27 * TILE);
+	App->fonts->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
 	if (App->backgroundPlay->lives > 4)
 	{
 		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 9, 29 * TILE + 1);

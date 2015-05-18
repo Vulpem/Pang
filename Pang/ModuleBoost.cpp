@@ -157,7 +157,7 @@ bool Boost::Update(Application* app)
 	}
 	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
 	{
-		app->player->punct += 100;
+		app->player->punt += 100;
 		switch (type)
 		{
 		case doubleHook:

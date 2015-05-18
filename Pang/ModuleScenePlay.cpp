@@ -100,7 +100,7 @@ update_status ModuleScenePlay::Update()
 			App->backgroundTransition->Enable(++currentLvl);
 			Disable();
 			/*
-			int punt = App->player->punct;
+			int punt = App->player->punt;
 			currentLvl++;
 			App->maps->LoadMap(currentLvl);
 			*/

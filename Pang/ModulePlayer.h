@@ -50,13 +50,13 @@ public:
 	///////////////////////
 
 
-	int punct;
+	int punt;
 	
 
 	//Printing variables//
 
-	SDL_Surface* punctMessage;
-	SDL_Rect punctRect;
+	SDL_Surface* puntMessage;
+	SDL_Rect puntRect;
 
 	SDL_Surface* textSurf;
 	SDL_Rect textRect;

@@ -150,7 +150,7 @@ bool Bullet::Update(Application* app)
 				(tmp->data->position.x + tmp->data->radius) > end.x)
 			{
 				tmp->data->dead = true;
-				app->player->punct += (50 * (4 - tmp->data->type));
+				app->player->punt += (50 * (4 - tmp->data->type));
 				return false;
 			}
 			tmp = tmp->next;
