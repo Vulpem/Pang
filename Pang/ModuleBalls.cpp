@@ -147,7 +147,6 @@ update_status ModuleBalls::Update()
 		{
 			LOG("-- Destroying ball --\n");
 			//Ball subdivision
-			App->player->punct += (50 * (4 - pointer->data->type));
 
 			if (pointer->data->type > little)
 			{
