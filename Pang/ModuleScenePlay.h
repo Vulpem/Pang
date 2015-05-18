@@ -6,12 +6,17 @@
 class ModuleScenePlay : public Module
 {
 public:
+
+
 	SDL_Texture* graphics;
 	SDL_Texture* livesGraphics;
-	SDL_Texture* sceneTransition;
+	SDL_Texture* timer;
+
+
 	SDL_Rect livesRect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
+	SDL_Rect timerRect;
 
 	SDL_Surface* player1Surf;
 	SDL_Rect player1Rect;

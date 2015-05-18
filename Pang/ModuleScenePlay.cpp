@@ -20,11 +20,14 @@ ModuleScenePlay::~ModuleScenePlay()
 
 bool ModuleScenePlay::Init()
 {
+	timer = NULL;
+
 	interfaceRect.x = 0;
 	interfaceRect.y = SCREEN_HEIGHT - (4 * TILE);
 	interfaceRect.w = SCREEN_WIDTH;
 	interfaceRect.h = 4 * TILE;
 
+	timerRect = { 0, 0, 71, 16 };
 	livesRect.x = 154;
 	livesRect.y = 44;
 	livesRect.w = 16;
@@ -43,7 +46,12 @@ bool ModuleScenePlay::Start(int level)
 
 	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
-	sceneTransition = App->textures->Load("./Image_Sources/Transition_Scene.png");
+	timer = App->textures->Load("./Image_Sources/Timer_Photo.png");
+	if (timer == NULL)
+	{
+		LOG("Could not load timer");
+		return false;
+	}
 	
 	App->maps->Enable();
 	App->player->Enable();
@@ -99,17 +107,14 @@ update_status ModuleScenePlay::Update()
 		{
 			App->backgroundTransition->Enable(++currentLvl);
 			Disable();
-			/*
-			int punt = App->player->punt;
-			currentLvl++;
-			App->maps->LoadMap(currentLvl);
-			*/
 		}
 	}
 	else
 	{
 		// Draw everything --------------------------------------
+
 		App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
+		App->renderer->Blit(timer, 250, 8, &timerRect, NULL);
 		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
 		for (int n = 0; n < lives && n < 4; n++)
