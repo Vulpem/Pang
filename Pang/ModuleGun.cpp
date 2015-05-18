@@ -115,6 +115,21 @@ bool Bullet::Update(Application* app)
 	if (app->maps->map[(end.y - 1) / 8][end.x/8] == 1)
 	{
 		ret = false;
+		int num = app->maps->lvl[app->backgroundPlay->currentLvl][(end.y - 1) / 8][end.x / 8];
+		if (num != 1 && num != 2 && num != 0)
+		{
+			for (int h = 0; h < 26; h++)
+			{
+				for (int w = 0; w < 48; w++)
+				{
+					if (num == app->maps->lvl[app->backgroundPlay->currentLvl][h][w])
+					{
+						app->maps->map[h][w] = 0;
+					}
+				}
+			}
+		}
+
 	}
 	else
 	{
