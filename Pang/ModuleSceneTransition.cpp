@@ -36,7 +36,7 @@ update_status ModuleSceneTransition::Update()
 {
 	// Draw everything --------------------------------------
 	timeCounter++;
-	if (timeCounter >= 50)
+	if (timeCounter >= 150)
 	{
 		timeCounter = 0;
 		App->backgroundPlay->Enable(nextLevel);
