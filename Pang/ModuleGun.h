@@ -17,6 +17,9 @@ struct Bullet
 	SDL_Rect end_rect;
 
 	bool Update(Application* app);
+
+	void BreakingBrick(int num, int w, int h, Application* App);
+
 };
 
 

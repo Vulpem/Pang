@@ -118,16 +118,7 @@ bool Bullet::Update(Application* app)
 		int num = app->maps->lvl[app->backgroundPlay->currentLvl][(end.y - 1) / 8][end.x / 8];
 		if (num != 1 && num != 2 && num != 0)
 		{
-			for (int h = 0; h < 26; h++)
-			{
-				for (int w = 0; w < 48; w++)
-				{
-					if (num == app->maps->lvl[app->backgroundPlay->currentLvl][h][w])
-					{
-						app->maps->map[h][w] = 0;
-					}
-				}
-			}
+			BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
 		}
 
 	}
@@ -180,3 +171,22 @@ bool ModuleGun::CleanUp()
 	return true;
 }
 
+void Bullet::BreakingBrick(int num, int w, int h, Application* App)
+{
+	App->maps->map[h][w] = 0;
+
+	for (int x = -1; x <= 1; x += 2)
+	{
+		if (App->maps->lvl[App->backgroundPlay->currentLvl][h][w + x] == num && App->maps->map[h][w + x] == 1)
+		{
+			BreakingBrick(num, w + x, h, App);
+		}
+	}
+	for (int y = -1; y <= 1; y += 2)
+	{
+		if (App->maps->lvl[App->backgroundPlay->currentLvl][h + y][w] == num && App->maps->map[h + y][w] == 1)
+		{
+			BreakingBrick(num, w, h + y, App);
+		}
+	}
+}
