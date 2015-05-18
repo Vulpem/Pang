@@ -24,7 +24,7 @@ bool ModuleBoost::Start()
 		LOG("Could not load boosts graphics");
 		return false;
 	}
-	pickedUp = App->audio->LoadFx("./Sounds/Death.wav");
+	pickedUp = App->audio->LoadFx("./Sounds/Coin.wav");
 	return true;
 }
 
