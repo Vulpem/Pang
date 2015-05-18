@@ -4,7 +4,7 @@
 #include "ModuleBalls.h"
 
 
-#define GRAVITY 0.12f
+#define GRAVITY 0.085f
 
 ////  CLASS BALL  //////////////////////////////////////
 
@@ -33,13 +33,9 @@ void Ball::CreateBall(int direction)
 	switch (type)
 	{
 		case huge:
-		{speed.y = -2.0f; speed.x = 1.6f * direction; radius = 24; YBaseSpeed = -5.7f; offset = 8; break; }
 		case big:
-		{speed.y = -2.5f; speed.x = 1.8f * direction; radius = 16; YBaseSpeed = -5.5f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 1.5f * direction; radius = 8; YBaseSpeed = -4.6f; offset = 4; break; }
 		case little:
-		{speed.y = -1.5f; speed.x = 1.4f * direction; radius = 4; YBaseSpeed = -3.0f; offset = 0; break; }
 	}
 	dead = false;
 }
