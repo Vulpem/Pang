@@ -92,6 +92,7 @@ update_status ModuleScenePlay::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
+		currentLvl = 0;
 		App->maps->LoadMap(0);
 	}
 #pragma endregion

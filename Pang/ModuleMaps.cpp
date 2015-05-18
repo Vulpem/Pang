@@ -281,5 +281,22 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 
 void ModuleMaps::DrawBrick(int h, int w)
 {
-	App->renderer->DrawQuad(tile, 255, 255, 0, 255);
+	if (lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] == 1)
+	{
+		App->renderer->DrawQuad(tile, 255, 255, 0, 255);
+	}
+	else if (lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1)
+	{
+		App->renderer->DrawQuad(tile, 200, 255, 0, 255);
+	}
+	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] != 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] == 1)
+	{
+		App->renderer->DrawQuad(tile, 200, 255, 0, 255);
+	}
+	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] == 1)
+	{
+		App->renderer->DrawQuad(tile, 255, 200, 0, 255);
+	}
+
+	
 }
