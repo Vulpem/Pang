@@ -99,16 +99,8 @@ update_status ModuleScenePlay::Update()
 
 	if (App->balls->ballsList.count() == 0)
 	{
-		if (currentLvl >= 3)
-		{
-			App->backgroundIntro->Enable();
-			Disable();
-		}
-		else
-		{
 			App->backgroundTransition->Enable(++currentLvl);
 			Disable();
-		}
 	}
 	else
 	{

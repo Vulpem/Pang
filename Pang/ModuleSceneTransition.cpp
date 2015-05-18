@@ -43,8 +43,16 @@ update_status ModuleSceneTransition::Update()
 	if (timeCounter >= 300 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 100))
 	{
 		timeCounter = 0;
-		App->backgroundPlay->Enable(nextLevel);
-		Disable();
+		if (nextLevel <= 3)
+		{
+			App->backgroundPlay->Enable(nextLevel);
+			Disable();
+		}
+		else
+		{
+			App->backgroundIntro->Enable();
+			Disable();
+		}
 	}
 	App->renderer->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
 	
@@ -66,27 +74,16 @@ update_status ModuleSceneTransition::Update()
 		App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220);
 	}
 	//////////////////
-	switch ((nextLevel - 1)% 3)
-	{
-	case 1:
-		if (timeCounter / 35 % 2 == 0)
+
+	//Print background
+	imageRect.y = 0 + (nextLevel - 2) * 96;
+	if (timeCounter / 35 % 2 == 0)
 		{
 			imageRect.x = 0;
-			imageRect.y = 0;
-
 		}
-		else
-		{
+	else
+	{
 			imageRect.x = 194;
-			imageRect.y = 0;
-		}
-		break;
-	case 2:
-		imageRect.x = 0;
-		imageRect.y = 96;
-		break;
-	default:
-		break;
 	}
 
 	App->renderer->Blit(graphics, 95, 32, &imageRect);
