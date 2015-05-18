@@ -19,7 +19,8 @@ bool ModuleSceneIntro::Start()
 	LOG("--Initializing Intro");
 	bool ret = true;
 	mapOn = false;
-	selectedRect = { 0, 0, 15, 15 };
+	paused = false;
+	selectedRect = { 0, 15, 15, 15 };
 	nextLevel = 1;
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
@@ -43,58 +44,125 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
-	if (!mapOn)
+	if (paused)
 	{
 		timeCounter++;
-		if (timeCounter / 25 % 2 == 0)
-			App->renderer->Blit(graphics, 0, 0, NULL);
-		else
-			App->renderer->Blit(graphics2, 0, 0, NULL);
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
-			mapOn = true;
-	}
-	if (mapOn)
-	{
-		App->renderer->Blit(map, 0, 0, NULL);
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP && nextLevel < 6)
-		{
-			nextLevel++;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP && nextLevel > 1)
-		{
-			nextLevel--;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && nextLevel <= 3)
+		if (timeCounter > 30)
 		{
 			timeCounter = 0;
 			App->backgroundPlay->Enable(nextLevel);
 			Disable();
 		}
-		switch (nextLevel)
+		else
 		{
-		case 1:
-			App->renderer->Blit(selected, 341, 69, &selectedRect);
-			break;
-		case 2:
-			App->renderer->Blit(selected, 301, 69, &selectedRect);
-			break;
-		case 3:
-			App->renderer->Blit(selected, 285, 101, &selectedRect);
-			break;
-		case 4:
-			App->renderer->Blit(selected, 301, 101, &selectedRect);
-			break;
-		case 5:
-			App->renderer->Blit(selected, 329, 161, &selectedRect);
-			break;
-		case 6:
-			App->renderer->Blit(selected, 265, 97, &selectedRect);
-			break;
+		if ((timeCounter / 2) % 2 == 0)
+			selectedRect.y = 0;
+		else
+			selectedRect.y = 15;
+		App->renderer->Blit(map, 0, 0, NULL);
+		App->renderer->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+		}
 
+	}
+	else
+	{
+		if (!mapOn)
+		{
+			timeCounter++;
+			if (timeCounter / 25 % 2 == 0)
+				App->renderer->Blit(graphics, 0, 0, NULL);
+			else
+				App->renderer->Blit(graphics2, 0, 0, NULL);
+
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+				mapOn = true;
+		}
+		if (mapOn)
+		{
+			App->renderer->Blit(map, 0, 0, NULL);
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP && nextLevel < 10)
+			{
+				nextLevel++;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP && nextLevel > 1)
+			{
+				nextLevel--;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && nextLevel <= 3)
+			{
+				timeCounter = 0;
+				paused = true;
+			}
+			App->renderer->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 		}
 	}
 
 	return UPDATE_CONTINUE;
 }
 
+int ModuleSceneIntro::SelectedPosition(bool x)
+{
+	switch (nextLevel)
+	{
+	case 1:
+		if (x == true)
+			return 341;
+		else
+			return 69;
+		break;
+	case 2:
+		if (x == true)
+			return 301;
+		else
+			return 69;
+		break;
+	case 3:
+		if (x == true)
+			return 285;
+		else
+			return 101;
+		break;
+	case 4:
+		if (x == true)
+			return 301;
+		else
+			return 101;
+		break;
+	case 5:
+		if (x == true)
+			return 329;
+		else
+			return 161;
+		break;
+	case 6:
+		if (x == true)
+			return 265;
+		else
+			return 97;
+		break;
+	case 7:
+		if (x == true)
+			return 205;
+		else
+			return 37;
+		break;
+	case 8:
+		if (x == true)
+			return 173;
+		else
+			return 45;
+		break;
+	case 9:
+		if (x == true)
+			return 149;
+		else
+			return 37;
+	case 10:
+		if (x == true)
+			return 129;
+		else
+			return 65;
+	default:
+		break;
+	}
+}

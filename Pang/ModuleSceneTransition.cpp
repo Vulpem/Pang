@@ -21,6 +21,7 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 	LOG("Scene Transition");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/TransitionScene.png");
+	graphics2 = App->textures->Load("./Image_Sources/IntroMap.png");
 
 	return ret;
 }
@@ -56,38 +57,43 @@ update_status ModuleSceneTransition::Update()
 	}
 	App->renderer->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
 	
-	//Print level stats
-	App->fonts->PrintNumbers(nextLevel - 1, textSurf, textRect, 170, 145);
-	App->fonts->PrintText("STAGE", textSurf, textRect, 170 + 4, 145);
-
-	App->fonts->PrintText("TIME BONUS", textSurf, textRect, 100, 165);
-	App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 165);
-	if (timeCounter > 50)
+	//Print level stats if its not end of stage
+	if ((nextLevel - 1) % 3 != 0)
 	{
-		App->fonts->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185);
-		App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 185);
-	}
-	///////////////////
-	//Print push button
-	if (timeCounter / 20 % 2 == 0)
-	{
-		App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220);
-	}
-	//////////////////
+		App->fonts->PrintNumbers(nextLevel - 1, textSurf, textRect, 170, 145);
+		App->fonts->PrintText("STAGE", textSurf, textRect, 170 + 4, 145);
 
-	//Print background
-	imageRect.y = 0 + (nextLevel - 2) * 96;
-	if (timeCounter / 35 % 2 == 0)
+		App->fonts->PrintText("TIME BONUS", textSurf, textRect, 100, 165);
+		App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 165);
+		if (timeCounter > 50)
 		{
-			imageRect.x = 0;
+			App->fonts->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185);
+			App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 185);
 		}
-	else
-	{
-			imageRect.x = 194;
+		///////////////////
+		//Print push button
+		if (timeCounter / 20 % 2 == 0)
+		{
+			App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220);
+		}
+		//////////////////
+
+		//Print background
+		imageRect.y = 0 + (nextLevel - 2) * 96;
+		if (timeCounter / 35 % 2 == 0)
+			{
+				imageRect.x = 0;
+			}
+		else
+		{
+				imageRect.x = 194;
+		}
+
+		App->renderer->Blit(graphics, 95, 32, &imageRect);
 	}
-
-	App->renderer->Blit(graphics, 95, 32, &imageRect);
-
+	//If it's end of stage
+	else
+		App->renderer->Blit(graphics2, 0, 0, NULL);
 
 	return UPDATE_CONTINUE;
 }

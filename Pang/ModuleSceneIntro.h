@@ -13,9 +13,15 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	int SelectedPosition(bool x);
+
+
 	int timeCounter;
 	bool mapOn;
-	int nextLevel = 1;
+	int nextLevel;
+	bool paused;
+
+
 
 public:
 
@@ -23,6 +29,7 @@ public:
 	SDL_Texture* graphics2;
 	SDL_Texture* map;
 	SDL_Texture* selected;
+	SDL_Texture* selected2;
 	SDL_Rect selectedRect;
 
 };
