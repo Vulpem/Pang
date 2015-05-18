@@ -143,6 +143,9 @@ bool ModuleMaps::Start()
 
 	tile.h = tile.w = 8;
 
+	SolidBrickSection.h = SolidBrickSection.w = 8;
+	SolidBrickSection.y = 0;
+
 	return true;
 }
 
@@ -282,43 +285,42 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 
 void ModuleMaps::DrawBrick(int h, int w)
 {
-	SDL_Rect toBlit{ 0, 0, 8, 8 };
 	if ((lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1) || w <=1 )
 	{
 		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != 1)
 		{
-			toBlit.x = 1 * TILE;
+			SolidBrickSection.x = 1 * TILE;
 		}
 		else
 		{
-			toBlit.x = 3 * TILE;
+			SolidBrickSection.x = 3 * TILE;
 		}
 	}
 	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] != 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] == 1 || w>= 46)
 	{
 		if (lvl[App->backgroundPlay->currentLvl][h][w - 2] != 1)
 		{
-			toBlit.x = 2 * TILE;
+			SolidBrickSection.x = 2 * TILE;
 		}
 		else
 		{
-			toBlit.x = 6 * TILE;
+			SolidBrickSection.x = 6 * TILE;
 		}
 	}
 	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] != 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1)
 	{
-		toBlit.x = 0;
+		SolidBrickSection.x = 0;
 	}
 	else
 	{
 		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != 1)
 		{
-			toBlit.x = 5 * TILE;
+			SolidBrickSection.x = 5 * TILE;
 		}
 		else
 		{
-			toBlit.x = 4 * TILE;
+			SolidBrickSection.x = 4 * TILE;
 		}
 	}
-	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &toBlit);
+	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
 }
