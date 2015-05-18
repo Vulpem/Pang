@@ -21,6 +21,7 @@ public:
 	ModulePlayer(Application* app, bool start_enabled = true);
 	~ModulePlayer();
 
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();

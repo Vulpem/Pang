@@ -22,6 +22,7 @@ bool ModuleSceneIntro::Start()
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
+	App->backgroundPlay->lives = 3;
 
 	return ret;
 }

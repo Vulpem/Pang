@@ -18,36 +18,39 @@ ModuleScenePlay::~ModuleScenePlay()
 {
 }
 
-// Load assets
-bool ModuleScenePlay::Start(int level)
+bool ModuleScenePlay::Init()
 {
-	player1Rect = { 0, 0, 0, 16 };
-	currentLvl = level;
-
 	interfaceRect.x = 0;
 	interfaceRect.y = SCREEN_HEIGHT - (4 * TILE);
 	interfaceRect.w = SCREEN_WIDTH;
 	interfaceRect.h = 4 * TILE;
-	LOG("Loading background assets");
-
-	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
-	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
-	sceneTransition = App->textures->Load("./Image_Sources/Transition_Scene.png");
-	
-
-	App->maps->Enable();
-	App->player->Enable();
-	App->gun->Enable();
-	App->fonts->Enable();
-
-
 
 	livesRect.x = 154;
 	livesRect.y = 44;
 	livesRect.w = 16;
 	livesRect.h = 16;
 
-	lives = 3;
+	return true;
+}
+
+// Load assets
+bool ModuleScenePlay::Start(int level)
+{
+	player1Rect = { 0, 0, 0, 16 };
+	currentLvl = level;
+
+	LOG("Loading background assets");
+
+	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
+	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
+	sceneTransition = App->textures->Load("./Image_Sources/Transition_Scene.png");
+	
+	App->maps->Enable();
+	App->player->Enable();
+	App->gun->Enable();
+	App->fonts->Enable();
+	App->particles->Enable();
+
 	App->maps->LoadMap(currentLvl);
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;

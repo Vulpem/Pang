@@ -37,6 +37,7 @@ public:
 	Animation hook;
 
 public:
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();

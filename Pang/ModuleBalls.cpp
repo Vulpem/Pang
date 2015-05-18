@@ -75,7 +75,7 @@ ModuleBalls::~ModuleBalls()
 
 //Module methods
 
-bool ModuleBalls::Start()
+bool ModuleBalls::Init()
 {
 	LOG("Initializing Balls");
 	ballsRects[red][huge].x = 0;		ballsRects[red][huge].y = 0;		ballsRects[red][huge].w = ballsRects[red][huge].h = 48;
@@ -93,13 +93,20 @@ bool ModuleBalls::Start()
 	ballsRects[green][medium].x = 80;	ballsRects[green][medium].y = 96;	ballsRects[green][medium].w = ballsRects[green][medium].h = 16;
 	ballsRects[green][little].x = 96;	ballsRects[green][little].y = 96;	ballsRects[green][little].w = ballsRects[green][little].h = 8;
 
+	return true;
+}
+
+bool ModuleBalls::Start()
+{
 	ballsGraphics = App->textures->Load("./Image_Sources/Balls.png");
 	if (ballsGraphics == NULL)
 	{
 		LOG("-------------------------Could not load balls Graphics.------------------------------")
+			return false;
 	}
 	pauseBalls = false;
 	pauseBoost = false;
+	bombBoost = false;
 	pauseCounter = 0;
 	
 	return true;

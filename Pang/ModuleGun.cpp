@@ -8,6 +8,15 @@
 
 ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_enabled)
 {
+	
+}
+ModuleGun::~ModuleGun()
+{
+
+}
+
+bool ModuleGun::Init()
+{
 	graphics = NULL;
 
 	current_animation = &hook;
@@ -16,10 +25,8 @@ ModuleGun::ModuleGun(Application* app, bool start_enabled) :Module(app, start_en
 
 	hook.speed = 0.21f;
 	hook.loop = true;
-}
-ModuleGun::~ModuleGun()
-{
 
+	return true;
 }
 
 bool ModuleGun::Start()

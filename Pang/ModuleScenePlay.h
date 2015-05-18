@@ -24,6 +24,7 @@ public:
 	ModuleScenePlay(Application* app, bool start_enabled = true);
 	~ModuleScenePlay();
 
+	bool Init();
 	bool Start(int level);
 	update_status Update();
 	update_status PostUpdate();

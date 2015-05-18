@@ -30,6 +30,7 @@ public:
 	ModuleParticles(Application* app, bool start_enabled = true);
 	~ModuleParticles();
 
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();

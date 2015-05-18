@@ -9,6 +9,13 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	}
+
+ModulePlayer::~ModulePlayer()
+{}
+
+bool ModulePlayer::Init()
+{
 	punct = 0;
 
 	graphics = NULL;
@@ -33,7 +40,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	forward.frames.PushBack({ 112, 2, 32, 32 });
 	forward.frames.PushBack({ 146, 2, 32, 32 });
 	forward.speed = 0.32f;
-	
+
 	// backward animation
 	backward.frames.PushBack({ 14, 146, 28, 32 });
 	backward.frames.PushBack({ 48, 146, 28, 32 });
@@ -70,17 +77,15 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	//killDead front
 	killDead2.frames.PushBack({ 129, 112, 47, 32 });
 
+	return true;
 }
-
-ModulePlayer::~ModulePlayer()
-{}
 
 
 bool ModulePlayer::Start()
 {
 	punctRect = { 0, 0, 0, 8};
 	textRect = { 0, 0, 0, 8};
-	LOG("--Initializing player");
+	LOG("--Starting player");
 	bool ret = true;
 	graphics = App->backgroundPlay->livesGraphics;
 	if (graphics == NULL)

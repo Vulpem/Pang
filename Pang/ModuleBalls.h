@@ -43,6 +43,7 @@ public:
 	int bombCounter;
 	bool bombBoost;
 
+	bool Init();
 	bool Start();
 	update_status PreUpdate();
 	update_status Update();

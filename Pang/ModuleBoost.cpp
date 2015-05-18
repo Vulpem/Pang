@@ -17,7 +17,13 @@ ModuleBoost::~ModuleBoost()
 
 bool ModuleBoost::Start()
 {
+	graphics = NULL;
 	graphics = App->textures->Load("./Image_Sources/PowerUps.png");
+	if (graphics == NULL)
+	{
+		LOG("Could not load boosts graphics");
+		return false;
+	}
 	pickedUp = App->audio->LoadFx("./Sounds/Death.wav");
 	return true;
 }
@@ -84,7 +90,7 @@ bool ModuleBoost::CleanUp()
 		activeBoost.del(tmp);
 		tmp = tmp_next;
 	}
-
+	App->textures->Unload(graphics);
 
 	return true;
 }
