@@ -18,9 +18,13 @@ bool ModuleSceneIntro::Start()
 
 	LOG("--Initializing Intro");
 	bool ret = true;
-
+	mapOn = false;
+	selectedRect = { 0, 0, 15, 15 };
+	nextLevel = 1;
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
+	map = App->textures->Load("./Image_Sources/IntroMap.png");
+	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
 	App->backgroundPlay->lives = 3;
 
@@ -39,17 +43,56 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
-	timeCounter++;
-	if (timeCounter / 25 % 2 == 0)
-		App->renderer->Blit(graphics, 0, 0, NULL);
-	else
-		App->renderer->Blit(graphics2, 0, 0, NULL);
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	if (!mapOn)
 	{
-		App->backgroundPlay->Enable(1);
-		Disable();
-//		App->fade->FadeToBlack(this, App->backgroundPlay, 3.0f);
+		timeCounter++;
+		if (timeCounter / 25 % 2 == 0)
+			App->renderer->Blit(graphics, 0, 0, NULL);
+		else
+			App->renderer->Blit(graphics2, 0, 0, NULL);
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+			mapOn = true;
+	}
+	if (mapOn)
+	{
+		App->renderer->Blit(map, 0, 0, NULL);
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP && nextLevel < 6)
+		{
+			nextLevel++;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP && nextLevel > 1)
+		{
+			nextLevel--;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && nextLevel <= 3)
+		{
+			timeCounter = 0;
+			App->backgroundPlay->Enable(nextLevel);
+			Disable();
+		}
+		switch (nextLevel)
+		{
+		case 1:
+			App->renderer->Blit(selected, 341, 69, &selectedRect);
+			break;
+		case 2:
+			App->renderer->Blit(selected, 301, 69, &selectedRect);
+			break;
+		case 3:
+			App->renderer->Blit(selected, 285, 101, &selectedRect);
+			break;
+		case 4:
+			App->renderer->Blit(selected, 301, 101, &selectedRect);
+			break;
+		case 5:
+			App->renderer->Blit(selected, 329, 161, &selectedRect);
+			break;
+		case 6:
+			App->renderer->Blit(selected, 265, 97, &selectedRect);
+			break;
+
+		}
 	}
 
 	return UPDATE_CONTINUE;
