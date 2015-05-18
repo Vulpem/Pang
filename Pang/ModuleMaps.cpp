@@ -264,7 +264,19 @@ void ModuleMaps::LoadMap(int nMap)
 
 void ModuleMaps::DrawGlassBrick(int h, int w)
 {
-	App->renderer->DrawQuad(tile, 0, 255, 50 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+		if (map[h][w - 1] == 1 && map[h][w + 3] == 1)
+		{
+			App->renderer->DrawQuad(tile, 0, 255, 50 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+		}
+		if (map[h][w - 1] != 1 && map[h][w + 3] == 1)
+		{
+			App->renderer->DrawQuad(tile, 0, 200, 50 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+		}
+		if (map[h][w - 1] == 1 && map[h][w + 3] != 1)
+		{
+			App->renderer->DrawQuad(tile, 0, 150, 50 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+		}
+	
 }
 
 void ModuleMaps::DrawBrick(int h, int w)
