@@ -26,5 +26,6 @@ public:
 public:
 
 	SDL_Texture* ladderGraphics;
+	SDL_Texture* bricksGraphics;
 	
 };
