@@ -17,9 +17,12 @@ public:
 	int timeCounter;
 	int nextLevel;
 
+
 public:
 
 	SDL_Texture* graphics;
-	SDL_Texture* graphics2;
+	SDL_Surface* textSurf;
+	SDL_Rect textRect;
+
 
 };

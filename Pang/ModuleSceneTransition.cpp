@@ -5,7 +5,6 @@
 ModuleSceneTransition::ModuleSceneTransition(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	graphics = NULL;
-	graphics2 = NULL;
 	timeCounter = 0;
 }
 
@@ -16,6 +15,7 @@ ModuleSceneTransition::~ModuleSceneTransition()
 
 bool ModuleSceneTransition::Start(int _nextLevel)
 {
+	textRect = { 0, 0, 0, 16 };
 	nextLevel = _nextLevel;
 	LOG("Scene Transition");
 	bool ret = true;
@@ -24,6 +24,7 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 }
 
 bool ModuleSceneTransition::CleanUp()
+
 {
 	LOG("--Cleanup Transition scene")
 		App->textures->Unload(graphics);
@@ -35,24 +36,21 @@ bool ModuleSceneTransition::CleanUp()
 update_status ModuleSceneTransition::Update()
 {
 	// Draw everything --------------------------------------
+
 	timeCounter++;
-	if (timeCounter >= 150)
+	if (timeCounter >= 150 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
 	{
 		timeCounter = 0;
 		App->backgroundPlay->Enable(nextLevel);
 		Disable();
 	}
-	/*
+	
 	if (timeCounter / 25 % 2 == 0)
-		App->renderer->Blit(graphics, 0, 0, NULL);
-	else
-		App->renderer->Blit(graphics2, 0, 0, NULL);
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
-		App->fade->FadeToBlack(this, App->backgroundPlay, 3.0f);
+		App->fonts->PrintText("HELLO :)", textSurf, textRect, 150, 100);
 	}
-	*/
+
+
 	App->renderer->Blit(graphics, 0, 0, NULL);
 
 	return UPDATE_CONTINUE;

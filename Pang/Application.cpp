@@ -8,6 +8,7 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
+	fonts = new ModuleFonts(this, false);
 
 	backgroundIntro = new ModuleSceneIntro(this, true);
 	backgroundPlay = new ModuleScenePlay(this, false);
@@ -20,7 +21,7 @@ Application::Application()
 	balls = new ModuleBalls(this, false);
 	particles = new ModuleParticles(this);
 	boosts = new ModuleBoost(this, false);
-	fonts = new ModuleFonts(this, false);
+//	fonts = new ModuleFonts(this, false);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -30,10 +31,11 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-
+	
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
 	AddModule(backgroundTransition);
+	AddModule(fonts);
 
 	AddModule(maps);
 	
@@ -42,7 +44,7 @@ Application::Application()
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);
-	AddModule(fonts);
+	
 
 
 
