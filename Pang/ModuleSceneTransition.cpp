@@ -41,7 +41,7 @@ update_status ModuleSceneTransition::Update()
 	// Draw everything --------------------------------------
 
 	timeCounter++;
-	if (timeCounter >= 300 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 100))
+	if (timeCounter >= 300 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
 	{
 		timeCounter = 0;
 		if (nextLevel <= 15)
