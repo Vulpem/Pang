@@ -226,25 +226,43 @@ void ModulePlayer::Movement()
 		//Move right
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT && App->maps->map[position.y / 8][(position.x + 25) / 8] != 1)
+			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT)
 			{
 				current_animation = &forward;
-				position.x += speed;
-				movementDirection = 1;
-			}
+				bool canMove = true;
+				for (int i = 0; i < 4; i++)
+				{
+					if (App->maps->map[position.y / 8][(position.x + 25) / 8] == 1)
+						canMove = false;
+				}
+				if (canMove)
+				{
+					position.x += speed;
+					movementDirection = 1;
+				}
 
+			}
 		}
 
 		//Move left
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT && App->maps->map[position.y / 8][(position.x - 1) / 8] != 1)
+			if (App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
 			{
-				current_animation = &backward;
-				position.x -= speed;
-				movementDirection = -1;
+				current_animation = &backward;	
+				bool canMove = true;
+				for(int i = 0; i < 4; i++)
+				{
+					if (App->maps->map[position.y / 8][(position.x - 1) / 8] == 1)
+						canMove = false;
+				}
+				
+				if (canMove)
+				{
+					position.x -= speed;
+					movementDirection = -1;
+				}
 			}
-
 		}
 	}
 }
