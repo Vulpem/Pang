@@ -584,7 +584,6 @@ void ModuleMaps::LoadMap(int nMap)
 	case 2:
 	{
 		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->balls->AddBall(200, 40, big, blue, 1);
 		App->player->position.x = 1 * TILE;
 		App->player->position.y = 20 * TILE;
 		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
@@ -601,8 +600,7 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	case 4:
 	{
-			  App->balls->AddBall(5 * TILE, 4 * TILE, huge, green, 1);
-			  App->balls->AddBall(20 * TILE, 3 * TILE, huge, green, 1);
+			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
 			  App->player->position.x = 1 * TILE;
 			  App->player->position.y = 20 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
@@ -610,7 +608,8 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	case 5:
 	{
-			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, green, 1);
+			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
+			  App->balls->AddBall(9 * TILE, 25 * TILE, big, blue, 1);
 			  App->player->position.x = 1 * TILE;
 			  App->player->position.y = 20 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
