@@ -505,7 +505,7 @@ bool ModuleMaps::Start()
 {
 	ladderGraphics = App->textures->Load("./Image_Sources/Ladder.png");
 	bricksGraphics = App->textures->Load("./Image_Sources/Bricks.png");
-
+	timer = 0;
 	tile.h = tile.w = 8;
 
 	SolidBrickSection.h = SolidBrickSection.w = 8;
@@ -517,6 +517,7 @@ bool ModuleMaps::Start()
 
 update_status ModuleMaps::Update()
 {	
+	timer++;
 	for (int h = 1; h <= 24; h++)
 	{
 		for (int w = 1; w <= 46; w++)
@@ -608,7 +609,7 @@ void ModuleMaps::LoadMap(int nMap)
 
 	App->player->position.x = 18 * TILE;
 	App->player->position.y = 23 * TILE;
-	switch (nMap)
+	switch ((nMap - 1) / 3 + 1)
 	{
 	case 0:
 	{
@@ -626,7 +627,7 @@ void ModuleMaps::LoadMap(int nMap)
 	case 2:
 	{
 		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
+		App->audio->PlayMusic("./Sounds/MtKeirin.wav");
 		break;
 	}
 	case 3:

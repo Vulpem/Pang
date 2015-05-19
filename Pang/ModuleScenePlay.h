@@ -10,19 +10,22 @@ public:
 
 	SDL_Texture* backgroundGraphics;
 	SDL_Texture* livesGraphics;
-	SDL_Texture* timer;
+	SDL_Texture* timerImage;
+	SDL_Texture* ready;
 
 
 	SDL_Rect livesRect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
 	SDL_Rect timerRect;
+	SDL_Rect readyRect;
 
 	SDL_Surface* player1Surf;
 	SDL_Rect player1Rect;
 	int lives;
 	int currentLvl;
-	int delay = 0;
+	int delay;
+	int timer;
 
 	bool debugMode = false;
 

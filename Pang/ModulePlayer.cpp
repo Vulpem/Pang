@@ -8,8 +8,7 @@
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
-	}
+{}
 
 ModulePlayer::~ModulePlayer()
 {}
@@ -17,7 +16,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Init()
 {
 	punt = 0;
-
+	pausePlayer = false;
 	graphics = NULL;
 
 	//////////////
@@ -85,6 +84,7 @@ bool ModulePlayer::Start()
 {
 	puntRect = { 0, 0, 0, 8};
 	textRect = { 0, 0, 0, 8};
+	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;
 	graphics = App->backgroundPlay->livesGraphics;
@@ -94,7 +94,7 @@ bool ModulePlayer::Start()
 	}
 	playerState = standing;
 	position.x = TILE;
-	position.y = 9 * TILE;
+	position.y = 21 * TILE;
 	ladderAlign = false;
 	dead = false;
 	deadAnimEnd = false;
@@ -146,8 +146,14 @@ update_status ModulePlayer::Update()
 	{
 		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 18, 29 * TILE + 1);
 	}
-	//////////////////////
 
+	if (current_animation != NULL)
+	{
+		App->renderer->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
+	}
+	//////////////////////
+	if (!pausePlayer)
+	{
 		if (dead == false)
 		{
 			SecurityPosition();
@@ -172,10 +178,6 @@ update_status ModulePlayer::Update()
 				deadCounter = 0;
 			}
 		}
-
-	if (current_animation != NULL)
-	{
-			App->renderer->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 	}
 
 	CheckBallCollision();
@@ -515,10 +517,10 @@ void ModulePlayer::CheckBallCollision()
 			if (App->backgroundPlay->lives > 0)
 			{
 				App->backgroundPlay->lives -= 1;
-				App->player->Disable();
-				App->player->Enable();
-				App->maps->LoadMap(App->backgroundPlay->currentLvl);
-				App->balls->pauseBalls = false;
+				App->backgroundPlay->Disable();
+				App->backgroundPlay->Enable(App->backgroundPlay->currentLvl);
+		//		App->maps->LoadMap(App->backgroundPlay->currentLvl);
+	//			App->balls->pauseBalls = false;
 			}
 			else
 			{

@@ -25,6 +25,7 @@ public:
 	void DrawBrick(int h, int w);
 
 	char* GetLevelName(int level);
+	int timer;
 
 public:
 
