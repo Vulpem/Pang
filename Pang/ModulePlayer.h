@@ -111,6 +111,7 @@ private:
 	bool CanStartClimbingDown();
 	bool AlignLadder(int direction);
 	int GetLadderCenter(int direction);
+	bool NewLadderDown();
 
 	//////////////////////
 

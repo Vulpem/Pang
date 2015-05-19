@@ -232,7 +232,7 @@ void ModulePlayer::Movement()
 				bool canMove = true;
 				for (int i = 0; i < 4; i++)
 				{
-					if (App->maps->map[position.y / 8][(position.x + 25) / 8] == 1)
+					if (App->maps->map[position.y / 8 + i][(position.x + 25) / 8] == 1)
 						canMove = false;
 				}
 				if (canMove)
@@ -253,7 +253,7 @@ void ModulePlayer::Movement()
 				bool canMove = true;
 				for(int i = 0; i < 4; i++)
 				{
-					if (App->maps->map[position.y / 8][(position.x - 1) / 8] == 1)
+					if (App->maps->map[position.y / 8 + i][(position.x - 1) / 8] == 1)
 						canMove = false;
 				}
 				
@@ -348,6 +348,11 @@ void ModulePlayer::Climb()
 				ladderAlign = false;
 			}
 			
+			else if (playerState == climbing && NewLadderDown())
+			{
+				playerState = standing;
+				ladderAlign = false;
+			}
 			else if (playerState == climbing && CanClimbDown())
 			{
 					climb.speed = 0.16f;
@@ -609,6 +614,23 @@ int ModulePlayer::GetLadderCenter(int direction)
 	}
 }
 
+bool ModulePlayer::NewLadderDown()
+{
+	bool a2 = false;
+	bool a0 = false;
+	for (int i = 0; i < 4; i++)
+	if (App->maps->map[position.y / 8 + 4][position.x / 8 + i] == 2)
+	{
+		a2 = true;
+	}
+	else if (App->maps->map[position.y / 8 + 4][position.x / 8 + i] == 0)
+	{
+		a0 = true;
+	}
+	if (a2 && a0)
+		return true;
+	return false;
+}
 void ModulePlayer::UpdateBoosts()
 {
 
