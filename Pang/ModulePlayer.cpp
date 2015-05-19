@@ -109,7 +109,38 @@ update_status ModulePlayer::Update()
 	//Printing interface//
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);
+	//Level name
+	if ((App->backgroundPlay->currentLvl - 1) / 3 + 1 == 3)
+	{
+		App->fonts->PrintText("EMERALD", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+		App->fonts->PrintText("TEMPLE", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
+	}
+	else if ((App->backgroundPlay->currentLvl - 1) / 3 + 1 == 17)
+	{
+		App->fonts->PrintText("EASTER", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+		App->fonts->PrintText("ISLAND", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
+	}
+	else
+	{
 	App->fonts->PrintText(App->maps->GetLevelName(App->backgroundPlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+	}
+
+	//Level info
+	if (App->backgroundPlay->currentLvl < 10)
+	{
+	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
+	App->fonts->PrintText("-", textSurf, textRect, 21 * TILE, 28 * TILE, 8);
+	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+	}
+	else
+	{
+		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
+		App->fonts->PrintText("-", textSurf, textRect, 20 * TILE, 28 * TILE, 8);
+		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+	}
+
+	App->fonts->PrintText("STAGE", textSurf, textRect, 24 * TILE, 28 * TILE, 8);
+	////////////
 	App->fonts->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
 	if (App->backgroundPlay->lives > 4)
 	{
