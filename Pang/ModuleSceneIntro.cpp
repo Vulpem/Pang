@@ -21,11 +21,13 @@ bool ModuleSceneIntro::Start()
 	mapOn = false;
 	paused = false;
 	selectedRect = { 0, 15, 15, 15 };
+	timerRect = { 0, 0, 38, 57 };
 	nextLevel = 1;
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
 	map = App->textures->Load("./Image_Sources/IntroMap.png");
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
+	timer = App->textures->Load("./Image_Sources/MapTimer.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
 	App->backgroundPlay->lives = 3;
 
@@ -75,11 +77,21 @@ update_status ModuleSceneIntro::Update()
 				App->renderer->Blit(graphics2, 0, 0, NULL);
 
 			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+			{
+				timeCounter = 0;
 				mapOn = true;
+			}
+
 		}
 		if (mapOn)
 		{
+			timeCounter++;
 			App->renderer->Blit(map, 0, 0, NULL);
+			//Drawing time counter
+			timerRect.x = (timeCounter / 60) * 38;
+			App->renderer->Blit(timer, 257, 31, &timerRect);
+			
+			//Moving through levels
 			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP && nextLevel < 10)
 			{
 				nextLevel++;
@@ -88,7 +100,7 @@ update_status ModuleSceneIntro::Update()
 			{
 				nextLevel--;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && nextLevel <= 3)
+			if ((App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || timeCounter >= 600) && nextLevel <= 3 )
 			{
 				timeCounter = 0;
 				paused = true;

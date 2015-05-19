@@ -27,9 +27,12 @@ public:
 
 	SDL_Texture* graphics;
 	SDL_Texture* graphics2;
+
 	SDL_Texture* map;
 	SDL_Texture* selected;
 	SDL_Texture* selected2;
+	SDL_Texture* timer;
+	SDL_Rect timerRect;
 	SDL_Rect selectedRect;
 
 };
