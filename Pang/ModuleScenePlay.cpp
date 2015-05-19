@@ -134,6 +134,7 @@ update_status ModuleScenePlay::Update()
 					myBallPos.x = pointer->data->position.x;
 					myBallPos.y = pointer->data->position.y;
 					App->renderer->DrawQuad(myBallPos, 0, 255, 0, 255);
+					pointer = pointer->next;
 			}
 		
 	}
