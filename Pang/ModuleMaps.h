@@ -23,6 +23,8 @@ public:
 	void DrawGlassBrick(int h, int w);
 	void DrawBrick(int h, int w);
 
+	char* GetLevelName(int level);
+
 public:
 
 	SDL_Texture* ladderGraphics;

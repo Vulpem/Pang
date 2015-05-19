@@ -754,3 +754,65 @@ void ModuleMaps::DrawBrick(int h, int w)
 	}
 	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
 }
+
+char* ModuleMaps::GetLevelName(int level)
+{
+	level / 3 + 1;
+	switch (level)
+	{
+		case 1:
+			return "MT. FUJI";
+			break;
+		case 2:
+			return "MT. KEIRIN";
+			break;
+		case 3:
+			return "EMERALD TEMPLE";
+			break;
+		case 4:
+			return "ANKOR WATT";
+			break;
+		case 5:
+			return "AUSTRALIA";
+			break;
+		case 6:
+			return "TAJ MAHAL";
+			break;
+		case 7:
+			return "LANINGRAD";
+			break;
+		case 8:
+			return "PARIS";
+			break;
+		case 9:
+			return "LONDON";
+			break;
+		case 10:
+			return "BARCELONA";
+			break;
+		case 11:
+			return "ATHENS";
+			break;
+		case 12:
+			return "EGYPT";
+			break;
+		case 13:
+			return "KENYA";
+			break;
+		case 14:
+			return "NEW YORK";
+			break;
+		case 15:
+			return "MAYA";
+			break;
+		case 16:
+			return "ANTARTICA";
+			break;
+		case 17:
+			return "EASTER ISLAND";
+			break;
+		default:
+			break;
+	}
+
+}
