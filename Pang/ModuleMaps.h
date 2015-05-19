@@ -14,6 +14,7 @@ public:
 	ModuleMaps(Application* app, bool start_enabled = true);
 	~ModuleMaps();
 
+	bool Init();
 	bool Start();
 	update_status Update();
 	bool CleanUp();
@@ -30,5 +31,6 @@ public:
 	SDL_Texture* ladderGraphics;
 	SDL_Texture* bricksGraphics;
 	SDL_Rect SolidBrickSection;
+	Animation* brick_Animation[5];
 	
 };
