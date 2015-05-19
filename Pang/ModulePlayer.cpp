@@ -618,7 +618,7 @@ bool ModulePlayer::NewLadderDown()
 {
 	bool a2 = false;
 	bool a0 = false;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 3; i++)
 	if (App->maps->map[position.y / 8 + 4][position.x / 8 + i] == 2)
 	{
 		a2 = true;
