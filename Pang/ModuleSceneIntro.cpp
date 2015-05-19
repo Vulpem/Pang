@@ -22,6 +22,7 @@ bool ModuleSceneIntro::Start()
 	paused = false;
 	selectedRect = { 0, 15, 15, 15 };
 	timerRect = { 0, 0, 26, 38};
+	interfaceRect = { 0, 0, 0, 10};
 	nextLevel = 1;
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
@@ -85,10 +86,10 @@ update_status ModuleSceneIntro::Update()
 		}
 		if (mapOn)
 		{
-			timeCounter++;
+			//timeCounter++;
 			App->renderer->Blit(map, 0, 0, NULL);
 			//Drawing time counter
-			timerRect.x = (timeCounter / 60) * 25;
+			timerRect.x = (timeCounter / 60) * 27;
 			App->renderer->Blit(timer, 257, 31, &timerRect);
 			
 			//Moving through levels
@@ -106,6 +107,10 @@ update_status ModuleSceneIntro::Update()
 				paused = true;
 			}
 			App->renderer->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+			App->fonts->PrintText("CHOSE THE CITY TO START.", interfaceText, interfaceRect, 8, 216, 6);
+			App->fonts->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceText, interfaceRect, 8, 224, 6);
+			App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceText, interfaceRect, 8, 232, 6);
+
 		}
 	}
 

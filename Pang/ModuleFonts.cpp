@@ -19,6 +19,7 @@ bool ModuleFonts::Init()
 	TTF_Init();
 	textColor = { 255, 255, 255 };
 	font = LoadFont("Fonts/Pang.ttf", 8);
+	fontInit = LoadFont("Fonts/Pang.ttf", 7);
 	return true;
 }
 
@@ -72,10 +73,21 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 	App->renderer->Blit(texture, x, y, &rect);
 }
 
-void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
+void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
 {
-	rect.w = strlen(text) * 8.5;
-	surface = TTF_RenderText_Solid(font, text, textColor);
+
+	if (size == 8)
+	{
+		rect.w = strlen(text) * 8.5;
+		surface = TTF_RenderText_Solid(font, text, textColor);
+	}
+
+	else if (size == 6)
+	{
+		rect.w = strlen(text) * 7;
+		surface = TTF_RenderText_Solid(fontInit, text, textColor);
+	}
+
 	if (surface == NULL)
 	{
 		LOG("Could not load message");

@@ -44,7 +44,7 @@ update_status ModuleSceneTransition::Update()
 	if (timeCounter >= 300 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 100))
 	{
 		timeCounter = 0;
-		if (nextLevel <= 3)
+		if (nextLevel <= 15)
 		{
 			App->backgroundPlay->Enable(nextLevel);
 			Disable();
@@ -61,20 +61,20 @@ update_status ModuleSceneTransition::Update()
 	if ((nextLevel - 1) % 3 != 0)
 	{
 		App->fonts->PrintNumbers(nextLevel - 1, textSurf, textRect, 170, 145);
-		App->fonts->PrintText("STAGE", textSurf, textRect, 170 + 4, 145);
+		App->fonts->PrintText("STAGE", textSurf, textRect, 170 + 4, 145, 8);
 
-		App->fonts->PrintText("TIME BONUS", textSurf, textRect, 100, 165);
-		App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 165);
+		App->fonts->PrintText("TIME BONUS", textSurf, textRect, 100, 165, 8);
+		App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 165, 8);
 		if (timeCounter > 50)
 		{
-			App->fonts->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185);
-			App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 185);
+			App->fonts->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185, 8);
+			App->fonts->PrintText("PTS", textSurf, textRect, 260 + 4, 185, 8);
 		}
 		///////////////////
 		//Print push button
 		if (timeCounter / 20 % 2 == 0)
 		{
-			App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220);
+			App->fonts->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220, 8);
 		}
 		//////////////////
 
