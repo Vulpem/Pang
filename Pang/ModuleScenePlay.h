@@ -8,7 +8,7 @@ class ModuleScenePlay : public Module
 public:
 
 
-	SDL_Texture* graphics;
+	SDL_Texture* backgroundGraphics;
 	SDL_Texture* livesGraphics;
 	SDL_Texture* timer;
 

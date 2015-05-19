@@ -565,6 +565,17 @@ void ModuleMaps::LoadMap(int nMap)
 	App->boosts->Enable();
 	App->balls->Enable();
 
+	if (nMap % 2 == 1)
+	{
+		App->backgroundPlay->background.x = 8;
+	}
+	else
+	{
+		App->backgroundPlay->background.x = 16 + SCREEN_WIDTH;
+	}
+	
+	App->backgroundPlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
+
 	App->player->position.x = 18 * TILE;
 	App->player->position.y = 23 * TILE;
 	switch (nMap)

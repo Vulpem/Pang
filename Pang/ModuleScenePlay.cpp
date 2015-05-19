@@ -6,12 +6,7 @@
 
 ModuleScenePlay::ModuleScenePlay(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	graphics = NULL;
 
-	background.x = 8;
-	background.y = 8;
-	background.w = SCREEN_WIDTH;
-	background.h = SCREEN_HEIGHT - 4 * TILE;
 }
 
 ModuleScenePlay::~ModuleScenePlay()
@@ -20,6 +15,13 @@ ModuleScenePlay::~ModuleScenePlay()
 
 bool ModuleScenePlay::Init()
 {
+	backgroundGraphics = NULL;
+
+	background.x = 8;
+	background.y = 8;
+	background.w = SCREEN_WIDTH;
+	background.h = SCREEN_HEIGHT - 4 * TILE;
+
 	timer = NULL;
 
 	interfaceRect.x = 0;
@@ -44,7 +46,7 @@ bool ModuleScenePlay::Start(int level)
 
 	LOG("Loading background assets");
 
-	graphics = App->textures->Load("./Image_Sources/Backgrounds.png");
+	backgroundGraphics = App->textures->Load("./Image_Sources/Backgrounds.png");
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
 	timer = App->textures->Load("./Image_Sources/Timer_Photo.png");
 	if (timer == NULL)
@@ -150,7 +152,7 @@ update_status ModuleScenePlay::Update()
 	{
 		// Draw everything --------------------------------------
 
-		App->renderer->Blit(graphics, 0, 0, &background, 0.75f);
+		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
 		App->renderer->Blit(timer, 250, 9, &timerRect, NULL);
 		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
@@ -171,7 +173,7 @@ update_status ModuleScenePlay::PostUpdate()
 }
 bool ModuleScenePlay::CleanUp()
 {
-	App->textures->Unload(graphics);
+	App->textures->Unload(backgroundGraphics);
 
 	App->particles->Disable();
 	App->gun->Disable();
