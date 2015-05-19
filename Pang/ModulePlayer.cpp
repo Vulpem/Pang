@@ -109,7 +109,7 @@ update_status ModulePlayer::Update()
 	//Printing interface//
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);
-	App->fonts->PrintText("MT.FUJI", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+	App->fonts->PrintText(App->maps->GetLevelName(App->backgroundPlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
 	App->fonts->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
 	if (App->backgroundPlay->lives > 4)
 	{
