@@ -481,6 +481,7 @@ bool ModuleMaps::Start()
 
 	SolidBrickSection.h = SolidBrickSection.w = 8;
 	SolidBrickSection.y = 0;
+	
 
 	return true;
 }
@@ -668,27 +669,52 @@ void ModuleMaps::LoadMap(int nMap)
 //Quan estas dins del joc, si apretes la "R" aniras a un mapa bo per probar el renderitzat
 void ModuleMaps::DrawGlassBrick(int h, int w)
 {
-		if (map[h][w - 1] == 1 && map[h][w + 3] == 1)
+	SolidBrickSection.y = 1 * TILE;
+	int num = App->maps->lvl[App->backgroundPlay->currentLvl][h][w];
+	if ((lvl[App->backgroundPlay->currentLvl][h][w + 1] == num && lvl[App->backgroundPlay->currentLvl][h][w - 1] != num) || w <= 1)
+	{
+		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != num)
 		{
-			App->renderer->DrawQuad(tile, 0, 255, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
-		}
-		else if (map[h][w - 1] != 1 && map[h][w + 3] == 1)
-		{
-			App->renderer->DrawQuad(tile, 0, 200, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
-		}
-		else if (map[h][w - 1] == 1 && map[h][w + 3] != 1)
-		{
-			App->renderer->DrawQuad(tile, 0, 150, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+			SolidBrickSection.x = 1 * TILE;
 		}
 		else
 		{
-			App->renderer->DrawQuad(tile, 0, 150, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+			SolidBrickSection.x = 3 * TILE;
 		}
+	}
+	else if (lvl[App->backgroundPlay->currentLvl][h][w + 1] != num && lvl[App->backgroundPlay->currentLvl][h][w - 1] == num || w >= 46)
+	{
+		if (lvl[App->backgroundPlay->currentLvl][h][w - 2] != num)
+		{
+			SolidBrickSection.x = 2 * TILE;
+		}
+		else
+		{
+			SolidBrickSection.x = 6 * TILE;
+		}
+	}
+	else if (lvl[App->backgroundPlay->currentLvl][h][w + 1] != num && lvl[App->backgroundPlay->currentLvl][h][w - 1] != num)
+	{
+		SolidBrickSection.x = 0;
+	}
+	else
+	{
+		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != num)
+		{
+			SolidBrickSection.x = 5 * TILE;
+		}
+		else
+		{
+			SolidBrickSection.x = 4 * TILE;
+		}
+	}
+	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
 	
 }
 
 void ModuleMaps::DrawBrick(int h, int w)
 {
+	SolidBrickSection.y = 0;
 	if ((lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1) || w <=1 )
 	{
 		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != 1)
