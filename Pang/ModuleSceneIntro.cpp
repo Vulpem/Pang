@@ -21,7 +21,7 @@ bool ModuleSceneIntro::Start()
 	mapOn = false;
 	paused = false;
 	selectedRect = { 0, 15, 15, 15 };
-	timerRect = { 0, 0, 38, 57 };
+	timerRect = { 0, 0, 26, 38};
 	nextLevel = 1;
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
@@ -88,7 +88,7 @@ update_status ModuleSceneIntro::Update()
 			timeCounter++;
 			App->renderer->Blit(map, 0, 0, NULL);
 			//Drawing time counter
-			timerRect.x = (timeCounter / 60) * 38;
+			timerRect.x = (timeCounter / 60) * 25;
 			App->renderer->Blit(timer, 257, 31, &timerRect);
 			
 			//Moving through levels
