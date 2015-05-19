@@ -171,14 +171,6 @@ update_status ModuleBalls::Update()
 			// Render as always
 			else
 				App->renderer->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
-			if (App->backgroundPlay->debugMode == true)
-			{
-				SDL_Rect myBallPos;
-				myBallPos.h = myBallPos.w = 1;
-				myBallPos.x = pointer->data->position.x;
-				myBallPos.y = pointer->data->position.y;
-				App->renderer->DrawQuad(myBallPos, 0, 255, 0, 255);
-			}
 		}
 		pointer = pointer->next;
 	}

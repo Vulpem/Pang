@@ -72,28 +72,70 @@ update_status ModuleScenePlay::Update()
 	{
 		debugMode = !debugMode;
 	}
-	int x = rand() % (SCREEN_WIDTH - TILE * 6) + TILE * 3;
-	int y = rand() % (SCREEN_HEIGHT- TILE * 10) + TILE * 3;
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (debugMode == true)
 	{
-		App->balls->AddBall(x, y, huge, rand()%3 ,1);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		App->balls->AddBall(x, y, big, rand() % 3, 1);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		App->balls->AddBall(x, y, medium, rand() % 3, 1);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-	{
-		App->balls->AddBall(x, y, little, rand() % 3, 1);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		currentLvl = 0;
-		App->maps->LoadMap(0);
+		int x = rand() % (SCREEN_WIDTH - TILE * 6) + TILE * 3;
+		int y = rand() % (SCREEN_HEIGHT - TILE * 10) + TILE * 3;
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		{
+			App->balls->AddBall(x, y, huge, rand() % 3, 1);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		{
+			App->balls->AddBall(x, y, big, rand() % 3, 1);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		{
+			App->balls->AddBall(x, y, medium, rand() % 3, 1);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			App->balls->AddBall(x, y, little, rand() % 3, 1);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		{
+			currentLvl = 0;
+			App->maps->LoadMap(0);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			LOG("Changed undying mode\n");
+			App->player->undying = !App->player->undying;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		{
+			LOG("Pause\n");
+			App->balls->pauseBalls = !App->balls->pauseBalls;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+		{
+			LOG("Bomb \n");
+			App->balls->Bomb();
+		}
+		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		{
+			LOG("NBalls: %i \n", App->balls->ballsList.count());
+		}
+			/*
+			Player bounding box
+			*/
+			SDL_Rect boundingBox;
+			boundingBox.x = App->player->position.x + 4;
+			boundingBox.y = App->player->position.y + 5;
+			boundingBox.w = 16;
+			boundingBox.h = 27;
+			App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
+			p2List_item<Ball*>* pointer = App->balls->ballsList.getFirst();
+			while (pointer != NULL)
+			{
+				
+					SDL_Rect myBallPos;
+					myBallPos.h = myBallPos.w = 1;
+					myBallPos.x = pointer->data->position.x;
+					myBallPos.y = pointer->data->position.y;
+					App->renderer->DrawQuad(myBallPos, 0, 255, 0, 255);
+			}
+		
 	}
 #pragma endregion
 

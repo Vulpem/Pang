@@ -149,40 +149,6 @@ update_status ModulePlayer::Update()
 
 	CheckBallCollision();
 
-#pragma region DebugCode
-
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-	{
-		LOG("Changed undying mode\n");
-		undying = !undying;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		LOG("Pause\n");
-		App->balls->pauseBalls = !App->balls->pauseBalls;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-	{
-		LOG("Bomb \n");
-		App->balls->Bomb();
-	}
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
-	{
-		LOG("NBalls: %i \n", App->balls->ballsList.count());
-	}
-	if (App->backgroundPlay->debugMode == true)
-	{
-		/*
-		Player bounding box
-		*/
-		SDL_Rect boundingBox;
-		boundingBox.x = position.x + 4;
-		boundingBox.y = position.y + 5;
-		boundingBox.w = 16;
-		boundingBox.h = 27;
-		App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
-	}
-#pragma endregion
 
 	return UPDATE_CONTINUE;
 }
