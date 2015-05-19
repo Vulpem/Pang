@@ -15,6 +15,7 @@ ModuleSceneTransition::~ModuleSceneTransition()
 
 bool ModuleSceneTransition::Start(int _nextLevel)
 {
+	App->audio->PlayMusic("./Sounds/TransitionScene.wav");
 	textRect = { 0, 0, 0, 9 };
 	nextLevel = _nextLevel;
 	imageRect = { 0, 0, 194, 96 };
@@ -41,7 +42,7 @@ update_status ModuleSceneTransition::Update()
 	// Draw everything --------------------------------------
 
 	timeCounter++;
-	if (timeCounter >= 300 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
+	if (timeCounter >= 180 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
 	{
 		timeCounter = 0;
 		if (nextLevel <= 15)
