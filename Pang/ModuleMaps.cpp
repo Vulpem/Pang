@@ -564,28 +564,27 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	App->boosts->Enable();
 	App->balls->Enable();
+
+	App->player->position.x = 18 * TILE;
+	App->player->position.y = 23 * TILE;
 	switch (nMap)
 	{
 	case 0:
 	{
 		App->balls->AddBall(50, 50, little, blue, 1);
 		App->player->position.x = 1*TILE;
-		App->player->position.y = 20*TILE;
+		App->player->position.y = 23*TILE;
 		break;
 	}
 	case 1:
 	{
 		App->balls->AddBall(5 * TILE, 4 * TILE, huge, red, 1);
-		App->player->position.x = 1 * TILE;
-		App->player->position.y = 20 * TILE;
 		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 		break;
 	}
 	case 2:
 	{
 		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->player->position.x = 1 * TILE;
-		App->player->position.y = 20 * TILE;
 		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 		break;
 	}
@@ -593,25 +592,22 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 		App->balls->AddBall(6 * TILE, 4 * TILE, huge, green, 1);
 		App->balls->AddBall(25 * TILE, 12 * TILE, medium, green, 1);
-		App->player->position.x = 1 * TILE;
-		App->player->position.y = 20 * TILE;
+		App->player->position.x = 22 * TILE;
 		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 		break;
 	}
 	case 4:
 	{
 			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
+			  App->player->position.x = 20 * TILE;
+			  App->player->position.y = 14 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
 	case 5:
 	{
 			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
-			  App->balls->AddBall(9 * TILE, 25 * TILE, big, blue, 1);
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
+			  App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, 1);
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
@@ -619,8 +615,6 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 			  App->balls->AddBall(18 * TILE, 4 * TILE, huge, green, 1);
 			  App->balls->AddBall(26 * TILE, 4 * TILE, huge, green, 1);
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
@@ -628,8 +622,6 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 			  App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
 			  App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
@@ -637,8 +629,6 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 		App->balls->AddBall(18 * TILE, 4 * TILE, big, blue, -1);
 		App->balls->AddBall(27 * TILE, 4 * TILE, big, blue, 1);
-		App->player->position.x = 1 * TILE;
-		App->player->position.y = 20 * TILE;
 		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 		break;
 	}
@@ -646,22 +636,18 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 			  App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
 			  App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
-
 			  App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
 			  App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
 			  App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
 			  App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
-
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
+			  App->player->position.x = 3 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
 	default:
 	{
 			  App->balls->AddBall(60, 50, huge, green, 1);
-			  App->player->position.x = 1 * TILE;
-			  App->player->position.y = 20 * TILE;
+			  App->player->position.y = 23 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
 	}
@@ -675,11 +661,15 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 		{
 			App->renderer->DrawQuad(tile, 0, 255, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
 		}
-		if (map[h][w - 1] != 1 && map[h][w + 3] == 1)
+		else if (map[h][w - 1] != 1 && map[h][w + 3] == 1)
 		{
 			App->renderer->DrawQuad(tile, 0, 200, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
 		}
-		if (map[h][w - 1] == 1 && map[h][w + 3] != 1)
+		else if (map[h][w - 1] == 1 && map[h][w + 3] != 1)
+		{
+			App->renderer->DrawQuad(tile, 0, 150, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
+		}
+		else
 		{
 			App->renderer->DrawQuad(tile, 0, 150, 100 * lvl[App->backgroundPlay->currentLvl][h][w], 255);
 		}

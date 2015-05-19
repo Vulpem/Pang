@@ -25,21 +25,21 @@ Ball::Ball(int x, int y, int _type, int _color = red, int direction = 1)
 	position.x = x;
 	color = _color;
 	type = _type;
-	CreateBall(direction);
+	CreateBall(direction, 0.2);
 }
 
-void Ball::CreateBall(int direction)
+void Ball::CreateBall(int direction, float ySpeedChange )
 {
 	switch (type)
 	{
 		case huge:
-		{speed.y = -2.0f; speed.x = 1.3f * direction; radius = 24; YBaseSpeed = -4.7f; offset = 8; break; }
+		{speed.y = -2.0f * ySpeedChange; speed.x = 1.3f * direction; radius = 24; YBaseSpeed = -4.7f; offset = 8; break; }
 		case big:
-		{speed.y = -2.5f; speed.x = 1.1f * direction; radius = 16; YBaseSpeed = -4.4f; offset = 8; break; }
+		{speed.y = -2.5f * ySpeedChange; speed.x = 1.1f * direction; radius = 16; YBaseSpeed = -4.4f; offset = 8; break; }
 		case medium:
-		{speed.y = -2.0f; speed.x = 0.9f * direction; radius = 8; YBaseSpeed = -3.6f; offset = 4; break; }
+		{speed.y = -2.0f * ySpeedChange; speed.x = 0.9f * direction; radius = 8; YBaseSpeed = -3.6f; offset = 4; break; }
 		case little:
-		{speed.y = -1.5f; speed.x = 1.1f * direction; radius = 4; YBaseSpeed = -2.6f; offset = 0; break; }
+		{speed.y = -1.5f * ySpeedChange; speed.x = 1.1f * direction; radius = 4; YBaseSpeed = -2.6f; offset = 0; break; }
 	}
 	dead = false;
 }

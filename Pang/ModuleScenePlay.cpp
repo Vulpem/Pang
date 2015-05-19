@@ -72,6 +72,7 @@ update_status ModuleScenePlay::Update()
 	{
 		debugMode = !debugMode;
 	}
+	App->player->undying = debugMode;
 	if (debugMode == true)
 	{
 		int x = rand() % (SCREEN_WIDTH - TILE * 6) + TILE * 3;
@@ -97,11 +98,6 @@ update_status ModuleScenePlay::Update()
 			currentLvl = 0;
 			App->maps->LoadMap(0);
 		}
-		if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		{
-			LOG("Changed undying mode\n");
-			App->player->undying = !App->player->undying;
-		}
 		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 		{
 			LOG("Pause\n");
@@ -115,6 +111,11 @@ update_status ModuleScenePlay::Update()
 		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 		{
 			LOG("NBalls: %i \n", App->balls->ballsList.count());
+		}
+		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		{
+			App->backgroundTransition->Enable(++currentLvl);
+			Disable();
 		}
 			/*
 			Player bounding box

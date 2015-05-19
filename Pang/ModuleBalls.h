@@ -23,7 +23,7 @@ public:
 	Ball(Ball* parent, int offsetDirection);
 	void Update(bool pause);
 private:
-	void CreateBall(int direction);
+	void CreateBall(int direction, float ySpeedChange = 1.0f);
 	
 };
 
