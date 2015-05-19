@@ -113,7 +113,7 @@ update_status ModulePlayer::Update()
 	App->fonts->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
 	if (App->backgroundPlay->lives > 4)
 	{
-		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 9, 29 * TILE + 1);
+		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 18, 29 * TILE + 1);
 	}
 	//////////////////////
 
