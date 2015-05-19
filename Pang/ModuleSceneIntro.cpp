@@ -101,7 +101,7 @@ update_status ModuleSceneIntro::Update()
 			{
 				nextLevel--;
 			}
-			if ((App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || timeCounter >= 600) && nextLevel <= 3 )
+			if ((App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || timeCounter >= 600) && nextLevel <= 10)
 			{
 				timeCounter = 0;
 				paused = true;
