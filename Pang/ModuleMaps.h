@@ -8,7 +8,7 @@ class ModuleMaps : public Module
 public:
 	SDL_Rect tile;
 	static int map[26][48];
-	const static int lvl[11][26][48];
+	const static int lvl[16][26][48];
 	
 
 	ModuleMaps(Application* app, bool start_enabled = true);
