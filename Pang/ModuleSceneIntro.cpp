@@ -53,7 +53,7 @@ update_status ModuleSceneIntro::Update()
 		if (timeCounter > 30)
 		{
 			timeCounter = 0;
-			App->backgroundPlay->Enable(nextLevel);
+			App->backgroundPlay->Enable(nextLevel * 3 - 2);
 			Disable();
 		}
 		else
