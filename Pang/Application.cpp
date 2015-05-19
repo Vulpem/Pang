@@ -3,8 +3,8 @@
 
 Application::Application()
 {
-	renderer = new ModuleRender(this);
 	window = new ModuleWindow(this);
+	renderer = new ModuleRender(this);
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
@@ -21,7 +21,6 @@ Application::Application()
 	balls = new ModuleBalls(this, false);
 	particles = new ModuleParticles(this);
 	boosts = new ModuleBoost(this, false);
-//	fonts = new ModuleFonts(this, false);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -31,11 +30,11 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
+	AddModule(fonts);
 	
 	AddModule(backgroundIntro);
 	AddModule(backgroundPlay);
 	AddModule(backgroundTransition);
-	AddModule(fonts);
 
 	AddModule(maps);
 	
@@ -44,10 +43,6 @@ Application::Application()
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);
-	
-
-
-
 }
 
 Application::~Application()
@@ -58,10 +53,12 @@ Application::~Application()
 	delete player;
 	delete gun;
 	delete maps;
-
+	
+	delete backgroundTransition;
 	delete backgroundPlay;
 	delete backgroundIntro;
-
+	
+	delete fonts;
 	delete audio;
 	delete input;
 	delete textures;
