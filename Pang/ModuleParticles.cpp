@@ -50,6 +50,28 @@ bool ModuleParticles::Init()
 			explosion[n][m].fx = explosion[0][0].fx;
 		}
 	}
+
+	/////////////////////
+	//Animations Bricks//
+	/////////////////////
+
+	for (int n = 0; n++; n < 5)
+	{
+		breakingBrick[n].anim.loop = 0;
+		breakingBrick[n].anim.speed = 0.01f;
+		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
+	}
+	//brick frames
+	breakingBrick[0].anim.frames.PushBack({ 0, 16, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 0, 24, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 0, 32, 8, 8 });
+	for (int n = 1; n < 5; n++)
+	{
+		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 16, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 24, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 32, 8, 8 });
+	}
+
 	return true;
 }
 

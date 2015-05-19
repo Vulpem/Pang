@@ -175,6 +175,8 @@ void Bullet::BreakingBrick(int num, int w, int h, Application* App)
 {
 	App->maps->map[h][w] = 0;
 
+	App->particles->AddParticle(App->particles->breakingBrick[0], w*TILE, h*TILE);
+
 	for (int x = -1; x <= 1; x += 2)
 	{
 		if (App->maps->lvl[App->backgroundPlay->currentLvl][h][w + x] == num && App->maps->map[h][w + x] == 1)

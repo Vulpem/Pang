@@ -17,29 +17,6 @@ ModuleMaps::~ModuleMaps()
 
 bool ModuleMaps::Init()
 {
-	/////////////////////
-	//Animations Bricks//
-	/////////////////////
-
-	//options frames brick 0
-	for (int n = 0; n++; n < 5)
-	{
-		brick_Animation[n]->loop = 0;
-		brick_Animation[n]->speed = 0.3f;
-	}
-	//brick 1st frame 
-	brick_Animation[0]->frames.PushBack({0,16,8,8});
-	//frames 2,3
-	brick_Animation[0]->frames.PushBack({ 0, 24, 8, 8 });
-	brick_Animation[0]->frames.PushBack({ 0, 32, 8, 8 });
-	for (int n = 1; n < 5; n++)
-	{
-		//brick 1st frame 
-		brick_Animation[n]->frames.PushBack({ 16+n*8 , 16, 8, 8 });
-		//frames 2,3
-		brick_Animation[n]->frames.PushBack({ 16 + n * 8, 24, 8, 8 });
-		brick_Animation[n]->frames.PushBack({ 16 + n * 8, 32, 8, 8 });
-	}
 	return true;
 }
 
