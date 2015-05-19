@@ -646,7 +646,7 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	default:
 	{
-			  App->balls->AddBall(60, 50, huge, green, 1);
+			  App->balls->AddBall(25*TILE, 4*TILE, huge, green, 1);
 			  App->player->position.y = 23 * TILE;
 			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 			  break;
