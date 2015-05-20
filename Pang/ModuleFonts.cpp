@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include "SDL_TTF\include\SDL_ttf.h"
+#include "SDL\include\SDL.h"
 
 ModuleFonts::ModuleFonts(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -66,7 +67,7 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
 void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
 {
 
-		/*std::string string = std::to_string(num);
+		std::string string = std::to_string(num);
 		rect.w = strlen(string.c_str()) * 9;
 		x -= strlen(string.c_str()) * 9;
 
@@ -78,17 +79,19 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 		}
 		else
 		{
+			int b = 0;
 			if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
 			{
+				b++;
 				App->renderer->Blit(tmpTexture, x, y, &rect);
-				SDL_DestroyTexture(tmpTexture);
+				b++;
 			}
-		}*/
+		}
 }
 
 void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
 {
-	/*if (size == 8)
+	if (size == 8)
 	{
 		rect.w = strlen(text) * 8.5;
 		surface = TTF_RenderText_Solid(font, text, textColor);
@@ -106,12 +109,14 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 	}
 	else
 	{
+		int c = 0;
 		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
 		{
+			c++;
 			App->renderer->Blit(tmpTexture, x, y, &rect);
-			SDL_DestroyTexture(tmpTexture);
+			c++;
 		}
-	}*/
+	}
 	
 }
 
