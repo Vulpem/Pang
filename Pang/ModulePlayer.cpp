@@ -106,7 +106,7 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	Died();
+	Reset();
 
 	//Printing interface//
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
@@ -529,7 +529,7 @@ void ModulePlayer::CheckBallCollision()
 	}
 }
 
-void ModulePlayer::Died()
+void ModulePlayer::Reset()
 {
 	if (deadAnimEnd == true)
 	{

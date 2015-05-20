@@ -101,7 +101,7 @@ private:
 	void UpdateBoosts();
 
 	void CheckBallCollision();
-	void Died();
+	void Reset();
 
 	//Ladder Positioning//
 	//////////////////////
