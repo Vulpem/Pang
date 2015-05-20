@@ -12,7 +12,7 @@ enum PlayerStates
 	falling,
 	climbingUp,
 	climbingDown,
-	dead
+	caput
 };
 
 class ModulePlayer : public Module

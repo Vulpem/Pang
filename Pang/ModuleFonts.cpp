@@ -23,6 +23,11 @@ bool ModuleFonts::Init()
 	return true;
 }
 
+bool ModuleFonts::Start()
+{
+	return true;
+}
+
 update_status ModuleFonts::PreUpdate()
 {
 	return UPDATE_CONTINUE;
@@ -58,29 +63,28 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
 
 void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
 {
-	
-	std::string string = std::to_string(num);
-	rect.w = strlen(string.c_str()) * 9;
-	x -= strlen(string.c_str()) * 9;
+		std::string string = std::to_string(num);
+		rect.w = strlen(string.c_str()) * 9;
+		x -= strlen(string.c_str()) * 9;
 
 
-	surface = TTF_RenderText_Solid(font, string.c_str(), textColor);
-	if (surface == NULL)
-	{
-		LOG("Could not load message");
-	}
-
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
-	App->renderer->Blit(texture, x, y, &rect);
-	
+		surface = TTF_RenderText_Solid(font, string.c_str(), textColor);
+		if (surface == NULL)
+		{
+			LOG("Could not load message");
+		}
+		else
+		{
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
+			App->renderer->Blit(texture, x, y, &rect);
+		}
 }
 
 void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
 {
-	/*
 	if (size == 8)
 	{
-		rect.w = strlen(text) * 8;
+		rect.w = strlen(text) * 8.5;
 		surface = TTF_RenderText_Solid(font, text, textColor);
 	}
 
@@ -94,10 +98,10 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 	{
 		LOG("Could not load message");
 	}
-
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
-	App->renderer->Blit(texture, x, y, &rect);
-	*/
-
+	else
+	{
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
+		App->renderer->Blit(texture, x, y, &rect);
+	}
 }
 
