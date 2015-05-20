@@ -106,6 +106,8 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+	Died();
+
 	//Printing interface//
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);
@@ -526,26 +528,26 @@ void ModulePlayer::CheckBallCollision()
 			tmp = tmp->next;
 		}
 	}
-		if (deadAnimEnd == true)
+}
+
+void ModulePlayer::Died()
+{
+	if (deadAnimEnd == true)
+	{
+		if (App->backgroundPlay->lives > 0)
 		{
-			if (App->backgroundPlay->lives > 0)
-			{
-				App->backgroundPlay->lives -= 1;
-				App->backgroundPlay->Disable();
-				App->backgroundPlay->Enable(App->backgroundPlay->currentLvl);
-		//		App->maps->LoadMap(App->backgroundPlay->currentLvl);
-	//			App->balls->pauseBalls = false;
-			}
-			else
-			{
-				App->backgroundPlay->lives = 3;
-				App->backgroundIntro->Enable();
-				App->backgroundPlay->Disable();
-			}
+			App->backgroundPlay->lives -= 1;
+			App->backgroundPlay->Disable();
+			App->backgroundPlay->Enable(App->backgroundPlay->currentLvl);
+		}
+		else
+		{
+			App->backgroundPlay->lives = 3;
+			App->backgroundIntro->Enable();
+			App->backgroundPlay->Disable();
 		}
 	}
-
-
+}
 
 bool ModulePlayer::LadderUpEnds()
 {

@@ -13,9 +13,7 @@ public:
 	SDL_Texture* timerImage;
 	SDL_Texture* ready;
 
-	SDL_Texture* timerNum1;
-	SDL_Texture* timerNum2;
-	SDL_Texture* timerNum3;
+	SDL_Texture* timerNum;
 
 
 	SDL_Rect livesRect;

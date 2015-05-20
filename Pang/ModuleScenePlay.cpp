@@ -57,31 +57,18 @@ bool ModuleScenePlay::Start(int level)
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
 	timerImage = App->textures->Load("./Image_Sources/Timer_Photo.png");
 	ready = App->textures->Load("./Image_Sources/Ready.png");
-	timerNum1 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
-	timerNum2 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
-	timerNum3 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
+	timerNum =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
 
 	if (timerImage == NULL)
 	{
 		LOG("Could not load timer");
 		return false;
 	}
-	if (timerNum1 == NULL)
+	if (timerNum == NULL)
 	{
 		LOG("Could not load timerNum1");
 		return false;
 	}
-	if (timerNum2 == NULL)
-	{
-		LOG("Could not load timerNum2");
-		return false;
-	}
-	if (timerNum3 == NULL)
-	{
-		LOG("Could not load timerNum3");
-		return false;
-	}
-	
 	App->maps->Enable();
 	App->fonts->Enable();
 	
@@ -134,9 +121,9 @@ update_status ModuleScenePlay::Update()
 		//////////////////////
 		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
 		App->renderer->Blit(timerImage, 250, 9, &timerRect);
-		App->renderer->Blit(timerNum1, 330, 9, &timerNumRect1);
-		App->renderer->Blit(timerNum2, 345, 9, &timerNumRect2);
-		App->renderer->Blit(timerNum3, 360, 9, &timerNumRect3);
+		App->renderer->Blit(timerNum, 330, 9, &timerNumRect1);
+		App->renderer->Blit(timerNum, 345, 9, &timerNumRect2);
+		App->renderer->Blit(timerNum, 360, 9, &timerNumRect3);
 		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
 		for (int n = 0; n < lives && n < 4; n++)
