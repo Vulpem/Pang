@@ -8,7 +8,7 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
-	fonts = new ModuleFonts(this, true);
+//	fonts = new ModuleFonts(this, true);
 
 	sceneIntro = new ModuleSceneIntro(this, true);
 	scenePlay = new ModuleScenePlay(this, false);
@@ -30,7 +30,7 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(fonts);
+//	AddModule(fonts);
 	
 	AddModule(sceneIntro);
 	AddModule(scenePlay);
@@ -58,7 +58,7 @@ Application::~Application()
 	delete scenePlay;
 	delete sceneIntro;
 	
-	delete fonts;
+//	delete fonts;
 	delete audio;
 	delete input;
 	delete textures;

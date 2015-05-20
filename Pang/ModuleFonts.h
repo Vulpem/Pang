@@ -8,9 +8,6 @@ class ModuleFonts : public Module
 {
 public:
 
-	SDL_Surface* message;
-
-
 	TTF_Font* font;
 	TTF_Font* fontInit;
 

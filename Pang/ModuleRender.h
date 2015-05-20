@@ -1,9 +1,16 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "SDL_TTF\include\SDL_ttf.h"
+#include <string.h>
 
 class ModuleRender : public Module
 {
+private:
+	TTF_Font* font;
+	TTF_Font* fontInit;
+
+	SDL_Color textColor;
 public:
 	ModuleRender(Application* app, bool start_enabled = true);
 	~ModuleRender();
@@ -16,6 +23,10 @@ public:
 
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, int xOffset = 0, int yOffset = 0, float speed = 1.0f);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
+
+	TTF_Font* LoadFont(char* file, int size) const;
+	void PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const;
+	void PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const;
 public:
 	SDL_Renderer* renderer;
 };

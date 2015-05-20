@@ -72,7 +72,7 @@ bool ModuleScenePlay::Start(int level)
 		return false;
 	}
 	App->maps->Enable();
-	App->fonts->Enable();
+//	App->fonts->Enable();
 	
 	App->player->Enable();
 	App->gun->Enable();

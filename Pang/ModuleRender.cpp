@@ -2,6 +2,9 @@
 #include "Application.h"
 #include "ModuleRender.h"
 
+#include <string.h>
+#include <sstream>
+
 ModuleRender::ModuleRender(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	renderer = NULL;
@@ -31,6 +34,11 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	TTF_Init();
+	textColor = { 255, 255, 255 };
+	font = LoadFont("Fonts/Pang.ttf", 8);
+	fontInit = LoadFont("Fonts/Pang.ttf", 7);
+
 	return ret;
 }
 
@@ -58,6 +66,10 @@ update_status ModuleRender::PostUpdate()
 bool ModuleRender::CleanUp()
 {
 	LOG("Destroying renderer");
+
+	TTF_CloseFont(font);
+	TTF_CloseFont(fontInit);
+	TTF_Quit();
 
 	//Destroy window
 	if(renderer != NULL)
@@ -121,4 +133,71 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+TTF_Font* ModuleRender::LoadFont(char* file, int size) const
+{
+	TTF_Font* tmpfont;
+	tmpfont = TTF_OpenFont(file, size);
+	if (tmpfont == NULL)
+	{
+		LOG("Could not load font");
+	}
+	return tmpfont;
+}
+
+void ModuleRender::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
+{
+
+	std::string string = std::to_string(num);
+	rect.w = strlen(string.c_str()) * 9;
+	x -= strlen(string.c_str()) * 9;
+
+
+	surface = TTF_RenderText_Solid(font, string.c_str(), textColor);
+	if (surface == NULL)
+	{
+		LOG("Could not load message");
+	}
+	else
+	{
+		int b = 0;
+		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, surface))
+		{
+			b++;
+			App->renderer->Blit(tmpTexture, x, y, &rect);
+			b++;
+		}
+	}
+}
+
+void ModuleRender::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
+{
+	if (size == 8)
+	{
+		rect.w = strlen(text) * 8.5;
+		surface = TTF_RenderText_Solid(font, text, textColor);
+	}
+
+	else if (size == 6)
+	{
+		rect.w = strlen(text) * 7;
+		surface = TTF_RenderText_Solid(fontInit, text, textColor);
+	}
+
+	if (surface == NULL)
+	{
+		LOG("Could not load message");
+	}
+	else
+	{
+		int c = 0;
+		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, surface))
+		{
+			c++;
+			App->renderer->Blit(tmpTexture, x, y, &rect);
+			c++;
+		}
+	}
+
 }
