@@ -58,7 +58,7 @@ bool ModuleParticles::Init()
 	for (int n = 0; n++; n < 5)
 	{
 		breakingBrick[n].anim.loop = false;
-		breakingBrick[n].anim.speed = 0.000000000002f;
+		breakingBrick[n].anim.speed = 0.2f;
 		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	}
 	//brick frames
