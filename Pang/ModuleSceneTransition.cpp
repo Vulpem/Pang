@@ -47,12 +47,12 @@ update_status ModuleSceneTransition::Update()
 		timeCounter = 0;
 		if (nextLevel <= 15)
 		{
-			App->backgroundPlay->Enable(nextLevel);
+			App->scenePlay->Enable(nextLevel);
 			Disable();
 		}
 		else
 		{
-			App->backgroundIntro->Enable();
+			App->sceneIntro->Enable();
 			Disable();
 		}
 	}

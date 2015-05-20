@@ -530,7 +530,7 @@ update_status ModuleMaps::Update()
 				{
 						  tile.x = w*TILE;
 						  tile.y = h*TILE;
-						  if (lvl[App->backgroundPlay->currentLvl][h][w] != 1)
+						  if (lvl[App->scenePlay->currentLvl][h][w] != 1)
 						  {
 							  DrawGlassBrick(h, w);
 						  }
@@ -600,14 +600,14 @@ void ModuleMaps::LoadMap(int nMap)
 
 	if (nMap % 2 == 1)
 	{
-		App->backgroundPlay->background.x = 8;
+		App->scenePlay->background.x = 8;
 	}
 	else
 	{
-		App->backgroundPlay->background.x = 16 + SCREEN_WIDTH;
+		App->scenePlay->background.x = 16 + SCREEN_WIDTH;
 	}
 	
-	App->backgroundPlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
+	App->scenePlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
 
 	App->player->position.x = 18 * TILE;
 	App->player->position.y = 21 * TILE;
@@ -629,7 +629,7 @@ void ModuleMaps::LoadMap(int nMap)
 	case 2:
 	{
 		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->audio->PlayMusic("./Sounds/MtKeirin.wav");
+		App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
 		break;
 	}
 	case 3:
@@ -645,14 +645,14 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
 			  App->player->position.x = 20 * TILE;
 			  App->player->position.y = 15 * TILE;
-			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
 			  break;
 	}
 	case 5:
 	{
 			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
 			  App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
-			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
 			  break;
 	}
 	case 6:
@@ -660,7 +660,7 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
 			  App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
 			  App->player->position.x = 10 * TILE;
-			  App->audio->PlayMusic("./Sounds/1Mt_Fuji.ogg");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
 			  break;
 	}
 	case 7:
@@ -704,10 +704,10 @@ void ModuleMaps::LoadMap(int nMap)
 void ModuleMaps::DrawGlassBrick(int h, int w)
 {
 	SolidBrickSection.y = 1 * TILE;
-	int num = App->maps->lvl[App->backgroundPlay->currentLvl][h][w];
-	if ((lvl[App->backgroundPlay->currentLvl][h][w + 1] == num && lvl[App->backgroundPlay->currentLvl][h][w - 1] != num) || w <= 1)
+	int num = App->maps->lvl[App->scenePlay->currentLvl][h][w];
+	if ((lvl[App->scenePlay->currentLvl][h][w + 1] == num && lvl[App->scenePlay->currentLvl][h][w - 1] != num) || w <= 1)
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != num)
+		if (lvl[App->scenePlay->currentLvl][h][w + 2] != num)
 		{
 			SolidBrickSection.x = 1 * TILE;
 		}
@@ -716,9 +716,9 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 			SolidBrickSection.x = 3 * TILE;
 		}
 	}
-	else if (lvl[App->backgroundPlay->currentLvl][h][w + 1] != num && lvl[App->backgroundPlay->currentLvl][h][w - 1] == num || w >= 46)
+	else if (lvl[App->scenePlay->currentLvl][h][w + 1] != num && lvl[App->scenePlay->currentLvl][h][w - 1] == num || w >= 46)
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w - 2] != num)
+		if (lvl[App->scenePlay->currentLvl][h][w - 2] != num)
 		{
 			SolidBrickSection.x = 2 * TILE;
 		}
@@ -727,13 +727,13 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 			SolidBrickSection.x = 6 * TILE;
 		}
 	}
-	else if (lvl[App->backgroundPlay->currentLvl][h][w + 1] != num && lvl[App->backgroundPlay->currentLvl][h][w - 1] != num)
+	else if (lvl[App->scenePlay->currentLvl][h][w + 1] != num && lvl[App->scenePlay->currentLvl][h][w - 1] != num)
 	{
 		SolidBrickSection.x = 0;
 	}
 	else
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != num)
+		if (lvl[App->scenePlay->currentLvl][h][w + 2] != num)
 		{
 			SolidBrickSection.x = 5 * TILE;
 		}
@@ -749,9 +749,9 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 void ModuleMaps::DrawBrick(int h, int w)
 {
 	SolidBrickSection.y = 0;
-	if ((lvl[App->backgroundPlay->currentLvl][h][w + 1] == 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1) || w <=1 )
+	if ((lvl[App->scenePlay->currentLvl][h][w + 1] == 1 && lvl[App->scenePlay->currentLvl][h][w - 1] != 1) || w <=1 )
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != 1)
+		if (lvl[App->scenePlay->currentLvl][h][w + 2] != 1)
 		{
 			SolidBrickSection.x = 1 * TILE;
 		}
@@ -760,9 +760,9 @@ void ModuleMaps::DrawBrick(int h, int w)
 			SolidBrickSection.x = 3 * TILE;
 		}
 	}
-	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] != 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] == 1 || w>= 46)
+	else if(lvl[App->scenePlay->currentLvl][h][w + 1] != 1 && lvl[App->scenePlay->currentLvl][h][w - 1] == 1 || w>= 46)
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w - 2] != 1)
+		if (lvl[App->scenePlay->currentLvl][h][w - 2] != 1)
 		{
 			SolidBrickSection.x = 2 * TILE;
 		}
@@ -771,13 +771,13 @@ void ModuleMaps::DrawBrick(int h, int w)
 			SolidBrickSection.x = 6 * TILE;
 		}
 	}
-	else if(lvl[App->backgroundPlay->currentLvl][h][w + 1] != 1 && lvl[App->backgroundPlay->currentLvl][h][w - 1] != 1)
+	else if(lvl[App->scenePlay->currentLvl][h][w + 1] != 1 && lvl[App->scenePlay->currentLvl][h][w - 1] != 1)
 	{
 		SolidBrickSection.x = 0;
 	}
 	else
 	{
-		if (lvl[App->backgroundPlay->currentLvl][h][w + 2] != 1)
+		if (lvl[App->scenePlay->currentLvl][h][w + 2] != 1)
 		{
 			SolidBrickSection.x = 5 * TILE;
 		}

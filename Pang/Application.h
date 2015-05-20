@@ -31,9 +31,9 @@ public:
 	ModuleAudio* audio;
 	
 
-	ModuleSceneIntro* backgroundIntro;
-	ModuleScenePlay* backgroundPlay;
-	ModuleSceneTransition* backgroundTransition;
+	ModuleSceneIntro* sceneIntro;
+	ModuleScenePlay* scenePlay;
+	ModuleSceneTransition* sceneTransition;
 
 	ModulePlayer* player;
 	ModuleGun* gun;

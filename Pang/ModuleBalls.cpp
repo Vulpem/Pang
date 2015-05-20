@@ -250,7 +250,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							 //This piece of code are just for rendering the squares in "debug mode", not used in the actual game.
 							 //VVVVV
-							 if (App->backgroundPlay->debugMode == true)
+							 if (App->scenePlay->debugMode == true)
 							 {
 								 rect.x = (currentTileX + (2 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 								 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -261,7 +261,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX + (2 * directionX), currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-								 if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								 if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 				}
@@ -270,7 +270,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							 //VVVVV
 
-							 if (App->backgroundPlay->debugMode == true)
+							 if (App->scenePlay->debugMode == true)
 							 {
 								 rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (2 * directionY)) * 8; rect.h = 8; rect.w = 8;
 								 App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -281,7 +281,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX + w, currentTileY + (2 * directionY), currentBall->data);
 #pragma region RenderDebugTiles
-								 if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								 if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 				}
@@ -290,7 +290,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 					//This piece of code are just for rendering the squares in "debug mode", not used in the actual game.
 					//VVVVV
-					if (App->backgroundPlay->debugMode == true)
+					if (App->scenePlay->debugMode == true)
 					{
 						rect.x = (currentTileX + (3 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -301,7 +301,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX + (3 * directionX), currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+						if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 				}
@@ -310,7 +310,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 					//VVVVV
 
-					if (App->backgroundPlay->debugMode == true)
+					if (App->scenePlay->debugMode == true)
 					{
 						rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (3 * directionY)) * 8; rect.h = 8; rect.w = 8;
 						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -321,7 +321,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX + w, currentTileY + (3 * directionY), currentBall->data);
 #pragma region RenderDebugTiles
-						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+						if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 				}
@@ -336,7 +336,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							//This piece of code are just for rendering the squares in "debug mode", not used in the actual game.
 							//VVVVV
-							if (App->backgroundPlay->debugMode == true)
+							if (App->scenePlay->debugMode == true)
 							{
 								rect.x = (currentTileX + (2 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 								App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -347,7 +347,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 							{
 								collided = CheckColision(currentTileX + (2 * directionX), currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-								if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 							}
 						}
@@ -356,7 +356,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							//VVVVV
 
-							if (App->backgroundPlay->debugMode == true)
+							if (App->scenePlay->debugMode == true)
 							{
 								rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (2 * directionY)) * 8; rect.h = 8; rect.w = 8;
 								App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -367,7 +367,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 							{
 								collided = CheckColision(currentTileX + w, currentTileY + (2 * directionY), currentBall->data);
 #pragma region RenderDebugTiles
-								if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 							}
 						}
@@ -376,7 +376,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							//This piece of code are just for rendering the squares in "debug mode", not used in the actual game.
 							//VVVVV
-							if (App->backgroundPlay->debugMode == true)
+							if (App->scenePlay->debugMode == true)
 							{
 								rect.x = (currentTileX + (1 * directionX)) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 								App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -387,7 +387,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 							{
 								collided = CheckColision(currentTileX + (1 * directionX), currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-								if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 							}
 						}
@@ -396,7 +396,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 #pragma region RenderDebugTiles
 							//VVVVV
 
-							if (App->backgroundPlay->debugMode == true)
+							if (App->scenePlay->debugMode == true)
 							{
 								rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + (1 * directionY)) * 8; rect.h = 8; rect.w = 8;
 								App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -407,7 +407,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 							{
 								collided = CheckColision(currentTileX + w, currentTileY + (1 * directionY), currentBall->data);
 #pragma region RenderDebugTiles
-								if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+								if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 							}
 						}
@@ -422,7 +422,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 
 #pragma region RenderDebugTiles
 					//VVVVV
-					if (App->backgroundPlay->debugMode == true)
+					if (App->scenePlay->debugMode == true)
 					{
 						rect.x = (currentTileX) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -433,7 +433,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX, currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+						if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 
@@ -443,7 +443,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 
 #pragma region RenderDebugTiles
 					//VVVVV
-					if (App->backgroundPlay->debugMode == true)
+					if (App->scenePlay->debugMode == true)
 					{
 						rect.x = (currentTileX + w)* 8; rect.y = (currentTileY) * 8; rect.h = 8; rect.w = 8;
 						App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -454,7 +454,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 						collided = CheckColision(currentTileX + w, currentTileY, currentBall->data);
 #pragma region RenderDebugTiles
-						if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+						if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 					}
 
@@ -465,7 +465,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 					{
 #pragma region RenderDebugTiles
 						//VVVVV
-						if (App->backgroundPlay->debugMode == true)
+						if (App->scenePlay->debugMode == true)
 						{
 							rect.x = (currentTileX + w) * 8; rect.y = (currentTileY + h) * 8; rect.h = 8; rect.w = 8;
 							App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -476,7 +476,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 						{
 							collided = CheckColision(currentTileX + w, currentTileY + h, currentBall->data);
 #pragma region RenderDebugTiles
-							if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+							if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 						}
 					}
@@ -494,7 +494,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 
 #pragma region RenderDebugTiles
 								   //VVVVV
-								   if (App->backgroundPlay->debugMode == true)
+								   if (App->scenePlay->debugMode == true)
 								   {
 									   rect.x = (currentTileX + w * directionX) * 8; rect.y = (currentTileY + h * directionY) * 8; rect.h = 8; rect.w = 8;
 									   App->renderer->DrawQuad(rect, 255, 0, 0, 100);
@@ -505,7 +505,7 @@ void ModuleBalls::CheckBricksColision(p2List_item<Ball*>* currentBall)
 								   {
 									   collided = CheckColision(currentTileX + w * directionX, currentTileY + h * directionY, currentBall->data);
 #pragma region RenderDebugTiles
-									   if (App->backgroundPlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
+									   if (App->scenePlay->debugMode == true){ App->renderer->DrawQuad(rect, 0, 0, 255, 150); }
 #pragma endregion
 								   }
 
@@ -530,7 +530,7 @@ bool ModuleBalls::CheckColision(int tileX, int tileY, Ball* myBall)
 	points[2].x = tileX * 8;		points[2].y = (tileY + 1) * 8;
 	points[3].x = (tileX + 1) * 8;	points[3].y = (tileY + 1) * 8;
 
-	for (int n = 0; n < 4 && App->backgroundPlay->debugMode == true; n++)
+	for (int n = 0; n < 4 && App->scenePlay->debugMode == true; n++)
 	{
 		SDL_Rect myBallPos;
 		myBallPos.h = myBallPos.w = 1;

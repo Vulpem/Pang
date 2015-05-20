@@ -113,7 +113,7 @@ bool Bullet::Update(Application* app)
 	if (app->maps->map[(end.y - 1) / 8][end.x/8] == 1)
 	{
 		ret = false;
-		int num = app->maps->lvl[app->backgroundPlay->currentLvl][(end.y - 1) / 8][end.x / 8];
+		int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];
 		if (num != 1 && num != 2 && num != 0)
 		{
 			BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
@@ -177,14 +177,14 @@ void Bullet::BreakingBrick(int num, int w, int h, Application* App)
 
 	for (int x = -1; x <= 1; x += 2)
 	{
-		if (App->maps->lvl[App->backgroundPlay->currentLvl][h][w + x] == num && App->maps->map[h][w + x] == 1)
+		if (App->maps->lvl[App->scenePlay->currentLvl][h][w + x] == num && App->maps->map[h][w + x] == 1)
 		{
 			BreakingBrick(num, w + x, h, App);
 		}
 	}
 	for (int y = -1; y <= 1; y += 2)
 	{
-		if (App->maps->lvl[App->backgroundPlay->currentLvl][h + y][w] == num && App->maps->map[h + y][w] == 1)
+		if (App->maps->lvl[App->scenePlay->currentLvl][h + y][w] == num && App->maps->map[h + y][w] == 1)
 		{
 			BreakingBrick(num, w, h + y, App);
 		}

@@ -62,14 +62,14 @@ bool ModuleParticles::Init()
 		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	}
 	//brick frames
-	breakingBrick[0].anim.frames.PushBack({ 65, 88, 8, 8 });
-	breakingBrick[0].anim.frames.PushBack({ 73, 88, 8, 8 });
-	breakingBrick[0].anim.frames.PushBack({ 81, 88, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 65, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 73, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 81, 96, 8, 8 });
 	for (int n = 1; n < 5; n++)
 	{
-		breakingBrick[n].anim.frames.PushBack({ 57 + n * 8, 80, 8, 8 });
-		breakingBrick[n].anim.frames.PushBack({ 89 + n * 8, 80, 8, 8 });
-		breakingBrick[n].anim.frames.PushBack({ 121 + n * 8, 80, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 81 + n * 8, 96, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 113 + n * 8, 96, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 145 + n * 8, 96, 8, 8 });
 	}
 
 	return true;
@@ -79,7 +79,7 @@ bool ModuleParticles::Init()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	explosionGraphics = App->textures->Load("Image_Sources/Explosions.png");
+	explosionGraphics = App->textures->Load("Image_Sources/Particles.png");
 	if (explosionGraphics == NULL)
 	{
 		LOG("Error loading particle graphics");

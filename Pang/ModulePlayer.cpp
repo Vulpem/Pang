@@ -87,7 +87,7 @@ bool ModulePlayer::Start()
 	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;
-	graphics = App->backgroundPlay->livesGraphics;
+	graphics = App->scenePlay->livesGraphics;
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -112,41 +112,41 @@ update_status ModulePlayer::Update()
 	App->fonts->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
 	App->fonts->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);
 	//Level name
-	if ((App->backgroundPlay->currentLvl - 1) / 3 + 1 == 3)
+	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
 	{
 		App->fonts->PrintText("EMERALD", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
 		App->fonts->PrintText("TEMPLE", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
 	}
-	else if ((App->backgroundPlay->currentLvl - 1) / 3 + 1 == 17)
+	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
 	{
 		App->fonts->PrintText("EASTER", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
 		App->fonts->PrintText("ISLAND", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
 	}
 	else
 	{
-	App->fonts->PrintText(App->maps->GetLevelName(App->backgroundPlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+	App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
 	}
 
 	//Level info
-	if (App->backgroundPlay->currentLvl < 10)
+	if (App->scenePlay->currentLvl < 10)
 	{
-	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
+	App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
 	App->fonts->PrintText("-", textSurf, textRect, 21 * TILE, 28 * TILE, 8);
-	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+	App->fonts->PrintNumbers((App->scenePlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
 	}
 	else
 	{
-		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
+		App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
 		App->fonts->PrintText("-", textSurf, textRect, 20 * TILE, 28 * TILE, 8);
-		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+		App->fonts->PrintNumbers((App->scenePlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
 	}
 
 	App->fonts->PrintText("STAGE", textSurf, textRect, 24 * TILE, 28 * TILE, 8);
 	////////////
 	App->fonts->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
-	if (App->backgroundPlay->lives > 4)
+	if (App->scenePlay->lives > 4)
 	{
-		App->fonts->PrintNumbers(App->backgroundPlay->lives, textSurf, textRect, 10 * TILE + 18, 29 * TILE + 1);
+		App->fonts->PrintNumbers(App->scenePlay->lives, textSurf, textRect, 10 * TILE + 18, 29 * TILE + 1);
 	}
 
 	if (current_animation != NULL)
@@ -533,17 +533,17 @@ void ModulePlayer::Reset()
 {
 	if (deadAnimEnd == true)
 	{
-		if (App->backgroundPlay->lives > 0)
+		if (App->scenePlay->lives > 0)
 		{
-			App->backgroundPlay->lives -= 1;
-			App->backgroundPlay->Disable();
-			App->backgroundPlay->Enable(App->backgroundPlay->currentLvl);
+			App->scenePlay->lives -= 1;
+			App->scenePlay->Disable();
+			App->scenePlay->Enable(App->scenePlay->currentLvl);
 		}
 		else
 		{
-			App->backgroundPlay->lives = 3;
-			App->backgroundIntro->Enable();
-			App->backgroundPlay->Disable();
+			App->scenePlay->lives = 3;
+			App->sceneIntro->Enable();
+			App->scenePlay->Disable();
 		}
 	}
 }

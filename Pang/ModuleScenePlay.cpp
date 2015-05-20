@@ -45,7 +45,9 @@ bool ModuleScenePlay::Start(int level)
 {
 
 	currentLvl = level;
+
 	timer = 6180;
+	startTimerevent = timer - 180;
 
 	timerNumRect1 = { 0, 0, 13, 16 };
 	timerNumRect2 = { 0, 0, 13, 16 };
@@ -88,17 +90,15 @@ bool ModuleScenePlay::Start(int level)
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
-#pragma region DebugCode
 
 	timer--;
 	if (timer <= 0)
 	{
-		App->player->Kill(0);
+		App->player->Kill( 1 );
 	}
-
 	if (App->balls->ballsList.count() == 0)
 	{
-		App->backgroundTransition->Enable(++currentLvl);
+		App->sceneTransition->Enable(++currentLvl);
 		Disable();
 	}
 	else
@@ -107,7 +107,7 @@ update_status ModuleScenePlay::Update()
 
 		//Setting timer images
 		//////////////////////
-		if (timer >= 6000)
+		if (timer >= startTimerevent)
 		{
 			timerNumRect1.x = 13;
 		}
@@ -133,16 +133,15 @@ update_status ModuleScenePlay::Update()
 		UpdateInterface();
 	}
 
-	if ((timer > 6060 || timer / 5 % 2 == 0) && timer > 6000)
+	if ((timer > startTimerevent + 60 || timer / 5 % 2 == 0) && timer > 6000)
 		App->renderer->Blit(ready, 150, 100, &readyRect);
-	if (timer == 6000)
+	if (timer == startTimerevent)
 	{
 		App->player->pausePlayer = false;
 		App->balls->pauseBalls = false;
 	}
 
-	if (timer < 6000)
-	{
+#pragma region DebugCode
 		if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		{
 			debugMode = !debugMode;
@@ -189,7 +188,7 @@ update_status ModuleScenePlay::Update()
 			}
 			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 			{
-				App->backgroundTransition->Enable(++currentLvl);
+				App->sceneTransition->Enable(++currentLvl);
 				Disable();
 			}
 				/*
@@ -213,11 +212,8 @@ update_status ModuleScenePlay::Update()
 						pointer = pointer->next;
 				}
 		
-		}
+		
 	#pragma endregion
-
-
-
 	}
 
 	return UPDATE_CONTINUE;

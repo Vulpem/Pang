@@ -166,7 +166,7 @@ bool Boost::Update(Application* app)
 		}
 		case life:
 		{
-			app->backgroundPlay->lives += 1; break;
+			app->scenePlay->lives += 1; break;
 		}
 		case pause:
 		{

@@ -30,7 +30,7 @@ bool ModuleSceneIntro::Start()
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 	timer = App->textures->Load("./Image_Sources/MapTimer.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
-	App->backgroundPlay->lives = 3;
+	App->scenePlay->lives = 3;
 
 	return ret;
 }
@@ -53,7 +53,7 @@ update_status ModuleSceneIntro::Update()
 		if (timeCounter > 30)
 		{
 			timeCounter = 0;
-			App->backgroundPlay->Enable(nextLevel * 3 - 2);
+			App->scenePlay->Enable(nextLevel * 3 - 2);
 			Disable();
 		}
 		else
