@@ -93,15 +93,15 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->Blit(timer, 257, 31, &timerRect);
 			
 			//Moving through levels
-			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP && nextLevel < 10)
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && nextLevel < 10)
 			{
 				nextLevel++;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP && nextLevel > 1)
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP && nextLevel > 1)
 			{
 				nextLevel--;
 			}
-			if ((App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || timeCounter >= 600) && nextLevel <= 10)
+			if ((App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || timeCounter >= 600) && nextLevel <= 10)
 			{
 				timeCounter = 0;
 				paused = true;
