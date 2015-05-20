@@ -13,12 +13,20 @@ public:
 	SDL_Texture* timerImage;
 	SDL_Texture* ready;
 
+	SDL_Texture* timerNum1;
+	SDL_Texture* timerNum2;
+	SDL_Texture* timerNum3;
+
 
 	SDL_Rect livesRect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
 	SDL_Rect timerRect;
 	SDL_Rect readyRect;
+
+	SDL_Rect timerNumRect1;
+	SDL_Rect timerNumRect2;
+	SDL_Rect timerNumRect3;
 
 	SDL_Surface* player1Surf;
 	SDL_Rect player1Rect;

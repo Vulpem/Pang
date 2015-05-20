@@ -25,6 +25,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void Kill(int);
 	bool pausePlayer;
 
 public:
@@ -100,7 +101,6 @@ private:
 	void UpdateBoosts();
 
 	void CheckBallCollision();
-	void Kill(int);
 
 	//Ladder Positioning//
 	//////////////////////

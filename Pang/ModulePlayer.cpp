@@ -473,22 +473,36 @@ void ModulePlayer::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
-	current_animation = &idle;
-	playerState = dead;
-	App->audio->PlayMusic("./Sounds/Death.wav");
 
-
-	if (xBallPos < position.x+16)
+	if (xBallPos == 0)
 	{
-			current_animation = &killDead2;
-			deadAnimXSpeed = 1;
+		pausePlayer = true;
+		for (int timer = 0; timer < 180; timer++)
+		{
+
+		}
+		deadAnimEnd = true;
 	}
 	else
 	{
-		current_animation = &killDead;
-		deadAnimXSpeed = -1;
-	}	
-	deadAnimYSpeed = -4;
+		current_animation = &idle;
+		playerState = dead;
+		App->audio->PlayMusic("./Sounds/Death.wav");
+
+
+		if (xBallPos < position.x+16)
+		{
+				current_animation = &killDead2;
+				deadAnimXSpeed = 1;
+		}
+		else
+		{
+			current_animation = &killDead;
+			deadAnimXSpeed = -1;
+		}	
+		deadAnimYSpeed = -4;
+	}
+
 }
 
 void ModulePlayer::CheckBallCollision()

@@ -30,6 +30,7 @@ bool ModuleScenePlay::Init()
 	interfaceRect.h = 4 * TILE;
 	player1Rect = { 0, 0, 0, 16 };
 	timerRect = { 0, 0, 71, 15 };
+
 	readyRect = { 0, 0, 58, 19 };
 	livesRect.x = 154;
 	livesRect.y = 44;
@@ -44,7 +45,11 @@ bool ModuleScenePlay::Start(int level)
 {
 
 	currentLvl = level;
-	timer = 0;
+	timer = 6180;
+
+	timerNumRect1 = { 0, 0, 13, 16 };
+	timerNumRect2 = { 0, 0, 13, 16 };
+	timerNumRect3 = { 0, 0, 13, 16 };
 
 	LOG("Loading background assets");
 
@@ -52,10 +57,28 @@ bool ModuleScenePlay::Start(int level)
 	livesGraphics = App->textures->Load("./Image_Sources/Player.png");
 	timerImage = App->textures->Load("./Image_Sources/Timer_Photo.png");
 	ready = App->textures->Load("./Image_Sources/Ready.png");
+	timerNum1 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
+	timerNum2 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
+	timerNum3 =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
 
 	if (timerImage == NULL)
 	{
 		LOG("Could not load timer");
+		return false;
+	}
+	if (timerNum1 == NULL)
+	{
+		LOG("Could not load timerNum1");
+		return false;
+	}
+	if (timerNum2 == NULL)
+	{
+		LOG("Could not load timerNum2");
+		return false;
+	}
+	if (timerNum3 == NULL)
+	{
+		LOG("Could not load timerNum3");
 		return false;
 	}
 	
@@ -80,6 +103,12 @@ update_status ModuleScenePlay::Update()
 {
 #pragma region DebugCode
 
+	timer--;
+	if (timer <= 0)
+	{
+		App->player->Kill(0);
+	}
+
 	if (App->balls->ballsList.count() == 0)
 	{
 		App->backgroundTransition->Enable(++currentLvl);
@@ -89,8 +118,25 @@ update_status ModuleScenePlay::Update()
 	{
 		// Draw everything --------------------------------------
 
+		//Setting timer images
+		//////////////////////
+		if (timer >= 6000)
+		{
+			timerNumRect1.x = 13;
+		}
+		else
+		{
+			timerNumRect1.x = ((timer / 60) / 100) * 13;
+			timerNumRect2.x = ((timer / 60) / 10) * 13;
+			timerNumRect3.x = ((timer / 60) % 10) * 13;
+		}
+
+		//////////////////////
 		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
-		App->renderer->Blit(timerImage, 250, 9, &timerRect, NULL);
+		App->renderer->Blit(timerImage, 250, 9, &timerRect);
+		App->renderer->Blit(timerNum1, 330, 9, &timerNumRect1);
+		App->renderer->Blit(timerNum2, 345, 9, &timerNumRect2);
+		App->renderer->Blit(timerNum3, 360, 9, &timerNumRect3);
 		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
 		for (int n = 0; n < lives && n < 4; n++)
@@ -100,16 +146,15 @@ update_status ModuleScenePlay::Update()
 		UpdateInterface();
 	}
 
-	timer++;
-	if ((timer < 80 || timer / 5 % 2 == 0) && timer < 120)
+	if ((timer > 6060 || timer / 5 % 2 == 0) && timer > 6000)
 		App->renderer->Blit(ready, 150, 100, &readyRect);
-	if (timer == 120)
+	if (timer == 6000)
 	{
 		App->player->pausePlayer = false;
 		App->balls->pauseBalls = false;
 	}
 
-	if (timer > 120)
+	if (timer < 6000)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		{
