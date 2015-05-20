@@ -124,21 +124,21 @@ update_status ModulePlayer::Update()
 	}
 	else
 	{
-//	App->fonts->PrintText(App->maps->GetLevelName(App->backgroundPlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+	App->fonts->PrintText(App->maps->GetLevelName(App->backgroundPlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
 	}
 
 	//Level info
 	if (App->backgroundPlay->currentLvl < 10)
 	{
-//	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
+	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
 	App->fonts->PrintText("-", textSurf, textRect, 21 * TILE, 28 * TILE, 8);
-//	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+	App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
 	}
 	else
 	{
-//		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
+		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
 		App->fonts->PrintText("-", textSurf, textRect, 20 * TILE, 28 * TILE, 8);
-//		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+		App->fonts->PrintNumbers((App->backgroundPlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
 	}
 
 	App->fonts->PrintText("STAGE", textSurf, textRect, 24 * TILE, 28 * TILE, 8);

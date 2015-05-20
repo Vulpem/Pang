@@ -63,6 +63,7 @@ TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
 
 void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
 {
+	/*
 		std::string string = std::to_string(num);
 		rect.w = strlen(string.c_str()) * 9;
 		x -= strlen(string.c_str()) * 9;
@@ -78,10 +79,12 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
 			App->renderer->Blit(texture, x, y, &rect);
 		}
+	*/
 }
 
 void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
 {
+	/*
 	if (size == 8)
 	{
 		rect.w = strlen(text) * 8.5;
@@ -103,5 +106,6 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
 		App->renderer->Blit(texture, x, y, &rect);
 	}
+	*/
 }
 
