@@ -610,8 +610,8 @@ void ModuleMaps::LoadMap(int nMap)
 	App->backgroundPlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
 
 	App->player->position.x = 18 * TILE;
-	App->player->position.y = 23 * TILE;
-	switch ((nMap - 1) / 3 + 1)
+	App->player->position.y = 21 * TILE;
+	switch (nMap)
 	{
 	case 0:
 	{

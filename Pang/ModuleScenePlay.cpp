@@ -61,12 +61,13 @@ bool ModuleScenePlay::Start(int level)
 	
 	App->maps->Enable();
 	App->fonts->Enable();
-	App->maps->LoadMap(currentLvl);
-
+	
 	App->player->Enable();
 	App->gun->Enable();
 
 	App->particles->Enable();
+
+	App->maps->LoadMap(currentLvl);
 
 	App->player->pausePlayer = true;
 	App->balls->pauseBalls = true;
