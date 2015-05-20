@@ -57,19 +57,19 @@ bool ModuleParticles::Init()
 
 	for (int n = 0; n++; n < 5)
 	{
-		breakingBrick[n].anim.loop = 0;
-		breakingBrick[n].anim.speed = 0.01f;
+		breakingBrick[n].anim.loop = false;
+		breakingBrick[n].anim.speed = 0.000000000002f;
 		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	}
 	//brick frames
-	breakingBrick[0].anim.frames.PushBack({ 0, 16, 8, 8 });
-	breakingBrick[0].anim.frames.PushBack({ 0, 24, 8, 8 });
-	breakingBrick[0].anim.frames.PushBack({ 0, 32, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 65, 88, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 73, 88, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 81, 88, 8, 8 });
 	for (int n = 1; n < 5; n++)
 	{
-		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 16, 8, 8 });
-		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 24, 8, 8 });
-		breakingBrick[n].anim.frames.PushBack({ 16 + n * 8, 32, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 57 + n * 8, 80, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 89 + n * 8, 80, 8, 8 });
+		breakingBrick[n].anim.frames.PushBack({ 121 + n * 8, 80, 8, 8 });
 	}
 
 	return true;
@@ -115,7 +115,7 @@ update_status ModuleParticles::Update()
 			delete p;
 			active.del(tmp);
 		}
-		else if(SDL_GetTicks() >= p->born)
+		else
 		{
 			App->renderer->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), p->offsetX, p->offsetY);
 			if(p->fx_played == false)
@@ -147,7 +147,6 @@ void ModuleParticles::Clear()
 void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int _offsetX, int _offsetY, Uint32 delay)
 {
  	Particle* p = new Particle(particle);
-	p->born = SDL_GetTicks() + delay;
 	p->position.x = x;
 	p->position.y = y;
 	p->offsetX = _offsetX;
@@ -160,17 +159,14 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int _o
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 
-Particle::Particle() : fx(0), born(0), life(0), fx_played(false)
+Particle::Particle() : fx(0), fx_played(false)
 {
 	position.SetToZero();
-	speed.SetToZero();
 }
 
-Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed), fx_played(false)
+Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), fx_played(false)
 {
 	fx = p.fx;
-	born = p.born;
-	life = p.life;
 }
 
 Particle::~Particle()
@@ -181,17 +177,8 @@ bool Particle::Update()
 {
 	bool ret = true;
 
-	if(life > 0)
-	{
-		if((SDL_GetTicks() - born) > life)
-			ret = false;
-	}
-	else
 		if(anim.Finished())
 			ret = false;
-
-	position.x += speed.x;
-	position.y += speed.y;
 
 	return ret;
 }

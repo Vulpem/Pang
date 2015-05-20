@@ -97,8 +97,6 @@ update_status ModuleGun::Update()
 		else
 		{
 			App->renderer->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
-//			App->renderer->DrawQuad(tmp->data->end_rect, 0, 0, 255, 130);
-//			App->renderer->DrawQuad(tmp->data->start_rect, 255, 0, 0, 255);
 		}
 
 		tmp = tmp_next;

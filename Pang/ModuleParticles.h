@@ -10,9 +10,6 @@ struct Particle
 	Animation anim;
 	unsigned int fx;
 	p2Point<int> position;
-	p2Point<int> speed;
-	Uint32 born;
-	Uint32 life;
 	bool fx_played;
 
 	int offsetX;
