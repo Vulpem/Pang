@@ -199,7 +199,7 @@ bool ModuleBalls::CleanUp()
 
 void ModuleBalls::AddBall(int position_x, int position_y, int _type, int _color=red, int _direction=1)
 {
-	Ball* newBall = new Ball(position_x, position_y, _type, _color, _direction);
+	Ball* newBall = new Ball(position_x + TILE, position_y + TILE, _type, _color, _direction);
 	ballsList.add(newBall);
 }
 
