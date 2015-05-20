@@ -46,6 +46,8 @@ update_status ModuleFonts::PostUpdate()
 
 bool ModuleFonts::CleanUp()
 {
+	TTF_CloseFont(font);
+	TTF_CloseFont(fontInit);
 	TTF_Quit();
 	return true;
 }
@@ -76,8 +78,7 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 		}
 		else
 		{
-			SDL_Texture* tmpTexture = NULL;
-			tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
+			if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
 			App->renderer->Blit(tmpTexture, x, y, &rect);
 		}
 }
@@ -103,8 +104,7 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 	}
 	else
 	{
-		SDL_Texture* tmpTexture = NULL;
-		tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface);
+		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
 		App->renderer->Blit(tmpTexture, x, y, &rect);
 	}
 	
