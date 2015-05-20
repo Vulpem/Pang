@@ -618,6 +618,7 @@ void ModuleMaps::LoadMap(int nMap)
 		App->balls->AddBall(50, 50, little, blue, 1);
 		App->player->position.x = 1*TILE;
 		App->player->position.y = 23*TILE;
+		App->audio->PlayMusic("./Sounds/MtKeirin.ogg");
 		break;
 	}
 	case 1:
@@ -645,14 +646,14 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
 			  App->player->position.x = 20 * TILE;
 			  App->player->position.y = 15 * TILE;
-			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.ogg");
 			  break;
 	}
 	case 5:
 	{
 			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
 			  App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
-			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.ogg");
 			  break;
 	}
 	case 6:
@@ -660,7 +661,7 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
 			  App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
 			  App->player->position.x = 10 * TILE;
-			  App->audio->PlayMusic("./Sounds/MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/MtKeirin.ogg");
 			  break;
 	}
 	case 7:

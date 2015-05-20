@@ -32,11 +32,6 @@ bool ModuleBoost::Start()
 
 update_status ModuleBoost::Update()
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		AddBoost(rand()%300 + 16, 101, none);
-	}
-
 	p2List_item<Boost*>* tmp = activeBoost.getFirst();
 	p2List_item<Boost*>* tmp_next = activeBoost.getFirst();
 	while (tmp != NULL)

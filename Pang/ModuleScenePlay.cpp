@@ -191,6 +191,10 @@ update_status ModuleScenePlay::Update()
 				App->sceneTransition->Enable(++currentLvl);
 				Disable();
 			}
+			if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+			{
+				App->boosts->AddBoost(rand() % 300 + 16, 101, none);
+			}
 				/*
 				Player bounding box
 				*/
