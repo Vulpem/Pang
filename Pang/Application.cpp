@@ -69,6 +69,7 @@ Application::~Application()
 
 bool Application::Init()
 {
+	frames = 0;
 	bool ret = true;
 
 	// Call Init() in all modules
@@ -101,14 +102,15 @@ update_status Application::Update()
 	p2List_item<Module*>* item = list_modules.getFirst();
 
 	// CAPING FPS IN THE UPDATE///////////////////
-	/*int time = SDL_GetTicks();
-	float delta = time - lastTime;
+	int time = SDL_GetTicks();
+	int delta = time - lastTime;
 
-	float deltaSeconds = delta / 1000.0f; //ms to sec
+	double deltaSeconds = delta / 1000.0f; //ms to sec
 
-	if (deltaSeconds >= (float)(1 / 2))
+	if (deltaSeconds >= 1.0 / FPS)
 	{
-		lastTime = time;*/
+		lastTime = time;
+		frames++;
 		//////////////////////////////////////////////
 
 		while (item != NULL && ret == UPDATE_CONTINUE)
@@ -128,6 +130,7 @@ update_status Application::Update()
 			item = item->next;
 		}
 
+		
 		item = list_modules.getFirst();
 
 		while (item != NULL && ret == UPDATE_CONTINUE)
@@ -136,7 +139,7 @@ update_status Application::Update()
 				ret = item->data->PostUpdate();
 			item = item->next;
 		}
-	//}
+	}
 	return ret;
 }
 

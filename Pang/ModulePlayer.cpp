@@ -108,6 +108,17 @@ update_status ModulePlayer::Update()
 {
 	Reset();
 
+	
+	if (App->scenePlay->debugMode == true)
+	{
+		App->renderer->PrintText("FPS:", textSurf, textRect, 20 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), textSurf, textRect, 27 * TILE, 29 * TILE);
+		App->renderer->PrintText("Frames:", textSurf, textRect, 28 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers(App->frames % (int)FPS, textSurf, textRect, 38 * TILE, 29 * TILE);
+		App->renderer->PrintText("Time:", textSurf, textRect, 39 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers(SDL_GetTicks() / 1000 , textSurf, textRect, 46 * TILE, 29 * TILE);
+	}
+
 	//Printing interface//
 	App->renderer->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
 	App->renderer->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);

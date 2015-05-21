@@ -43,8 +43,10 @@ public:
 	ModuleBoost* boosts;
 //	ModuleFonts* fonts;
 
-private:
 
+	int frames;
+private:
+	
 	int lastTime;
 	p2List<Module*> list_modules;
 
