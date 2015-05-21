@@ -111,7 +111,6 @@ update_status ModulePlayer::Update()
 	
 	if (App->scenePlay->debugMode == true)
 	{
-		App->renderer->drawText("PLAYER-1", 8, 2 * TILE, 26 * TILE, 255, 255, 255);
 		App->renderer->PrintText("FPS:", textRect, 20 * TILE, 29 * TILE, 8);
 		App->renderer->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), textRect, 27 * TILE, 29 * TILE);
 		App->renderer->PrintText("Frames:", textRect, 28 * TILE, 29 * TILE, 8);
@@ -121,6 +120,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//Printing interface//
+	App->renderer->drawText("PLAYER-1", 8, 2 * TILE, 26 * TILE, 255, 255, 255);
 	App->renderer->PrintText("PLAYER-1", textRect, 2 * TILE, 26 * TILE, 8);
 	App->renderer->PrintText("PLAYER-2", textRect, 35 * TILE, 26 * TILE, 8);
 	//Level name

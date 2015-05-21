@@ -217,10 +217,13 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 
 void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, int B)
 {
+	
 	SDL_Surface* textSurface = TTF_RenderText_Solid(font, string, textColor);
 
 	SDL_Rect textLoc = { x, y, 50, 50 };
-
+	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+	Blit(textTexture, x, y, &textLoc);
 	SDL_BlitSurface(textSurface, NULL, App->window->screen_surface, &textLoc);
 	SDL_FreeSurface(textSurface);
+	
 }
