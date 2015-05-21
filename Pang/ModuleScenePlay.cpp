@@ -119,7 +119,7 @@ update_status ModuleScenePlay::Update()
 		}
 
 		//////////////////////
-		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
+//		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
 		App->renderer->Blit(timerImage, 250, 9, &timerRect);
 		App->renderer->Blit(timerNum, 330, 9, &timerNumRect1);
 		App->renderer->Blit(timerNum, 345, 9, &timerNumRect2);

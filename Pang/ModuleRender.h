@@ -27,6 +27,7 @@ public:
 	TTF_Font* LoadFont(char* file, int size) const;
 	void PrintNumbers(int num, SDL_Rect& rect, int x, int y) const;
 	void PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const;
+	void drawText(char* string, int size, int y, int x, int R, int G, int B);
 public:
 	SDL_Renderer* renderer;
 };
