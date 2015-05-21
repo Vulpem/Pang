@@ -17,6 +17,9 @@ ModuleRender::~ModuleRender()
 // Called before render is available
 bool ModuleRender::Init()
 {
+	fontInit = NULL;
+	font = NULL;
+
 	LOG("Creating Renderer context");
 	bool ret = true;
 	Uint32 flags = 0;
@@ -34,11 +37,29 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
-	TTF_Init();
+	if (TTF_Init() != 0)
+	{
+		LOG("TTF_Init() Failed: ");
+		SDL_Quit();
+		return UPDATE_ERROR;
+	}
 	textColor = { 255, 255, 255 };
 	font = LoadFont("Fonts/Pang.ttf", 8);
+	if (font == NULL)
+	{
+		LOG("TTF_OpenFont() Failed");
+		TTF_Quit();
+		SDL_Quit();
+		return UPDATE_ERROR;
+	}
 	fontInit = LoadFont("Fonts/Pang.ttf", 7);
-
+	if (fontInit == NULL)
+	{
+		LOG("TTF_OpenFont() Failed");
+		TTF_Quit();
+		SDL_Quit();
+		return UPDATE_ERROR;
+	}
 	return ret;
 }
 
@@ -148,7 +169,7 @@ TTF_Font* ModuleRender::LoadFont(char* file, int size) const
 
 void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 {
-	/*
+	
 	SDL_Surface* tmpSurface = NULL;
 	SDL_Texture* tmpTexture = NULL;
 
@@ -173,15 +194,21 @@ void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 		}
 
 	}
-	SDL_FreeSurface(tmpSurface);
-	SDL_DestroyTexture(tmpTexture);
-	*/
+	if (tmpSurface != NULL)
+	{
+		SDL_FreeSurface(tmpSurface);
+	}
+	if (tmpTexture != NULL)
+	{
+		SDL_DestroyTexture(tmpTexture);
+	}
+	
 }
 
 
 void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const
 {
-	/*
+	
 	SDL_Surface* tmpSurface = NULL;
 	SDL_Texture* tmpTexture = NULL;
 	if (size == 8)
@@ -209,10 +236,14 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 			App->renderer->Blit(tmpTexture, x, y, &rect);
 		}
 	}
-
-	SDL_FreeSurface(tmpSurface);
-	SDL_DestroyTexture(tmpTexture);
-	*/
+	if (tmpSurface != NULL)
+	{
+		SDL_FreeSurface(tmpSurface);
+	}
+	if (tmpTexture != NULL)
+	{
+		SDL_DestroyTexture(tmpTexture);
+	}
 }
 
 void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, int B)
@@ -226,4 +257,9 @@ void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, 
 	SDL_BlitSurface(textSurface, NULL, App->window->screen_surface, &textLoc);
 	SDL_FreeSurface(textSurface);
 	
+	if (textTexture != NULL)
+	{
+		SDL_DestroyTexture(textTexture);
+	}
+
 }

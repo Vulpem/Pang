@@ -11,6 +11,7 @@ private:
 	TTF_Font* fontInit;
 
 	SDL_Color textColor;
+
 public:
 	ModuleRender(Application* app, bool start_enabled = true);
 	~ModuleRender();

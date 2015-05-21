@@ -30,7 +30,7 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-//	AddModule(fonts);
+	
 	
 	AddModule(sceneIntro);
 	AddModule(scenePlay);
@@ -43,6 +43,8 @@ Application::Application()
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);
+	
+//	AddModule(fonts);
 }
 
 Application::~Application()

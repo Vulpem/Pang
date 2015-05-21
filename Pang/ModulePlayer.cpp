@@ -116,7 +116,7 @@ update_status ModulePlayer::Update()
 		App->renderer->PrintText("Frames:", textRect, 28 * TILE, 29 * TILE, 8);
 		App->renderer->PrintNumbers(App->frames % (int)FPS, textRect, 38 * TILE, 29 * TILE);
 		App->renderer->PrintText("Time:", textRect, 39 * TILE, 29 * TILE, 8);
-		App->renderer->PrintNumbers(SDL_GetTicks() / 1000 , textRect, 46 * TILE, 29 * TILE);
+		App->renderer->PrintNumbers(SDL_GetTicks() / 1000 , textRect, 47 * TILE, 29 * TILE);
 	}
 
 	//Printing interface//
