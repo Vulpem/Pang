@@ -111,53 +111,53 @@ update_status ModulePlayer::Update()
 	
 	if (App->scenePlay->debugMode == true)
 	{
-		App->renderer->PrintText("FPS:", textSurf, textRect, 20 * TILE, 29 * TILE, 8);
-		App->renderer->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), textSurf, textRect, 27 * TILE, 29 * TILE);
-		App->renderer->PrintText("Frames:", textSurf, textRect, 28 * TILE, 29 * TILE, 8);
-		App->renderer->PrintNumbers(App->frames % (int)FPS, textSurf, textRect, 38 * TILE, 29 * TILE);
-		App->renderer->PrintText("Time:", textSurf, textRect, 39 * TILE, 29 * TILE, 8);
-		App->renderer->PrintNumbers(SDL_GetTicks() / 1000 , textSurf, textRect, 46 * TILE, 29 * TILE);
+		App->renderer->PrintText("FPS:", textRect, 20 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), textRect, 27 * TILE, 29 * TILE);
+		App->renderer->PrintText("Frames:", textRect, 28 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers(App->frames % (int)FPS, textRect, 38 * TILE, 29 * TILE);
+		App->renderer->PrintText("Time:", textRect, 39 * TILE, 29 * TILE, 8);
+		App->renderer->PrintNumbers(SDL_GetTicks() / 1000 , textRect, 46 * TILE, 29 * TILE);
 	}
 
 	//Printing interface//
-	App->renderer->PrintText("PLAYER-1", textSurf, textRect, 2 * TILE, 26 * TILE, 8);
-	App->renderer->PrintText("PLAYER-2", textSurf, textRect, 35 * TILE, 26 * TILE, 8);
+	App->renderer->PrintText("PLAYER-1", textRect, 2 * TILE, 26 * TILE, 8);
+	App->renderer->PrintText("PLAYER-2", textRect, 35 * TILE, 26 * TILE, 8);
 	//Level name
 	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
 	{
-		App->renderer->PrintText("EMERALD", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
-		App->renderer->PrintText("TEMPLE", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
+		App->renderer->PrintText("EMERALD", textRect, 20 * TILE, 26 * TILE, 8);
+		App->renderer->PrintText("TEMPLE", textRect, 20 * TILE, 27 * TILE, 8);
 	}
 	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
 	{
-		App->renderer->PrintText("EASTER", textSurf, textRect, 20 * TILE, 26 * TILE, 8);
-		App->renderer->PrintText("ISLAND", textSurf, textRect, 20 * TILE, 27 * TILE, 8);
+		App->renderer->PrintText("EASTER", textRect, 20 * TILE, 26 * TILE, 8);
+		App->renderer->PrintText("ISLAND", textRect, 20 * TILE, 27 * TILE, 8);
 	}
 	else
 	{
-		App->renderer->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), textSurf, textRect, 20 * TILE, 26 * TILE, 8);
+		App->renderer->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), textRect, 20 * TILE, 26 * TILE, 8);
 	}
 
 	//Level info
 	if (App->scenePlay->currentLvl < 10)
 	{
-	App->renderer->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 21 * TILE, 28 * TILE);
-	App->renderer->PrintText("-", textSurf, textRect, 21 * TILE, 28 * TILE, 8);
-	App->renderer->PrintNumbers((App->scenePlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+	App->renderer->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textRect, 21 * TILE, 28 * TILE);
+	App->renderer->PrintText("-", textRect, 21 * TILE, 28 * TILE, 8);
+	App->renderer->PrintNumbers((App->scenePlay->currentLvl), textRect, 23 * TILE, 28 * TILE);
 	}
 	else
 	{
-		App->renderer->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textSurf, textRect, 20 * TILE, 28 * TILE);
-		App->renderer->PrintText("-", textSurf, textRect, 20 * TILE, 28 * TILE, 8);
-		App->renderer->PrintNumbers((App->scenePlay->currentLvl), textSurf, textRect, 23 * TILE, 28 * TILE);
+		App->renderer->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, textRect, 20 * TILE, 28 * TILE);
+		App->renderer->PrintText("-", textRect, 20 * TILE, 28 * TILE, 8);
+		App->renderer->PrintNumbers((App->scenePlay->currentLvl), textRect, 23 * TILE, 28 * TILE);
 	}
 
-	App->renderer->PrintText("STAGE", textSurf, textRect, 24 * TILE, 28 * TILE, 8);
+	App->renderer->PrintText("STAGE", textRect, 24 * TILE, 28 * TILE, 8);
 	////////////
-	App->renderer->PrintNumbers(punt, puntMessage, puntRect, 15 * TILE, 27 * TILE);
+	App->renderer->PrintNumbers(punt, puntRect, 15 * TILE, 27 * TILE);
 	if (App->scenePlay->lives > 4)
 	{
-		App->renderer->PrintNumbers(App->scenePlay->lives, textSurf, textRect, 10 * TILE + 18, 29 * TILE + 1);
+		App->renderer->PrintNumbers(App->scenePlay->lives, textRect, 10 * TILE + 18, 29 * TILE + 1);
 	}
 
 	if (current_animation != NULL)

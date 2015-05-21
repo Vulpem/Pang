@@ -57,10 +57,8 @@ public:
 
 	//Printing variables//
 
-	SDL_Surface* puntMessage;
 	SDL_Rect puntRect;
 
-	SDL_Surface* textSurf;
 	SDL_Rect textRect;
 
 	//////////////////////
