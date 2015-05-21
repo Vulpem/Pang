@@ -110,7 +110,7 @@ update_status ModuleGun::Update()
 bool Bullet::Update(Application* app)
 {
 	bool ret = true;
-	if (app->maps->map[(end.y - 1) / 8][end.x/8] == 1)
+	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
 	{
 		ret = false;
 		int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];

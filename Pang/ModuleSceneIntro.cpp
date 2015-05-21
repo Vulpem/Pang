@@ -86,7 +86,7 @@ update_status ModuleSceneIntro::Update()
 		}
 		if (mapOn)
 		{
-			//timeCounter++;
+			timeCounter++;
 			App->renderer->Blit(map, 0, 0, NULL);
 			//Drawing time counter
 			timerRect.x = (timeCounter / 60) * 27;
