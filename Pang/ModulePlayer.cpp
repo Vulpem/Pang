@@ -488,7 +488,7 @@ void ModulePlayer::Kill(int xBallPos)
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
 
-	if (xBallPos == 0)
+	/*if (xBallPos == 0)
 	{
 		pausePlayer = true;
 		for (int timer = 0; timer < 180; timer++)
@@ -498,7 +498,8 @@ void ModulePlayer::Kill(int xBallPos)
 		deadAnimEnd = true;
 	}
 	else
-	{
+	{*/
+		dead = true;
 		current_animation = &idle;
 		App->audio->PlayMusic("./Sounds/Death.wav");
 
@@ -514,7 +515,7 @@ void ModulePlayer::Kill(int xBallPos)
 			deadAnimXSpeed = -1;
 		}	
 		deadAnimYSpeed = -4;
-	}
+	//}
 
 }
 
