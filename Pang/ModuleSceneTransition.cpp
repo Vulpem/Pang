@@ -45,7 +45,7 @@ update_status ModuleSceneTransition::Update()
 	if (timeCounter >= 180 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
 	{
 		timeCounter = 0;
-		if (nextLevel <= 15)
+		if (nextLevel <= 10)
 		{
 			App->scenePlay->Enable(nextLevel);
 			Disable();

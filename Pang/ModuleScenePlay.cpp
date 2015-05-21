@@ -109,13 +109,15 @@ update_status ModuleScenePlay::Update()
 		//////////////////////
 		if (timer >= startTimerevent)
 		{
-			timerNumRect1.x = 13;
+			timerNumRect1.x = ((startTimerevent / FPS / 100) % 10) * 13;
+			timerNumRect2.x = ((startTimerevent / FPS / 10) % 10) * 13;
+			timerNumRect3.x = ((startTimerevent / FPS) % 10) * 13;
 		}
 		else
 		{
-			timerNumRect1.x = ((timer / 60) / 100) * 13;
-			timerNumRect2.x = ((timer / 60) / 10) * 13;
-			timerNumRect3.x = ((timer / 60) % 10) * 13;
+			timerNumRect1.x = ((timer / FPS / 100) % 10) * 13;
+			timerNumRect2.x = ((timer / FPS / 10) % 10) * 13;
+			timerNumRect3.x = ((timer / FPS) % 10) * 13;
 		}
 
 		//////////////////////
