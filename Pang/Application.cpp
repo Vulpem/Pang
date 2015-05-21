@@ -100,32 +100,43 @@ update_status Application::Update()
 	update_status ret = UPDATE_CONTINUE;
 	p2List_item<Module*>* item = list_modules.getFirst();
 
-	while(item != NULL && ret == UPDATE_CONTINUE)
+	// CAPING FPS IN THE UPDATE///////////////////
+	/*int time = SDL_GetTicks();
+	float delta = time - lastTime;
+
+	float deltaSeconds = delta / 1000.0f; //ms to sec
+
+	if (deltaSeconds >= (float)(1 / 2))
 	{
-		if (item->data->IsEnabled())
-			ret = item->data->PreUpdate();
-		item = item->next;
-	}
-	
+		lastTime = time;*/
+		//////////////////////////////////////////////
 
-	item = list_modules.getFirst();
+		while (item != NULL && ret == UPDATE_CONTINUE)
+		{
+			if (item->data->IsEnabled())
+				ret = item->data->PreUpdate();
+			item = item->next;
+		}
 
-	while(item != NULL && ret == UPDATE_CONTINUE)
-	{
-		if (item->data->IsEnabled())
-			ret = item->data->Update();
-		item = item->next;
-	}
 
-	item = list_modules.getFirst();
+		item = list_modules.getFirst();
 
-	while(item != NULL && ret == UPDATE_CONTINUE)
-	{
-		if (item->data->IsEnabled())
-			ret = item->data->PostUpdate();
-		item = item->next;
-	}
+		while (item != NULL && ret == UPDATE_CONTINUE)
+		{
+			if (item->data->IsEnabled())
+				ret = item->data->Update();
+			item = item->next;
+		}
 
+		item = list_modules.getFirst();
+
+		while (item != NULL && ret == UPDATE_CONTINUE)
+		{
+			if (item->data->IsEnabled())
+				ret = item->data->PostUpdate();
+			item = item->next;
+		}
+	//}
 	return ret;
 }
 

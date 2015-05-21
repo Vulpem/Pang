@@ -45,7 +45,10 @@ public:
 
 private:
 
+	int lastTime;
 	p2List<Module*> list_modules;
+
+
 
 public:
 
