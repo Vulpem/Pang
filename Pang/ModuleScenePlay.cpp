@@ -92,7 +92,7 @@ update_status ModuleScenePlay::Update()
 {
 
 	timer--;
-	if (timer <= 0 && App->player->dead = false)
+	if (timer <= 0 && App->player->dead == false)
 	{
 		App->player->Kill(8);
 	}
