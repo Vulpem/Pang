@@ -61,21 +61,21 @@ update_status ModuleSceneTransition::Update()
 	//Print level stats if its not end of stage
 	if ((nextLevel - 1) % 3 != 0)
 	{
-		App->renderer->PrintNumbers(nextLevel - 1, textSurf, textRect, 170, 145);
-		App->renderer->PrintText("STAGE", textSurf, textRect, 170 + 4, 145, 8);
+		App->renderer->PrintNumbers(nextLevel - 1, textRect, 170, 145);
+		App->renderer->PrintText("STAGE", textRect, 170 + 4, 145, 8);
 
-		App->renderer->PrintText("TIME BONUS", textSurf, textRect, 100, 165, 8);
-		App->renderer->PrintText("PTS", textSurf, textRect, 260 + 4, 165, 8);
+		App->renderer->PrintText("TIME BONUS", textRect, 100, 165, 8);
+		App->renderer->PrintText("PTS", textRect, 260 + 4, 165, 8);
 		if (timeCounter > 50)
 		{
-			App->renderer->PrintText("NEXT EXTEND", textSurf, textRect, 100, 185, 8);
-			App->renderer->PrintText("PTS", textSurf, textRect, 260 + 4, 185, 8);
+			App->renderer->PrintText("NEXT EXTEND", textRect, 100, 185, 8);
+			App->renderer->PrintText("PTS", textRect, 260 + 4, 185, 8);
 		}
 		///////////////////
 		//Print push button
 		if (timeCounter / 20 % 2 == 0)
 		{
-			App->renderer->PrintText("PUSH BUTTON", textSurf, textRect, 280, 220, 8);
+			App->renderer->PrintText("PUSH BUTTON", textRect, 280, 220, 8);
 		}
 		//////////////////
 

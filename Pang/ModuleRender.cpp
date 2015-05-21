@@ -146,58 +146,65 @@ TTF_Font* ModuleRender::LoadFont(char* file, int size) const
 	return tmpfont;
 }
 
-void ModuleRender::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const
+void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 {
+	SDL_Surface* tmpSurface = NULL;
+	SDL_Texture* tmpTexture = NULL;
 
 	std::string string = std::to_string(num);
 	rect.w = strlen(string.c_str()) * 9;
 	x -= strlen(string.c_str()) * 9;
 
 
-	surface = TTF_RenderText_Solid(font, string.c_str(), textColor);
-	if (surface == NULL)
+	tmpSurface = TTF_RenderText_Solid(font, string.c_str(), textColor);
+	if (tmpSurface == NULL)
 	{
 		LOG("Could not load message");
 	}
 	else
 	{
-		int b = 0;
-		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, surface))
+		SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+		if (tmpTexture)
 		{
-			b++;
-			App->renderer->Blit(tmpTexture, x, y, &rect);
-			b++;
+		App->renderer->Blit(tmpTexture, x, y, &rect);
 		}
+
 	}
+	SDL_FreeSurface(tmpSurface);
+	SDL_DestroyTexture(tmpTexture);
 }
 
-void ModuleRender::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
+
+void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const
 {
+	SDL_Surface* tmpSurface = NULL;
+	SDL_Texture* tmpTexture = NULL;
 	if (size == 8)
 	{
 		rect.w = strlen(text) * 8.5;
-		surface = TTF_RenderText_Solid(font, text, textColor);
+		tmpSurface = TTF_RenderText_Solid(font, text, textColor);
 	}
 
 	else if (size == 6)
 	{
 		rect.w = strlen(text) * 7;
-		surface = TTF_RenderText_Solid(fontInit, text, textColor);
+		tmpSurface = TTF_RenderText_Solid(fontInit, text, textColor);
 	}
 
-	if (surface == NULL)
+	if (tmpSurface == NULL)
 	{
 		LOG("Could not load message");
 	}
+
 	else
 	{
-		int c = 0;
-		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, surface))
+		tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+		if (tmpTexture)
 		{
-			c++;
 			App->renderer->Blit(tmpTexture, x, y, &rect);
-			c++;
 		}
 	}
+	SDL_FreeSurface(tmpSurface);
+	SDL_DestroyTexture(tmpTexture);
 
 }

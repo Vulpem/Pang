@@ -33,8 +33,6 @@ public:
 	SDL_Texture* selected2;
 	SDL_Texture* timer;
 
-	SDL_Surface* interfaceText;
-
 	SDL_Rect interfaceRect;
 	SDL_Rect timerRect;
 	SDL_Rect selectedRect;

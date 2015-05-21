@@ -26,7 +26,6 @@ public:
 	SDL_Rect timerNumRect2;
 	SDL_Rect timerNumRect3;
 
-	SDL_Surface* player1Surf;
 	SDL_Rect player1Rect;
 	int lives;
 	int currentLvl;
