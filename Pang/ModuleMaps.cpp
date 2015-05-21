@@ -697,6 +697,10 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->audio->PlayMusic("./Sounds/Barcelona.wav");
 			  break;
 	}
+
+	App->scenePlay->startTimerevent = App->scenePlay->timer - 180;
+
+
 	}
 }
 
