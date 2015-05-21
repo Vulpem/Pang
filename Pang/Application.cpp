@@ -107,7 +107,7 @@ update_status Application::Update()
 
 	double deltaSeconds = delta / 1000.0f; //ms to sec
 
-	if (deltaSeconds >= 1.0 / FPS)
+ 	if (deltaSeconds >= 1.0 / FPS)
 	{
 		lastTime = time;
 		frames++;
