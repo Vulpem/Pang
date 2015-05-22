@@ -79,18 +79,17 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 		}
 		else
 		{
-			int b = 0;
 			if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, surface))
 			{
-				b++;
 				App->render->Blit(tmpTexture, x, y, &rect);
-				b++;
 			}
 		}
 }
 
 void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const
 {
+	surface = NULL;
+	SDL_Texture* tmpTexture = NULL;
 	if (size == 8)
 	{
 		rect.w = strlen(text) * 8.5;
@@ -106,15 +105,18 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 	if (surface == NULL)
 	{
 		LOG("Could not load message");
+		assert(false);
 	}
 	else
 	{
-		int c = 0;
-		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, surface))
+		if (tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, surface))
 		{
-			c++;
 			App->render->Blit(tmpTexture, x, y, &rect);
-			c++;
+		}
+		else
+		{
+			LOG("Could not generate texture");
+			assert(false);
 		}
 	}
 	

@@ -120,8 +120,8 @@ update_status ModulePlayer::Update()
 	}
 
 	//Printing interface//
-	App->render->drawText("PLAYER-1", 8, 2 * TILE, 26 * TILE, 255, 255, 255);
-	App->render->PrintText("PLAYER-1", textRect, 2 * TILE, 26 * TILE, 8);
+	//App->render->drawText("PLAYER-1", 8, 2 * TILE, 26 * TILE, 255, 255, 255);
+	App->render->PrintText("PLAYER-1\0", textRect, 2 * TILE, 26 * TILE, 8);
 	App->render->PrintText("PLAYER-2", textRect, 35 * TILE, 26 * TILE, 8);
 	//Level name
 	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)

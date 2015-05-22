@@ -183,13 +183,17 @@ void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 	if (tmpSurface == NULL)
 	{
 		LOG("Could not load message");
+		assert(false);
 	}
 	else
 	{
-		SDL_BlitSurface(tmpSurface, NULL, App->window->screen_surface, &rect);
-
 		SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		if (tmpTexture)
+		if (tmpTexture == NULL)
+		{
+			LOG("Could not generate texture");
+			assert(false);
+		}
+		else
 		{
 			App->render->Blit(tmpTexture, x, y, &rect);
 		}
@@ -227,20 +231,26 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 	if (tmpSurface == NULL)
 	{
 		LOG("Could not load message");
+		assert(false);
 	}
-
 	else
 	{
 		tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		if (tmpTexture)
+		if (tmpSurface)
+		{
+			SDL_FreeSurface(tmpSurface);
+		}
+		if (tmpTexture == NULL)
+		{
+			LOG("Could not generate texture");
+			assert(false);
+		}
+		else
 		{
 			App->render->Blit(tmpTexture, x, y, &rect);
 		}
 	}
-	if (tmpSurface)
-	{
-		SDL_FreeSurface(tmpSurface);
-	}
+	
 	if (tmpTexture)
 	{
 		SDL_DestroyTexture(tmpTexture);
@@ -249,18 +259,17 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 
 void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, int B)
 {
-	
+	/*
 	SDL_Surface* textSurface = TTF_RenderText_Solid(font, string, textColor);
 
 	SDL_Rect textLoc = { x, y, 50, 50 };
 	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 	Blit(textTexture, x, y, &textLoc);
-	SDL_BlitSurface(textSurface, NULL, App->window->screen_surface, &textLoc);
 	SDL_FreeSurface(textSurface);
 	
 	if (textTexture)
 	{
 		SDL_DestroyTexture(textTexture);
 	}
-
+*/
 }
