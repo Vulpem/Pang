@@ -92,6 +92,7 @@ bool ModuleRender::CleanUp()
 	TTF_CloseFont(fontInit);
 	TTF_Quit();
 
+	SDL_RenderClear(renderer);
 	//Destroy window
 	if(renderer != NULL)
 	{
@@ -194,11 +195,11 @@ void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 		}
 
 	}
-	if (tmpSurface != NULL)
+	if (tmpSurface)
 	{
 		SDL_FreeSurface(tmpSurface);
 	}
-	if (tmpTexture != NULL)
+	if (tmpTexture)
 	{
 		SDL_DestroyTexture(tmpTexture);
 	}
@@ -236,11 +237,11 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 			App->renderer->Blit(tmpTexture, x, y, &rect);
 		}
 	}
-	if (tmpSurface != NULL)
+	if (tmpSurface)
 	{
 		SDL_FreeSurface(tmpSurface);
 	}
-	if (tmpTexture != NULL)
+	if (tmpTexture)
 	{
 		SDL_DestroyTexture(tmpTexture);
 	}
@@ -257,7 +258,7 @@ void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, 
 	SDL_BlitSurface(textSurface, NULL, App->window->screen_surface, &textLoc);
 	SDL_FreeSurface(textSurface);
 	
-	if (textTexture != NULL)
+	if (textTexture)
 	{
 		SDL_DestroyTexture(textTexture);
 	}
