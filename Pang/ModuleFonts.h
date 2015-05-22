@@ -26,8 +26,8 @@ public:
 	bool CleanUp();
 
 	TTF_Font* LoadFont(char* file, int size) const;
-	void PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, int x, int y) const;
-	void PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, int x, int y, int size) const;
+	void PrintNumbers(int num, SDL_Rect& rect, int x, int y) const;
+	void PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const;
 
 public:
 };

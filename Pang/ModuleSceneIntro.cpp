@@ -107,9 +107,9 @@ update_status ModuleSceneIntro::Update()
 				paused = true;
 			}
 			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
-			App->render->PrintText("CHOSE THE CITY TO START.", interfaceRect, 8, 216, 6);
-			App->render->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceRect, 8, 224, 6);
-			App->render->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceRect, 8, 232, 6);
+			App->fonts->PrintText("CHOSE THE CITY TO START.", interfaceRect, 8, 216, 6);
+			App->fonts->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceRect, 8, 224, 6);
+			App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceRect, 8, 232, 6);
 
 		}
 	}

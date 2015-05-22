@@ -36,30 +36,6 @@ bool ModuleRender::Init()
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
-	if (TTF_Init() != 0)
-	{
-		LOG("TTF_Init() Failed: ");
-		SDL_Quit();
-		return UPDATE_ERROR;
-	}
-	textColor = { 255, 255, 255 };
-	font = LoadFont("Fonts/Pang.ttf", 8);
-	if (font == NULL)
-	{
-		LOG("TTF_OpenFont() Failed");
-		TTF_Quit();
-		SDL_Quit();
-		return UPDATE_ERROR;
-	}
-	fontInit = LoadFont("Fonts/Pang.ttf", 7);
-	if (fontInit == NULL)
-	{
-		LOG("TTF_OpenFont() Failed");
-		TTF_Quit();
-		SDL_Quit();
-		return UPDATE_ERROR;
-	}
 	return ret;
 }
 
@@ -87,10 +63,6 @@ update_status ModuleRender::PostUpdate()
 bool ModuleRender::CleanUp()
 {
 	LOG("Destroying renderer");
-
-	TTF_CloseFont(font);
-	TTF_CloseFont(fontInit);
-	TTF_Quit();
 
 	SDL_RenderClear(renderer);
 	//Destroy window
@@ -155,121 +127,4 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
-}
-
-TTF_Font* ModuleRender::LoadFont(char* file, int size) const
-{
-	TTF_Font* tmpfont;
-	tmpfont = TTF_OpenFont(file, size);
-	if (tmpfont == NULL)
-	{
-		LOG("Could not load font");
-	}
-	return tmpfont;
-}
-
-void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
-{
-	
-	SDL_Surface* tmpSurface = NULL;
-	SDL_Texture* tmpTexture = NULL;
-
-	std::string string = std::to_string(num);
-	rect.w = strlen(string.c_str()) * 9;
-	x -= strlen(string.c_str()) * 9;
-
-
-	tmpSurface = TTF_RenderText_Solid(font, string.c_str(), textColor);
-	if (tmpSurface == NULL)
-	{
-		LOG("Could not load message");
-		assert(false);
-	}
-	else
-	{
-		SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		if (tmpTexture == NULL)
-		{
-			LOG("Could not generate texture");
-			assert(false);
-		}
-		else
-		{
-			App->render->Blit(tmpTexture, x, y, &rect);
-		}
-
-	}
-	if (tmpSurface)
-	{
-		SDL_FreeSurface(tmpSurface);
-	}
-	if (tmpTexture)
-	{
-		SDL_DestroyTexture(tmpTexture);
-	}
-	
-}
-
-
-void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const
-{
-	
-	SDL_Surface* tmpSurface = NULL;
-	SDL_Texture* tmpTexture = NULL;
-	if (size == 8)
-	{
-		rect.w = strlen(text) * 8.5;
-		tmpSurface = TTF_RenderText_Solid(font, text, textColor);
-	}
-
-	else if (size == 6)
-	{
-		rect.w = strlen(text) * 7;
-		tmpSurface = TTF_RenderText_Solid(fontInit, text, textColor);
-	}
-
-	if (tmpSurface == NULL)
-	{
-		LOG("Could not load message");
-		assert(false);
-	}
-	else
-	{
-		tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		if (tmpSurface)
-		{
-			SDL_FreeSurface(tmpSurface);
-		}
-		if (tmpTexture == NULL)
-		{
-			LOG("Could not generate texture");
-			assert(false);
-		}
-		else
-		{
-			App->render->Blit(tmpTexture, x, y, &rect);
-		}
-	}
-	
-	if (tmpTexture)
-	{
-		SDL_DestroyTexture(tmpTexture);
-	}
-}
-
-void ModuleRender::drawText(char* string, int size, int y, int x, int R, int G, int B)
-{
-	/*
-	SDL_Surface* textSurface = TTF_RenderText_Solid(font, string, textColor);
-
-	SDL_Rect textLoc = { x, y, 50, 50 };
-	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-	Blit(textTexture, x, y, &textLoc);
-	SDL_FreeSurface(textSurface);
-	
-	if (textTexture)
-	{
-		SDL_DestroyTexture(textTexture);
-	}
-*/
 }

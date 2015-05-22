@@ -8,7 +8,7 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
-//	fonts = new ModuleFonts(this, true);
+	fonts = new ModuleFonts(this, true);
 
 	sceneIntro = new ModuleSceneIntro(this, true);
 	scenePlay = new ModuleScenePlay(this, false);
@@ -44,7 +44,7 @@ Application::Application()
 	AddModule(particles);
 	AddModule(boosts);
 	
-//	AddModule(fonts);
+	AddModule(fonts);
 }
 
 Application::~Application()
@@ -60,7 +60,7 @@ Application::~Application()
 	delete scenePlay;
 	delete sceneIntro;
 	
-//	delete fonts;
+	delete fonts;
 	delete audio;
 	delete input;
 	delete textures;
