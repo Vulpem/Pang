@@ -56,26 +56,26 @@ update_status ModuleSceneTransition::Update()
 			Disable();
 		}
 	}
-	App->renderer->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
+	App->render->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
 	
 	//Print level stats if its not end of stage
 	if ((nextLevel - 1) % 3 != 0)
 	{
-		App->renderer->PrintNumbers(nextLevel - 1, textRect, 170, 145);
-		App->renderer->PrintText("STAGE", textRect, 170 + 4, 145, 8);
+		App->render->PrintNumbers(nextLevel - 1, textRect, 170, 145);
+		App->render->PrintText("STAGE", textRect, 170 + 4, 145, 8);
 
-		App->renderer->PrintText("TIME BONUS", textRect, 100, 165, 8);
-		App->renderer->PrintText("PTS", textRect, 260 + 4, 165, 8);
+		App->render->PrintText("TIME BONUS", textRect, 100, 165, 8);
+		App->render->PrintText("PTS", textRect, 260 + 4, 165, 8);
 		if (timeCounter > 50)
 		{
-			App->renderer->PrintText("NEXT EXTEND", textRect, 100, 185, 8);
-			App->renderer->PrintText("PTS", textRect, 260 + 4, 185, 8);
+			App->render->PrintText("NEXT EXTEND", textRect, 100, 185, 8);
+			App->render->PrintText("PTS", textRect, 260 + 4, 185, 8);
 		}
 		///////////////////
 		//Print push button
 		if (timeCounter / 20 % 2 == 0)
 		{
-			App->renderer->PrintText("PUSH BUTTON", textRect, 280, 220, 8);
+			App->render->PrintText("PUSH BUTTON", textRect, 280, 220, 8);
 		}
 		//////////////////
 
@@ -90,11 +90,11 @@ update_status ModuleSceneTransition::Update()
 				imageRect.x = 194;
 		}
 
-		App->renderer->Blit(graphics, 95, 32, &imageRect);
+		App->render->Blit(graphics, 95, 32, &imageRect);
 	}
 	//If it's end of stage
 	else
-		App->renderer->Blit(graphics2, 0, 0, NULL);
+		App->render->Blit(graphics2, 0, 0, NULL);
 
 	return UPDATE_CONTINUE;
 }

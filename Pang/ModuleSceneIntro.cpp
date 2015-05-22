@@ -62,8 +62,8 @@ update_status ModuleSceneIntro::Update()
 			selectedRect.y = 0;
 		else
 			selectedRect.y = 15;
-		App->renderer->Blit(map, 0, 0, NULL);
-		App->renderer->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+		App->render->Blit(map, 0, 0, NULL);
+		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 		}
 
 	}
@@ -73,9 +73,9 @@ update_status ModuleSceneIntro::Update()
 		{
 			timeCounter++;
 			if (timeCounter / 25 % 2 == 0)
-				App->renderer->Blit(graphics, 0, 0, NULL);
+				App->render->Blit(graphics, 0, 0, NULL);
 			else
-				App->renderer->Blit(graphics2, 0, 0, NULL);
+				App->render->Blit(graphics2, 0, 0, NULL);
 
 			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 			{
@@ -87,10 +87,10 @@ update_status ModuleSceneIntro::Update()
 		if (mapOn)
 		{
 			timeCounter++;
-			App->renderer->Blit(map, 0, 0, NULL);
+			App->render->Blit(map, 0, 0, NULL);
 			//Drawing time counter
 			timerRect.x = (timeCounter / 60) * 27;
-			App->renderer->Blit(timer, 257, 31, &timerRect);
+			App->render->Blit(timer, 257, 31, &timerRect);
 			
 			//Moving through levels
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && nextLevel < 3)
@@ -106,10 +106,10 @@ update_status ModuleSceneIntro::Update()
 				timeCounter = 0;
 				paused = true;
 			}
-			App->renderer->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
-			App->renderer->PrintText("CHOSE THE CITY TO START.", interfaceRect, 8, 216, 6);
-			App->renderer->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceRect, 8, 224, 6);
-			App->renderer->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceRect, 8, 232, 6);
+			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+			App->render->PrintText("CHOSE THE CITY TO START.", interfaceRect, 8, 216, 6);
+			App->render->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceRect, 8, 224, 6);
+			App->render->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceRect, 8, 232, 6);
 
 		}
 	}

@@ -24,7 +24,7 @@
 class Application
 {
 public:
-	ModuleRender* renderer;
+	ModuleRender* render;
 	ModuleWindow* window;
 	ModuleTextures* textures;
 	ModuleInput* input;

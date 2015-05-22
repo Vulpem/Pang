@@ -191,7 +191,7 @@ void ModuleRender::PrintNumbers(int num, SDL_Rect& rect, int x, int y) const
 		SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
 		if (tmpTexture)
 		{
-		App->renderer->Blit(tmpTexture, x, y, &rect);
+			App->render->Blit(tmpTexture, x, y, &rect);
 		}
 
 	}
@@ -234,7 +234,7 @@ void ModuleRender::PrintText(char* text, SDL_Rect& rect, int x, int y, int size)
 		tmpTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
 		if (tmpTexture)
 		{
-			App->renderer->Blit(tmpTexture, x, y, &rect);
+			App->render->Blit(tmpTexture, x, y, &rect);
 		}
 	}
 	if (tmpSurface)

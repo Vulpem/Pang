@@ -4,7 +4,7 @@
 Application::Application()
 {
 	window = new ModuleWindow(this);
-	renderer = new ModuleRender(this);
+	render = new ModuleRender(this);
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this);
@@ -26,7 +26,7 @@ Application::Application()
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
 	AddModule(window);
-	AddModule(renderer);
+	AddModule(render);
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
@@ -64,7 +64,7 @@ Application::~Application()
 	delete audio;
 	delete input;
 	delete textures;
-	delete renderer;
+	delete render;
 	delete window;
 
 }

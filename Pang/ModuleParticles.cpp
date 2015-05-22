@@ -117,7 +117,7 @@ update_status ModuleParticles::Update()
 		}
 		else
 		{
-			App->renderer->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), p->offsetX, p->offsetY);
+			App->render->Blit(explosionGraphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), p->offsetX, p->offsetY);
 			if(p->fx_played == false)
 			{
 				p->fx_played = true;

@@ -90,11 +90,13 @@ bool ModuleScenePlay::Start(int level)
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
-
-	timer--;
+	if (timer >= 0)
+	{
+		timer--;
+	}
 	if (timer <= 0 && App->player->dead == false)
 	{
-		App->player->Kill(8);
+		App->player->Kill(0);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{
@@ -121,22 +123,22 @@ update_status ModuleScenePlay::Update()
 		}
 
 		//////////////////////
-		App->renderer->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
-		App->renderer->Blit(timerImage, 250, 9, &timerRect);
-		App->renderer->Blit(timerNum, 330, 9, &timerNumRect1);
-		App->renderer->Blit(timerNum, 345, 9, &timerNumRect2);
-		App->renderer->Blit(timerNum, 360, 9, &timerNumRect3);
-		App->renderer->DrawQuad(interfaceRect, 0, 0, 0, 255);
+		App->render->Blit(backgroundGraphics, 0, 0, &background, 0.75f);
+		App->render->Blit(timerImage, 250, 9, &timerRect);
+		App->render->Blit(timerNum, 330, 9, &timerNumRect1);
+		App->render->Blit(timerNum, 345, 9, &timerNumRect2);
+		App->render->Blit(timerNum, 360, 9, &timerNumRect3);
+		App->render->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
 		for (int n = 0; n < lives && n < 4; n++)
 		{
-			App->renderer->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
+			App->render->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
 		}
 		UpdateInterface();
 	}
 
 	if ((timer > startTimerevent + 60 || timer / 5 % 2 == 0) && timer > startTimerevent)
-		App->renderer->Blit(ready, 150, 100, &readyRect);
+		App->render->Blit(ready, 150, 100, &readyRect);
 	if (timer == startTimerevent)
 	{
 		App->player->pausePlayer = false;
@@ -183,6 +185,10 @@ update_status ModuleScenePlay::Update()
 			currentLvl = 0;
 			App->maps->LoadMap(0);
 		}
+		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+		{
+			timer = 300;
+		}
 		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 		{
 			LOG("Pause\n");
@@ -214,7 +220,7 @@ update_status ModuleScenePlay::Update()
 		boundingBox.y = App->player->position.y + 5;
 		boundingBox.w = 16;
 		boundingBox.h = 27;
-		App->renderer->DrawQuad(boundingBox, 0, 200, 0, 150);
+		App->render->DrawQuad(boundingBox, 0, 200, 0, 150);
 		p2List_item<Ball*>* pointer = App->balls->ballsList.getFirst();
 		while (pointer != NULL)
 		{
@@ -223,7 +229,7 @@ update_status ModuleScenePlay::Update()
 			myBallPos.h = myBallPos.w = 1;
 			myBallPos.x = pointer->data->position.x;
 			myBallPos.y = pointer->data->position.y;
-			App->renderer->DrawQuad(myBallPos, 0, 255, 0, 255);
+			App->render->DrawQuad(myBallPos, 0, 255, 0, 255);
 			pointer = pointer->next;
 		}
 	}

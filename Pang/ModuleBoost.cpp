@@ -50,11 +50,11 @@ update_status ModuleBoost::Update()
 			if (tmp->data->lifeTime > 450)
 			{
 				if (tmp->data->lifeTime / 8 % 2 == 0)
-					App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
+					App->render->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
 			}
 			//Render as normal
 			else
-				App->renderer->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
+				App->render->Blit(graphics, tmp->data->position.x, tmp->data->position.y, &tmp->data->anim.GetCurrentFrame());
 		}
 
 		tmp = tmp_next;
@@ -64,7 +64,7 @@ update_status ModuleBoost::Update()
 	{
 	case doubleHook:
 		playerBoost = { 16, 0, 16, 16 };
-		App->renderer->Blit(graphics, 14 * TILE, 28 * TILE, &playerBoost);
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &playerBoost);
 		break;
 	default:
 		break;

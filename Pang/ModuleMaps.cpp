@@ -549,10 +549,10 @@ update_status ModuleMaps::Update()
 							tile.w = TILE * 3;
 							tile.x = w*TILE;
 							tile.y = h*TILE;
-							App->renderer->DrawQuad(tile, 255, 255, 0, 255);
+							App->render->DrawQuad(tile, 255, 255, 0, 255);
 							tile.w = TILE;
 						}*/
-						App->renderer->Blit(ladderGraphics, w * TILE, h * TILE, NULL);
+						App->render->Blit(ladderGraphics, w * TILE, h * TILE, NULL);
 						break;
 					}
 					
@@ -746,7 +746,7 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 			SolidBrickSection.x = 4 * TILE;
 		}
 	}
-	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
+	App->render->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
 	
 }
 
@@ -790,7 +790,7 @@ void ModuleMaps::DrawBrick(int h, int w)
 			SolidBrickSection.x = 4 * TILE;
 		}
 	}
-	App->renderer->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
+	App->render->Blit(bricksGraphics, w*TILE, h*TILE, &SolidBrickSection);
 }
 
 char* ModuleMaps::GetLevelName(int level)

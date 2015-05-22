@@ -80,10 +80,10 @@ void ModuleFonts::PrintNumbers(int num, SDL_Surface* surface, SDL_Rect& rect, in
 		else
 		{
 			int b = 0;
-			if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
+			if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, surface))
 			{
 				b++;
-				App->renderer->Blit(tmpTexture, x, y, &rect);
+				App->render->Blit(tmpTexture, x, y, &rect);
 				b++;
 			}
 		}
@@ -110,10 +110,10 @@ void ModuleFonts::PrintText(char* text, SDL_Surface* surface, SDL_Rect& rect, in
 	else
 	{
 		int c = 0;
-		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->renderer->renderer, surface))
+		if (SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, surface))
 		{
 			c++;
-			App->renderer->Blit(tmpTexture, x, y, &rect);
+			App->render->Blit(tmpTexture, x, y, &rect);
 			c++;
 		}
 	}

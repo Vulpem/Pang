@@ -96,7 +96,7 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			App->renderer->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
+			App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
 		}
 
 		tmp = tmp_next;
