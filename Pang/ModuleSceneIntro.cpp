@@ -111,7 +111,7 @@ update_status ModuleSceneIntro::Update()
 
 			textText = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
 			App->render->Blit(textText, 8, 210, &textRect);
-			textText = App->fonts->PrintText("USE THE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
+			textText = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
 			App->render->Blit(textText, 8, 220, &textRect);
 			textText = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
 			App->render->Blit(textText, 8, 230, &textRect);
@@ -119,25 +119,36 @@ update_status ModuleSceneIntro::Update()
 			if (nextLevel == 3)
 			{
 				textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 
 				textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 220, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
 			}
 			else if (nextLevel == 17)
 			{
 				textText = App->fonts->PrintText("EASTER", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 
 				textText = App->fonts->PrintText("ISLAND", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 220, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
 			}
 			else
 			{
 				textText = App->fonts->PrintText((App->maps->GetLevelName(nextLevel * 3)), { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 			}
 
+			textText = App->fonts->PrintNumbers(nextLevel * 3 - 2, { 255, 167, 16 }, NULL, textRect);
+			App->render->Blit(textText, 350 - textRect.w, 230, &textRect);
+
+			textText = App->fonts->PrintText("~", { 255, 167, 16 }, NULL, textRect);
+			App->render->Blit(textText, 357 - textRect.w / 2, 230, &textRect);
+
+			textText = App->fonts->PrintNumbers(nextLevel * 3, { 255, 167, 16 }, NULL, textRect);
+			App->render->Blit(textText, 365, 230, &textRect);
+
+			textText = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL, textRect);
+			App->render->Blit(textText, 285, 230, &textRect);
 		}
 	}
 
