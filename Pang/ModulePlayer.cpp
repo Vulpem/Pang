@@ -735,7 +735,7 @@ void ModulePlayer::PrintInterface()
 	if (App->scenePlay->currentLvl < 10)
 	{
 		//Level number
-		App->render->Blit(textText, 23 * TILE - textRect.w, 28 * TILE, &textRect);
+		App->render->Blit(textText, 23 * TILE - textRect.w + 2, 28  * TILE, &textRect);
 	}
 	else
 	{
