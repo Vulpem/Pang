@@ -29,6 +29,8 @@ public:
 	void PrintNumbers(int num, SDL_Rect& rect, int x, int y) const;
 	void PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const;
 
-	SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* font);
+	SDL_Texture* Print(const char* text, SDL_Color color, TTF_Font* font, SDL_Rect& rect);
+	SDL_Texture* Numbers(int numbers, SDL_Color color, TTF_Font* font, SDL_Rect& rect);
+
 public:
 };
