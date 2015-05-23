@@ -154,5 +154,8 @@
     <Text Include="Punctuation.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Things to do.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

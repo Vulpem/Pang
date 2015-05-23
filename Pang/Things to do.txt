@@ -1,0 +1,6 @@
+IMPORTANT BUGS:
+	Printing text crashes spontaniously
+	ScenePlay doesnt render background after a while
+
+MINOR THINGS:
+Map transition between scenes appears withoutjoystick
