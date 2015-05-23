@@ -163,7 +163,7 @@ update_status ModuleBalls::Update()
 		{
 			CheckBricksColision(pointer);
 			// Blink balls when pause counter ends
-			if (pauseCounter > 250)
+			if (pauseCounter > PAUSE_BOOST_TIME * FPS * 0.7f)
 			{
 				if ((pauseCounter / 8) %2 == 0)
 					App->render->Blit(ballsGraphics, pointer->data->position.x, pointer->data->position.y, &ballsRects[pointer->data->color][pointer->data->type], pointer->data->radius, pointer->data->radius);
@@ -604,7 +604,7 @@ void ModuleBalls::CheckBoosts()
 	if (pauseBoost == true)
 	{
 		pauseCounter++;
-		if (pauseCounter >= PAUSE_BOOST_TIME)
+		if (pauseCounter >= PAUSE_BOOST_TIME * FPS)
 		{
 			pauseBalls = false;
 			pauseBoost = false;

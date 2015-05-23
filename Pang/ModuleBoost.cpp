@@ -46,7 +46,7 @@ update_status ModuleBoost::Update()
 		}
 		else
 		{
-			//Blink after disappearing
+			//Blink before disappearing
 			if (tmp->data->lifeTime > 450)
 			{
 				if (tmp->data->lifeTime / 8 % 2 == 0)
@@ -98,32 +98,32 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 	b->lifeTime = 0;
 
 	if (boostType == none)
-		type = rand() % 4 + 1;
+		type = rand() % 100 + 1;
 	else
 		type = boostType;
 
-	b->type = type;
-	switch (b->type)
+	if (type <= 10)
 	{
-	case doubleHook:
-	{
-		b->anim.frames.PushBack({ 16, 0, 16, 16 }); break;
+		b->type = life;
+		b->anim.frames.PushBack({ 112, 0, 16, 16 });
 	}
-	case bomb:
+	else if (type <= 40)
 	{
+		b->type = doubleHook;
+		b->anim.frames.PushBack({ 16, 0, 16, 16 });
+	}
+	else if (type <= 70)
+	{
+		b->type = bomb;
 		b->anim.frames.PushBack({ 32, 0, 16, 16 });
 		b->anim.frames.PushBack({ 48, 0, 16, 16 }); 
-		b->anim.frames.PushBack({ 64, 0, 16, 16 }); break;
+		b->anim.frames.PushBack({ 64, 0, 16, 16 });
 		b->anim.speed = 10.0f;
 	}
-	case pause:
+	else
 	{
-		b->anim.frames.PushBack({ 96, 0, 16, 16 }); break;
-	}
-	case life:
-	{
-		b->anim.frames.PushBack({ 112, 0, 16, 16 }); break;
-	}
+		b->type = pause;
+		b->anim.frames.PushBack({ 96, 0, 16, 16 });
 	}
 	b->position.x = x;
 	b->position.y = y;
