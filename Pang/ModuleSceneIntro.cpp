@@ -119,23 +119,23 @@ update_status ModuleSceneIntro::Update()
 			if (nextLevel == 3)
 			{
 				textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 320, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
 
 				textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 320, 220, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 220, &textRect);
 			}
 			else if (nextLevel == 17)
 			{
 				textText = App->fonts->PrintText("EASTER", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 320, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
 
 				textText = App->fonts->PrintText("ISLAND", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 320, 220, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 220, &textRect);
 			}
 			else
 			{
 				textText = App->fonts->PrintText((App->maps->GetLevelName(nextLevel * 3)), { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 290, 210, &textRect);
+				App->render->Blit(textText, 330 - textRect.w / 2, 210, &textRect);
 			}
 
 		}
