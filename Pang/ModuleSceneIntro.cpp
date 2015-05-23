@@ -22,8 +22,9 @@ bool ModuleSceneIntro::Start()
 	paused = false;
 	selectedRect = { 0, 15, 15, 15 };
 	timerRect = { 0, 0, 26, 38};
-	interfaceRect = { 0, 0, 0, 10};
+	textRect = { 0, 0, 0, 10};
 	nextLevel = 1;
+	textFont = App->fonts->LoadFont("./Fonts/Pang.ttf", 10);
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
 	map = App->textures->Load("./Image_Sources/IntroMap.png");
@@ -93,7 +94,7 @@ update_status ModuleSceneIntro::Update()
 			App->render->Blit(timer, 257, 31, &timerRect);
 			
 			//Moving through levels
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && nextLevel < 3)
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && nextLevel < 10)
 			{
 				nextLevel++;
 			}
@@ -108,9 +109,34 @@ update_status ModuleSceneIntro::Update()
 			}
 			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 
-		//	App->fonts->PrintText("CHOSE THE CITY TO START.", interfaceRect, 8, 216, 6);
-		//	App->fonts->PrintText("USE THE JOYSTICK TO CHOOSE.", interfaceRect, 8, 224, 6);
-//			App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", interfaceRect, 8, 232, 6);
+			textText = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
+			App->render->Blit(textText, 8, 210, &textRect);
+			textText = App->fonts->PrintText("USE THE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
+			App->render->Blit(textText, 8, 220, &textRect);
+			textText = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
+			App->render->Blit(textText, 8, 230, &textRect);
+
+			if (nextLevel == 3)
+			{
+				textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
+				App->render->Blit(textText, 320, 210, &textRect);
+
+				textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
+				App->render->Blit(textText, 320, 220, &textRect);
+			}
+			else if (nextLevel == 17)
+			{
+				textText = App->fonts->PrintText("EASTER", { 255, 167, 16 }, NULL, textRect);
+				App->render->Blit(textText, 320, 210, &textRect);
+
+				textText = App->fonts->PrintText("ISLAND", { 255, 167, 16 }, NULL, textRect);
+				App->render->Blit(textText, 320, 220, &textRect);
+			}
+			else
+			{
+				textText = App->fonts->PrintText((App->maps->GetLevelName(nextLevel * 3)), { 255, 167, 16 }, NULL, textRect);
+				App->render->Blit(textText, 290, 210, &textRect);
+			}
 
 		}
 	}

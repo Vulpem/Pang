@@ -795,8 +795,7 @@ void ModuleMaps::DrawBrick(int h, int w)
 
 char* ModuleMaps::GetLevelName(int level)
 {
-	level = (level - 1)/ 3;
-	level++;
+	level = (level - 1)/ 3 + 1;
 	switch (level)
 	{
 		case 1:
