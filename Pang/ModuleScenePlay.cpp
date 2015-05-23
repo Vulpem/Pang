@@ -43,11 +43,9 @@ bool ModuleScenePlay::Init()
 // Load assets
 bool ModuleScenePlay::Start(int level)
 {
-
 	currentLvl = level;
-
 	timer = 6180;
-	startTimerevent = timer - 180;
+	startTimerEvent = timer - 180;
 
 	timerNumRect1 = { 0, 0, 13, 16 };
 	timerNumRect2 = { 0, 0, 13, 16 };
@@ -72,7 +70,6 @@ bool ModuleScenePlay::Start(int level)
 		return false;
 	}
 	App->maps->Enable();
-//	App->fonts->Enable();
 	
 	App->player->Enable();
 	App->gun->Enable();
@@ -96,11 +93,14 @@ update_status ModuleScenePlay::Update()
 	}
 	if (timer <= 0 && App->player->dead == false)
 	{
+
 		App->player->Kill(0);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{
+		timeBonus = timer / FPS * 10;
 		App->sceneTransition->Enable(++currentLvl);
+		App->player->punt += timeBonus;
 		Disable();
 	}
 	else
@@ -109,11 +109,11 @@ update_status ModuleScenePlay::Update()
 
 		//Setting timer images
 		//////////////////////
-		if (timer >= startTimerevent)
+		if (timer >= startTimerEvent)
 		{
-			timerNumRect1.x = ((startTimerevent / FPS / 100) % 10) * 13;
-			timerNumRect2.x = ((startTimerevent / FPS / 10) % 10) * 13;
-			timerNumRect3.x = ((startTimerevent / FPS) % 10) * 13;
+			timerNumRect1.x = ((startTimerEvent / FPS / 100) % 10) * 13;
+			timerNumRect2.x = ((startTimerEvent / FPS / 10) % 10) * 13;
+			timerNumRect3.x = ((startTimerEvent / FPS) % 10) * 13;
 		}
 		else
 		{
@@ -137,18 +137,18 @@ update_status ModuleScenePlay::Update()
 		UpdateInterface();
 	}
 
-	if ((timer > startTimerevent + 60 || timer / 5 % 2 == 0) && timer > startTimerevent)
+	if ((timer > startTimerEvent + 60 || timer / 5 % 2 == 0) && timer > startTimerEvent)
 		App->render->Blit(ready, 150, 100, &readyRect);
-	if (timer == startTimerevent)
+	if (timer == startTimerEvent)
 	{
 		App->player->pausePlayer = false;
 		App->balls->pauseBalls = false;
 	}
-	if (timer == startTimerevent * 0.4)
+	if (timer == startTimerEvent * 0.4)
 	{
 		App->audio->PlayMusic("./Sounds/Getting_late.wav");
 	}
-	if (timer == startTimerevent * 0.15)
+	if (timer == startTimerEvent * 0.15)
 	{
 		App->audio->PlayMusic("./Sounds/out_of_time.wav");
 	}

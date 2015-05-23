@@ -13,6 +13,7 @@ public:
 	bool CleanUp();
 
 	void Enable(int nextLevel);
+	void PrintStats();
 
 	int timeCounter;
 	int nextLevel;
@@ -22,6 +23,7 @@ public:
 
 	SDL_Texture* graphics;
 	SDL_Texture* graphics2;
+	SDL_Texture* textText;
 	SDL_Rect textRect;
 	SDL_Rect imageRect;
 

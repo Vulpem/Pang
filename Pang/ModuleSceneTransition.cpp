@@ -61,23 +61,7 @@ update_status ModuleSceneTransition::Update()
 	//Print level stats if its not end of stage
 	if ((nextLevel - 1) % 3 != 0)
 	{
-		App->fonts->PrintNumbers(nextLevel - 1, textRect, 170, 145);
-		App->fonts->PrintText("STAGE", textRect, 170 + 4, 145, 8);
-
-		App->fonts->PrintText("TIME BONUS", textRect, 100, 165, 8);
-		App->fonts->PrintText("PTS", textRect, 260 + 4, 165, 8);
-		if (timeCounter > 50)
-		{
-			App->fonts->PrintText("NEXT EXTEND", textRect, 100, 185, 8);
-			App->fonts->PrintText("PTS", textRect, 260 + 4, 185, 8);
-		}
-		///////////////////
-		//Print push button
-		if (timeCounter / 20 % 2 == 0)
-		{
-			App->fonts->PrintText("PUSH BUTTON", textRect, 280, 220, 8);
-		}
-		//////////////////
+		PrintStats();
 
 		//Print background
 		imageRect.y = 0 + (nextLevel - 2) * 96;
@@ -105,5 +89,41 @@ void ModuleSceneTransition::Enable(int nextLevel)
 	{
 		enabled = true;
 		Start(nextLevel);
+	}
+}
+
+void ModuleSceneTransition::PrintStats()
+{
+	//Level Number
+	textText = App->fonts->PrintNumbers(nextLevel - 1, { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 170  - textRect.w, 145, &textRect);
+
+	//Stage text
+	textText = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 174, 145, &textRect);
+
+	textText = App->fonts->PrintText("TIME BONUS", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 100, 165, &textRect);
+
+	textText = App->fonts->PrintNumbers(App->scenePlay->timeBonus, { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 260 - textRect.w, 165, &textRect);
+
+	textText = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 264, 165, &textRect);
+
+	if (timeCounter > 50)
+	{
+		textText = App->fonts->PrintText("NEXT EXTEND", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 100, 185, &textRect);
+
+		textText = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 264, 185, &textRect);
+	}
+	///////////////////
+	//Print push button
+	if (timeCounter / 20 % 2 == 0)
+	{
+		textText = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 280, 220, &textRect);
 	}
 }

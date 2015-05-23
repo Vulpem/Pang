@@ -20,7 +20,7 @@ bool ModuleFonts::Init()
 	LOG("Init True Type Font library");
 	bool ret = true;
 
-	if (TTF_Init() == -1)
+ 	if (TTF_Init() == -1)
 	{
 		LOG("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 		ret = false;
@@ -85,96 +85,7 @@ TTF_Font* const ModuleFonts::LoadFont(char* file, int size)
 	return font;
 }
 
-void ModuleFonts::PrintNumbers(int num,  SDL_Rect& rect, int x, int y) const
-{
-	/*
-	SDL_Surface* tmpSurface = NULL;
-	SDL_Texture* tmpTexture = NULL;
-
-	std::string string = std::to_string(num);
-	rect.w = strlen(string.c_str()) * 9;
-	x -= strlen(string.c_str()) * 9;
-
-
-	tmpSurface = TTF_RenderText_Solid(font, string.c_str(), textColor);
-	if (tmpSurface == NULL)
-	{
-		LOG("Could not load message");
-		assert(false);
-	}
-	else
-	{
-		SDL_Texture* tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, tmpSurface);
-		if (tmpTexture == NULL)
-		{
-			LOG("Could not generate texture");
-			assert(false);
-		}
-		else
-		{
-			App->render->Blit(tmpTexture, x, y, &rect);
-		}
-
-	}
-	if (tmpSurface)
-	{
-		SDL_FreeSurface(tmpSurface);
-	}
-	if (tmpTexture)
-	{
-		SDL_DestroyTexture(tmpTexture);
-	}
-	*/
-}
-
-void ModuleFonts::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const
-{
-	/*
-	SDL_Surface* tmpSurface = NULL;
-	SDL_Texture* tmpTexture = NULL;
-	if (size == 8)
-	{
-		rect.w = strlen(text) * 8.5;
-		tmpSurface = TTF_RenderText_Solid(font, text, textColor);
-	}
-
-	else if (size == 6)
-	{
-		rect.w = strlen(text) * 7;
-		tmpSurface = TTF_RenderText_Solid(fontInit, text, textColor);
-	}
-
-	if (tmpSurface == NULL)
-	{
-		LOG("Could not load message");
-		assert(false);
-	}
-	else
-	{
-		tmpTexture = SDL_CreateTextureFromSurface(App->render->renderer, tmpSurface);
-		if (tmpSurface)
-		{
-			SDL_FreeSurface(tmpSurface);
-		}
-		if (tmpTexture == NULL)
-		{
-			LOG("Could not generate texture");
-			assert(false);
-		}
-		else
-		{
-			App->render->Blit(tmpTexture, x, y, &rect);
-		}
-	}
-
-	if (tmpTexture)
-	{
-		SDL_DestroyTexture(tmpTexture);
-	}
-	*/
-}
-
-SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* font, SDL_Rect& rect) 
+SDL_Texture* ModuleFonts::PrintText(const char* text, SDL_Color color, TTF_Font* font, SDL_Rect& rect) 
 {
 	SDL_Texture* ret = NULL;
 	SDL_Surface* surface = TTF_RenderText_Solid((font) ? font : def, text, color);
@@ -192,7 +103,7 @@ SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* fon
 	return ret;
 }
 
-SDL_Texture* ModuleFonts::Numbers(int numbers, SDL_Color color, TTF_Font* font, SDL_Rect& rect)
+SDL_Texture* ModuleFonts::PrintNumbers(int numbers, SDL_Color color, TTF_Font* font, SDL_Rect& rect)
 {
 	std::string string = std::to_string(numbers);
 	rect.w = strlen(string.c_str()) * 9;

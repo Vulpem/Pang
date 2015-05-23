@@ -31,7 +31,8 @@ public:
 	int currentLvl;
 	int delay;
 	int timer;
-	int startTimerevent;
+	int startTimerEvent;
+	int timeBonus;
 
 	bool debugMode = false;
 

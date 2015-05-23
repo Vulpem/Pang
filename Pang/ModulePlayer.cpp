@@ -107,95 +107,13 @@ update_status ModulePlayer::Update()
 {
 	Reset();
 
-	
 	if (App->scenePlay->debugMode == true)
 	{
-		//Debug stats
-
-			//FPS text
-		textText = App->fonts->Print("FPS: ", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 29 * TILE, &textRect);
-			//FPS numbers
-		textText = App->fonts->Numbers((double)App->frames / (SDL_GetTicks() / 1000.0), { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 27 * TILE - textRect.w, 29 * TILE, &textRect);
-
-			//Frames text
-		textText = App->fonts->Print("Frames: ", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 28 * TILE, 29 * TILE, &textRect);
-			//Frames numbers
-		textText = App->fonts->Numbers(App->frames % (int)FPS, { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 38 * TILE - textRect.w, 29 * TILE, &textRect);
-
-			//Time text
-		textText = App->fonts->Print("Time: ", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 39 * TILE, 29 * TILE, &textRect);
-			//Time numbers
-		textText = App->fonts->Numbers(SDL_GetTicks() / 1000, { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 47 * TILE - textRect.w, 29 * TILE, &textRect);
+		PrintDebugMode();
 	}
 
-	//Printing interface//
-	textText = App->fonts->Print("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 2 * TILE, 26 * TILE, &textRect);
+	PrintInterface();
 
-	textText = App->fonts->Print("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 35 * TILE, 26 * TILE, &textRect);
-
-	//Level name
-	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
-	{
-		textText = App->fonts->Print("EMERALD", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-
-		textText = App->fonts->Print("TEMPLE", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
-	}
-	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
-	{
-		textText = App->fonts->Print("EASTER", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-
-		textText = App->fonts->Print("ISLAND", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
-	}
-	else
-	{
-		textText = App->fonts->Print(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-	}
-
-	//Level info
-
-	//Stage number
-	textText = App->fonts->Numbers((App->scenePlay->currentLvl - 1) / 3 + 1, { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
-	//Dash
-	textText = App->fonts->Print("-", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 21 * TILE, 28 * TILE, &textRect);
-
-	textText = App->fonts->Numbers(App->scenePlay->currentLvl, { 255, 255, 255 }, NULL, textRect);
-	if (App->scenePlay->currentLvl < 10)
-	{
-		//Level number
-		App->render->Blit(textText, 23 * TILE - textRect.w, 28 * TILE, &textRect);
-	}
-	else
-	{
-		App->render->Blit(textText, 23 * TILE - textRect.w + 10, 28 * TILE, &textRect);
-	}
-
-	textText = App->fonts->Print("STAGE", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 24 * TILE, 28 * TILE, &textRect);
-	////////////
-
-	textText = App->fonts->Numbers(punt, { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 15 * TILE - textRect.w, 27 * TILE, &textRect);
-
-	if (App->scenePlay->lives > 4)
-	{
-		textText = App->fonts->Numbers(punt, { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 10 * TILE - textRect.w + 18, 29 * TILE, &textRect);
-	}
 
 	if (current_animation != NULL)
 	{
@@ -744,4 +662,96 @@ void ModulePlayer::UpdateBoosts()
 		}
 	}
 	prevBoost = boost;
+}
+
+void ModulePlayer::PrintDebugMode()
+{
+	//Debug stats
+
+	//FPS text
+	textText = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 20 * TILE, 29 * TILE, &textRect);
+	//FPS PrintNumbers
+	textText = App->fonts->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 27 * TILE - textRect.w, 29 * TILE, &textRect);
+
+	//Frames text
+	textText = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 28 * TILE, 29 * TILE, &textRect);
+	//Frames PrintNumbers
+	textText = App->fonts->PrintNumbers(App->frames % (int)FPS, { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 38 * TILE - textRect.w, 29 * TILE, &textRect);
+
+	//Time text
+	textText = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 39 * TILE, 29 * TILE, &textRect);
+	//Time PrintNumbers
+	textText = App->fonts->PrintNumbers(SDL_GetTicks() / 1000, { 255, 167, 16 }, NULL, textRect);
+	App->render->Blit(textText, 47 * TILE - textRect.w, 29 * TILE, &textRect);
+}
+
+void ModulePlayer::PrintInterface()
+{
+	//PrintTexting interface//
+	textText = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 2 * TILE, 26 * TILE, &textRect);
+
+	textText = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 35 * TILE, 26 * TILE, &textRect);
+
+	//Level name
+	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
+	{
+		textText = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
+
+		textText = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
+	}
+	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
+	{
+		textText = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
+
+		textText = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
+	}
+	else
+	{
+		textText = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
+	}
+
+	//Level info
+
+	//Stage number
+	textText = App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
+	//Dash
+	textText = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 21 * TILE, 28 * TILE, &textRect);
+
+	textText = App->fonts->PrintNumbers(App->scenePlay->currentLvl, { 255, 255, 255 }, NULL, textRect);
+	if (App->scenePlay->currentLvl < 10)
+	{
+		//Level number
+		App->render->Blit(textText, 23 * TILE - textRect.w, 28 * TILE, &textRect);
+	}
+	else
+	{
+		App->render->Blit(textText, 23 * TILE - textRect.w + 10, 28 * TILE, &textRect);
+	}
+
+	textText = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 24 * TILE, 28 * TILE, &textRect);
+	////////////
+
+	textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
+	App->render->Blit(textText, 15 * TILE - textRect.w, 27 * TILE, &textRect);
+
+	if (App->scenePlay->lives > 4)
+	{
+		textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
+		App->render->Blit(textText, 10 * TILE - textRect.w + 18, 29 * TILE, &textRect);
+	}
 }

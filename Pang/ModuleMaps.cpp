@@ -698,7 +698,7 @@ void ModuleMaps::LoadMap(int nMap)
 			  break;
 	}
 
-	App->scenePlay->startTimerevent = App->scenePlay->timer - 180;
+	App->scenePlay->startTimerEvent = App->scenePlay->timer - 180;
 
 
 	}

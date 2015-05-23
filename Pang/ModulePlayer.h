@@ -114,7 +114,10 @@ private:
 	bool NewLadderDown();
 
 	//////////////////////
+	//Interface
 
+	void PrintInterface();
+	void PrintDebugMode();
 
 
 };
