@@ -79,6 +79,24 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	return texture;
 }
 
+SDL_Texture* const ModuleTextures::LoadSurface(SDL_Surface* surface)
+{
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
+
+	if (texture == NULL)
+	{
+		LOG("Unable to create texture from surface! SDL Error: %s\n", SDL_GetError());
+	}
+	else
+	{
+		textures.add(texture);
+	}
+
+	return texture;
+}
+
+
+
 // Free texture from memory
 void ModuleTextures::Unload(SDL_Texture* texture)
 {

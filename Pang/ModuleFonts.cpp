@@ -3,10 +3,8 @@
 #include "ModuleFonts.h"
 #include "String.h"
 
-#include <sstream>
-#include <string>
+
 #include "SDL_TTF\include\SDL_ttf.h"
-#include "SDL\include\SDL.h"
 
 ModuleFonts::ModuleFonts(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -17,28 +15,19 @@ ModuleFonts::~ModuleFonts()
 
 bool ModuleFonts::Init()
 {
-	if (TTF_Init() != 0)
-	{
-		LOG("TTF_Init() Failed: ");
-		return UPDATE_ERROR;
-	}
-	textColor = { 255, 255, 255 };
-	font = LoadFont("Fonts/Pang.ttf", 8);
-	if (font == NULL)
-	{
-		LOG("TTF_OpenFont() Failed");
-		return UPDATE_ERROR;
-	}
-	fontInit = LoadFont("Fonts/Pang.ttf", 7);
-	if (fontInit == NULL)
-	{
-		LOG("TTF_OpenFont() Failed");
-		return UPDATE_ERROR;
-	}
+	LOG("Init True Type Font library");
+	bool ret = true;
 
-
-	textColor = { 255, 255, 255 };
-	return true;
+	if (TTF_Init() == -1)
+	{
+		LOG("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+		ret = false;
+	}
+	else
+	{
+		def = LoadFont("./Fonts/Pang.ttf", 8);
+	}
+	return ret;
 }
 
 bool ModuleFonts::Start()
@@ -64,25 +53,39 @@ update_status ModuleFonts::PostUpdate()
 
 bool ModuleFonts::CleanUp()
 {
-	TTF_CloseFont(font);
-	TTF_CloseFont(fontInit);
+	LOG("Freeing True Type fonts and library");
+	
+	p2List_item<TTF_Font*>* item;
+	
+	for (item = fonts.getFirst(); item != NULL; item = item->next)
+	{
+		TTF_CloseFont(item->data);
+	}
+	fonts.clear();
+	
 	TTF_Quit();
 	return true;
 }
 
 TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
 {
-	TTF_Font* tmpfont;
-	tmpfont = TTF_OpenFont(file, size);
-	if (tmpfont == NULL)
+	TTF_Font* font = TTF_OpenFont(file, size);
+
+	if (font == NULL)
 	{
-		LOG("Could not load font");
+		LOG("Could not load font", TTF_GetError());
 	}
-	return tmpfont;
+	else
+	{
+		LOG("Successfully loaded font %s size %d", file, size);
+		fonts.add(font);
+	}
+	return font;
 }
 
 void ModuleFonts::PrintNumbers(int num,  SDL_Rect& rect, int x, int y) const
 {
+	/*
 	SDL_Surface* tmpSurface = NULL;
 	SDL_Texture* tmpTexture = NULL;
 
@@ -119,12 +122,12 @@ void ModuleFonts::PrintNumbers(int num,  SDL_Rect& rect, int x, int y) const
 	{
 		SDL_DestroyTexture(tmpTexture);
 	}
-
+	*/
 }
 
 void ModuleFonts::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const
 {
-
+	/*
 	SDL_Surface* tmpSurface = NULL;
 	SDL_Texture* tmpTexture = NULL;
 	if (size == 8)
@@ -166,5 +169,23 @@ void ModuleFonts::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) 
 	{
 		SDL_DestroyTexture(tmpTexture);
 	}
+	*/
 }
 
+SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* font)
+{
+	SDL_Texture* ret = NULL;
+	SDL_Surface* surface = TTF_RenderText_Solid((font) ? font : def, text, color);
+
+	if (surface == NULL)
+	{
+		LOG("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	}
+	else
+	{
+		ret = App->textures->LoadSurface(surface);
+		SDL_FreeSurface(surface);
+	}
+
+	return ret;
+}
