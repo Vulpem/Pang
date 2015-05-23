@@ -25,7 +25,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	TTF_Font* LoadFont(char* file, int size) const;
+	TTF_Font* const LoadFont(char* file, int size);
 	void PrintNumbers(int num, SDL_Rect& rect, int x, int y) const;
 	void PrintText(char* text, SDL_Rect& rect, int x, int y, int size) const;
 

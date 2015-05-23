@@ -67,7 +67,7 @@ bool ModuleFonts::CleanUp()
 	return true;
 }
 
-TTF_Font* ModuleFonts::LoadFont(char* file, int size) const
+TTF_Font* const ModuleFonts::LoadFont(char* file, int size)
 {
 	TTF_Font* font = TTF_OpenFont(file, size);
 
