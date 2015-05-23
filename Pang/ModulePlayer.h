@@ -57,9 +57,10 @@ public:
 
 	//Printing variables//
 
-	SDL_Rect puntRect;
+	SDL_Texture* Player1;
 
 	SDL_Rect textRect;
+	SDL_Rect puntRect;
 
 	//////////////////////
 

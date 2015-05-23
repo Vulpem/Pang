@@ -172,7 +172,7 @@ void ModuleFonts::PrintText(char* text, SDL_Rect& rect, int x, int y, int size) 
 	*/
 }
 
-SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* font)
+SDL_Texture* ModuleFonts::Print(const char* text, SDL_Color color, TTF_Font* font) 
 {
 	SDL_Texture* ret = NULL;
 	SDL_Surface* surface = TTF_RenderText_Solid((font) ? font : def, text, color);

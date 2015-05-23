@@ -82,7 +82,7 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
-	puntRect = { 0, 0, 0, 8};
+	puntRect = { 0, 0, 64, 8};
 	textRect = { 0, 0, 0, 8};
 	current_animation = &idle;
 	LOG("--Starting player");
@@ -120,6 +120,8 @@ update_status ModulePlayer::Update()
 	}
 
 	//Printing interface//
+	Player1 = App->fonts->Print("PLAYER-1", { 255, 255, 255 }, NULL);
+	App->render->Blit(Player1, 2 * TILE, 26 * TILE, &puntRect);
 	App->fonts->PrintText("PLAYER-1\0", textRect, 2 * TILE, 26 * TILE, 8);
 	App->fonts->PrintText("PLAYER-2", textRect, 35 * TILE, 26 * TILE, 8);
 	//Level name
