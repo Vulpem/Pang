@@ -8,3 +8,13 @@ MINOR THINGS:
 
 INTERFACE:
 	Put a dot after "PTS" transition scene
+
+SOUNDS:
+	Fix level sound with 3 seconds of delay
+
+SPRITES:
+	Get all arcade game sprites:
+		Hook
+		Boosts
+		Scene trasnition
+		Particle hook shot
