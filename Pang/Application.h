@@ -29,7 +29,7 @@ public:
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleAudio* audio;
-	
+	ModuleFonts* fonts;	
 
 	ModuleSceneIntro* sceneIntro;
 	ModuleScenePlay* scenePlay;
@@ -41,7 +41,7 @@ public:
 	ModuleBalls* balls;
 	ModuleParticles* particles;
 	ModuleBoost* boosts;
-	ModuleFonts* fonts;
+
 
 
 	int frames;

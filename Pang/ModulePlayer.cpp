@@ -4,7 +4,39 @@
 #include "ModuleGun.h"
 #include <math.h>
 
-
+enum ui_messages
+{
+	UI_FPS,
+//	UI_FPS_NUM,
+	UI_Frames,
+//	UI_Frames_NUM,
+	UI_Time,
+//	UI_Time_NUM,
+	UI_Player1,
+	UI_Player2,
+	UI_MTFUJI,
+	UI_MTKEIRIN,
+	UI_EMERALD,
+	UI_TEMPLE,
+	UI_ANKOR_WATT,
+	UI_AUSTRALIA,
+	UI_TAJ_MAHAL,
+	UI_LENINGRAD,
+	UI_PARIS,
+	UI_LONDON,
+	UI_BARCELONA,
+	UI_ATHENS,
+	UI_EGYPT,
+	UI_KENYA,
+	UI_NEW_YORK,
+	UI_MAYA,
+	UI_ANTARTICA,
+	UI_EASTER,
+	UI_ISLAND,
+	UI_DASH,
+	UI_STAGE,
+	UI_MAX
+};
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -18,6 +50,54 @@ bool ModulePlayer::Init()
 	punt = 0;
 	pausePlayer = false;
 	graphics = NULL;
+
+	//Loading UI Textures
+	uiText = new SDL_Texture*[UI_MAX];
+	for (int i = 0; i < UI_MAX; i++)
+	{
+		uiText[i] = NULL;
+	}
+	uiText[UI_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
+
+	uiText[UI_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
+
+	uiText[UI_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+
+	//Setting UI Rects
+	rectText = new SDL_Rect[UI_MAX];
+	rectText[UI_FPS] = { 0, 0, 34, 8 };
+	rectText[UI_Frames] = { 0, 0, 68, 8 };
+	rectText[UI_Time] = { 0, 0, 42.5, 8 };
+
+	rectText[UI_Player1] = { 0, 0, 68, 8 };
+	rectText[UI_Player2] = { 0, 0, 68, 8 };
+
+	rectText[UI_DASH] = { 0, 0, 8.5, 8 };
+	rectText[UI_STAGE] = { 0, 0, 42.5, 8 };
+
+	rectText[UI_MTFUJI] = { 0, 0, 59.5, 8 };
+	rectText[UI_MTKEIRIN] = { 0, 0, 76.5, 8 };
+	rectText[UI_EMERALD] = { 0, 0, 59.5, 8 };
+	rectText[UI_TEMPLE] = { 0, 0, 51, 8 };
+	rectText[UI_ANKOR_WATT] = { 0, 0, 85, 8 };
+	rectText[UI_AUSTRALIA] = { 0, 0, 76.5, 8 };
+	rectText[UI_TAJ_MAHAL] = { 0, 0, 76.5, 8 };
+	rectText[UI_LENINGRAD] = { 0, 0, 76.5, 8 };
+	rectText[UI_PARIS] = { 0, 0, 42.5, 8 };
+	rectText[UI_LONDON] = { 0, 0, 51, 8 };
+	rectText[UI_BARCELONA] = { 0, 0, 76.5, 8 };
+	rectText[UI_ATHENS] = { 0, 0, 51, 8 };
+	rectText[UI_EGYPT] = { 0, 0, 42.5, 8 };
+	rectText[UI_KENYA] = { 0, 0, 42.5, 8 };
+	rectText[UI_NEW_YORK] = { 0, 0, 68, 8 };
+	rectText[UI_MAYA] = { 0, 0, 34, 8 };
+	rectText[UI_ANTARTICA] = { 0, 0, 76.5, 8 };
+	rectText[UI_EASTER] = { 0, 0, 51, 8 };
+	rectText[UI_ISLAND] = { 0, 0, 51, 8 };
 
 	//////////////
 	//Animations//
@@ -692,44 +772,75 @@ void ModulePlayer::PrintDebugMode()
 
 void ModulePlayer::PrintInterface()
 {
-	//PrintTexting interface//
-	textText = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 2 * TILE, 26 * TILE, &textRect);
+	App->render->Blit(uiText[UI_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player1]);
+	App->render->Blit(uiText[UI_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player1]);
 
-	textText = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 35 * TILE, 26 * TILE, &textRect);
+
+
+	//PrintTexting interface//
 
 	//Level name
+
 	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
 	{
-		textText = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-
-		textText = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
+		if (uiText[UI_EMERALD] == NULL)
+		{
+			uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
+			rectText[UI_EMERALD] = { 0, 0, 59.5, 8 };
+		}
+		App->render->Blit(uiText[UI_EMERALD], 20 * TILE, 26 * TILE, &rectText[UI_EMERALD]);
+		
+		if (uiText[UI_TEMPLE] == NULL)
+		{
+			uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
+			rectText[UI_TEMPLE] = { 0, 0, 51, 8 };
+		}
+		App->render->Blit(uiText[UI_TEMPLE], 20 * TILE + 4, 27 * TILE, &rectText[UI_TEMPLE]);
 	}
 	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
 	{
+		if (uiText[UI_EASTER] == NULL)
+		{
+			uiText[UI_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
+		}
+		App->render->Blit(uiText[UI_EASTER], 20 * TILE, 26 * TILE, &rectText[UI_EASTER]);
+
+		if (uiText[UI_ISLAND] == NULL)
+		{
+			uiText[UI_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
+		}
+		App->render->Blit(uiText[UI_ISLAND], 20 * TILE + 4, 27 * TILE, &rectText[UI_ISLAND]);
+
+
 		textText = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
 		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
 
 		textText = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
 		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
 	}
+	
 	else
 	{
-		textText = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-	}
+		if (uiText[App->scenePlay->currentLvl + 4] == NULL)
+		{
+			uiText[App->scenePlay->currentLvl + 4] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
+		}
+		App->render->Blit(uiText[App->scenePlay->currentLvl + 4], 20 * TILE, 26 * TILE, &rectText[App->scenePlay->currentLvl + 4]);
 
+
+
+	}
+	/*
 	//Level info
 
 	//Stage number
 	textText = App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, { 255, 255, 255 }, NULL, textRect);
 	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
-	//Dash
-	textText = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 21 * TILE, 28 * TILE, &textRect);
+
+	*/
+	App->render->Blit(uiText[UI_DASH], 21 * TILE, 28 * TILE, &rectText[UI_DASH]);
+	/*
+
 
 	textText = App->fonts->PrintNumbers(App->scenePlay->currentLvl, { 255, 255, 255 }, NULL, textRect);
 	if (App->scenePlay->currentLvl < 10)
@@ -741,9 +852,10 @@ void ModulePlayer::PrintInterface()
 	{
 		App->render->Blit(textText, 23 * TILE - textRect.w + 10, 28 * TILE, &textRect);
 	}
+	*/
+	App->render->Blit(uiText[UI_STAGE], 24 * TILE, 28 * TILE, &rectText[UI_STAGE]);
+	/*
 
-	textText = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 24 * TILE, 28 * TILE, &textRect);
 	////////////
 
 	textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
@@ -754,4 +866,5 @@ void ModulePlayer::PrintInterface()
 		textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
 		App->render->Blit(textText, 10 * TILE - textRect.w + 18, 29 * TILE, &textRect);
 	}
+	*/
 }
