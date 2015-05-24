@@ -10,9 +10,37 @@ ModuleSceneTransition::ModuleSceneTransition(Application* app, bool start_enable
 
 ModuleSceneTransition::~ModuleSceneTransition()
 {
-
+	for (int i = 0; i < UI_Transition_MAX; i++)
+	{
+		SDL_DestroyTexture(uiText[i]);
+	}
+	delete[]uiText;
 }
 
+bool ModuleSceneTransition::Init()
+{
+	uiText = new SDL_Texture*[UI_Transition_MAX];
+	for (int i = 0; i < UI_Transition_MAX; i++)
+	{
+		uiText[i] == NULL;
+	}
+
+	uiText[UI_Transition_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Transition_TIMEBONUS] = App->fonts->PrintText("TIME BONUS", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Transition_PTS] = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Transition_NEXTEXTEND] = App->fonts->PrintText("NEXT EXTEND", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL, textRect);
+
+	rectText = new SDL_Rect[UI_Transition_MAX];
+
+	rectText[UI_Transition_STAGE] = { 0, 0, 42.5, 8 };
+	rectText[UI_Transition_TIMEBONUS] = { 0, 0, 85, 8 };
+	rectText[UI_Transition_PTS] = { 0, 0, 25.5, 8 };
+	rectText[UI_Transition_NEXTEXTEND] = { 0, 0, 93.5, 8 };
+	rectText[UI_Transition_PUSHBUTTON] = { 0, 0, 93.5, 8 };
+
+	return true;
+}
 bool ModuleSceneTransition::Start(int _nextLevel)
 {
 	App->audio->PlayMusic("./Sounds/TransitionScene.wav");
@@ -95,35 +123,30 @@ void ModuleSceneTransition::Enable(int nextLevel)
 void ModuleSceneTransition::PrintStats()
 {
 	//Level Number
+	//Pending
 	textText = App->fonts->PrintNumbers(nextLevel - 1, { 255, 255, 255 }, NULL, textRect);
 	App->render->Blit(textText, 170  - textRect.w, 145, &textRect);
 
 	//Stage text
-	textText = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 174, 145, &textRect);
-
-	textText = App->fonts->PrintText("TIME BONUS", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 100, 165, &textRect);
-
+	App->render->Blit(uiText[UI_Transition_STAGE], 174, 145, &rectText[UI_Transition_STAGE]);
+	App->render->Blit(uiText[UI_Transition_TIMEBONUS], 100, 165, &rectText[UI_Transition_TIMEBONUS]);
+ 
+	//Pending
 	textText = App->fonts->PrintNumbers(App->scenePlay->timeBonus, { 255, 255, 255 }, NULL, textRect);
 	App->render->Blit(textText, 260 - textRect.w, 165, &textRect);
 
-	textText = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 264, 165, &textRect);
+	App->render->Blit(uiText[UI_Transition_PTS], 264, 165, &rectText[UI_Transition_PTS]);
 
 	if (timeCounter > 50)
 	{
-		textText = App->fonts->PrintText("NEXT EXTEND", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 100, 185, &textRect);
-
-		textText = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 264, 185, &textRect);
+		App->render->Blit(uiText[UI_Transition_NEXTEXTEND], 100, 185, &rectText[UI_Transition_NEXTEXTEND]);
+		App->render->Blit(uiText[UI_Transition_PTS], 264, 185, &rectText[UI_Transition_PTS]);
 	}
+
 	///////////////////
 	//Print push button
 	if (timeCounter / 20 % 2 == 0)
 	{
-		textText = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 280, 220, &textRect);
+		App->render->Blit(uiText[UI_Transition_PUSHBUTTON], 280, 220, &rectText[UI_Transition_NEXTEXTEND]);
 	}
 }

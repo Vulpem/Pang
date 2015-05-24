@@ -46,7 +46,13 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 }
 
 ModulePlayer::~ModulePlayer()
-{}
+{
+	for (int i = 0; i < UI_Player_MAX; i++)
+	{
+		SDL_DestroyTexture(uiText[i]);
+	}
+	delete[]uiText;
+}
 
 bool ModulePlayer::Init()
 {

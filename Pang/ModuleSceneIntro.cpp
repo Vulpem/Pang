@@ -10,7 +10,13 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
-{}
+{
+	for (int i = 0; i < UI_Intro_MAX; i++)
+	{
+		SDL_DestroyTexture(uiText[i]);
+	}
+	delete[]uiText;
+}
 
 // Load assets
 bool ModuleSceneIntro::Start()

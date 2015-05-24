@@ -3,9 +3,8 @@
 #include "ModuleAnimation.h"
 #include "Globals.h"
 
-enum UI_Intro_intro
+enum UI_Intro_messages
 {
-
 	UI_Intro_MTFUJI = 1,
 	UI_Intro_MTKEIRIN,
 	UI_Intro_EMERALD,
