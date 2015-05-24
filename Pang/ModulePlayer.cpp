@@ -69,7 +69,7 @@ bool ModulePlayer::Init()
 	{
 		uiText[i] = NULL;
 	}
-	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL);
+	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL);
 	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL);
 	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL);
 
@@ -728,28 +728,46 @@ void ModulePlayer::UpdateBoosts()
 void ModulePlayer::PrintDebugMode()
 {
 	//Debug stats
-	/*
+
 	//FPS text
-	textText = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL, textRect);
-	App->render->Blit(textText, 20 * TILE, 29 * TILE, &textRect);
-	//FPS PrintNumbers
-	textText = App->fonts->PrintNumbers((double)App->frames / (SDL_GetTicks() / 1000.0), { 255, 167, 16 }, NULL, textRect);
-	App->render->Blit(textText, 27 * TILE - textRect.w, 29 * TILE, &textRect);
+	App->render->Blit(uiText[UI_Player_FPS], 150, 232, &rectText[UI_Player_FPS]);
+
+	//FPS number
+	if ((double)App->frames / (SDL_GetTicks() / 1000.0) >= 10)
+	{
+		App->render->Blit(App->maps->textNumY[(int)(App->frames / (SDL_GetTicks() / 1000.0) / 10)], 180, 232, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumY[(int)(App->frames / (int)(SDL_GetTicks() / 1000.0) % 10)], 190, 232, &App->maps->rectNum);
+	}
+	else
+		App->render->Blit(App->maps->textNumY[(int)(App->frames / (SDL_GetTicks() / 1000.0))], 180, 232, &App->maps->rectNum);
+
 
 	//Frames text
-	textText = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
-	App->render->Blit(textText, 28 * TILE, 29 * TILE, &textRect);
-	//Frames PrintNumbers
-	textText = App->fonts->PrintNumbers(App->frames % (int)FPS, { 255, 167, 16 }, NULL, textRect);
-	App->render->Blit(textText, 38 * TILE - textRect.w, 29 * TILE, &textRect);
+	App->render->Blit(uiText[UI_Player_Frames], 28 * TILE - 10, 29 * TILE, &rectText[UI_Player_Frames]);
+
+	//Frames number
+
+	if (App->frames % (int)FPS >= 10)
+	{
+		App->render->Blit(App->maps->textNumY[(App->frames % (int)FPS) / 10], 276, 232, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumY[App->frames % (int)FPS % 10], 286, 232, &App->maps->rectNum);
+	}
+	else
+		App->render->Blit(App->maps->textNumY[App->frames % (int)FPS], 286, 232, &App->maps->rectNum);
+
 
 	//Time text
-	textText = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
-	App->render->Blit(textText, 39 * TILE, 29 * TILE, &textRect);
-	//Time PrintNumbers
-	textText = App->fonts->PrintNumbers(SDL_GetTicks() / 1000, { 255, 177, 16 }, NULL, textRect);
-	App->render->Blit(textText, 47 * TILE - textRect.w, 29 * TILE, &textRect);
-	*/
+	App->render->Blit(uiText[UI_Player_Time], 307, 232, &rectText[UI_Player_Time]);
+	//Time number
+	digitNumber = CountDigits(SDL_GetTicks() / 1000);
+	for (int i = 1; i <= digitNumber; i++)
+	{
+		rest = SDL_GetTicks() / 1000 % (int)(pow(10.0, i));
+		div = pow(10.0, (i - 1));
+		index = rest / div;
+
+		App->render->Blit(App->maps->textNumY[index], 345 + (10 * (digitNumber - i)), 232, &App->maps->rectNum);
+	}
 }
 
 void ModulePlayer::PrintInterface()
