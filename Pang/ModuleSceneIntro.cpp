@@ -26,13 +26,15 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 	mapOn = false;
 	paused = false;
+	boolAnimation = true;
 	selectedRect = { 0, 15, 15, 15 };
 	timerRect = { 0, 0, 26, 38};
-	textRect = { 0, 0, 0, 10};
+	animationRect = { 0, 0, 384, 240 };
 	nextLevel = 1;
 	textFont = App->fonts->LoadFont("./Fonts/Pang.ttf", 10);
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
+	animation = App->textures->Load("./Image_Sources/Pang_Title_Balls.png");
 	map = App->textures->Load("./Image_Sources/IntroMap.png");
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 	timer = App->textures->Load("./Image_Sources/MapTimer.png");
@@ -81,46 +83,61 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-
+	timeCounter++;
 
 	// Draw everything --------------------------------------
-	timeCounter++;
-	//Create balls
-	if (timeCounter == 15)
+	// First Animation
+	if (boolAnimation)
 	{
-		App->balls->AddBall(250, 0, 3, 0, -1);
-	}
-	if (timeCounter == 30)
-	{
-		App->balls->AddBall(35, 20, 3, 0, 1);
-	}
-	if (timeCounter == 45)
-	{
-		App->balls->AddBall(270, 20, 3, 0, -1);
-	}
-	if (timeCounter == 50)
-	{
-		App->balls->AddBall(35, 20, 3, 0, 1);
-	}
+		if (timeCounter < 130)
+		{
+			App->render->Blit(animation, 0, 0, &animationRect);
+		}
+		else
+			boolAnimation = false;
+		//Create balls
+		if (timeCounter == 15)
+		{
+			App->balls->AddBall(250, 0, 3, 0, -1);
+		}
+		if (timeCounter == 30)
+		{
+			App->balls->AddBall(35, 20, 3, 0, 1);
+		}
+		if (timeCounter == 45)
+		{
+			App->balls->AddBall(270, 20, 3, 0, -1);
+		}
+		if (timeCounter == 50)
+		{
+			App->balls->AddBall(35, 20, 3, 0, 1);
+		}
 
-	//Destroy balls
-	if (timeCounter == 60)
-	{
-		App->balls->ballsList.getFirst()->data->dead = true;
+		//Destroy balls
+		if (timeCounter == 60)
+		{
+			App->balls->ballsList.getFirst()->data->dead = true;
+			animationRect.x += 384;
+		}
+		if (timeCounter == 85)
+		{
+			App->balls->ballsList.getFirst()->data->dead = true;
+			animationRect.x += 384;
+		}
+		if (timeCounter == 97)
+		{
+			App->balls->ballsList.getFirst()->data->dead = true;
+			animationRect.x += 384;
+		}
+		if (timeCounter == 109)
+		{
+			App->balls->ballsList.getFirst()->data->dead = true;
+			animationRect.x += 384;
+		}
 	}
-	if (timeCounter == 85)
-	{
-		App->balls->ballsList.getFirst()->data->dead = true;
-	}
-	if (timeCounter == 97)
-	{
-		App->balls->ballsList.getFirst()->data->dead = true;
-	}
-	if (timeCounter == 109)
-	{
-		App->balls->ballsList.getFirst()->data->dead = true;
-	}
+	//End animation
 
+	//Print animation when level selected
 	if (paused)
 	{
 		if (timeCounter > 30)
@@ -139,11 +156,11 @@ update_status ModuleSceneIntro::Update()
 		App->render->Blit(map, 0, 0, NULL);
 		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 		}
-
 	}
 	else
 	{
-		if (!mapOn)
+		//Print intro image waiting for coin
+		if (!mapOn && timeCounter > 130)
 		{
 			if (timeCounter / 25 % 2 == 0)
 				App->render->Blit(graphics, 0, 0, NULL);
@@ -157,6 +174,7 @@ update_status ModuleSceneIntro::Update()
 			}
 
 		}
+		//Print map with stages
 		if (mapOn)
 		{
 			App->render->Blit(map, 0, 0, NULL);

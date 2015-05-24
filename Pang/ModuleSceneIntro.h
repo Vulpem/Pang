@@ -49,6 +49,7 @@ public:
 	bool mapOn;
 	int nextLevel;
 	bool paused;
+	bool boolAnimation;
 
 
 
@@ -56,6 +57,7 @@ public:
 	
 	SDL_Texture* graphics;
 	SDL_Texture* graphics2;
+	SDL_Texture* animation;
 
 	SDL_Texture* map;
 	SDL_Texture* selected;
@@ -66,7 +68,8 @@ public:
 	SDL_Texture** uiText;
 	SDL_Rect* rectText;
 
-	SDL_Rect textRect;
+	SDL_Rect animationRect;
+
 	SDL_Rect timerRect;
 	SDL_Rect selectedRect;
 
