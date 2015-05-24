@@ -87,7 +87,7 @@ public:
 	///////////////////////
 
 
-	int punt;
+	int score;
 	int digitNumber;
 
 	float rest;

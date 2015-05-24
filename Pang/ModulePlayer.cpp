@@ -58,7 +58,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Init()
 {
 
-	punt = 0;
+	score = 0;
 	digitNumber = 0;
 	pausePlayer = false;
 	graphics = NULL;
@@ -516,7 +516,7 @@ void ModulePlayer::Kill(int xBallPos)
 	{*/
 		dead = true;
 		current_animation = &idle;
-		App->audio->PlayMusic("./Sounds/Death.wav");
+		App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
 
 		if (xBallPos < position.x+16)
@@ -850,12 +850,12 @@ void ModulePlayer::PrintInterface()
 
 	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
 
-	//Printing puntuation
-	digitNumber = CountDigits(punt);
+	//Printing scoreuation
+	digitNumber = CountDigits(score);
 
 	for (int i = 1; i <= digitNumber; i++)
 	{
-		rest = punt % (int)(pow(10.0, i));
+		rest = score % (int)(pow(10.0, i));
 		div = pow(10.0, (i - 1));
 		index = rest / div;
 

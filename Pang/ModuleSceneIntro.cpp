@@ -36,7 +36,7 @@ bool ModuleSceneIntro::Start()
 	map = App->textures->Load("./Image_Sources/IntroMap.png");
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 	timer = App->textures->Load("./Image_Sources/MapTimer.png");
-	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
+	App->audio->PlayMusic("./Sounds/Title_Screen.ogg", -1);
 
 	uiText = new SDL_Texture*[UI_Intro_MAX];
 	for (int i = 0; i < UI_Intro_MAX; i++)
@@ -82,8 +82,8 @@ update_status ModuleSceneIntro::Update()
 		if (timeCounter > 30)
 		{
 			timeCounter = 0;
-			App->scenePlay->Enable(nextLevel * 3 - 2);
 			Disable();
+			App->scenePlay->Enable(nextLevel * 3 - 2);
 		}
 		else
 		{

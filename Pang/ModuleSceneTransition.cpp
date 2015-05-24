@@ -43,7 +43,7 @@ bool ModuleSceneTransition::Init()
 }
 bool ModuleSceneTransition::Start(int _nextLevel)
 {
-	App->audio->PlayMusic("./Sounds/TransitionScene.wav");
+	App->audio->PlayMusic("./Sounds/TransitionScene.wav", 1);
 	textRect = { 0, 0, 0, 9 };
 	nextLevel = _nextLevel;
 	imageRect = { 0, 0, 194, 96 };
@@ -75,13 +75,13 @@ update_status ModuleSceneTransition::Update()
 		timeCounter = 0;
 		if (nextLevel <= 10)
 		{
-			App->scenePlay->Enable(nextLevel);
 			Disable();
+			App->scenePlay->Enable(nextLevel);
 		}
 		else
 		{
-			App->sceneIntro->Enable();
 			Disable();
+			App->sceneIntro->Enable();
 		}
 	}
 	App->render->DrawQuad({ 0, 0, 384, 240 }, 8, 8, 8, 255);
@@ -124,16 +124,33 @@ void ModuleSceneTransition::PrintStats()
 {
 	//Level Number
 	//Pending
-//	textText = App->fonts->PrintNumbers(nextLevel - 1, { 255, 255, 255 }, NULL, textRect);
-//	App->render->Blit(textText, 170  - textRect.w, 145, &textRect);
+
+	if ((nextLevel - 1) >= 10)
+	{
+		App->render->Blit(App->maps->textNumW[(nextLevel - 1) / 10], 150, 145, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[(nextLevel - 1) % 10], 160, 145, &App->maps->rectNum);
+	}
+	else
+		App->render->Blit(App->maps->textNumW[nextLevel - 1], 160, 145, &App->maps->rectNum);
+
 
 	//Stage text
 	App->render->Blit(uiText[UI_Transition_STAGE], 174, 145, &rectText[UI_Transition_STAGE]);
 	App->render->Blit(uiText[UI_Transition_TIMEBONUS], 100, 165, &rectText[UI_Transition_TIMEBONUS]);
  
-	//Pending
-//	textText = App->fonts->PrintNumbers(App->scenePlay->timeBonus, { 255, 255, 255 }, NULL, textRect);
-//	App->render->Blit(textText, 260 - textRect.w, 165, &textRect);
+	//Time bonus points
+
+	App->player->digitNumber = CountDigits(App->scenePlay->timeBonus);
+
+	for (int i = 1; i <= App->player->digitNumber; i++)
+	{
+		App->player->rest = App->scenePlay->timeBonus % (int)(pow(10.0, i));
+		App->player->div = pow(10.0, (i - 1));
+		App->player->index = App->player->rest / App->player->div;
+
+		App->render->Blit(App->maps->textNumW[App->player->index], 245 - (10 * (i - 1)), 165, &App->maps->rectNum);
+	}
+
 
 	App->render->Blit(uiText[UI_Transition_PTS], 264, 165, &rectText[UI_Transition_PTS]);
 
@@ -141,7 +158,16 @@ void ModuleSceneTransition::PrintStats()
 	{
 		App->render->Blit(uiText[UI_Transition_NEXTEXTEND], 100, 185, &rectText[UI_Transition_NEXTEXTEND]);
 		App->render->Blit(uiText[UI_Transition_PTS], 264, 185, &rectText[UI_Transition_PTS]);
+
+		App->render->Blit(App->maps->textNumW[1], 204, 185, &App->maps->rectNum);
+		for (int i = 0; i < 4; i++)
+		{
+			App->render->Blit(App->maps->textNumW[(nextLevel - 1) / 10], 214 + 10 * i, 185, &App->maps->rectNum);
+		}
 	}
+
+
+
 
 	///////////////////
 	//Print push button

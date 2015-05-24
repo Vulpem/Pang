@@ -651,19 +651,19 @@ void ModuleMaps::LoadMap(int nMap)
 		App->balls->AddBall(50, 50, little, blue, 1);
 		App->player->position.x = 1*TILE;
 		App->player->position.y = 23*TILE;
-		App->audio->PlayMusic("./Sounds/MtKeirin.wav");
+		App->audio->PlayMusic("./Sounds/MtKeirin.wav", 1);
 		break;
 	}
 	case 1:
 	{
 		App->balls->AddBall(8 * TILE, 4 * TILE, huge, red, -1);
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav");
+		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
 		break;
 	}
 	case 2:
 	{
 		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav");
+		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
 		break;
 	}
 	case 3:
@@ -671,7 +671,7 @@ void ModuleMaps::LoadMap(int nMap)
 		App->balls->AddBall(6 * TILE, 4 * TILE, huge, green, 1);
 		App->balls->AddBall(25 * TILE, 12 * TILE, medium, green, 1);
 		App->player->position.x = 22 * TILE;
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav");
+		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
 		break;
 	}
 	case 4:
@@ -679,14 +679,14 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
 			  App->player->position.x = 20 * TILE;
 			  App->player->position.y = 15 * TILE;
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
 			  break;
 	}
 	case 5:
 	{
 			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
 			  App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
 			  break;
 	}
 	case 6:
@@ -694,14 +694,14 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
 			  App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
 			  App->player->position.x = 10 * TILE;
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav");
+			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
 			  break;
 	}
 	case 7:
 	{
 			  App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
 			  App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
-			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav");
+			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
 			  break;
 	}
 	case 8:
@@ -709,7 +709,7 @@ void ModuleMaps::LoadMap(int nMap)
 		App->balls->AddBall(18 * TILE, 4 * TILE, big, blue, 1);
 		App->balls->AddBall(27 * TILE, 4 * TILE, big, blue, -1);
 		App->player->position.x = 12 * TILE;
-		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav");
+		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
 		break;
 	}
 	case 9:
@@ -721,13 +721,13 @@ void ModuleMaps::LoadMap(int nMap)
 			  App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
 			  App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
 			  App->player->position.x = 3 * TILE;
-			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav");
+			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
 			  break;
 	}
 	default:
 	{
 			  App->balls->AddBall(25*TILE, 4*TILE, huge, green, 1);
-			  App->audio->PlayMusic("./Sounds/Barcelona.wav");
+			  App->audio->PlayMusic("./Sounds/Barcelona.wav", 1);
 			  break;
 	}
 

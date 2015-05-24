@@ -1,13 +1,10 @@
 IMPORTANT BUGS:
-	Printing text crashes spontaniously
-	ScenePlay doesnt render background after a while
-	That lagg?? 
+	Printing text crashes spontaniously (need to check, probably gone)
+	ScenePlay doesnt render background after a while (need to check, probably gone)
+	That lagg?? (not appearing for a long while)
 
 MINOR THINGS:
 	Map transition between stages appears withoutjoystick
 
-FONTS:
-	Print numbers
-
-SOUNDS:
-	Close loop in particle sounds
+INTERFACE:
+	Put a dot after "PTS" transition scene

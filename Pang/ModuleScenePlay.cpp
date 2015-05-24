@@ -98,9 +98,9 @@ update_status ModuleScenePlay::Update()
 	if (App->balls->ballsList.count() == 0)
 	{
 		timeBonus = timer / FPS * 10;
-		App->sceneTransition->Enable(++currentLvl);
-		App->player->punt += timeBonus;
 		Disable();
+		App->sceneTransition->Enable(++currentLvl);
+		App->player->score += timeBonus;
 	}
 	else
 	{
@@ -145,11 +145,11 @@ update_status ModuleScenePlay::Update()
 	}
 	if (timer == startTimerEvent * 0.4)
 	{
-		App->audio->PlayMusic("./Sounds/Getting_late.wav");
+		App->audio->PlayMusic("./Sounds/Getting_late.wav", 1);
 	}
 	if (timer == startTimerEvent * 0.15)
 	{
-		App->audio->PlayMusic("./Sounds/out_of_time.wav");
+		App->audio->PlayMusic("./Sounds/out_of_time.wav", 1);
 	}
 
 
@@ -204,8 +204,8 @@ update_status ModuleScenePlay::Update()
 		}
 		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 		{
-			App->sceneTransition->Enable(++currentLvl);
 			Disable();
+			App->sceneTransition->Enable(++currentLvl);
 		}
 		if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		{
