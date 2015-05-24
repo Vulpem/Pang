@@ -89,7 +89,7 @@ update_status ModuleSceneIntro::Update()
 	// First Animation
 	if (boolAnimation)
 	{
-		if (timeCounter < 130)
+		if (timeCounter < 170)
 		{
 			App->render->Blit(animation, 0, 0, &animationRect);
 		}
@@ -160,7 +160,7 @@ update_status ModuleSceneIntro::Update()
 	else
 	{
 		//Print intro image waiting for coin
-		if (!mapOn && timeCounter > 130)
+		if (!mapOn && timeCounter > 170)
 		{
 			if (timeCounter / 25 % 2 == 0)
 				App->render->Blit(graphics, 0, 0, NULL);
