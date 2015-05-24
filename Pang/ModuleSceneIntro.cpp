@@ -94,7 +94,7 @@ update_status ModuleSceneIntro::Update()
 		else
 			selectedRect.y = 15;
 		App->render->Blit(map, 0, 0, NULL);
-//		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 		}
 
 	}
