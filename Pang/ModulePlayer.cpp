@@ -23,6 +23,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 
 	rectText[UI_Player_DASH] = { 0, 0, 8.5, 8 };
 	rectText[UI_Player_STAGE] = { 0, 0, 42.5, 8 };
+	rectText[UI_Player_PUSHBUTTON] = { 0, 0, 93.5, 8 };
 
 	rectText[UI_Player_MTFUJI] = { 0, 0, 61, 8 };
 	rectText[UI_Player_MTKEIRIN] = { 0, 0, 76.5, 8 };
@@ -75,6 +76,7 @@ bool ModulePlayer::Init()
 
 	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
 	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL, textRect);
 
 	//////////////
 	//Animations//
@@ -752,7 +754,10 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 
-
+	if (App->scenePlay->timer / 20 % 2 == 0)
+	{
+		App->render->Blit(uiText[UI_Transition_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
+	}
 
 	//PrintTexting interface//
 

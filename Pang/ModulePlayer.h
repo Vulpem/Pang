@@ -36,6 +36,7 @@ enum UI_Player_messages
 
 	UI_Player_DASH,
 	UI_Player_STAGE,
+	UI_Player_PUSHBUTTON,
 	UI_Player_MAX
 };
 
