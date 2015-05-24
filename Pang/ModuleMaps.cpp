@@ -79,14 +79,15 @@ bool ModuleMaps::Init()
 
 int ModuleMaps::map[26][48];
 
+#pragma region maps
 const int ModuleMaps::lvl[16][26][48] = {
 	{// Testing
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1 },
+		{ 1, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 4, 4, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1 },
@@ -101,11 +102,11 @@ const int ModuleMaps::lvl[16][26][48] = {
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 	},
 
@@ -532,6 +533,7 @@ const int ModuleMaps::lvl[16][26][48] = {
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 	},
 };
+#pragma endregion 
 
 
 bool ModuleMaps::Start()
@@ -577,14 +579,6 @@ update_status ModuleMaps::Update()
 				{
 					if (map[h][w - 1] != 2)
 					{
-						/*if (map[h][w - 1] == 1 && map[h][w + 3] == 1)
-						{
-							tile.w = TILE * 3;
-							tile.x = w*TILE;
-							tile.y = h*TILE;
-							App->render->DrawQuad(tile, 255, 255, 0, 255);
-							tile.w = TILE;
-						}*/
 						App->render->Blit(ladderGraphics, w * TILE, h * TILE, NULL);
 						break;
 					}
@@ -611,7 +605,7 @@ void ModuleMaps::LoadMap(int nMap)
 	App->boosts->Disable();
 	App->balls->Disable();
 	App->gun->Disable();
-	
+
 	for (int h = 0; h < 26; h++)
 	{
 		for (int w = 0; w < 48; w++)
@@ -639,7 +633,7 @@ void ModuleMaps::LoadMap(int nMap)
 	{
 		App->scenePlay->background.x = 16 + SCREEN_WIDTH;
 	}
-	
+
 	App->scenePlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
 
 	App->player->position.x = 18 * TILE;
@@ -649,8 +643,8 @@ void ModuleMaps::LoadMap(int nMap)
 	case 0:
 	{
 		App->balls->AddBall(50, 50, little, blue, 1);
-		App->player->position.x = 1*TILE;
-		App->player->position.y = 23*TILE;
+		App->player->position.x = 1 * TILE;
+		App->player->position.y = 23 * TILE;
 		App->audio->PlayMusic("./Sounds/MtKeirin.wav", 1);
 		break;
 	}
@@ -676,33 +670,33 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	case 4:
 	{
-			  App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
-			  App->player->position.x = 20 * TILE;
-			  App->player->position.y = 15 * TILE;
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-			  break;
+		App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
+		App->player->position.x = 20 * TILE;
+		App->player->position.y = 15 * TILE;
+		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+		break;
 	}
 	case 5:
 	{
-			  App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
-			  App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-			  break;
+		App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
+		App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
+		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+		break;
 	}
 	case 6:
 	{
-			  App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
-			  App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
-			  App->player->position.x = 10 * TILE;
-			  App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-			  break;
+		App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
+		App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
+		App->player->position.x = 10 * TILE;
+		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+		break;
 	}
 	case 7:
 	{
-			  App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
-			  App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
-			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
-			  break;
+		App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
+		App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
+		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
+		break;
 	}
 	case 8:
 	{
@@ -714,21 +708,21 @@ void ModuleMaps::LoadMap(int nMap)
 	}
 	case 9:
 	{
-			  App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
-			  App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
-			  App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
-			  App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
-			  App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
-			  App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
-			  App->player->position.x = 3 * TILE;
-			  App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
-			  break;
+		App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
+		App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
+		App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
+		App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
+		App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
+		App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
+		App->player->position.x = 3 * TILE;
+		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
+		break;
 	}
 	default:
 	{
-			  App->balls->AddBall(25*TILE, 4*TILE, huge, green, 1);
-			  App->audio->PlayMusic("./Sounds/Barcelona.wav", 1);
-			  break;
+		App->balls->AddBall(25 * TILE, 4 * TILE, huge, green, 1);
+		App->audio->PlayMusic("./Sounds/Barcelona.wav", 1);
+		break;
 	}
 
 	App->scenePlay->startTimerEvent = App->scenePlay->timer - 180;
@@ -766,7 +760,26 @@ void ModuleMaps::DrawGlassBrick(int h, int w)
 	}
 	else if (lvl[App->scenePlay->currentLvl][h][w + 1] != num && lvl[App->scenePlay->currentLvl][h][w - 1] != num)
 	{
-		SolidBrickSection.x = 0;
+		if ((lvl[App->scenePlay->currentLvl][h-1][w] != num || h == 1) && lvl[App->scenePlay->currentLvl][h+1][w] == num && lvl[App->scenePlay->currentLvl][h+2][w] == num)
+		{
+			SolidBrickSection.x = 56;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h - 2][w] == num && lvl[App->scenePlay->currentLvl][h - 1][w] == num && (lvl[App->scenePlay->currentLvl][h + 1][w] != num || h == 24))
+		{
+			SolidBrickSection.x = 80;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h-1][w] == num && lvl[App->scenePlay->currentLvl][h+1][w] == num && lvl[App->scenePlay->currentLvl][h+2][w] == num)
+		{
+			SolidBrickSection.x = 64;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h-1][w] == num && lvl[App->scenePlay->currentLvl][h+1][w] == num && lvl[App->scenePlay->currentLvl][h+2][w] != num)
+		{
+			SolidBrickSection.x = 72;
+		}
+		else
+		{
+			SolidBrickSection.x = 0;
+		}
 	}
 	else
 	{
@@ -810,7 +823,26 @@ void ModuleMaps::DrawBrick(int h, int w)
 	}
 	else if(lvl[App->scenePlay->currentLvl][h][w + 1] != 1 && lvl[App->scenePlay->currentLvl][h][w - 1] != 1)
 	{
-		SolidBrickSection.x = 0;
+		if ((lvl[App->scenePlay->currentLvl][h - 1][w] != 1 || h == 1) && lvl[App->scenePlay->currentLvl][h + 1][w] == 1 && lvl[App->scenePlay->currentLvl][h + 2][w] == 1)
+		{
+			SolidBrickSection.x = 56;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h - 2][w] == 1 && lvl[App->scenePlay->currentLvl][h - 1][w] == 1 && (lvl[App->scenePlay->currentLvl][h + 1][w] != 1 || h == 24))
+		{
+			SolidBrickSection.x = 80;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h - 1][w] == 1 && lvl[App->scenePlay->currentLvl][h + 1][w] == 1 && lvl[App->scenePlay->currentLvl][h + 2][w] == 1)
+		{
+			SolidBrickSection.x = 64;
+		}
+		else if (lvl[App->scenePlay->currentLvl][h - 1][w] == 1 && lvl[App->scenePlay->currentLvl][h + 1][w] == 1 && lvl[App->scenePlay->currentLvl][h + 2][w] != 1)
+		{
+			SolidBrickSection.x = 72;
+		}
+		else
+		{
+			SolidBrickSection.x = 0;
+		}
 	}
 	else
 	{
