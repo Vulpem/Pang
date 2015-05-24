@@ -62,6 +62,11 @@ bool ModuleSceneIntro::Start()
 	App->balls->Enable();
 	App->scenePlay->lives = 3;
 
+
+
+
+
+
 	return ret;
 }
 
@@ -76,9 +81,27 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+
+
 	// Draw everything --------------------------------------
-	App->balls->AddBall(200, 200, 4, 1, 1);
 	timeCounter++;
+	if (timeCounter == 20)
+	{
+		App->balls->AddBall(250, 0, 3, 0, -1);
+	}
+	if (timeCounter == 40)
+	{
+		App->balls->AddBall(35, 20, 3, 0, 1);
+	}
+	if (timeCounter == 60)
+	{
+		App->balls->AddBall(270, 20, 3, 0, -1);
+	}
+	if (timeCounter == 80)
+	{
+		App->balls->AddBall(35, 20, 3, 0, 1);
+	}
+
 	if (paused)
 	{
 		if (timeCounter > 30)
