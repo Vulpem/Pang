@@ -59,6 +59,7 @@ bool ModuleSceneIntro::Start()
 	rectText[UI_Intro_CHECKMARK] = { 0, 0, 8, 8 };
 	rectText[UI_Intro_STAGE] = { 0, 0, 42.5, 8 };
 	
+	App->balls->Enable();
 	App->scenePlay->lives = 3;
 
 	return ret;
@@ -76,6 +77,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
+	App->balls->AddBall(200, 200, 4, 1, 1);
 	timeCounter++;
 	if (paused)
 	{
@@ -92,7 +94,7 @@ update_status ModuleSceneIntro::Update()
 		else
 			selectedRect.y = 15;
 		App->render->Blit(map, 0, 0, NULL);
-		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+//		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 		}
 
 	}
