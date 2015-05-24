@@ -38,9 +38,9 @@ bool ModuleSceneIntro::Start()
 		uiText[i] = NULL;
 	}
 
-	uiText[UI_Intro_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Intro_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Intro_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START. ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE. ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE. ", { 255, 255, 255 }, NULL, textRect);
 
 	uiText[UI_Intro_CHECKMARK] = App->fonts->PrintText("~", { 255, 167, 16 }, NULL, textRect);
 	uiText[UI_Intro_STAGE] = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL, textRect);
@@ -129,11 +129,11 @@ update_status ModuleSceneIntro::Update()
 			}
 			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 
-			if (timeCounter < 32)
+			if (timeCounter < 33)
 			{
 				rectText[UI_Intro_TEXT1].w += 6;
 			}
-			if (timeCounter < 63 && timeCounter > 32)
+			if (timeCounter < 64 && timeCounter > 32)
 			{
 				rectText[UI_Intro_TEXT2].w += 6;
 			}
