@@ -89,6 +89,10 @@ public:
 
 	int punt;
 	int digitNumber;
+
+	float rest;
+	float div;
+	int index;
 	
 
 	//Printing variables//

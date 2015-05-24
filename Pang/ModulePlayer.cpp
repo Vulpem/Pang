@@ -832,24 +832,15 @@ void ModulePlayer::PrintInterface()
 
 	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
 
+	//Printing puntuation
 	digitNumber = CountDigits(punt);
-	if (digitNumber > 2)
-	{
-		int b = 0;
-	}
+
 	for (int i = 1; i <= digitNumber; i++)
 	{
-		App->render->Blit(App->maps->textNumW[(punt % (10^i)) / (10^(i-1))], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
-	}
-/*	////////////
+		rest = punt % (int)(pow(10.0, i));
+		div = pow(10.0, (i - 1));
+		index = rest / div;
 
-	textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 15 * TILE - textRect.w, 27 * TILE, &textRect);
-
-	if (App->scenePlay->lives > 4)
-	{
-		textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 10 * TILE - textRect.w + 18, 29 * TILE, &textRect);
+		App->render->Blit(App->maps->textNumW[index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
 	}
-	*/
 }
