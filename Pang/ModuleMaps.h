@@ -29,6 +29,10 @@ public:
 
 public:
 
+	SDL_Texture** textNumW;
+	SDL_Texture** textNumY;
+	SDL_Rect rectNum;
+
 	SDL_Texture* ladderGraphics;
 	SDL_Texture* bricksGraphics;
 	SDL_Rect SolidBrickSection;

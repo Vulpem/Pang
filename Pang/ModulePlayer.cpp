@@ -67,16 +67,16 @@ bool ModulePlayer::Init()
 	{
 		uiText[i] = NULL;
 	}
-	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
-	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL);
+	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL);
+	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL);
 
-	uiText[UI_Player_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Player_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL);
+	uiText[UI_Player_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL);
 
-	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL);
+	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL);
+	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
 
 	//////////////
 	//Animations//
@@ -726,7 +726,7 @@ void ModulePlayer::UpdateBoosts()
 void ModulePlayer::PrintDebugMode()
 {
 	//Debug stats
-
+	/*
 	//FPS text
 	textText = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL, textRect);
 	App->render->Blit(textText, 20 * TILE, 29 * TILE, &textRect);
@@ -747,6 +747,7 @@ void ModulePlayer::PrintDebugMode()
 	//Time PrintNumbers
 	textText = App->fonts->PrintNumbers(SDL_GetTicks() / 1000, { 255, 177, 16 }, NULL, textRect);
 	App->render->Blit(textText, 47 * TILE - textRect.w, 29 * TILE, &textRect);
+	*/
 }
 
 void ModulePlayer::PrintInterface()
@@ -767,13 +768,13 @@ void ModulePlayer::PrintInterface()
 	{
 		if (uiText[UI_Player_EMERALD] == NULL)
 		{
-			uiText[UI_Player_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL);
 		}
 		App->render->Blit(uiText[UI_Player_EMERALD], 24 * TILE - rectText[UI_Player_EMERALD].w / 2, 26 * TILE, &rectText[UI_Player_EMERALD]);
 		
 		if (uiText[UI_Player_TEMPLE] == NULL)
 		{
-			uiText[UI_Player_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL);
 		}
 		App->render->Blit(uiText[UI_Player_TEMPLE], 24 * TILE - rectText[UI_Player_TEMPLE].w / 2, 27 * TILE, &rectText[UI_Player_TEMPLE]);
 	}
@@ -781,13 +782,13 @@ void ModulePlayer::PrintInterface()
 	{
 		if (uiText[UI_Player_EASTER] == NULL)
 		{
-			uiText[UI_Player_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL);
 		}
 		App->render->Blit(uiText[UI_Player_EASTER], 24 * TILE - rectText[UI_Player_EASTER].w / 2, 26 * TILE, &rectText[UI_Player_EASTER]);
 
 		if (uiText[UI_Player_ISLAND] == NULL)
 		{
-			uiText[UI_Player_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL);
 		}
 		App->render->Blit(uiText[UI_Player_ISLAND], 24 * TILE - rectText[UI_Player_ISLAND].w / 2, 27 * TILE, &rectText[UI_Player_ISLAND]);
 	}
@@ -796,7 +797,7 @@ void ModulePlayer::PrintInterface()
 	{
 		if (uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] == NULL)
 		{
-			uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
+			uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL);
 		}
 		App->render->Blit(uiText[(App->scenePlay->currentLvl - 1) / 3 + 1], 24 * TILE - rectText[(App->scenePlay->currentLvl - 1) / 3 + 1].w / 2, 26 * TILE, &rectText[(App->scenePlay->currentLvl - 1) / 3 + 1]);
 

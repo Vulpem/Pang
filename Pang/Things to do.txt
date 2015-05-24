@@ -7,5 +7,7 @@ MINOR THINGS:
 	Map transition between stages appears withoutjoystick
 
 FONTS:
-	Create number textures
 	Print numbers
+
+SOUNDS:
+	Close loop in particle sounds

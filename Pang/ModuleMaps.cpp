@@ -7,16 +7,49 @@
 
 ModuleMaps::ModuleMaps(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	
+
 }
 
 ModuleMaps::~ModuleMaps()
 {
-	
+	for (int i = 0; i < 10; i++)
+	{
+		SDL_DestroyTexture(textNumW[i]);
+		SDL_DestroyTexture(textNumY[i]);
+	}
+	delete[]textNumW;
+	delete[]textNumY;
 }
 
 bool ModuleMaps::Init()
 {
+	rectNum = { 0, 0, 8, 8 };
+
+	textNumW = new SDL_Texture*[10];
+	textNumY = new SDL_Texture*[10];
+
+	textNumW[0] = App->fonts->PrintText("0", { 255, 255, 255 }, NULL);
+	textNumW[1] = App->fonts->PrintText("1", { 255, 255, 255 }, NULL);
+	textNumW[2] = App->fonts->PrintText("2", { 255, 255, 255 }, NULL);
+	textNumW[3] = App->fonts->PrintText("3", { 255, 255, 255 }, NULL);
+	textNumW[4] = App->fonts->PrintText("4", { 255, 255, 255 }, NULL);
+	textNumW[5] = App->fonts->PrintText("5", { 255, 255, 255 }, NULL);
+	textNumW[6] = App->fonts->PrintText("6", { 255, 255, 255 }, NULL);
+	textNumW[7] = App->fonts->PrintText("7", { 255, 255, 255 }, NULL);
+	textNumW[8] = App->fonts->PrintText("8", { 255, 255, 255 }, NULL);
+	textNumW[9] = App->fonts->PrintText("9", { 255, 255, 255 }, NULL);
+
+	textNumY[0] = App->fonts->PrintText("0", { 255, 167, 16 }, NULL);
+	textNumY[1] = App->fonts->PrintText("1", { 255, 167, 16 }, NULL);
+	textNumY[2] = App->fonts->PrintText("2", { 255, 167, 16 }, NULL);
+	textNumY[3] = App->fonts->PrintText("3", { 255, 167, 16 }, NULL);
+	textNumY[4] = App->fonts->PrintText("4", { 255, 167, 16 }, NULL);
+	textNumY[5] = App->fonts->PrintText("5", { 255, 167, 16 }, NULL);
+	textNumY[6] = App->fonts->PrintText("6", { 255, 167, 16 }, NULL);
+	textNumY[7] = App->fonts->PrintText("7", { 255, 167, 16 }, NULL);
+	textNumY[8] = App->fonts->PrintText("8", { 255, 167, 16 }, NULL);
+	textNumY[9] = App->fonts->PrintText("9", { 255, 167, 16 }, NULL);
+
 	/////////////////////
 	//Animations Bricks//
 	/////////////////////

@@ -27,8 +27,7 @@ public:
 
 	TTF_Font* const LoadFont(char* file, int size);
 
-	SDL_Texture* PrintText(const char* text, SDL_Color color, TTF_Font* font, SDL_Rect& rect);
-	SDL_Texture* PrintNumbers(int numbers, SDL_Color color, TTF_Font* font, SDL_Rect& rect);
+	SDL_Texture* PrintText(const char* text, SDL_Color color, TTF_Font* font);
 
 public:
 };

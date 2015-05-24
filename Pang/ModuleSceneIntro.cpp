@@ -44,12 +44,12 @@ bool ModuleSceneIntro::Start()
 		uiText[i] = NULL;
 	}
 
-	uiText[UI_Intro_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START. ", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Intro_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE. ", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Intro_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE. ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START. ", { 255, 255, 255 }, NULL);
+	uiText[UI_Intro_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE. ", { 255, 255, 255 }, NULL);
+	uiText[UI_Intro_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE. ", { 255, 255, 255 }, NULL);
 
-	uiText[UI_Intro_CHECKMARK] = App->fonts->PrintText("~", { 255, 167, 16 }, NULL, textRect);
-	uiText[UI_Intro_STAGE] = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Intro_CHECKMARK] = App->fonts->PrintText("~", { 255, 167, 16 }, NULL);
+	uiText[UI_Intro_STAGE] = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL);
 
 	rectText = new SDL_Rect[UI_Intro_MAX];
 
@@ -151,18 +151,18 @@ update_status ModuleSceneIntro::Update()
 			App->render->Blit(uiText[UI_Intro_TEXT2], TILE, 220, &rectText[UI_Intro_TEXT2]);
 			App->render->Blit(uiText[UI_Intro_TEXT3], TILE, 230, &rectText[UI_Intro_TEXT3]);
 
-			
+
 			if (nextLevel == 3)
 			{
 				if (uiText[UI_Intro_EMERALD] == NULL)
 				{
-					uiText[UI_Intro_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
+					uiText[UI_Intro_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL);
 				}
 				App->render->Blit(uiText[UI_Intro_EMERALD], 330 - App->player->rectText[UI_Intro_EMERALD].w / 2, 207, &App->player->rectText[UI_Intro_EMERALD]);
 
 				if (uiText[UI_Intro_TEMPLE] == NULL)
 				{
-					uiText[UI_Intro_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
+					uiText[UI_Intro_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL);
 				}
 				App->render->Blit(uiText[UI_Intro_TEMPLE], 330 - App->player->rectText[UI_Intro_TEMPLE].w / 2, 217, &App->player->rectText[UI_Intro_TEMPLE]);
 			}
@@ -171,22 +171,30 @@ update_status ModuleSceneIntro::Update()
 			{
 				if (uiText[nextLevel] == NULL)
 				{
-					uiText[nextLevel] = App->fonts->PrintText(App->maps->GetLevelName(nextLevel * 3), { 255, 167, 16 }, NULL, textRect);
+					uiText[nextLevel] = App->fonts->PrintText(App->maps->GetLevelName(nextLevel * 3), { 255, 167, 16 }, NULL);
 				}
 				App->render->Blit(uiText[nextLevel], 330 - App->player->rectText[nextLevel].w / 2, 207, &App->player->rectText[nextLevel]);
 			}
 
-
-			//PENDING
-//			textText = App->fonts->PrintNumbers(nextLevel * 3 - 2, { 255, 167, 16 }, NULL, textRect);
-//			App->render->Blit(textText, 350 - textRect.w, 230, &textRect);
-
-			App->render->Blit(uiText[UI_Intro_CHECKMARK], 357, 230, &rectText[UI_Intro_CHECKMARK]);
-
-//			textText = App->fonts->PrintNumbers(nextLevel * 3, { 255, 167, 16 }, NULL, textRect);
-//			App->render->Blit(textText, 365, 230, &textRect);
-
+			//Stage - Level info
 			App->render->Blit(uiText[UI_Intro_STAGE], 285, 230, &rectText[UI_Intro_STAGE]);
+			if ((nextLevel * 3 - 2) >= 10)
+			{
+				App->render->Blit(App->maps->textNumY[(nextLevel * 3 - 2) / 10 ], 335, 230, &App->maps->rectNum);
+				App->render->Blit(App->maps->textNumY[(nextLevel * 3 - 2) % 10], 345, 230, &App->maps->rectNum);
+			}
+			else
+				App->render->Blit(App->maps->textNumY[nextLevel * 3 - 2], 345, 230, &App->maps->rectNum);
+			
+			App->render->Blit(uiText[UI_Intro_CHECKMARK], 355, 230, &rectText[UI_Intro_CHECKMARK]);
+
+			if (nextLevel * 3 >= 10)
+			{
+				App->render->Blit(App->maps->textNumY[(nextLevel * 3) / 10], 365, 230, &App->maps->rectNum);
+				App->render->Blit(App->maps->textNumY[(nextLevel * 3) % 10], 375, 230, &App->maps->rectNum);
+			}
+			else
+				App->render->Blit(App->maps->textNumY[nextLevel * 3], 365, 230, &App->maps->rectNum);
 		}
 	}
 
