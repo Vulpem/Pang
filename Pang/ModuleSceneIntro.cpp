@@ -85,21 +85,40 @@ update_status ModuleSceneIntro::Update()
 
 	// Draw everything --------------------------------------
 	timeCounter++;
-	if (timeCounter == 20)
+	//Create balls
+	if (timeCounter == 15)
 	{
 		App->balls->AddBall(250, 0, 3, 0, -1);
 	}
-	if (timeCounter == 40)
+	if (timeCounter == 30)
 	{
 		App->balls->AddBall(35, 20, 3, 0, 1);
 	}
-	if (timeCounter == 60)
+	if (timeCounter == 45)
 	{
 		App->balls->AddBall(270, 20, 3, 0, -1);
 	}
-	if (timeCounter == 80)
+	if (timeCounter == 50)
 	{
 		App->balls->AddBall(35, 20, 3, 0, 1);
+	}
+
+	//Destroy balls
+	if (timeCounter == 60)
+	{
+		App->balls->ballsList.getFirst()->data->dead = true;
+	}
+	if (timeCounter == 85)
+	{
+		App->balls->ballsList.getFirst()->data->dead = true;
+	}
+	if (timeCounter == 97)
+	{
+		App->balls->ballsList.getFirst()->data->dead = true;
+	}
+	if (timeCounter == 109)
+	{
+		App->balls->ballsList.getFirst()->data->dead = true;
 	}
 
 	if (paused)
@@ -107,6 +126,7 @@ update_status ModuleSceneIntro::Update()
 		if (timeCounter > 30)
 		{
 			timeCounter = 0;
+			App->balls->Disable();
 			Disable();
 			App->scenePlay->Enable(nextLevel * 3 - 2);
 		}

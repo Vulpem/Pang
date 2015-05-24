@@ -18,3 +18,8 @@ SPRITES:
 		Boosts
 		Scene trasnition
 		Particle hook shot
+		Get letter by letter the "pang" sprite introduction
+
+INTRO AND BALLS:
+	Adjust "create new ball" so you can set an angle direction, and change the speed of the balls
+	Clean each sprite letter and use it as we pop each ball
