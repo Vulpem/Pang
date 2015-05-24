@@ -57,7 +57,9 @@ ModulePlayer::~ModulePlayer()
 
 bool ModulePlayer::Init()
 {
+
 	punt = 0;
+	digitNumber = 0;
 	pausePlayer = false;
 	graphics = NULL;
 
@@ -807,24 +809,19 @@ void ModulePlayer::PrintInterface()
 	
 	//Level info
 
-
 	//Stage number
-	/*
-	textText = App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, { 255, 255, 255 }, NULL, textRect);
-	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
-
-	*/
 	if ((App->scenePlay->currentLvl / 3 + 1) >= 10)
 	{
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) / 10], 156, 224, &App->maps->rectNum);
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) % 10], 166, 224, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) / 10], 146, 224, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) % 10], 156, 224, &App->maps->rectNum);
 	}
 	else
 		App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl / 3 + 1], 156, 224, &App->maps->rectNum);
 
+	//Dash
 	App->render->Blit(uiText[UI_Player_DASH], 166, 28 * TILE, &rectText[UI_Player_DASH]);
 
-
+	//Level number
 	if ((App->scenePlay->currentLvl) >= 10)
 	{
 	App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl) / 10 ], 176, 224, &App->maps->rectNum);
@@ -834,9 +831,17 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl], 176, 224, &App->maps->rectNum);
 
 	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
-	/*
 
-	////////////
+	digitNumber = CountDigits(punt);
+	if (digitNumber > 2)
+	{
+		int b = 0;
+	}
+	for (int i = 1; i <= digitNumber; i++)
+	{
+		App->render->Blit(App->maps->textNumW[(punt % (10^i)) / (10^(i-1))], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+	}
+/*	////////////
 
 	textText = App->fonts->PrintNumbers(punt, { 255, 255, 255 }, NULL, textRect);
 	App->render->Blit(textText, 15 * TILE - textRect.w, 27 * TILE, &textRect);

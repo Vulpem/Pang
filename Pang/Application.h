@@ -1,7 +1,7 @@
 #pragma once
 
 #include "List.h"
-#include "Globals.h"
+//#include "Globals.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"

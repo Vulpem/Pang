@@ -149,6 +149,9 @@
     <ClCompile Include="ModuleSceneTransition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CountDigits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Punctuation.txt">

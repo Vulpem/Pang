@@ -88,6 +88,7 @@ public:
 
 
 	int punt;
+	int digitNumber;
 	
 
 	//Printing variables//
