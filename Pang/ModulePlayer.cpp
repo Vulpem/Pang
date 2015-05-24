@@ -17,7 +17,6 @@ enum ui_messages
 	UI_MTFUJI,
 	UI_MTKEIRIN,
 	UI_EMERALD,
-	UI_TEMPLE,
 	UI_ANKOR_WATT,
 	UI_AUSTRALIA,
 	UI_TAJ_MAHAL,
@@ -33,6 +32,7 @@ enum ui_messages
 	UI_ANTARTICA,
 	UI_EASTER,
 	UI_ISLAND,
+	UI_TEMPLE,
 	UI_DASH,
 	UI_STAGE,
 	UI_MAX
@@ -79,11 +79,11 @@ bool ModulePlayer::Init()
 	rectText[UI_DASH] = { 0, 0, 8.5, 8 };
 	rectText[UI_STAGE] = { 0, 0, 42.5, 8 };
 
-	rectText[UI_MTFUJI] = { 0, 0, 59.5, 8 };
+	rectText[UI_MTFUJI] = { 0, 0, 61, 8 };
 	rectText[UI_MTKEIRIN] = { 0, 0, 76.5, 8 };
 	rectText[UI_EMERALD] = { 0, 0, 59.5, 8 };
 	rectText[UI_TEMPLE] = { 0, 0, 51, 8 };
-	rectText[UI_ANKOR_WATT] = { 0, 0, 85, 8 };
+	rectText[UI_ANKOR_WATT] = { 0, 0, 95, 8 };
 	rectText[UI_AUSTRALIA] = { 0, 0, 76.5, 8 };
 	rectText[UI_TAJ_MAHAL] = { 0, 0, 76.5, 8 };
 	rectText[UI_LENINGRAD] = { 0, 0, 76.5, 8 };
@@ -786,14 +786,12 @@ void ModulePlayer::PrintInterface()
 		if (uiText[UI_EMERALD] == NULL)
 		{
 			uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
-			rectText[UI_EMERALD] = { 0, 0, 59.5, 8 };
 		}
 		App->render->Blit(uiText[UI_EMERALD], 20 * TILE, 26 * TILE, &rectText[UI_EMERALD]);
 		
 		if (uiText[UI_TEMPLE] == NULL)
 		{
 			uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
-			rectText[UI_TEMPLE] = { 0, 0, 51, 8 };
 		}
 		App->render->Blit(uiText[UI_TEMPLE], 20 * TILE + 4, 27 * TILE, &rectText[UI_TEMPLE]);
 	}
@@ -810,22 +808,15 @@ void ModulePlayer::PrintInterface()
 			uiText[UI_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
 		}
 		App->render->Blit(uiText[UI_ISLAND], 20 * TILE + 4, 27 * TILE, &rectText[UI_ISLAND]);
-
-
-		textText = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 26 * TILE, &textRect);
-
-		textText = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
-		App->render->Blit(textText, 20 * TILE, 27 * TILE, &textRect);
 	}
 	
 	else
 	{
-		if (uiText[App->scenePlay->currentLvl + 4] == NULL)
+		if (uiText[(App->scenePlay->currentLvl - 1) / 3 + 5] == NULL)
 		{
-			uiText[App->scenePlay->currentLvl + 4] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
+			uiText[(App->scenePlay->currentLvl - 1) / 3 + 5] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[App->scenePlay->currentLvl + 4], 20 * TILE, 26 * TILE, &rectText[App->scenePlay->currentLvl + 4]);
+		App->render->Blit(uiText[(App->scenePlay->currentLvl - 1) / 3 + 5], 20 * TILE, 26 * TILE, &rectText[App->scenePlay->currentLvl + 4]);
 
 
 
