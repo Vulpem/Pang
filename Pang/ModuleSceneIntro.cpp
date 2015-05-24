@@ -32,21 +32,26 @@ bool ModuleSceneIntro::Start()
 	timer = App->textures->Load("./Image_Sources/MapTimer.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
 
-	uiText = new SDL_Texture*[INTRO_UI_MAX];
-	for (int i = 0; i < INTRO_UI_MAX; i++)
+	uiText = new SDL_Texture*[UI_Intro_MAX];
+	for (int i = 0; i < UI_Intro_MAX; i++)
 	{
 		uiText[i] = NULL;
 	}
 
-	uiText[UI_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Intro_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
 
-	rectText = new SDL_Rect[INTRO_UI_MAX];
+	uiText[UI_Intro_CHECKMARK] = App->fonts->PrintText("~", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Intro_STAGE] = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL, textRect);
 
-	rectText[UI_TEXT1] = { 0, 0, 204, 8 };
-	rectText[UI_TEXT2] = { 0, 0, 195.5, 8 };
-	rectText[UI_TEXT3] = { 0, 0, 272, 8 };
+	rectText = new SDL_Rect[UI_Intro_MAX];
+
+	rectText[UI_Intro_TEXT1] = { 0, 0, 0, 8 };
+	rectText[UI_Intro_TEXT2] = { 0, 0, 0, 8 };
+	rectText[UI_Intro_TEXT3] = { 0, 0, 0, 8 };
+	rectText[UI_Intro_CHECKMARK] = { 0, 0, 8, 8 };
+	rectText[UI_Intro_STAGE] = { 0, 0, 42.5, 8 };
 	
 	App->scenePlay->lives = 3;
 
@@ -65,9 +70,9 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Draw everything --------------------------------------
+	timeCounter++;
 	if (paused)
 	{
-		timeCounter++;
 		if (timeCounter > 30)
 		{
 			timeCounter = 0;
@@ -89,7 +94,6 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (!mapOn)
 		{
-			timeCounter++;
 			if (timeCounter / 25 % 2 == 0)
 				App->render->Blit(graphics, 0, 0, NULL);
 			else
@@ -104,12 +108,11 @@ update_status ModuleSceneIntro::Update()
 		}
 		if (mapOn)
 		{
-			timeCounter++;
 			App->render->Blit(map, 0, 0, NULL);
 			//Drawing time counter
 			timerRect.x = (timeCounter / 60) * 27;
 			App->render->Blit(timer, 257, 31, &timerRect);
-			
+
 			//Moving through levels
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && nextLevel < 10)
 			{
@@ -126,24 +129,36 @@ update_status ModuleSceneIntro::Update()
 			}
 			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 
-			App->render->Blit(uiText[UI_TEXT1], TILE, 210, &rectText[UI_TEXT1]);
-			App->render->Blit(uiText[UI_TEXT2], TILE, 220, &rectText[UI_TEXT2]);
-			App->render->Blit(uiText[UI_TEXT3], TILE, 230, &rectText[UI_TEXT3]);
+			if (timeCounter < 32)
+			{
+				rectText[UI_Intro_TEXT1].w += 6;
+			}
+			if (timeCounter < 63 && timeCounter > 32)
+			{
+				rectText[UI_Intro_TEXT2].w += 6;
+			}
+			if (timeCounter < 96 && timeCounter > 63)
+			{
+				rectText[UI_Intro_TEXT3].w += 8;
+			}
+			App->render->Blit(uiText[UI_Intro_TEXT1], TILE, 210, &rectText[UI_Intro_TEXT1]);
+			App->render->Blit(uiText[UI_Intro_TEXT2], TILE, 220, &rectText[UI_Intro_TEXT2]);
+			App->render->Blit(uiText[UI_Intro_TEXT3], TILE, 230, &rectText[UI_Intro_TEXT3]);
 
 			
 			if (nextLevel == 3)
 			{
-				if (uiText[UI_EMERALD] == NULL)
+				if (uiText[UI_Intro_EMERALD] == NULL)
 				{
-					uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
+					uiText[UI_Intro_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
 				}
-				App->render->Blit(uiText[UI_EMERALD], 330 - App->player->rectText[UI_EMERALD].w / 2, 207, &App->player->rectText[UI_EMERALD]);
+				App->render->Blit(uiText[UI_Intro_EMERALD], 330 - App->player->rectText[UI_Intro_EMERALD].w / 2, 207, &App->player->rectText[UI_Intro_EMERALD]);
 
-				if (uiText[UI_TEMPLE] == NULL)
+				if (uiText[UI_Intro_TEMPLE] == NULL)
 				{
-					uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
+					uiText[UI_Intro_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
 				}
-				App->render->Blit(uiText[UI_TEMPLE], 330 - App->player->rectText[UI_TEMPLE].w / 2, 217, &App->player->rectText[UI_TEMPLE]);
+				App->render->Blit(uiText[UI_Intro_TEMPLE], 330 - App->player->rectText[UI_Intro_TEMPLE].w / 2, 217, &App->player->rectText[UI_Intro_TEMPLE]);
 			}
 
 			else
@@ -154,38 +169,18 @@ update_status ModuleSceneIntro::Update()
 				}
 				App->render->Blit(uiText[nextLevel], 330 - App->player->rectText[nextLevel].w / 2, 207, &App->player->rectText[nextLevel]);
 			}
-			
-		//		textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
-		//		App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 
-		//		textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
-		//		App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
-			/*
-			else if (nextLevel == 17)
-			{
-				textText = App->fonts->PrintText("EASTER", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 
-				textText = App->fonts->PrintText("ISLAND", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
-			}
-			else
-			{
-				textText = App->fonts->PrintText((App->maps->GetLevelName(nextLevel * 3)), { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
-			}
-		*/
-			textText = App->fonts->PrintNumbers(nextLevel * 3 - 2, { 255, 167, 16 }, NULL, textRect);
-			App->render->Blit(textText, 350 - textRect.w, 230, &textRect);
+			//PENDING
+//			textText = App->fonts->PrintNumbers(nextLevel * 3 - 2, { 255, 167, 16 }, NULL, textRect);
+//			App->render->Blit(textText, 350 - textRect.w, 230, &textRect);
 
-			textText = App->fonts->PrintText("~", { 255, 167, 16 }, NULL, textRect);
-			App->render->Blit(textText, 357 - textRect.w / 2, 230, &textRect);
+			App->render->Blit(uiText[UI_Intro_CHECKMARK], 357, 230, &rectText[UI_Intro_CHECKMARK]);
 
-			textText = App->fonts->PrintNumbers(nextLevel * 3, { 255, 167, 16 }, NULL, textRect);
-			App->render->Blit(textText, 365, 230, &textRect);
+//			textText = App->fonts->PrintNumbers(nextLevel * 3, { 255, 167, 16 }, NULL, textRect);
+//			App->render->Blit(textText, 365, 230, &textRect);
 
-			textText = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL, textRect);
-			App->render->Blit(textText, 285, 230, &textRect);
+			App->render->Blit(uiText[UI_Intro_STAGE], 285, 230, &rectText[UI_Intro_STAGE]);
 		}
 	}
 

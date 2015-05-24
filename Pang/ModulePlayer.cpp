@@ -13,36 +13,36 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 
 
 	//Setting UI Rects
-	rectText = new SDL_Rect[UI_MAX];
-	rectText[UI_FPS] = { 0, 0, 34, 8 };
-	rectText[UI_Frames] = { 0, 0, 68, 8 };
-	rectText[UI_Time] = { 0, 0, 42.5, 8 };
+	rectText = new SDL_Rect[UI_Player_MAX];
+	rectText[UI_Player_FPS] = { 0, 0, 34, 8 };
+	rectText[UI_Player_Frames] = { 0, 0, 68, 8 };
+	rectText[UI_Player_Time] = { 0, 0, 42.5, 8 };
 
-	rectText[UI_Player1] = { 0, 0, 68, 8 };
-	rectText[UI_Player2] = { 0, 0, 68, 8 };
+	rectText[UI_Player_Player1] = { 0, 0, 68, 8 };
+	rectText[UI_Player_Player2] = { 0, 0, 68, 8 };
 
-	rectText[UI_DASH] = { 0, 0, 8.5, 8 };
-	rectText[UI_STAGE] = { 0, 0, 42.5, 8 };
+	rectText[UI_Player_DASH] = { 0, 0, 8.5, 8 };
+	rectText[UI_Player_STAGE] = { 0, 0, 42.5, 8 };
 
-	rectText[UI_MTFUJI] = { 0, 0, 61, 8 };
-	rectText[UI_MTKEIRIN] = { 0, 0, 76.5, 8 };
-	rectText[UI_EMERALD] = { 0, 0, 59.5, 8 };
-	rectText[UI_TEMPLE] = { 0, 0, 51, 8 };
-	rectText[UI_ANKOR_WATT] = { 0, 0, 95, 8 };
-	rectText[UI_AUSTRALIA] = { 0, 0, 76.5, 8 };
-	rectText[UI_TAJ_MAHAL] = { 0, 0, 76.5, 8 };
-	rectText[UI_LENINGRAD] = { 0, 0, 76.5, 8 };
-	rectText[UI_PARIS] = { 0, 0, 42.5, 8 };
-	rectText[UI_LONDON] = { 0, 0, 51, 8 };
-	rectText[UI_BARCELONA] = { 0, 0, 76.5, 8 };
-	rectText[UI_ATHENS] = { 0, 0, 51, 8 };
-	rectText[UI_EGYPT] = { 0, 0, 42.5, 8 };
-	rectText[UI_KENYA] = { 0, 0, 42.5, 8 };
-	rectText[UI_NEW_YORK] = { 0, 0, 68, 8 };
-	rectText[UI_MAYA] = { 0, 0, 34, 8 };
-	rectText[UI_ANTARTICA] = { 0, 0, 76.5, 8 };
-	rectText[UI_EASTER] = { 0, 0, 51, 8 };
-	rectText[UI_ISLAND] = { 0, 0, 51, 8 };
+	rectText[UI_Player_MTFUJI] = { 0, 0, 61, 8 };
+	rectText[UI_Player_MTKEIRIN] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_EMERALD] = { 0, 0, 59.5, 8 };
+	rectText[UI_Player_TEMPLE] = { 0, 0, 51, 8 };
+	rectText[UI_Player_ANKOR_WATT] = { 0, 0, 95, 8 };
+	rectText[UI_Player_AUSTRALIA] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_TAJ_MAHAL] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_LENINGRAD] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_PARIS] = { 0, 0, 42.5, 8 };
+	rectText[UI_Player_LONDON] = { 0, 0, 51, 8 };
+	rectText[UI_Player_BARCELONA] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_ATHENS] = { 0, 0, 51, 8 };
+	rectText[UI_Player_EGYPT] = { 0, 0, 42.5, 8 };
+	rectText[UI_Player_KENYA] = { 0, 0, 42.5, 8 };
+	rectText[UI_Player_NEW_YORK] = { 0, 0, 68, 8 };
+	rectText[UI_Player_MAYA] = { 0, 0, 34, 8 };
+	rectText[UI_Player_ANTARTICA] = { 0, 0, 76.5, 8 };
+	rectText[UI_Player_EASTER] = { 0, 0, 51, 8 };
+	rectText[UI_Player_ISLAND] = { 0, 0, 51, 8 };
 }
 
 ModulePlayer::~ModulePlayer()
@@ -55,20 +55,20 @@ bool ModulePlayer::Init()
 	graphics = NULL;
 
 	//Loading UI Textures
-	uiText = new SDL_Texture*[UI_MAX];
-	for (int i = 0; i < UI_MAX; i++)
+	uiText = new SDL_Texture*[UI_Player_MAX];
+	for (int i = 0; i < UI_Player_MAX; i++)
 	{
 		uiText[i] = NULL;
 	}
-	uiText[UI_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
-	uiText[UI_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
 
-	uiText[UI_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
 
-	uiText[UI_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
 
 	//////////////
 	//Animations//
@@ -743,8 +743,8 @@ void ModulePlayer::PrintDebugMode()
 
 void ModulePlayer::PrintInterface()
 {
-	App->render->Blit(uiText[ UI_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player1]);
-	App->render->Blit(uiText[UI_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player1]);
+	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
+	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 
 
 
@@ -754,31 +754,31 @@ void ModulePlayer::PrintInterface()
 
 	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
 	{
-		if (uiText[UI_EMERALD] == NULL)
+		if (uiText[UI_Player_EMERALD] == NULL)
 		{
-			uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_EMERALD], 24 * TILE - rectText[UI_EMERALD].w / 2, 26 * TILE, &rectText[UI_EMERALD]);
+		App->render->Blit(uiText[UI_Player_EMERALD], 24 * TILE - rectText[UI_Player_EMERALD].w / 2, 26 * TILE, &rectText[UI_Player_EMERALD]);
 		
-		if (uiText[UI_TEMPLE] == NULL)
+		if (uiText[UI_Player_TEMPLE] == NULL)
 		{
-			uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_TEMPLE], 24 * TILE - rectText[UI_TEMPLE].w / 2, 27 * TILE, &rectText[UI_TEMPLE]);
+		App->render->Blit(uiText[UI_Player_TEMPLE], 24 * TILE - rectText[UI_Player_TEMPLE].w / 2, 27 * TILE, &rectText[UI_Player_TEMPLE]);
 	}
 	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
 	{
-		if (uiText[UI_EASTER] == NULL)
+		if (uiText[UI_Player_EASTER] == NULL)
 		{
-			uiText[UI_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_EASTER], 24 * TILE - rectText[UI_EASTER].w / 2, 26 * TILE, &rectText[UI_EASTER]);
+		App->render->Blit(uiText[UI_Player_EASTER], 24 * TILE - rectText[UI_Player_EASTER].w / 2, 26 * TILE, &rectText[UI_Player_EASTER]);
 
-		if (uiText[UI_ISLAND] == NULL)
+		if (uiText[UI_Player_ISLAND] == NULL)
 		{
-			uiText[UI_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
+			uiText[UI_Player_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_ISLAND], 24 * TILE - rectText[UI_ISLAND].w / 2, 27 * TILE, &rectText[UI_ISLAND]);
+		App->render->Blit(uiText[UI_Player_ISLAND], 24 * TILE - rectText[UI_Player_ISLAND].w / 2, 27 * TILE, &rectText[UI_Player_ISLAND]);
 	}
 	
 	else
@@ -800,7 +800,7 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
 
 	*/
-	App->render->Blit(uiText[UI_DASH], 21 * TILE, 28 * TILE, &rectText[UI_DASH]);
+	App->render->Blit(uiText[UI_Player_DASH], 21 * TILE, 28 * TILE, &rectText[UI_Player_DASH]);
 	/*
 
 
@@ -815,7 +815,7 @@ void ModulePlayer::PrintInterface()
 		App->render->Blit(textText, 23 * TILE - textRect.w + 10, 28 * TILE, &textRect);
 	}
 	*/
-	App->render->Blit(uiText[UI_STAGE], 24 * TILE, 28 * TILE, &rectText[UI_STAGE]);
+	App->render->Blit(uiText[UI_Player_STAGE], 24 * TILE, 28 * TILE, &rectText[UI_Player_STAGE]);
 	/*
 
 	////////////

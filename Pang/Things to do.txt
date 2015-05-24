@@ -3,4 +3,9 @@ IMPORTANT BUGS:
 	ScenePlay doesnt render background after a while
 
 MINOR THINGS:
-Map transition between scenes appears withoutjoystick
+	Map transition between scenes appears withoutjoystick
+
+FONTS:
+	Create number textures
+	Change to the "new method" stage and level numbers at intro and sceneplay
+	Change to the "new method" in transition

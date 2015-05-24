@@ -4,20 +4,39 @@
 #include "Globals.h"
 #include "p2Point.h"
 
-enum ui_messages
+enum UI_Player_messages
 {
-	UI_FPS = 20,
-	//	UI_FPS_NUM,
-	UI_Frames,
-	//	UI_Frames_NUM,
-	UI_Time,
-	//	UI_Time_NUM,
-	UI_Player1,
-	UI_Player2,
+	UI_Player_MTFUJI = 1,
+	UI_Player_MTKEIRIN,
+	UI_Player_EMERALD,
+	UI_Player_ANKOR_WATT,
+	UI_Player_AUSTRALIA,
+	UI_Player_TAJ_MAHAL,
+	UI_Player_LENINGRAD,
+	UI_Player_PARIS,
+	UI_Player_LONDON,
+	UI_Player_BARCELONA,
+	UI_Player_ATHENS,
+	UI_Player_EGYPT,
+	UI_Player_KENYA,
+	UI_Player_NEW_YORK,
+	UI_Player_MAYA,
+	UI_Player_ANTARTICA,
+	UI_Player_EASTER,
+	UI_Player_ISLAND,
+	UI_Player_TEMPLE,
+	UI_Player_FPS = 20,
+	//	UI_Player_FPS_NUM,
+	UI_Player_Frames,
+	//	UI_Player_Frames_NUM,
+	UI_Player_Time,
+	//	UI_Player_Time_NUM,
+	UI_Player_Player1,
+	UI_Player_Player2,
 
-	UI_DASH,
-	UI_STAGE,
-	UI_MAX
+	UI_Player_DASH,
+	UI_Player_STAGE,
+	UI_Player_MAX
 };
 
 enum PlayerStates
