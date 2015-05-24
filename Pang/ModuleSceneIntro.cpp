@@ -31,6 +31,23 @@ bool ModuleSceneIntro::Start()
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 	timer = App->textures->Load("./Image_Sources/MapTimer.png");
 	App->audio->PlayMusic("./Sounds/Title_Screen.ogg");
+
+	uiText = new SDL_Texture*[INTRO_UI_MAX];
+	for (int i = 0; i < INTRO_UI_MAX; i++)
+	{
+		uiText[i] = NULL;
+	}
+
+	uiText[UI_TEXT1] = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_TEXT2] = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_TEXT3] = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
+
+	rectText = new SDL_Rect[INTRO_UI_MAX];
+
+	rectText[UI_TEXT1] = { 0, 0, 204, 8 };
+	rectText[UI_TEXT2] = { 0, 0, 195.5, 8 };
+	rectText[UI_TEXT3] = { 0, 0, 272, 8 };
+	
 	App->scenePlay->lives = 3;
 
 	return ret;
@@ -109,12 +126,10 @@ update_status ModuleSceneIntro::Update()
 			}
 			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
 
-			textText = App->fonts->PrintText("CHOSE THE CITY TO START.", { 255, 255, 255 }, NULL, textRect);
-			App->render->Blit(textText, 8, 210, &textRect);
-			textText = App->fonts->PrintText("USE JOYSTICK TO CHOOSE.", { 255, 255, 255 }, NULL, textRect);
-			App->render->Blit(textText, 8, 220, &textRect);
-			textText = App->fonts->PrintText("PRESS BUTTON TO FINALIZE CHOICE.", { 255, 255, 255 }, NULL, textRect);
-			App->render->Blit(textText, 8, 230, &textRect);
+			App->render->Blit(uiText[UI_TEXT1], TILE, 210, &rectText[UI_TEXT1]);
+			App->render->Blit(uiText[UI_TEXT2], TILE, 220, &rectText[UI_TEXT2]);
+			App->render->Blit(uiText[UI_TEXT3], TILE, 230, &rectText[UI_TEXT3]);
+
 
 			if (nextLevel == 3)
 			{

@@ -3,6 +3,14 @@
 #include "ModuleAnimation.h"
 #include "Globals.h"
 
+enum ui_intro
+{
+	UI_TEXT1,
+	UI_TEXT2,
+	UI_TEXT3,
+	INTRO_UI_MAX
+};
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -33,6 +41,9 @@ public:
 	SDL_Texture* timer;
 	SDL_Texture* textText;
 	TTF_Font* textFont;
+
+	SDL_Texture** uiText;
+	SDL_Rect* rectText;
 
 	SDL_Rect textRect;
 	SDL_Rect timerRect;

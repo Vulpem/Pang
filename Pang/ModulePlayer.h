@@ -4,6 +4,22 @@
 #include "Globals.h"
 #include "p2Point.h"
 
+enum ui_messages
+{
+
+	UI_FPS = 20,
+	//	UI_FPS_NUM,
+	UI_Frames,
+	//	UI_Frames_NUM,
+	UI_Time,
+	//	UI_Time_NUM,
+	UI_Player1,
+	UI_Player2,
+
+	UI_DASH,
+	UI_STAGE,
+	UI_MAX
+};
 
 enum PlayerStates
 {

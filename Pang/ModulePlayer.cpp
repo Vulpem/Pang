@@ -4,39 +4,8 @@
 #include "ModuleGun.h"
 #include <math.h>
 
-enum ui_messages
-{
-	UI_FPS,
-//	UI_FPS_NUM,
-	UI_Frames,
-//	UI_Frames_NUM,
-	UI_Time,
-//	UI_Time_NUM,
-	UI_Player1,
-	UI_Player2,
-	UI_MTFUJI,
-	UI_MTKEIRIN,
-	UI_EMERALD,
-	UI_ANKOR_WATT,
-	UI_AUSTRALIA,
-	UI_TAJ_MAHAL,
-	UI_LENINGRAD,
-	UI_PARIS,
-	UI_LONDON,
-	UI_BARCELONA,
-	UI_ATHENS,
-	UI_EGYPT,
-	UI_KENYA,
-	UI_NEW_YORK,
-	UI_MAYA,
-	UI_ANTARTICA,
-	UI_EASTER,
-	UI_ISLAND,
-	UI_TEMPLE,
-	UI_DASH,
-	UI_STAGE,
-	UI_MAX
-};
+
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -766,7 +735,7 @@ void ModulePlayer::PrintDebugMode()
 	textText = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
 	App->render->Blit(textText, 39 * TILE, 29 * TILE, &textRect);
 	//Time PrintNumbers
-	textText = App->fonts->PrintNumbers(SDL_GetTicks() / 1000, { 255, 167, 16 }, NULL, textRect);
+	textText = App->fonts->PrintNumbers(SDL_GetTicks() / 1000, { 255, 177, 16 }, NULL, textRect);
 	App->render->Blit(textText, 47 * TILE - textRect.w, 29 * TILE, &textRect);
 }
 
@@ -787,13 +756,13 @@ void ModulePlayer::PrintInterface()
 		{
 			uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_EMERALD], 20 * TILE, 26 * TILE, &rectText[UI_EMERALD]);
+		App->render->Blit(uiText[UI_EMERALD], 24 * TILE - rectText[UI_EMERALD].w / 2, 26 * TILE, &rectText[UI_EMERALD]);
 		
 		if (uiText[UI_TEMPLE] == NULL)
 		{
 			uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_TEMPLE], 20 * TILE + 4, 27 * TILE, &rectText[UI_TEMPLE]);
+		App->render->Blit(uiText[UI_TEMPLE], 24 * TILE - rectText[UI_TEMPLE].w / 2, 27 * TILE, &rectText[UI_TEMPLE]);
 	}
 	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
 	{
@@ -801,22 +770,22 @@ void ModulePlayer::PrintInterface()
 		{
 			uiText[UI_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_EASTER], 20 * TILE, 26 * TILE, &rectText[UI_EASTER]);
+		App->render->Blit(uiText[UI_EASTER], 24 * TILE - rectText[UI_EASTER].w / 2, 26 * TILE, &rectText[UI_EASTER]);
 
 		if (uiText[UI_ISLAND] == NULL)
 		{
 			uiText[UI_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[UI_ISLAND], 20 * TILE + 4, 27 * TILE, &rectText[UI_ISLAND]);
+		App->render->Blit(uiText[UI_ISLAND], 24 * TILE - rectText[UI_ISLAND].w / 2, 27 * TILE, &rectText[UI_ISLAND]);
 	}
 	
 	else
 	{
-		if (uiText[(App->scenePlay->currentLvl - 1) / 3 + 5] == NULL)
+		if (uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] == NULL)
 		{
-			uiText[(App->scenePlay->currentLvl - 1) / 3 + 5] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
+			uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL, textRect);
 		}
-		App->render->Blit(uiText[(App->scenePlay->currentLvl - 1) / 3 + 5], 20 * TILE, 26 * TILE, &rectText[App->scenePlay->currentLvl + 4]);
+		App->render->Blit(uiText[(App->scenePlay->currentLvl - 1) / 3 + 1], 24 * TILE - rectText[(App->scenePlay->currentLvl - 1) / 3 + 1].w / 2, 26 * TILE, &rectText[(App->scenePlay->currentLvl - 1) / 3 + 1]);
 
 
 
