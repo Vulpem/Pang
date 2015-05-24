@@ -804,30 +804,36 @@ void ModulePlayer::PrintInterface()
 
 
 	}
-	/*
+	
 	//Level info
 
+
 	//Stage number
+	/*
 	textText = App->fonts->PrintNumbers((App->scenePlay->currentLvl - 1) / 3 + 1, { 255, 255, 255 }, NULL, textRect);
 	App->render->Blit(textText, 21 * TILE - textRect.w, 28 * TILE, &textRect);
 
 	*/
-	App->render->Blit(uiText[UI_Player_DASH], 21 * TILE, 28 * TILE, &rectText[UI_Player_DASH]);
-	/*
-
-
-	textText = App->fonts->PrintNumbers(App->scenePlay->currentLvl, { 255, 255, 255 }, NULL, textRect);
-	if (App->scenePlay->currentLvl < 10)
+	if ((App->scenePlay->currentLvl / 3 + 1) >= 10)
 	{
-		//Level number
-		App->render->Blit(textText, 23 * TILE - textRect.w + 2, 28  * TILE, &textRect);
+		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) / 10], 156, 224, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) % 10], 166, 224, &App->maps->rectNum);
 	}
 	else
+		App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl / 3 + 1], 156, 224, &App->maps->rectNum);
+
+	App->render->Blit(uiText[UI_Player_DASH], 166, 28 * TILE, &rectText[UI_Player_DASH]);
+
+
+	if ((App->scenePlay->currentLvl) >= 10)
 	{
-		App->render->Blit(textText, 23 * TILE - textRect.w + 10, 28 * TILE, &textRect);
+	App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl) / 10 ], 176, 224, &App->maps->rectNum);
+	App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl) % 10], 186, 224, &App->maps->rectNum);
 	}
-	*/
-	App->render->Blit(uiText[UI_Player_STAGE], 24 * TILE, 28 * TILE, &rectText[UI_Player_STAGE]);
+	else
+	App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl], 176, 224, &App->maps->rectNum);
+
+	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
 	/*
 
 	////////////
