@@ -6,7 +6,6 @@
 
 enum ui_messages
 {
-
 	UI_FPS = 20,
 	//	UI_FPS_NUM,
 	UI_Frames,

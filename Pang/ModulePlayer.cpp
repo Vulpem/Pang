@@ -9,32 +9,8 @@
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
-{}
-
-ModulePlayer::~ModulePlayer()
-{}
-
-bool ModulePlayer::Init()
 {
-	punt = 0;
-	pausePlayer = false;
-	graphics = NULL;
 
-	//Loading UI Textures
-	uiText = new SDL_Texture*[UI_MAX];
-	for (int i = 0; i < UI_MAX; i++)
-	{
-		uiText[i] = NULL;
-	}
-	uiText[UI_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
-	uiText[UI_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
-
-	uiText[UI_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
-
-	uiText[UI_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
-	uiText[UI_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
 
 	//Setting UI Rects
 	rectText = new SDL_Rect[UI_MAX];
@@ -67,6 +43,32 @@ bool ModulePlayer::Init()
 	rectText[UI_ANTARTICA] = { 0, 0, 76.5, 8 };
 	rectText[UI_EASTER] = { 0, 0, 51, 8 };
 	rectText[UI_ISLAND] = { 0, 0, 51, 8 };
+}
+
+ModulePlayer::~ModulePlayer()
+{}
+
+bool ModulePlayer::Init()
+{
+	punt = 0;
+	pausePlayer = false;
+	graphics = NULL;
+
+	//Loading UI Textures
+	uiText = new SDL_Texture*[UI_MAX];
+	for (int i = 0; i < UI_MAX; i++)
+	{
+		uiText[i] = NULL;
+	}
+	uiText[UI_FPS] = App->fonts->PrintText("FPS: ", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL, textRect);
+	uiText[UI_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL, textRect);
+
+	uiText[UI_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL, textRect);
+
+	uiText[UI_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL, textRect);
+	uiText[UI_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL, textRect);
 
 	//////////////
 	//Animations//
@@ -741,7 +743,7 @@ void ModulePlayer::PrintDebugMode()
 
 void ModulePlayer::PrintInterface()
 {
-	App->render->Blit(uiText[UI_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player1]);
+	App->render->Blit(uiText[ UI_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player1]);
 	App->render->Blit(uiText[UI_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player1]);
 
 

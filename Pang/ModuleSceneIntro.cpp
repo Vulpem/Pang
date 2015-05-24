@@ -130,15 +130,37 @@ update_status ModuleSceneIntro::Update()
 			App->render->Blit(uiText[UI_TEXT2], TILE, 220, &rectText[UI_TEXT2]);
 			App->render->Blit(uiText[UI_TEXT3], TILE, 230, &rectText[UI_TEXT3]);
 
-
+			
 			if (nextLevel == 3)
 			{
-				textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
+				if (uiText[UI_EMERALD] == NULL)
+				{
+					uiText[UI_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
+				}
+				App->render->Blit(uiText[UI_EMERALD], 330 - App->player->rectText[UI_EMERALD].w / 2, 207, &App->player->rectText[UI_EMERALD]);
 
-				textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
-				App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
+				if (uiText[UI_TEMPLE] == NULL)
+				{
+					uiText[UI_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
+				}
+				App->render->Blit(uiText[UI_TEMPLE], 330 - App->player->rectText[UI_TEMPLE].w / 2, 217, &App->player->rectText[UI_TEMPLE]);
 			}
+
+			else
+			{
+				if (uiText[nextLevel] == NULL)
+				{
+					uiText[nextLevel] = App->fonts->PrintText(App->maps->GetLevelName(nextLevel * 3), { 255, 167, 16 }, NULL, textRect);
+				}
+				App->render->Blit(uiText[nextLevel], 330 - App->player->rectText[nextLevel].w / 2, 207, &App->player->rectText[nextLevel]);
+			}
+			
+		//		textText = App->fonts->PrintText("EMERALD", { 255, 167, 16 }, NULL, textRect);
+		//		App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
+
+		//		textText = App->fonts->PrintText("TEMPLE", { 255, 167, 16 }, NULL, textRect);
+		//		App->render->Blit(textText, 330 - textRect.w / 2, 217, &textRect);
+			/*
 			else if (nextLevel == 17)
 			{
 				textText = App->fonts->PrintText("EASTER", { 255, 167, 16 }, NULL, textRect);
@@ -152,7 +174,7 @@ update_status ModuleSceneIntro::Update()
 				textText = App->fonts->PrintText((App->maps->GetLevelName(nextLevel * 3)), { 255, 167, 16 }, NULL, textRect);
 				App->render->Blit(textText, 330 - textRect.w / 2, 207, &textRect);
 			}
-
+		*/
 			textText = App->fonts->PrintNumbers(nextLevel * 3 - 2, { 255, 167, 16 }, NULL, textRect);
 			App->render->Blit(textText, 350 - textRect.w, 230, &textRect);
 

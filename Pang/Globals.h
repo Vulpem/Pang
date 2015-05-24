@@ -40,28 +40,6 @@ enum Boosts
 	bomb
 };
 
-enum LevelNames
-{
-	UI_MTFUJI = 1,
-	UI_MTKEIRIN,
-	UI_EMERALD,
-	UI_ANKOR_WATT,
-	UI_AUSTRALIA,
-	UI_TAJ_MAHAL,
-	UI_LENINGRAD,
-	UI_PARIS,
-	UI_LONDON,
-	UI_BARCELONA,
-	UI_ATHENS,
-	UI_EGYPT,
-	UI_KENYA,
-	UI_NEW_YORK,
-	UI_MAYA,
-	UI_ANTARTICA,
-	UI_EASTER,
-	UI_ISLAND,
-	UI_TEMPLE,
-};
 
 // Configuration -----------
 #define TILE 8
