@@ -170,7 +170,7 @@ update_status ModuleSceneIntro::Update()
 		else
 			selectedRect.y = 15;
 		App->render->Blit(map, 0, 0, NULL);
-		App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+		App->render->Blit(selected, SelectedPosition(true, nextLevel), SelectedPosition(false, nextLevel), &selectedRect);
 		}
 	}
 	else
@@ -212,7 +212,7 @@ update_status ModuleSceneIntro::Update()
 				timeCounter = 0;
 				paused = true;
 			}
-			App->render->Blit(selected, SelectedPosition(true), SelectedPosition(false), &selectedRect);
+			App->render->Blit(selected, SelectedPosition(true, nextLevel), SelectedPosition(false, nextLevel), &selectedRect);
 
 			if (timeCounter < 33)
 			{
@@ -280,9 +280,9 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
-int ModuleSceneIntro::SelectedPosition(bool x)
+int ModuleSceneIntro::SelectedPosition(bool x, int _nextLevel)
 {
-	switch (nextLevel)
+	switch (_nextLevel)
 	{
 	case 1:
 		if (x == true)

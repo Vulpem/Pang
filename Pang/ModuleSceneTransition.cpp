@@ -44,13 +44,17 @@ bool ModuleSceneTransition::Init()
 bool ModuleSceneTransition::Start(int _nextLevel)
 {
 	App->audio->PlayMusic("./Sounds/TransitionScene.wav", 1);
-	textRect = { 0, 0, 0, 9 };
 	nextLevel = _nextLevel;
 	imageRect = { 0, 0, 194, 96 };
+	selectedRect = { 0, 15, 15, 15 };
 	LOG("Scene Transition");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/TransitionScene.png");
 	graphics2 = App->textures->Load("./Image_Sources/IntroMap.png");
+	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
+
+	uiText[UI_Transition_CHECKMARK] = App->fonts->PrintText("~", { 255, 167, 16 }, NULL);
+	uiText[UI_Intro_STAGE] = App->fonts->PrintText("STAGE", { 255, 167, 16 }, NULL);
 
 	return ret;
 }
@@ -70,6 +74,8 @@ update_status ModuleSceneTransition::Update()
 	// Draw everything --------------------------------------
 
 	timeCounter++;
+
+	//Change to next level after animation
 	if (timeCounter >= 180 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
 	{
 		timeCounter = 0;
@@ -106,7 +112,24 @@ update_status ModuleSceneTransition::Update()
 	}
 	//If it's end of stage
 	else
-		App->render->Blit(graphics2, 0, 0, NULL);
+		{
+			if (timeCounter > 180)
+			{
+				timeCounter = 0;
+				Disable();
+				App->scenePlay->Enable(nextLevel * 3 - 2);
+			}
+			else
+			{
+				App->render->Blit(graphics2, 0, 0, NULL);
+				if ((timeCounter / 2) % 2 == 0)
+					selectedRect.y = 0;
+				else
+					selectedRect.y = 15;
+				App->render->Blit(selected, App->sceneIntro->SelectedPosition(true, nextLevel / 3 + 1), App->sceneIntro->SelectedPosition(false, nextLevel / 3 + 1), &selectedRect);
+			}
+		}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -165,14 +188,9 @@ void ModuleSceneTransition::PrintStats()
 			App->render->Blit(App->maps->textNumW[(nextLevel - 1) / 10], 214 + 10 * i, 185, &App->maps->rectNum);
 		}
 	}
+}
 
+void PrintMapInterface()
+{
 
-
-
-	///////////////////
-	//Print push button
-	if (timeCounter / 20 % 2 == 0)
-	{
-		App->render->Blit(uiText[UI_Transition_PUSHBUTTON], 280, 220, &rectText[UI_Transition_NEXTEXTEND]);
-	}
 }

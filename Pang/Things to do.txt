@@ -19,11 +19,5 @@ SPRITES:
 		Scene trasnition
 		Particle hook shot
 
-
-INTRO AND BALLS:
-	Adjust "create new ball" so you can set an angle direction, and change the speed of the balls
-		Maybe new method ("CreateFakeBall") ? Without boost, direction and speed set exactly.
-	Clean each sprite letter and use it as we pop each ball
-
 BALLS:
 	Adjust that awful first bounce

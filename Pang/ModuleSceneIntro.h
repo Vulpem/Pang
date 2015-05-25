@@ -42,7 +42,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	int SelectedPosition(bool x);
+	int SelectedPosition(bool x, int _nextLevel);
 
 
 	int timeCounter;
