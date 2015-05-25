@@ -99,18 +99,34 @@ update_status ModuleSceneIntro::Update()
 		if (timeCounter == 15)
 		{
 			App->balls->AddBall(250, 0, 3, 0, -1);
+			App->balls->ballsList.getFirst()->data->speed.x = -3.3f;
+			App->balls->ballsList.getFirst()->data->speed.y = 18;
+			App->balls->ballsList.getFirst()->data->YBaseSpeed = -6.3f;
+			App->balls->ballsList.getFirst()->data->divisible = false;
 		}
 		if (timeCounter == 30)
 		{
-			App->balls->AddBall(35, 20, 3, 0, 1);
+			App->balls->AddBall(25, 20, 3, 0, 1);
+			App->balls->ballsList.getFirst()->next->data->speed.x = 2.3f;
+			App->balls->ballsList.getFirst()->next->data->speed.y = 7;
+			App->balls->ballsList.getFirst()->next->data->YBaseSpeed = -4.4f;
+			App->balls->ballsList.getFirst()->next->data->divisible = false;
 		}
 		if (timeCounter == 45)
 		{
 			App->balls->AddBall(270, 20, 3, 0, -1);
+			App->balls->ballsList.getFirst()->next->next->data->speed.x = -1.0f;
+			App->balls->ballsList.getFirst()->next->next->data->speed.y = 7;
+			App->balls->ballsList.getFirst()->next->next->data->YBaseSpeed = -5.0f;
+			App->balls->ballsList.getFirst()->next->next->data->divisible = false;
 		}
 		if (timeCounter == 50)
 		{
 			App->balls->AddBall(35, 20, 3, 0, 1);
+			App->balls->ballsList.getFirst()->next->next->next->data->speed.x = 3.7f;
+			App->balls->ballsList.getFirst()->next->next->next->data->speed.y = 7;
+			App->balls->ballsList.getFirst()->next->next->next->data->YBaseSpeed = -4.3f;
+			App->balls->ballsList.getFirst()->next->next->next->data->divisible = false;
 		}
 
 		//Destroy balls

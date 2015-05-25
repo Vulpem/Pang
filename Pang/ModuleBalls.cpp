@@ -147,17 +147,20 @@ update_status ModuleBalls::Update()
 		{
 			LOG("-- Destroying ball --\n");
 			//Ball subdivision
-
-			if (pointer->data->type > little)
+			if (pointer->data->divisible)
 			{
-				Ball* newBall1 = new Ball(pointer->data, -1);
-				Ball* newBall2 = new Ball(pointer->data, 1);
+				if (pointer->data->type > little)
+				{
+					Ball* newBall1 = new Ball(pointer->data, -1);
+					Ball* newBall2 = new Ball(pointer->data, 1);
 
-				ballsList.add(newBall1);
-				ballsList.add(newBall2);
+					ballsList.add(newBall1);
+					ballsList.add(newBall2);
+				}
+			if (rand() % 100 <= 20) { App->boosts->AddBoost(pointer->data->position.x, pointer->data->position.y, none); }
 			}
 			App->particles->AddParticle(App->particles->explosion[pointer->data->color][pointer->data->type], pointer->data->position.x, pointer->data->position.y, 15, 15);
-			if (rand() % 100 <= 20) { App->boosts->AddBoost(pointer->data->position.x, pointer->data->position.y, none); }
+
 		}
 		else
 		{

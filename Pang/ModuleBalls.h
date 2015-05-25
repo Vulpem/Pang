@@ -16,6 +16,7 @@ public:
 	int color;
 	bool dead = false;
 
+	bool divisible = true;
 	int offset;
 
 public:
