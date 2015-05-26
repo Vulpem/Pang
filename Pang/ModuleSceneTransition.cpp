@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneTransition.h"
 
-#define NUMLVLSPRINT 2
+#define NUMLVLSPRINT 4
 ModuleSceneTransition::ModuleSceneTransition(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	graphics = NULL;
@@ -41,6 +41,12 @@ bool ModuleSceneTransition::Init()
 	uiText[UI_Transition_Text2_1] = App->fonts->PrintText("YOU CAN BREAK SOME BLOCKS. ", { 255, 255, 255 }, NULL);
 	uiText[UI_Transition_Text2_2] = App->fonts->PrintText("THEY ARE HIDDEN SOMEWHERE. ", { 255, 255, 255 }, NULL);
 
+	uiText[UI_Transition_Text3_1] = App->fonts->PrintText("SORRY, CAN'T USE THE WIRE  ", { 255, 255, 255 }, NULL);
+	uiText[UI_Transition_Text3_2] = App->fonts->PrintText("CONTINOUSLY. ONE AT A TIME  ", { 255, 255, 255 }, NULL);
+
+	uiText[UI_Transition_Text4_1] = App->fonts->PrintText("YOU CAN SHOOT THE VULCAN MISSILE  ", { 255, 255, 255 }, NULL);
+	uiText[UI_Transition_Text4_2] = App->fonts->PrintText("CONTINOUSLY BUT YOU CAN'T USE  ", { 255, 255, 255 }, NULL);
+	uiText[UI_Transition_Text4_3] = App->fonts->PrintText("IT AGAIN  ", { 255, 255, 255 }, NULL);
 	rectText = new SDL_Rect[UI_Transition_MAX];
 
 	return true;
@@ -64,6 +70,12 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 	rectText[UI_Transition_Text2_1] = { 0, 0, 221, 8 };
 	rectText[UI_Transition_Text2_2] = { 0, 0, 221, 8 };
 
+	rectText[UI_Transition_Text3_1] = { 0, 0, 212.5, 8 };
+	rectText[UI_Transition_Text3_2] = { 0, 0, 221, 8 };
+
+	rectText[UI_Transition_Text4_1] = { 0, 0, 272, 8 };
+	rectText[UI_Transition_Text4_2] = { 0, 0, 246.5, 8 };
+	rectText[UI_Transition_Text4_2] = { 0, 0, 68, 8 };
 
 	text1Lenght = rectText[nextLevel / 3 + 26].w + 1;
 	text2Lenght = rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w + 1;

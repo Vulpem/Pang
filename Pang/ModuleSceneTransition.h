@@ -33,9 +33,15 @@ enum UI_Transition_messages
 
 	UI_Transition_Text1_1,
 	UI_Transition_Text2_1,
+	UI_Transition_Text3_1,
+	UI_Transition_Text4_1,
 
 	UI_Transition_Text1_2,
 	UI_Transition_Text2_2,
+	UI_Transition_Text3_2,
+	UI_Transition_Text4_2,
+
+	UI_Transition_Text4_3,
 
 	UI_Transition_MAX,
 };
