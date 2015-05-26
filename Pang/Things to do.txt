@@ -1,16 +1,14 @@
 IMPORTANT BUGS:
-	Printing text crashes spontaniously (need to check, probably gone)
-	ScenePlay doesnt render background after a while (need to check, probably gone)
-	That lagg?? (not appearing for a long while)
+
 
 MINOR THINGS:
-	Map transition between stages appears withoutjoystick
+	Map between stages appears without joystick image
 
 INTERFACE:
 	Put a dot after "PTS" transition scene
 
 SOUNDS:
-	Fix level sound with 3 seconds of delay
+	Fix level sound with 3 seconds delay
 
 SPRITES:
 	Get all arcade game sprites:
@@ -21,3 +19,6 @@ SPRITES:
 
 BALLS:
 	Adjust that awful first bounce
+
+TRANSITION:
+	End text animation

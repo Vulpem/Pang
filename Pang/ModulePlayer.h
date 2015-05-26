@@ -33,7 +33,6 @@ enum UI_Player_messages
 	//	UI_Player_Time_NUM,
 	UI_Player_Player1,
 	UI_Player_Player2,
-
 	UI_Player_DASH,
 	UI_Player_STAGE,
 	UI_Player_PUSHBUTTON,

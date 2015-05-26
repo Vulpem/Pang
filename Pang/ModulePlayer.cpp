@@ -78,7 +78,7 @@ bool ModulePlayer::Init()
 
 	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL);
 	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL);
-	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
+	uiText[UI_Player_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
 
 	//////////////
 	//Animations//
@@ -143,7 +143,6 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
-	textRect = { 0, 0, 0, 8};
 	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;
@@ -777,7 +776,7 @@ void ModulePlayer::PrintInterface()
 
 	if (App->scenePlay->timer / 20 % 2 == 0)
 	{
-		App->render->Blit(uiText[UI_Transition_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
+		App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
 	}
 
 	//PrintTexting interface//
@@ -850,7 +849,7 @@ void ModulePlayer::PrintInterface()
 
 	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
 
-	//Printing scoreuation
+	//Printing score
 	digitNumber = CountDigits(score);
 
 	for (int i = 1; i <= digitNumber; i++)

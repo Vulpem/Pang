@@ -24,11 +24,19 @@ enum UI_Transition_messages
 	UI_Transition_ISLAND,
 	UI_Transition_TEMPLE,
 	UI_Transition_STAGE,
+	UI_Transition_STAGE2,
 	UI_Transition_CHECKMARK,
 	UI_Transition_TIMEBONUS,
 	UI_Transition_PTS,
 	UI_Transition_NEXTEXTEND,
 	UI_Transition_PUSHBUTTON,
+
+	UI_Transition_Text1_1,
+	UI_Transition_Text2_1,
+
+	UI_Transition_Text1_2,
+	UI_Transition_Text2_2,
+
 	UI_Transition_MAX,
 };
 class ModuleSceneTransition : public Module
@@ -45,10 +53,14 @@ public:
 	void Enable(int nextLevel);
 	void PrintStats();
 	void PrintMapInterface();
+	void PrintText();
 
 	int timeCounter;
 	int nextLevel;
 
+	int text1Lenght;
+	int text2Lenght;
+	int text3Lenght;
 
 public:
 
