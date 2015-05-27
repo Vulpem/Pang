@@ -315,13 +315,13 @@ void ModuleSceneTransition::PrintText()
 
 			if (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w < text2Lenght && (rectText[nextLevel / 3 + 26].w >= text1Lenght))
 			{
-				rectText[nextLevel / 3 + 26].w = timeCounter * 10;
+				rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w = timeCounter * 10 - rectText[nextLevel / 3 + 26].w / 10;
 			}
 			App->render->Blit(uiText[nextLevel / 3 + 26 + NUMLVLSPRINT], TILE, 220, &rectText[nextLevel / 3 + 26 + NUMLVLSPRINT]);
 
 			if (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT * 2].w < text3Lenght && (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w >= text2Lenght))
 			{
-				rectText[nextLevel / 3 + 26].w = timeCounter * 10;
+				rectText[nextLevel / 3 + 26].w = timeCounter * 10 - (rectText[nextLevel / 3 + 26].w / 10) - (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w / 10);
 			}
 			App->render->Blit(uiText[nextLevel / 3 + 26 + NUMLVLSPRINT * 2], TILE, 230, &rectText[nextLevel / 3 + 26 + NUMLVLSPRINT * 2]);
 		}
@@ -333,9 +333,9 @@ void ModuleSceneTransition::PrintText()
 			}
 			App->render->Blit(uiText[nextLevel / 3 + 26], TILE, 215, &rectText[nextLevel / 3 + 26]);
 
-			if (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w < text2Lenght - 8.5 //&& (rectText[nextLevel / 3 + 26].w >= text1Lenght))
-		)	{
-				rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w = timeCounter * 10;
+			if (rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w < text2Lenght - 8.5 && (rectText[nextLevel / 3 + 26].w >= text1Lenght - 10))
+			{
+				rectText[nextLevel / 3 + 26 + NUMLVLSPRINT].w = (timeCounter - (rectText[nextLevel / 3 + 26].w / 10))* 10 ;
 			}
 			App->render->Blit(uiText[nextLevel / 3 + 26 + NUMLVLSPRINT], TILE, 225, &rectText[nextLevel / 3 + 26 + NUMLVLSPRINT]);
 		}
