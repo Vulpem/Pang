@@ -9,6 +9,10 @@ INTERFACE:
 
 SOUNDS:
 	Fix level sound with 3 seconds delay
+	Sounds to get:
+		Intro timer
+		Life up
+
 
 SPRITES:
 	Get all arcade game sprites:
