@@ -26,3 +26,6 @@ BALLS:
 
 TRANSITION:
 	End text animation
+
+PLAYER:
+	Fix player shot animation

@@ -180,17 +180,29 @@ update_status ModulePlayer::Update()
 		App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 	}
 	//////////////////////
+
+	if (current_animation == &shot  || current_animation == &shot2)
+	{
+		shotDelay++;
+	}
+
+	if (shotDelay >= 3)
+	{
+		shotDelay = 0;
+		pausePlayer = false;
+	}
+
 	if (!pausePlayer)
 	{
 		if (dead == false)
 		{
 			SecurityPosition();
 			IsFalling();
-			Shoot();
 			EndClimbUp();
 			StartClimbDown();
 			Climb();
 			Movement();
+			Shoot();
 			Fall();
 			UpdateBoosts();
 		}
@@ -280,9 +292,10 @@ void ModulePlayer::Movement()
 	if (playerState != climbing && playerState != climbingUp && playerState != climbingDown)
 	{
 		if (movementDirection == 1)
-			current_animation = &idle;
+				current_animation = &idle;
+
 		if (movementDirection == -1)
-			current_animation = &idle2;
+				current_animation = &idle2;
 
 		//Move right
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -334,13 +347,11 @@ void ModulePlayer::Shoot()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
+			pausePlayer = true;
 			p2Point<int> offset;
 			offset.y = 32;
 			offset.x = 11.5 + (2.5 * movementDirection);
-			if (playerState == climbing)
-			{
-				
-			}
+
 			if (playerState != climbing)
 			{
 				if (movementDirection == 1)

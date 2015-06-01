@@ -88,57 +88,57 @@ bool ModulePlayer2::Init()
 	//////////////
 
 	// idle animation
-	idle.frames.PushBack({ 10, 112, 32, 32 });
+	idle.frames.PushBack({ 10 + 197, 112, 32, 32 });
 
 	// idle2 animation
-	idle2.frames.PushBack({ 14, 179, 28, 32 });
+	idle2.frames.PushBack({ 14 + 197, 179 + 1, 28, 32 });
 	// forward animation
-	forward.frames.PushBack({ 10, 2, 32, 32 });
-	forward.frames.PushBack({ 44, 2, 32, 32 });
-	forward.frames.PushBack({ 78, 2, 32, 32 });
-	forward.frames.PushBack({ 112, 2, 32, 32 });
-	forward.frames.PushBack({ 10, 2, 32, 32 });
-	forward.frames.PushBack({ 44, 2, 32, 32 });
-	forward.frames.PushBack({ 78, 2, 32, 32 });
-	forward.frames.PushBack({ 112, 2, 32, 32 });
-	forward.frames.PushBack({ 146, 2, 32, 32 });
+	forward.frames.PushBack({ 10 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 44 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 78 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 112 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 10 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 44 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 78 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 112 + 197, 2, 32, 32 });
+	forward.frames.PushBack({ 146 + 197, 2, 32, 32 });
 	forward.speed = 0.32f;
 
 	// backward animation
-	backward.frames.PushBack({ 14, 146, 28, 32 });
-	backward.frames.PushBack({ 48, 146, 28, 32 });
-	backward.frames.PushBack({ 82, 146, 28, 32 });
-	backward.frames.PushBack({ 116, 146, 28, 32 });
-	backward.frames.PushBack({ 14, 146, 28, 32 });
-	backward.frames.PushBack({ 48, 146, 28, 32 });
-	backward.frames.PushBack({ 82, 146, 28, 32 });
-	backward.frames.PushBack({ 116, 146, 28, 32 });
-	backward.frames.PushBack({ 150, 146, 28, 32 });
+	backward.frames.PushBack({ 14 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 48 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 82 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 116 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 14 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 48 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 82 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 116 + 197, 146, 28, 32 });
+	backward.frames.PushBack({ 150 + 197, 146, 28, 32 });
 	backward.speed = 0.32f;
 
 
 	// shot animation
-	shot.frames.PushBack({ 44, 112, 32, 32 });
+	shot.frames.PushBack({ 44 + 197, 112, 32, 32 });
 
 	// shot2 animation
-	shot2.frames.PushBack({ 44, 179, 32, 32 });
+	shot2.frames.PushBack({ 44 + 197, 179 + 1, 32, 32 });
 
 	// climb animation
-	climb.frames.PushBack({ 80, 36, 30, 32 });
-	climb.frames.PushBack({ 47, 77, 30, 32 });
-	climb.frames.PushBack({ 114, 36, 30, 32 });
-	climb.frames.PushBack({ 47, 77, 30, 32 });
+	climb.frames.PushBack({ 80 + 197, 36, 30, 32 });
+	climb.frames.PushBack({ 47 + 197, 77, 30, 32 });
+	climb.frames.PushBack({ 114 + 197, 36, 30, 32 });
+	climb.frames.PushBack({ 47 + 197, 77, 30, 32 });
 
 	climb.speed = 0.16f;
 
-	endclimb.frames.PushBack({ 113, 78, 32, 32 });
+	endclimb.frames.PushBack({ 113 + 197, 78, 32, 32 });
 	endclimb.speed = 0.0f;
 
 	// animation
 	//killDead back
-	killDead.frames.PushBack({ 78, 112, 47, 32 });
+	killDead.frames.PushBack({ 78 + 197, 112, 47, 32 });
 	//killDead front
-	killDead2.frames.PushBack({ 129, 112, 47, 32 });
+	killDead2.frames.PushBack({ 129 + 197, 112, 47, 32 });
 
 	return true;
 }
