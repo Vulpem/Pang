@@ -31,7 +31,6 @@ bool ModuleSceneIntro::Start()
 	timerRect = { 0, 0, 26, 38};
 	animationRect = { 0, 0, 384, 240 };
 	nextLevel = 1;
-	textFont = App->fonts->LoadFont("./Fonts/Pang.ttf", 10);
 	graphics = App->textures->Load("./Image_Sources/Pang_Title_NoCoin.png");
 	graphics2 = App->textures->Load("./Image_Sources/Pang_Title_Coin.png");
 	animation = App->textures->Load("./Image_Sources/Pang_Title_Balls.png");

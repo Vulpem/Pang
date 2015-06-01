@@ -15,6 +15,8 @@ ModuleScenePlay::~ModuleScenePlay()
 
 bool ModuleScenePlay::Init()
 {
+	player2Enabled = false;
+
 	backgroundGraphics = NULL;
 
 	background.x = 8;
@@ -72,7 +74,12 @@ bool ModuleScenePlay::Start(int level)
 	App->maps->Enable();
 	
 	App->player->Enable();
-	App->player2->Enable();
+
+	if (player2Enabled)
+	{
+		App->player2->Enable();
+	}
+
 	App->gun->Enable();
 
 	App->particles->Enable();
@@ -96,7 +103,8 @@ update_status ModuleScenePlay::Update()
 	if (timer <= 0 && App->player->dead == false)
 	{
 		App->player->Kill(0);
-		App->player2->Kill(0);
+		if (App->player2->IsEnabled())
+			App->player2->Kill(0);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{
@@ -104,7 +112,8 @@ update_status ModuleScenePlay::Update()
 		Disable();
 		App->sceneTransition->Enable(++currentLvl);
 		App->player->score += timeBonus;
-		App->player2->score += timeBonus;
+		if (App->player2->IsEnabled())
+			App->player2->score += timeBonus;
 	}
 	else
 	{
@@ -138,6 +147,12 @@ update_status ModuleScenePlay::Update()
 			App->render->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
 		}
 		UpdateInterface();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
+	{
+		player2Enabled = true;
+		App->player2->Enable();
 	}
 
 	if ((timer > startTimerEvent + 60 || timer / 5 % 2 == 0) && timer > startTimerEvent)
@@ -254,7 +269,8 @@ bool ModuleScenePlay::CleanUp()
 	App->particles->Disable();
 	App->gun->Disable();
 	App->player->Disable();
-	App->player2->Disable();
+	if (App->player2->IsEnabled())
+		App->player2->Disable();
 	App->maps->Disable();
 
 	App->textures->Unload(livesGraphics);

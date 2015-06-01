@@ -34,6 +34,8 @@ public:
 	int startTimerEvent;
 	int timeBonus;
 
+	bool player2Enabled;
+
 	bool debugMode = false;
 
 	ModuleScenePlay(Application* app, bool start_enabled = true);

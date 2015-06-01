@@ -785,10 +785,14 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 
-	if (App->scenePlay->timer / 20 % 2 == 0)
+	if (!App->player2->IsEnabled())
 	{
-		App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
+		if (App->scenePlay->timer / 20 % 2 == 0)
+		{
+			App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
+		}
 	}
+
 
 	//PrintTexting interface//
 

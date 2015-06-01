@@ -5,6 +5,9 @@ MINOR THINGS:
 	Map between stages appears without joystick image
 
 
+INTRO:
+	After loosing and reseting the game, balls doesnt appear (ask Deif)
+
 SOUNDS:
 	Fix level sound with 3 seconds delay
 	Sounds to get:
