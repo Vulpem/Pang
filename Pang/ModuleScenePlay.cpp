@@ -72,6 +72,7 @@ bool ModuleScenePlay::Start(int level)
 	App->maps->Enable();
 	
 	App->player->Enable();
+	App->player2->Enable();
 	App->gun->Enable();
 
 	App->particles->Enable();
@@ -79,6 +80,7 @@ bool ModuleScenePlay::Start(int level)
 	App->maps->LoadMap(currentLvl);
 
 	App->player->pausePlayer = true;
+	App->player2->pausePlayer = true;
 	App->balls->pauseBalls = true;
 	LOG("M: Toggle undying mode\nN: Toggle debug mode\nB: Create a Ball\nV: Explode big balls\nC: Count Balls\nP: Pause\nR: Reset");
 	return true;
@@ -94,6 +96,7 @@ update_status ModuleScenePlay::Update()
 	if (timer <= 0 && App->player->dead == false)
 	{
 		App->player->Kill(0);
+		App->player2->Kill(0);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{
@@ -101,6 +104,7 @@ update_status ModuleScenePlay::Update()
 		Disable();
 		App->sceneTransition->Enable(++currentLvl);
 		App->player->score += timeBonus;
+		App->player2->score += timeBonus;
 	}
 	else
 	{
@@ -141,6 +145,7 @@ update_status ModuleScenePlay::Update()
 	if (timer == startTimerEvent)
 	{
 		App->player->pausePlayer = false;
+		App->player2->pausePlayer = false;
 		App->balls->pauseBalls = false;
 	}
 	if (timer == startTimerEvent * 0.4)
@@ -159,6 +164,7 @@ update_status ModuleScenePlay::Update()
 		debugMode = !debugMode;
 	}
 	App->player->undying = debugMode;
+	App->player2->undying = debugMode;
 	if (debugMode == true)
 	{
 		int x = rand() % (SCREEN_WIDTH - TILE * 6) + TILE * 3;
@@ -248,6 +254,7 @@ bool ModuleScenePlay::CleanUp()
 	App->particles->Disable();
 	App->gun->Disable();
 	App->player->Disable();
+	App->player2->Disable();
 	App->maps->Disable();
 
 	App->textures->Unload(livesGraphics);

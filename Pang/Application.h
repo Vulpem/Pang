@@ -13,6 +13,7 @@
 #include "ModuleSceneTransition.h"
 
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleGun.h"
 #include "ModuleMaps.h"
 #include "ModuleBalls.h"
@@ -36,6 +37,7 @@ public:
 	ModuleSceneTransition* sceneTransition;
 
 	ModulePlayer* player;
+	ModulePlayer2* player2;
 	ModuleGun* gun;
 	ModuleMaps* maps;
 	ModuleBalls* balls;
