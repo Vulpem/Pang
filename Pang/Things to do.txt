@@ -1,11 +1,9 @@
 IMPORTANT BUGS:
-
+	None?? :O
 
 MINOR THINGS:
 	Map between stages appears without joystick image
 
-INTERFACE:
-	Put a dot after "PTS" transition scene
 
 SOUNDS:
 	Fix level sound with 3 seconds delay
@@ -24,8 +22,11 @@ SPRITES:
 BALLS:
 	Adjust that awful first bounce
 
-TRANSITION:
-	End text animation
+_____________________________________________________________
 
-PLAYER:
-	Fix player shot animation
+ALPHA REQUIREMENTS
+	Three levels: easy(without blocks), medium (with blocks) and hard (with blocks and stairs) ---> done
+	Items: (hook), (2x hook), hook that stays in place and the gun, (lives) and shield
+	Two players ---> done
+
+

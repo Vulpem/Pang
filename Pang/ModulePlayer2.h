@@ -48,6 +48,8 @@ public:
 	float deadAnimYSpeed;
 	int deadAnimXSpeed;
 
+	int shotDelay = 0;
+
 	///////////////////////
 
 

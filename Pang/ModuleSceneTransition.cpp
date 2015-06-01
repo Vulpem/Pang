@@ -31,7 +31,7 @@ bool ModuleSceneTransition::Init()
 
 	uiText[UI_Transition_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL);
 	uiText[UI_Transition_TIMEBONUS] = App->fonts->PrintText("TIME BONUS", { 255, 255, 255 }, NULL);
-	uiText[UI_Transition_PTS] = App->fonts->PrintText("PTS", { 255, 255, 255 }, NULL);
+	uiText[UI_Transition_PTS] = App->fonts->PrintText("PTS.", { 255, 255, 255 }, NULL);
 	uiText[UI_Transition_NEXTEXTEND] = App->fonts->PrintText("NEXT EXTEND", { 255, 255, 255 }, NULL);
 	uiText[UI_Transition_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
 
@@ -60,7 +60,7 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 
 	rectText[UI_Transition_STAGE] = { 0, 0, 42.5, 8 };
 	rectText[UI_Transition_TIMEBONUS] = { 0, 0, 85, 8 };
-	rectText[UI_Transition_PTS] = { 0, 0, 25.5, 8 };
+	rectText[UI_Transition_PTS] = { 0, 0, 34, 8 };
 	rectText[UI_Transition_NEXTEXTEND] = { 0, 0, 93.5, 8 };
 	rectText[UI_Transition_PUSHBUTTON] = { 0, 0, 93.5, 8 };
 
