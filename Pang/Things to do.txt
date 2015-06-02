@@ -1,7 +1,7 @@
 IMPORTANT BUGS:
-	Two bullets can hit the same ball!!
 
-MINOR THINGS:
+
+SCENE TRANSITION:
 	Map between stages appears without joystick image
 
 PLAYERS:
@@ -28,7 +28,7 @@ _____________________________________________________________
 
 ALPHA REQUIREMENTS
 	Three levels: easy(without blocks), medium (with blocks) and hard (with blocks and stairs) ---> done
-	Items: (hook), (2x hook), hook that stays in place and the gun, (lives) and shield
+	Items: (hook), (2x hook), hook that stays in place, the gun, (lives), shield
 	Two players ---> done
 
 
