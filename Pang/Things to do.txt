@@ -1,12 +1,11 @@
 IMPORTANT BUGS:
-	None?? :O
+	Two bullets can hit the same ball!!
 
 MINOR THINGS:
 	Map between stages appears without joystick image
 
 PLAYERS:
 	Pause both players when one dies // wait as both die
-	Adjust hook count
 	Fix death by time
 
 SOUNDS:

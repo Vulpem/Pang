@@ -512,10 +512,17 @@ void ModulePlayer::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
-	if (App->player2->IsEnabled())
+
+	if (xBallPos != 0)
 	{
-		App->player2->pausePlayer = true;
+		if (App->player2->IsEnabled())
+			if (App->player2->current_animation != &App->player2->climb)
+				App->player2->current_animation = &App->player2->idle;
+			App->player2->pausePlayer = true;
 	}
+
+	else
+		xBallPos = 1;
 	/*if (xBallPos == 0)
 	{
 		pausePlayer = true;
@@ -881,7 +888,6 @@ void ModulePlayer::PrintInterface()
 	//Player 2 score
 	if (App->player2->IsEnabled())
 	{
-		App->player2->score = 100000000;
 		digitNumber = CountDigits(App->player2->score);
 
 		for (int i = 1; i <= digitNumber; i++)

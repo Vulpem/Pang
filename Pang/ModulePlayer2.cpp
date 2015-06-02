@@ -517,8 +517,15 @@ void ModulePlayer2::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
-	App->player->pausePlayer = true;
+	if (xBallPos != 0)
+	{
+		if (App->player->current_animation != &App->player->climb)
+			App->player->current_animation = &App->player->idle;
+		App->player->pausePlayer = true;
+	}
 
+	else
+		xBallPos = 1;
 	/*if (xBallPos == 0)
 	{
 	pausePlayer = true;

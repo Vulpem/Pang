@@ -73,7 +73,7 @@ update_status ModuleBoost::Update()
 	{
 	case doubleHook:
 		player2Boost = { 16, 0, 16, 16 };
-		App->render->Blit(graphics, 30 * TILE, 28 * TILE, &player2Boost);
+		App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
 		break;
 	default:
 		break;

@@ -102,7 +102,7 @@ update_status ModuleGun::Update()
 	{
 		tmp_next = tmp->next;
 
-		if (tmp->data->Update(App) == false)
+		if (tmp->data->Update(App, 1) == false)
 		{
 			LOG("-- Destroying Bullet --\n");
 			delete tmp->data;
@@ -124,7 +124,7 @@ update_status ModuleGun::Update()
 	{
 		tmp_next = tmp->next;
 
-		if (tmp->data->Update(App) == false)
+		if (tmp->data->Update(App, 2) == false)
 		{
 			LOG("-- Destroying Bullet --\n");
 			delete tmp->data;
@@ -145,7 +145,7 @@ update_status ModuleGun::Update()
 
 
 
-bool Bullet::Update(Application* app)
+bool Bullet::Update(Application* app, int player)
 {
 	bool ret = true;
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
@@ -177,7 +177,15 @@ bool Bullet::Update(Application* app)
 				(tmp->data->position.x + tmp->data->radius) > end.x)
 			{
 				tmp->data->dead = true;
-				app->player->score += (50 * (4 - tmp->data->type));
+				if (player == 1)
+				{
+					app->player->score += (50 * (4 - tmp->data->type));
+				}
+				else if (player == 2)
+				{
+					app->player2->score += (50 * (4 - tmp->data->type));
+				}
+
 				return false;
 			}
 			tmp = tmp->next;
