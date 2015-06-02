@@ -512,7 +512,10 @@ void ModulePlayer::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
-
+	if (App->player2->IsEnabled())
+	{
+		App->player2->pausePlayer = true;
+	}
 	/*if (xBallPos == 0)
 	{
 		pausePlayer = true;
