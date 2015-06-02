@@ -30,8 +30,10 @@ public:
 	ModuleGun(Application* app, bool start_enabled = true);
 	~ModuleGun();
 
-	bool shootAvailable = true;
-	int maxShots;
+	bool shootAvailable1 = true;
+	bool shootAvailable2 = true;
+	int maxShots1;
+	int maxShots2;
 	int bulletWidth;
 
 	SDL_Texture* graphics;
@@ -45,12 +47,12 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddBullet(p2Point<int>);
+	void AddBullet(p2Point<int>, int);
 
-	void Shoot(p2Point<int>);
+	void Shoot(p2Point<int>, int);
 
 public:
-	p2List<Bullet*> activeBullet;
-
+	p2List<Bullet*> activeBullet1;
+	p2List<Bullet*> activeBullet2;
 
 };

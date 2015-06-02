@@ -33,7 +33,8 @@ public:
 	void AddBoost(int x, int y, Boosts boostType);
 
 public:
-	SDL_Rect playerBoost;
+	SDL_Rect player1Boost;
+	SDL_Rect player2Boost;
 	p2List<Boost*> activeBoost;
 	SDL_Texture* graphics;
 	unsigned int pickedUp;

@@ -36,12 +36,13 @@ bool ModuleGun::Start()
 	{
 		LOG("------------------Could not load gun graphics----------------------");
 	}
-	maxShots = 1;
+	maxShots1 = maxShots2 = 1;
+
 	bulletWidth = 3;
 	return true;
 }
 
-void ModuleGun::AddBullet(p2Point<int> startPoint)
+void ModuleGun::AddBullet(p2Point<int> startPoint, int player)
 {
 
 	Bullet* b = new Bullet();
@@ -62,26 +63,41 @@ void ModuleGun::AddBullet(p2Point<int> startPoint)
 	b->end_rect.y = b->end.y;
 	b->end_rect.w = bulletWidth;
 	b->end_rect.h = 1;
-
-	activeBullet.add(b);
+	if (player == 1)
+		activeBullet1.add(b);
+	else
+		activeBullet2.add(b);
 	App->particles->AddParticle(App->particles->shot, startPoint.x, startPoint.y - TILE * 4, 8, 8);
 }
 
-void ModuleGun::Shoot(p2Point<int> startPoint)
+void ModuleGun::Shoot(p2Point<int> startPoint, int player)
 {
-	if (activeBullet.count() < maxShots)
+	if (player == 1)
 	{
-		AddBullet(startPoint);
-		if (activeBullet.count() == maxShots)
-			shootAvailable = false;
+		if (activeBullet1.count() < maxShots1)
+		{
+			AddBullet(startPoint, player);
+			if (activeBullet1.count() == maxShots1)
+				shootAvailable1 = false;
+		}
 	}
+	else if (player == 2)
+	{
+		if (activeBullet2.count() < maxShots2)
+		{
+			AddBullet(startPoint, player);
+			if (activeBullet2.count() == maxShots2)
+				shootAvailable2 = false;
+		}
+	}
+
 }
 
 update_status ModuleGun::Update()
 {
 
-	p2List_item<Bullet*>* tmp = activeBullet.getFirst();
-	p2List_item<Bullet*>* tmp_next = activeBullet.getFirst();
+	p2List_item<Bullet*>* tmp = activeBullet1.getFirst();
+	p2List_item<Bullet*>* tmp_next = activeBullet1.getFirst();
 	while (tmp != NULL)
 	{
 		tmp_next = tmp->next;
@@ -90,8 +106,30 @@ update_status ModuleGun::Update()
 		{
 			LOG("-- Destroying Bullet --\n");
 			delete tmp->data;
-			activeBullet.del(tmp);
-			shootAvailable = true;
+			activeBullet1.del(tmp);
+			shootAvailable1 = true;
+		}
+
+		else
+		{
+			App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
+		}
+
+		tmp = tmp_next;
+	}
+
+	tmp = activeBullet2.getFirst();
+	tmp_next = activeBullet2.getFirst();
+	while (tmp != NULL)
+	{
+		tmp_next = tmp->next;
+
+		if (tmp->data->Update(App) == false)
+		{
+			LOG("-- Destroying Bullet --\n");
+			delete tmp->data;
+			activeBullet2.del(tmp);
+			shootAvailable2 = true;
 		}
 
 		else
@@ -154,17 +192,27 @@ bool Bullet::Update(Application* app)
 
 bool ModuleGun::CleanUp()
 {
-	p2List_item<Bullet*>* tmp = activeBullet.getFirst();
-	p2List_item<Bullet*>* tmp_next = activeBullet.getFirst();
+	p2List_item<Bullet*>* tmp = activeBullet1.getFirst();
+	p2List_item<Bullet*>* tmp_next = activeBullet1.getFirst();
 	while (tmp != NULL)
 	{
  		tmp_next = tmp->next;
 		delete tmp->data;
-		activeBullet.del(tmp);
+		activeBullet1.del(tmp);
 		tmp = tmp_next;
 	}
-	shootAvailable = true;
 
+	tmp = activeBullet2.getFirst();
+	tmp_next = activeBullet2.getFirst();
+	while (tmp != NULL)
+	{
+		tmp_next = tmp->next;
+		delete tmp->data;
+		activeBullet2.del(tmp);
+		tmp = tmp_next;
+	}
+	shootAvailable1 = true;
+	shootAvailable2 = true;
 	App->textures->Unload(graphics);
 	return true;
 }

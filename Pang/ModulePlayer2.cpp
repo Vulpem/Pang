@@ -345,7 +345,7 @@ void ModulePlayer2::Movement()
 
 void ModulePlayer2::Shoot()
 {
-	if (App->gun->shootAvailable == true)
+	if (App->gun->shootAvailable2 == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
@@ -369,7 +369,7 @@ void ModulePlayer2::Shoot()
 					current_animation = &shot2;
 				}
 			}
-			App->gun->Shoot((position + offset));
+			App->gun->Shoot((position + offset), 2);
 
 		}
 	}
@@ -728,13 +728,13 @@ void ModulePlayer2::UpdateBoosts()
 
 	if (boost != prevBoost)
 	{
-		App->gun->maxShots = 1;
+		App->gun->maxShots2 = 1;
 
 		switch (boost)
 		{
 		case doubleHook:
 		{
-			App->gun->maxShots = 2;
+			App->gun->maxShots2 = 2;
 		}
 		}
 	}

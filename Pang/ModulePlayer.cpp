@@ -343,7 +343,7 @@ void ModulePlayer::Movement()
 
 void ModulePlayer::Shoot()
 {
-	if (App->gun->shootAvailable == true)
+	if (App->gun->shootAvailable1 == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
@@ -364,7 +364,7 @@ void ModulePlayer::Shoot()
 					current_animation = &shot2;
 				}
 			}
-			App->gun->Shoot((position + offset));
+			App->gun->Shoot((position + offset), 1);
 
 		}
 	}
@@ -725,13 +725,13 @@ void ModulePlayer::UpdateBoosts()
 
 	if (boost != prevBoost)
 	{
-		App->gun->maxShots = 1;
+		App->gun->maxShots1 = 1;
 
 		switch (boost)
 		{
 		case doubleHook:
 		{
-			App->gun->maxShots = 2;
+			App->gun->maxShots1 = 2;
 		}
 		}
 	}
@@ -878,4 +878,20 @@ void ModulePlayer::PrintInterface()
 
 		App->render->Blit(App->maps->textNumW[index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
 	}
+	//Player 2 score
+	if (App->player2->IsEnabled())
+	{
+		App->player2->score = 100000000;
+		digitNumber = CountDigits(App->player2->score);
+
+		for (int i = 1; i <= digitNumber; i++)
+		{
+			rest = App->player2->score % (int)(pow(10.0, i));
+			div = pow(10.0, (i - 1));
+			index = rest / div;
+
+			App->render->Blit(App->maps->textNumW[index], 45 * TILE - (10 * (i - 1)), 216, &App->maps->rectNum);
+		}
+	}
+
 }

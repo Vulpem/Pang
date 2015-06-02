@@ -63,8 +63,17 @@ update_status ModuleBoost::Update()
 	switch (App->player->boost)
 	{
 	case doubleHook:
-		playerBoost = { 16, 0, 16, 16 };
-		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &playerBoost);
+		player1Boost = { 16, 0, 16, 16 };
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+		break;
+	default:
+		break;
+	}
+	switch (App->player2->boost)
+	{
+	case doubleHook:
+		player2Boost = { 16, 0, 16, 16 };
+		App->render->Blit(graphics, 30 * TILE, 28 * TILE, &player2Boost);
 		break;
 	default:
 		break;
@@ -148,6 +157,7 @@ bool Boost::Update(Application* app)
 	if (lifeTime >= 500) { return false; }
 	if (app->maps->map[(position.y + 16) / 8][(position.x + 8) / 8] == 0)
 	{
+		lifeTime = 0;
 		Fall(app);
 	}
 	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
@@ -174,6 +184,31 @@ bool Boost::Update(Application* app)
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);
 	return false;
+	}
+	if (app->player2->position.x + 15 > position.x && app->player2->position.x + 15 < position.x + 32 && app->player2->position.y + 20 > position.y - 16 && app->player2->position.y + 20 < position.y + 16)
+	{
+		app->player2->score += 100;
+		switch (type)
+		{
+		case doubleHook:
+		{
+			app->player2->boost = doubleHook; break;
+		}
+		case life:
+		{
+			app->scenePlay->lives += 1; break;
+		}
+		case pause:
+		{
+			app->balls->PauseBoost(); break;
+		}
+		case bomb:
+		{
+			app->balls->BombBoost();
+		}
+		}
+		app->audio->PlayFx(app->boosts->pickedUp);
+		return false;
 	}
 	return true;
 }
