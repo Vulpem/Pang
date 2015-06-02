@@ -223,12 +223,17 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	CheckBallCollision();
+//	CheckBallCollision();
 
 
 	return UPDATE_CONTINUE;
 }
 
+update_status ModulePlayer2::PostUpdate()
+{
+	CheckBallCollision();
+	return UPDATE_CONTINUE;
+}
 bool ModulePlayer2::CleanUp()
 {
 	LOG("--Cleanup Player");

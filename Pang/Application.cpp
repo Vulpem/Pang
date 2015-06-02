@@ -40,6 +40,8 @@ Application::Application()
 	AddModule(maps);
 	
 	AddModule(gun);
+
+
 	AddModule(player);
 	AddModule(player2);
 	AddModule(balls);

@@ -23,6 +23,7 @@ public:
 	bool Init();
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 	void Kill(int);
 	bool pausePlayer;
