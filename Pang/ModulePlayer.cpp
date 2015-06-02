@@ -580,8 +580,8 @@ void ModulePlayer::Reset()
 		else
 		{
 			App->scenePlay->lives = 3;
-			App->sceneIntro->Enable();
 			App->scenePlay->Disable();
+			App->sceneIntro->Enable();
 		}
 	}
 }

@@ -61,6 +61,7 @@ bool ModuleSceneIntro::Start()
 	rectText[UI_Intro_STAGE] = { 0, 0, 42.5, 8 };
 	
 	App->balls->Enable();
+	App->particles->Enable();
 	App->scenePlay->lives = 3;
 
 
