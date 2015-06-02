@@ -14,9 +14,9 @@ Application::Application()
 	scenePlay = new ModuleScenePlay(this, false);
 	sceneTransition = new ModuleSceneTransition(this, false);
 
-
-	player = new ModulePlayer(this, false);
 	player2 = new ModulePlayer2(this, false);
+	player = new ModulePlayer(this, false);
+
 	gun = new ModuleGun(this, false);
 	maps = new ModuleMaps(this, false);
 	balls = new ModuleBalls(this, false);
@@ -41,9 +41,9 @@ Application::Application()
 	
 	AddModule(gun);
 
-
-	AddModule(player);
 	AddModule(player2);
+	AddModule(player);
+
 	AddModule(balls);
 	AddModule(particles);
 	AddModule(boosts);

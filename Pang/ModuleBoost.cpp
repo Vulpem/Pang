@@ -160,14 +160,14 @@ bool Boost::Update(Application* app)
 		lifeTime = 0;
 		Fall(app);
 	}
-	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
+	if (app->player2->position.x + 15 > position.x && app->player2->position.x + 15 < position.x + 32 && app->player2->position.y + 20 > position.y - 16 && app->player2->position.y + 20 < position.y + 16)
 	{
-		app->player->score += 100;
+		app->player2->score += 100;
 		switch (type)
 		{
 		case doubleHook:
 		{
-			app->player->boost = doubleHook; break;
+			app->player2->boost = doubleHook; break;
 		}
 		case life:
 		{
@@ -183,16 +183,16 @@ bool Boost::Update(Application* app)
 		}
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);
-	return false;
+		return false;
 	}
-	if (app->player2->position.x + 15 > position.x && app->player2->position.x + 15 < position.x + 32 && app->player2->position.y + 20 > position.y - 16 && app->player2->position.y + 20 < position.y + 16)
+	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
 	{
-		app->player2->score += 100;
+		app->player->score += 100;
 		switch (type)
 		{
 		case doubleHook:
 		{
-			app->player2->boost = doubleHook; break;
+			app->player->boost = doubleHook; break;
 		}
 		case life:
 		{
