@@ -5,8 +5,7 @@ MINOR THINGS:
 	Map between stages appears without joystick image
 
 PLAYERS:
-	Pause both players when one dies // wait as both die
-	Fix death by time
+	Blue has to die before pink
 
 SOUNDS:
 	Fix level sound with 3 seconds delay

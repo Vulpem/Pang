@@ -566,21 +566,24 @@ void ModulePlayer2::CheckBallCollision()
 {
 	if (!App->balls->pauseBalls)
 	{
-		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
-		while (tmp != NULL && !dead)
+		if (!App->player->dead)
 		{
-			if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
-				(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-				((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
-				(tmp->data->position.x - tmp->data->radius) < position.x + 20)
+			p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
+			while (tmp != NULL && !dead)
 			{
-				if (undying == false)
+				if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
+					(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+					((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
+					(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 				{
-					dead = true;
-					Kill(tmp->data->position.x);
+					if (undying == false)
+					{
+						dead = true;
+						Kill(tmp->data->position.x);
+					}
 				}
+				tmp = tmp->next;
 			}
-			tmp = tmp->next;
 		}
 	}
 }

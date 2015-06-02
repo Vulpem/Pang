@@ -171,23 +171,27 @@ bool Bullet::Update(Application* app, int player)
 
 		while (tmp != NULL)
 		{	
-			if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
-				(tmp->data->position.y <= start.y) &&
-				((tmp->data->position.x - tmp->data->radius) < end.x + end_rect.w) &&
-				(tmp->data->position.x + tmp->data->radius) > end.x)
+			if (!tmp->data->dead)
 			{
-				tmp->data->dead = true;
-				if (player == 1)
+				if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
+					(tmp->data->position.y <= start.y) &&
+					((tmp->data->position.x - tmp->data->radius) < end.x + end_rect.w) &&
+					(tmp->data->position.x + tmp->data->radius) > end.x)
 				{
-					app->player->score += (50 * (4 - tmp->data->type));
-				}
-				else if (player == 2)
-				{
-					app->player2->score += (50 * (4 - tmp->data->type));
-				}
+					tmp->data->dead = true;
+					if (player == 1)
+					{
+						app->player->score += (50 * (4 - tmp->data->type));
+					}
+					else if (player == 2)
+					{
+						app->player2->score += (50 * (4 - tmp->data->type));
+					}
 
-				return false;
+					return false;
+				}
 			}
+
 			tmp = tmp->next;
 		}
 ////////////////////////////////////////////////
