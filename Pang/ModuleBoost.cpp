@@ -66,6 +66,14 @@ update_status ModuleBoost::Update()
 		player1Boost = { 16, 0, 16, 16 };
 		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
 		break;
+	case stayingHook:
+		player1Boost = { 0, 0, 16, 16 };
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+		break;
+	case SMG:
+		player1Boost = { 192, 0, 16, 16 };
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+		break;
 	default:
 		break;
 	}
@@ -74,6 +82,14 @@ update_status ModuleBoost::Update()
 	case doubleHook:
 		player2Boost = { 16, 0, 16, 16 };
 		App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
+		break;
+	case stayingHook:
+		player2Boost = { 0, 0, 16, 16 };
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player2Boost);
+		break;
+	case SMG:
+		player2Boost = { 192, 0, 16, 16 };
+		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player2Boost);
 		break;
 	default:
 		break;
@@ -107,25 +123,31 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 	b->lifeTime = 0;
 
 	if (boostType == none)
-		type = rand() % 140 + 1;
+		type = rand() % 160 + 1;
 	else
 		type = boostType;
 	if (type <= 20)
 	{
+		b->type = gun;
+		b->anim.frames.PushBack({ 192, 0, 16, 16 });
+		b->anim.speed = 0.0f;
+	}
+	else if (type <= 40)
+	{
 		b->type = stayingHook;
 		b->anim.frames.PushBack({ 0, 0, 16, 16 });
 	}
-	else if (type <= 30)
+	else if (type <= 50)
 	{
 		b->type = life;
 		b->anim.frames.PushBack({ 112, 0, 16, 16 });
 	}
-	else if (type <= 60)
+	else if (type <= 80)
 	{
 		b->type = doubleHook;
 		b->anim.frames.PushBack({ 16, 0, 16, 16 });
 	}
-	else if (type <= 90)
+	else if (type <= 110)
 	{
 		b->type = bomb;
 		b->anim.frames.PushBack({ 32, 0, 16, 16 });
@@ -133,7 +155,7 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 		b->anim.frames.PushBack({ 64, 0, 16, 16 });
 		b->anim.speed = 10.0f;
 	}
-	else if (type <= 110)
+	else if (type <= 130)
 	{
 		b->type = shield;
 		b->anim.frames.PushBack({ 128, 0, 16, 16 });
@@ -188,6 +210,10 @@ bool Boost::Update(Application* app)
 		{
 			app->player2->boost = doubleHook; break;
 		}
+		case gun:
+		{
+			app->player2->boost = SMG; break;
+		}
 		case life:
 		{
 			app->scenePlay->lives2 += 1; break;
@@ -220,6 +246,10 @@ bool Boost::Update(Application* app)
 		case doubleHook:
 		{
 			app->player->boost = doubleHook; break;
+		}
+		case gun:
+		{
+			app->player->boost = SMG; break;
 		}
 		case life:
 		{
