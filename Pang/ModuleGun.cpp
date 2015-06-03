@@ -62,9 +62,11 @@ bool ModuleGun::Start()
 		LOG("------------------Could not load gun graphics----------------------");
 	}
 	graphics2 = App->textures->Load("./Image_Sources/Hook.png");
-	if (graphics2 == NULL)
+
+	bulletTexture = App->textures->Load("./Image_Sources/Bullet.png");
+	if (bulletTexture == NULL)
 	{
-		LOG("------------------Could not load gun graphics----------------------");
+		LOG("-----------------Could not load bullet graphics------------------");
 	}
 	maxShots1 = maxShots2 = 1;
 	type1 = type2 = normal;
@@ -153,8 +155,8 @@ update_status ModuleGun::Update()
 				else if (tmp->data->type == staying)
 					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &staying_animation1->GetCurrentFrame());
 				else if (tmp->data->type == SMG)
-					//App->render->Blit(
-					App->render->DrawQuad(bulletRect, 0, 0, 255, 255);
+					App->render->Blit(bulletTexture, tmp->data->end.x - 2, tmp->data->end.y, &bulletRect);
+				//	App->render->DrawQuad(bulletRect, 0, 0, 255, 255);
 			}
 
 		}
@@ -201,44 +203,56 @@ bool Bullet::Update(Application* app, int player)
 			pathDone = true;
 		else
 			ret = false;
-		int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];
-		if (num != 1 && num != 2 && num != 0)
+		if (type != gun)
 		{
-			ret = false;
-			BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
+			int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];
+			if (num != 1 && num != 2 && num != 0)
+			{
+				ret = false;
+				BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
+			}
 		}
+
 
 	}
 	else
 	{
-		end.y -= 2;
-		end_rect.h -= 2;
-		if (player == 1)
+		if (type != gun)
 		{
-			if (type == normal)
+			end.y -= 2;
+			end_rect.h -= 2;
+			if (player == 1)
 			{
-				app->gun->hook.frames[0].h = -(end.y - start.y);
-				app->gun->hook.frames[1].h = -(end.y - start.y);
+				if (type == normal)
+				{
+					app->gun->hook.frames[0].h = -(end.y - start.y);
+					app->gun->hook.frames[1].h = -(end.y - start.y);
+				}
+				else if (type == staying)
+				{
+					app->gun->staying1.frames[0].h = -(end.y - start.y);
+					app->gun->staying1.frames[1].h = -(end.y - start.y);
+				}
 			}
-			else if (type == staying)
+			else if (player == 2)
 			{
-				app->gun->staying1.frames[0].h = -(end.y - start.y);
-				app->gun->staying1.frames[1].h = -(end.y - start.y);
+				if (type == normal)
+				{
+					app->gun->hook2.frames[0].h = -(end.y - start.y);
+					app->gun->hook2.frames[1].h = -(end.y - start.y);
+				}
+				else if (type == staying)
+				{
+					app->gun->staying2.frames[0].h = -(end.y - start.y);
+					app->gun->staying2.frames[1].h = -(end.y - start.y);
+				}
 			}
 		}
-		else if (player == 2)
+		else if (type == gun)
 		{
-			if (type == normal)
-			{
-				app->gun->hook2.frames[0].h = -(end.y - start.y);
-				app->gun->hook2.frames[1].h = -(end.y - start.y);
-			}
-			else if (type == staying)
-			{
-				app->gun->staying2.frames[0].h = -(end.y - start.y);
-				app->gun->staying2.frames[1].h = -(end.y - start.y);
-			}
+			end.y -= 4;
 		}
+
 
 
 	}
@@ -251,23 +265,47 @@ bool Bullet::Update(Application* app, int player)
 		{
 			if (!tmp->data->dead)
 			{
-				if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
-					(tmp->data->position.y <= start.y) &&
-					((tmp->data->position.x - tmp->data->radius) < end.x + end_rect.w) &&
-					(tmp->data->position.x + tmp->data->radius) > end.x)
+				if (type != gun)
 				{
-					tmp->data->dead = true;
-					if (player == 1)
+					if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
+						(tmp->data->position.y <= start.y) &&
+						((tmp->data->position.x - tmp->data->radius) < end.x + end_rect.w) &&
+						(tmp->data->position.x + tmp->data->radius) > end.x)
 					{
-						app->player->score += (50 * (4 - tmp->data->type));
-					}
-					else if (player == 2)
-					{
-						app->player2->score += (50 * (4 - tmp->data->type));
-					}
+						tmp->data->dead = true;
+						if (player == 1)
+						{
+							app->player->score += (50 * (4 - tmp->data->type));
+						}
+						else if (player == 2)
+						{
+							app->player2->score += (50 * (4 - tmp->data->type));
+						}
 
-					return false;
+						return false;
+					}
 				}
+				else if (type == gun)
+				{
+					if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
+						(tmp->data->position.y <= end.y + 8) &&
+						((tmp->data->position.x - tmp->data->radius) < end.x + 8) &&
+						(tmp->data->position.x + tmp->data->radius) > end.x)
+					{
+						tmp->data->dead = true;
+						if (player == 1)
+						{
+							app->player->score += (50 * (4 - tmp->data->type));
+						}
+						else if (player == 2)
+						{
+							app->player2->score += (50 * (4 - tmp->data->type));
+						}
+
+						return false;
+					}
+				}
+
 			}
 
 			tmp = tmp->next;
@@ -303,7 +341,6 @@ bool ModuleGun::CleanUp()
 	shootAvailable1 = true;
 	shootAvailable2 = true;
 	App->textures->Unload(graphics);
-	App->textures->Unload(graphics2);
 	return true;
 }
 

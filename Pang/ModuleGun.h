@@ -52,6 +52,7 @@ public:
 
 	SDL_Texture* graphics;
 	SDL_Texture* graphics2;
+	SDL_Texture* bulletTexture;
 
 //	SDL_Texture* hookStick;
 
