@@ -146,6 +146,13 @@ update_status ModuleGun::Update()
 		{
 			if (tmp->data->pathDone)
 			{
+				hookStickRect.h = tmp->data->start.y - tmp->data->end.y;
+				if (tmp->data->stickTimer < 180)
+					hookStickRect.x = 36;
+				else if (tmp->data->stickTimer < 300)
+					hookStickRect.x = 45;
+				else
+					hookStickRect.x = 54;
 				App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &hookStickRect);
 			}
 			else
@@ -159,12 +166,8 @@ update_status ModuleGun::Update()
 					App->render->Blit(bulletTexture, tmp->data->end.x - 6, tmp->data->end.y, &bulletRect);
 					App->render->Blit(bulletTexture, tmp->data->end.x + 3,tmp->data->end.y, &bulletRect);
 				}
-
-				//	App->render->DrawQuad(bulletRect, 0, 0, 255, 255);
 			}
-
 		}
-
 		tmp = tmp_next;
 	}
 
@@ -184,10 +187,18 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			if (tmp2->data->type != staying)
-				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &normal_animation2->GetCurrentFrame());
+			if (tmp->data->pathDone)
+			{
+				App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &hookStickRect);
+			}
 			else
+			{
+				if(tmp2->data->type != staying)
+				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &normal_animation2->GetCurrentFrame());
+				else
 				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &staying_animation2->GetCurrentFrame());
+			}
+
 		}
 
 		tmp2 = tmp_next2;
@@ -201,6 +212,12 @@ update_status ModuleGun::Update()
 bool Bullet::Update(Application* app, int player)
 {
 	bool ret = true;
+	if (pathDone)
+	{
+		stickTimer++;
+		if (stickTimer >= 360)
+			return false;
+	}
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
 	{
 		if (type == stayingHook)
@@ -256,11 +273,9 @@ bool Bullet::Update(Application* app, int player)
 		{
 			end.y -= 4;
 		}
-
-
-
 	}
-/////////////////////////////////////////////////
+/////////////////////////////////////////////////.
+	//Checking collisions with balls
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1) / 8] != 1 || type == stayingHook)
 	{
 		p2List_item<Ball*>* tmp = app->balls->ballsList.getFirst();

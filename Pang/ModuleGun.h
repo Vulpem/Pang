@@ -25,6 +25,7 @@ struct Bullet
 
 
 	bool pathDone = false;
+	int	stickTimer = 0;
 
 	bool Update(Application* app, int);
 

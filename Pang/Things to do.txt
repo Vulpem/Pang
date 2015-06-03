@@ -2,6 +2,7 @@ IMPORTANT BUGS:
 	Sometimes both players are paused when death by ball (probably gone)
 	Lagging maybe?
 	Reset shield
+	Dr.Memory crashing?
 
 SCENE TRANSITION:
 	Map between stages appears without joystick image
