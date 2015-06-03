@@ -156,8 +156,8 @@ update_status ModuleBalls::Update()
 
 					ballsList.add(newBall1);
 					ballsList.add(newBall2);
+					if (rand() % 100 <= 20) { App->boosts->AddBoost(pointer->data->position.x, pointer->data->position.y, none); }
 				}
-			if (rand() % 100 <= 20) { App->boosts->AddBoost(pointer->data->position.x, pointer->data->position.y, none); }
 			}
 			App->particles->AddParticle(App->particles->explosion[pointer->data->color][pointer->data->type], pointer->data->position.x, pointer->data->position.y, 15, 15);
 

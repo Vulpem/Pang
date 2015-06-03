@@ -543,7 +543,6 @@ void ModulePlayer2::Kill(int xBallPos)
 	else
 	{*/
 	dead = true;
-	current_animation = &idle;
 	App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
 
@@ -592,15 +591,14 @@ void ModulePlayer2::Reset()
 {
 	if (deadAnimEnd == true)
 	{
-		if (App->scenePlay->lives > 0)
+		if (App->scenePlay->lives2 > 0)
 		{
-			App->scenePlay->lives -= 1;
+			App->scenePlay->lives2 -= 1;
 			App->scenePlay->Disable();
 			App->scenePlay->Enable(App->scenePlay->currentLvl);
 		}
 		else
 		{
-			App->scenePlay->lives = 3;
 			App->scenePlay->Disable();
 			App->sceneIntro->Enable();
 		}

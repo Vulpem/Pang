@@ -171,7 +171,7 @@ bool Boost::Update(Application* app)
 		}
 		case life:
 		{
-			app->scenePlay->lives += 1; break;
+			app->scenePlay->lives2 += 1; break;
 		}
 		case pause:
 		{
@@ -196,7 +196,7 @@ bool Boost::Update(Application* app)
 		}
 		case life:
 		{
-			app->scenePlay->lives += 1; break;
+			app->scenePlay->lives1 += 1; break;
 		}
 		case pause:
 		{

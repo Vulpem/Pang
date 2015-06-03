@@ -143,6 +143,7 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
+
 	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;
@@ -535,7 +536,6 @@ void ModulePlayer::Kill(int xBallPos)
 	else
 	{*/
 		dead = true;
-		current_animation = &idle;
 		App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
 
@@ -581,16 +581,16 @@ void ModulePlayer::Reset()
 {
 	if (deadAnimEnd == true)
 	{
-		if (App->scenePlay->lives > 0)
+		if (App->scenePlay->lives1 > 0)
 		{
-			App->scenePlay->lives -= 1;
+			App->scenePlay->lives1 -= 1;
 			App->scenePlay->Disable();
 			App->scenePlay->Enable(App->scenePlay->currentLvl);
 		}
 		else
 		{
-			App->scenePlay->lives = 3;
 			App->scenePlay->Disable();
+			App->player2->Disable();
 			App->sceneIntro->Enable();
 		}
 	}

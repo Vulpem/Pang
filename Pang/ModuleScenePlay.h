@@ -16,7 +16,8 @@ public:
 	SDL_Texture* timerNum;
 
 
-	SDL_Rect livesRect;
+	SDL_Rect lives1Rect;
+	SDL_Rect lives2Rect;
 	SDL_Rect background;
 	SDL_Rect interfaceRect;
 	SDL_Rect timerRect;
@@ -27,7 +28,8 @@ public:
 	SDL_Rect timerNumRect3;
 
 	SDL_Rect player1Rect;
-	int lives;
+	int lives1;
+	int lives2;
 	int currentLvl;
 	int delay;
 	int timer;

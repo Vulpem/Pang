@@ -62,12 +62,10 @@ bool ModuleSceneIntro::Start()
 	
 	App->balls->Enable();
 	App->particles->Enable();
-	App->scenePlay->lives = 3;
-
-
-
-
-
+	App->scenePlay->lives1 = 2;
+	App->scenePlay->lives2 = 2;
+	App->player->score = 0;
+	App->player2->score = 0;
 
 	return ret;
 }

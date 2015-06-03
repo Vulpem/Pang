@@ -1,5 +1,5 @@
 IMPORTANT BUGS:
-
+	Sometimes both players are paused when death by ball
 
 SCENE TRANSITION:
 	Map between stages appears without joystick image

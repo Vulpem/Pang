@@ -34,11 +34,8 @@ bool ModuleScenePlay::Init()
 	timerRect = { 0, 0, 71, 15 };
 
 	readyRect = { 0, 0, 58, 19 };
-	livesRect.x = 154;
-	livesRect.y = 44;
-	livesRect.w = 16;
-	livesRect.h = 16;
-
+	lives1Rect = { 154, 44, 16, 16 };
+	lives2Rect = { 154 + 197, 44, 16, 16 };
 	return true;
 }
 
@@ -142,10 +139,18 @@ update_status ModuleScenePlay::Update()
 		App->render->Blit(timerNum, 360, 9, &timerNumRect3);
 		App->render->DrawQuad(interfaceRect, 0, 0, 0, 255);
 
-		for (int n = 0; n < lives && n < 4; n++)
+		for (int n = 0; n < lives1 && n < 4; n++)
 		{
-			App->render->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &livesRect);
+			App->render->Blit(livesGraphics, (2 + n * 2) * TILE, 28 * TILE, &lives1Rect);
 		}
+		if (App->player2->IsEnabled())
+		{
+			for (int n = 0; n < lives2 && n < 4; n++)
+			{
+				App->render->Blit(livesGraphics, (35 + n * 2) * TILE, 28 * TILE, &lives2Rect);
+			}
+		}
+
 		UpdateInterface();
 	}
 
