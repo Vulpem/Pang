@@ -19,13 +19,20 @@ bool ModuleGun::Init()
 {
 	graphics = NULL;
 
-	current_animation = &hook;
 	hook.frames.PushBack({ 0, 0, 9, 199 });
 	hook.frames.PushBack({ 9, 0, 9, 199 });
 
 	hook.speed = 0.21f;
 	hook.loop = true;
 
+	hook2.frames.PushBack({ 0, 0, 9, 199 });
+	hook2.frames.PushBack({ 9, 0, 9, 199 });
+
+	hook2.speed = 0.21f;
+	hook2.loop = true;
+
+	current_animation = &hook;
+	current_animation2 = &hook2;
 	return true;
 }
 
@@ -33,6 +40,11 @@ bool ModuleGun::Start()
 {
 	graphics = App->textures->Load("./Image_Sources/Hook.png");
 	if (graphics == NULL)
+	{
+		LOG("------------------Could not load gun graphics----------------------");
+	}
+	graphics2 = App->textures->Load("./Image_Sources/Hook.png");
+	if (graphics2 == NULL)
 	{
 		LOG("------------------Could not load gun graphics----------------------");
 	}
@@ -118,26 +130,26 @@ update_status ModuleGun::Update()
 		tmp = tmp_next;
 	}
 
-	tmp = activeBullet2.getFirst();
-	tmp_next = activeBullet2.getFirst();
-	while (tmp != NULL)
+	p2List_item<Bullet*>* tmp2 = activeBullet2.getFirst();
+	p2List_item<Bullet*>* tmp_next2 = activeBullet2.getFirst();
+	while (tmp2 != NULL)
 	{
-		tmp_next = tmp->next;
+		tmp_next2 = tmp2->next;
 
-		if (tmp->data->Update(App, 2) == false)
+		if (tmp2->data->Update(App, 2) == false)
 		{
 			LOG("-- Destroying Bullet --\n");
-			delete tmp->data;
-			activeBullet2.del(tmp);
+			delete tmp2->data;
+			activeBullet2.del(tmp2);
 			shootAvailable2 = true;
 		}
 
 		else
 		{
-			App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
+			App->render->Blit(graphics2, tmp2->data->end.x - 2, tmp2->data->end.y, &current_animation2->GetCurrentFrame());
 		}
 
-		tmp = tmp_next;
+		tmp2 = tmp_next2;
 	}
 
 	return UPDATE_CONTINUE;
@@ -164,8 +176,18 @@ bool Bullet::Update(Application* app, int player)
 	{
 		end.y -= 2;
 		end_rect.h -= 2;
-		app->gun->hook.frames[0].h = -(end.y - start.y);
-		app->gun->hook.frames[1].h = -(end.y - start.y);
+		if (player == 1)
+		{
+			app->gun->hook.frames[0].h = -(end.y - start.y);
+			app->gun->hook.frames[1].h = -(end.y - start.y);
+		}
+		else if (player == 2)
+		{
+			app->gun->hook2.frames[0].h = -(end.y - start.y);
+			app->gun->hook2.frames[1].h = -(end.y - start.y);
+		}
+
+
 	}
 /////////////////////////////////////////////////
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1) / 8] != 1 || type == stayingHook)
@@ -215,18 +237,20 @@ bool ModuleGun::CleanUp()
 		tmp = tmp_next;
 	}
 
-	tmp = activeBullet2.getFirst();
-	tmp_next = activeBullet2.getFirst();
-	while (tmp != NULL)
+	p2List_item<Bullet*>* tmp2 = activeBullet2.getFirst();
+	p2List_item<Bullet*>* tmp_next2 = activeBullet2.getFirst();
+
+	while (tmp2 != NULL)
 	{
-		tmp_next = tmp->next;
-		delete tmp->data;
-		activeBullet2.del(tmp);
-		tmp = tmp_next;
+		tmp_next2 = tmp2->next;
+		delete tmp2->data;
+		activeBullet2.del(tmp2);
+		tmp2 = tmp_next2;
 	}
 	shootAvailable1 = true;
 	shootAvailable2 = true;
 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
 	return true;
 }
 

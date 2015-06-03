@@ -46,9 +46,12 @@ public:
 	int bulletWidth;
 
 	SDL_Texture* graphics;
+	SDL_Texture* graphics2;
 
 	Animation* current_animation;
+	Animation* current_animation2;
 	Animation hook;
+	Animation hook2;
 
 public:
 	bool Init();
