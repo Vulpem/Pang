@@ -293,8 +293,8 @@ bool Bullet::Update(Application* app, int player)
 				{
 					if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
 						(tmp->data->position.y <= end.y + 8) &&
-						((tmp->data->position.x - tmp->data->radius) < end.x + 12) &&
-						(tmp->data->position.x + tmp->data->radius) > end.x - 10)
+						((tmp->data->position.x - tmp->data->radius) < end.x + 10) &&
+						(tmp->data->position.x + tmp->data->radius) > end.x - 8)
 
 					{
 						tmp->data->dead = true;
