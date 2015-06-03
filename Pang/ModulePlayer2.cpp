@@ -774,7 +774,12 @@ void ModulePlayer2::UpdateBoosts()
 			App->gun->maxShots2 = 2;
 			break;
 		}
-
+		case SMG:
+		{
+			App->gun->type1 = SMG;
+			App->gun->maxShots1 = 50;
+			break;
+		}
 		}
 	}
 	prevBoost = boost;

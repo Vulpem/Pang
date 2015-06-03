@@ -49,6 +49,8 @@ bool ModuleGun::Init()
 
 	staying_animation1 = &staying1;
 	staying_animation2 = &staying2;
+
+	bulletRect = { 0, 0, 8, 8 };
 	return true;
 }
 
@@ -146,10 +148,13 @@ update_status ModuleGun::Update()
 			}
 			else
 			{
-				if (tmp->data->type != staying)
+				if (tmp->data->type != staying && tmp->data->type != SMG)
 					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &normal_animation1->GetCurrentFrame());
-				else
+				else if (tmp->data->type == staying)
 					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &staying_animation1->GetCurrentFrame());
+				else if (tmp->data->type == SMG)
+					//App->render->Blit(
+					App->render->DrawQuad(bulletRect, 0, 0, 255, 255);
 			}
 
 		}

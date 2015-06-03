@@ -770,6 +770,12 @@ void ModulePlayer::UpdateBoosts()
 			App->gun->maxShots1 = 2;
 			break;
 		}
+		case SMG:
+		{
+			App->gun->type1 = SMG;
+			App->gun->maxShots1 = 50;
+			break;
+		}
 
 		}
 	}

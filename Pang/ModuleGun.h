@@ -23,6 +23,7 @@ struct Bullet
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
 
+
 	bool pathDone = false;
 
 	bool Update(Application* app, int);
@@ -38,6 +39,8 @@ public:
 
 	ModuleGun(Application* app, bool start_enabled = true);
 	~ModuleGun();
+
+	SDL_Rect bulletRect;
 
 	bool shootAvailable1 = true;
 	bool shootAvailable2 = true;
