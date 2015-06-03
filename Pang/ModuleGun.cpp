@@ -19,6 +19,7 @@ bool ModuleGun::Init()
 {
 	graphics = NULL;
 
+	hookStickRect = { 36, 0, 9, 191 };
 	hook.frames.PushBack({ 0, 0, 9, 199 });
 	hook.frames.PushBack({ 9, 0, 9, 199 });
 
@@ -31,8 +32,23 @@ bool ModuleGun::Init()
 	hook2.speed = 0.21f;
 	hook2.loop = true;
 
-	current_animation = &hook;
-	current_animation2 = &hook2;
+	staying1.frames.PushBack({ 18, 0, 9, 199 });
+	staying1.frames.PushBack({ 27, 0, 9, 199 });
+
+	staying1.speed = 0.21f;
+	staying1.loop = true;
+
+	staying2.frames.PushBack({ 18, 0, 9, 199 });
+	staying2.frames.PushBack({ 27, 0, 9, 199 });
+
+	staying2.speed = 0.21f;
+	staying2.loop = true;
+
+	normal_animation1 = &hook;
+	normal_animation2 = &hook2;
+
+	staying_animation1 = &staying1;
+	staying_animation2 = &staying2;
 	return true;
 }
 
@@ -124,7 +140,18 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &current_animation->GetCurrentFrame());
+			if (tmp->data->pathDone)
+			{
+				App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &hookStickRect);
+			}
+			else
+			{
+				if (tmp->data->type != staying)
+					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &normal_animation1->GetCurrentFrame());
+				else
+					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &staying_animation1->GetCurrentFrame());
+			}
+
 		}
 
 		tmp = tmp_next;
@@ -146,7 +173,10 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			App->render->Blit(graphics2, tmp2->data->end.x - 2, tmp2->data->end.y, &current_animation2->GetCurrentFrame());
+			if (tmp2->data->type != staying)
+				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &normal_animation2->GetCurrentFrame());
+			else
+				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &staying_animation2->GetCurrentFrame());
 		}
 
 		tmp2 = tmp_next2;
@@ -162,7 +192,9 @@ bool Bullet::Update(Application* app, int player)
 	bool ret = true;
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
 	{
-		if (type != stayingHook)
+		if (type == stayingHook)
+			pathDone = true;
+		else
 			ret = false;
 		int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];
 		if (num != 1 && num != 2 && num != 0)
@@ -178,13 +210,29 @@ bool Bullet::Update(Application* app, int player)
 		end_rect.h -= 2;
 		if (player == 1)
 		{
-			app->gun->hook.frames[0].h = -(end.y - start.y);
-			app->gun->hook.frames[1].h = -(end.y - start.y);
+			if (type == normal)
+			{
+				app->gun->hook.frames[0].h = -(end.y - start.y);
+				app->gun->hook.frames[1].h = -(end.y - start.y);
+			}
+			else if (type == staying)
+			{
+				app->gun->staying1.frames[0].h = -(end.y - start.y);
+				app->gun->staying1.frames[1].h = -(end.y - start.y);
+			}
 		}
 		else if (player == 2)
 		{
-			app->gun->hook2.frames[0].h = -(end.y - start.y);
-			app->gun->hook2.frames[1].h = -(end.y - start.y);
+			if (type == normal)
+			{
+				app->gun->hook2.frames[0].h = -(end.y - start.y);
+				app->gun->hook2.frames[1].h = -(end.y - start.y);
+			}
+			else if (type == staying)
+			{
+				app->gun->staying2.frames[0].h = -(end.y - start.y);
+				app->gun->staying2.frames[1].h = -(end.y - start.y);
+			}
 		}
 
 

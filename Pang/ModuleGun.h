@@ -23,6 +23,8 @@ struct Bullet
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
 
+	bool pathDone = false;
+
 	bool Update(Application* app, int);
 
 	void BreakingBrick(int num, int w, int h, Application* App);
@@ -48,10 +50,21 @@ public:
 	SDL_Texture* graphics;
 	SDL_Texture* graphics2;
 
-	Animation* current_animation;
-	Animation* current_animation2;
+//	SDL_Texture* hookStick;
+
+	Animation* normal_animation1;
+	Animation* normal_animation2;
+
+	Animation* staying_animation1;
+	Animation* staying_animation2;
+
 	Animation hook;
 	Animation hook2;
+
+	Animation staying1;
+	Animation staying2;
+
+	SDL_Rect hookStickRect;
 
 public:
 	bool Init();
