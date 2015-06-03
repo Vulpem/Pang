@@ -4,7 +4,13 @@
 #include "List.h"
 #include "Globals.h"
 
-
+enum GunType
+{
+	normal,
+	staying,
+	doubleH,
+	SMG
+};
 struct Bullet
 {
 	Animation anim;
@@ -12,6 +18,7 @@ struct Bullet
 	p2Point<int> start;
 	p2Point<int> end;
 
+	int type;
 
 	SDL_Rect start_rect;
 	SDL_Rect end_rect;
@@ -32,6 +39,8 @@ public:
 
 	bool shootAvailable1 = true;
 	bool shootAvailable2 = true;
+	int type1;
+	int type2;
 	int maxShots1;
 	int maxShots2;
 	int bulletWidth;
@@ -47,7 +56,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddBullet(p2Point<int>, int);
+	void AddBullet(p2Point<int>, int, int);
 
 	void Shoot(p2Point<int>, int);
 

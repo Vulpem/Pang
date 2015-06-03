@@ -107,21 +107,25 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 	b->lifeTime = 0;
 
 	if (boostType == none)
-		type = rand() % 120 + 1;
+		type = rand() % 140 + 1;
 	else
 		type = boostType;
-
-	if (type <= 10)
+	if (type <= 20)
+	{
+		b->type = stayingHook;
+		b->anim.frames.PushBack({ 0, 0, 16, 16 });
+	}
+	else if (type <= 30)
 	{
 		b->type = life;
 		b->anim.frames.PushBack({ 112, 0, 16, 16 });
 	}
-	else if (type <= 40)
+	else if (type <= 60)
 	{
 		b->type = doubleHook;
 		b->anim.frames.PushBack({ 16, 0, 16, 16 });
 	}
-	else if (type <= 70)
+	else if (type <= 90)
 	{
 		b->type = bomb;
 		b->anim.frames.PushBack({ 32, 0, 16, 16 });
@@ -129,7 +133,7 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 		b->anim.frames.PushBack({ 64, 0, 16, 16 });
 		b->anim.speed = 10.0f;
 	}
-	else if (type <= 90)
+	else if (type <= 110)
 	{
 		b->type = shield;
 		b->anim.frames.PushBack({ 128, 0, 16, 16 });
@@ -176,6 +180,10 @@ bool Boost::Update(Application* app)
 		app->player2->score += 100;
 		switch (type)
 		{
+		case stayingHook:
+		{
+			app->player2->boost = stayingHook; break;
+		}
 		case doubleHook:
 		{
 			app->player2->boost = doubleHook; break;
@@ -190,11 +198,11 @@ bool Boost::Update(Application* app)
 		}
 		case bomb:
 		{
-			app->balls->BombBoost();
+			app->balls->BombBoost(); break;
 		}
 		case shield:
 		{
-			app->player2->shieldOn = true;
+			app->player2->shieldOn = true; break;
 		}
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);
@@ -205,6 +213,10 @@ bool Boost::Update(Application* app)
 		app->player->score += 100;
 		switch (type)
 		{
+		case stayingHook:
+		{
+			app->player->boost = stayingHook; break;
+		}
 		case doubleHook:
 		{
 			app->player->boost = doubleHook; break;
@@ -219,11 +231,11 @@ bool Boost::Update(Application* app)
 		}
 		case bomb:
 		{
-			app->balls->BombBoost();
+			app->balls->BombBoost(); break;
 		}
 		case shield:
 		{
-			app->player->shieldOn = true;
+			app->player->shieldOn = true; break;
 		}
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);

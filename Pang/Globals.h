@@ -36,7 +36,9 @@ enum BallColours
 enum Boosts
 {
 	none = 0,
+	stayingHook,
 	doubleHook,
+	gun,
 	life,
 	pause,
 	bomb,

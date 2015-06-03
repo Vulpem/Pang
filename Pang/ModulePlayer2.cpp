@@ -762,10 +762,19 @@ void ModulePlayer2::UpdateBoosts()
 
 		switch (boost)
 		{
+		case stayingHook:
+		{
+			App->gun->type2 = staying;
+			App->gun->maxShots2 = 1;
+			break;
+		}
 		case doubleHook:
 		{
+			App->gun->type2 = normal;
 			App->gun->maxShots2 = 2;
+			break;
 		}
+
 		}
 	}
 	prevBoost = boost;

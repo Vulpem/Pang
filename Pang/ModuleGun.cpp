@@ -37,12 +37,12 @@ bool ModuleGun::Start()
 		LOG("------------------Could not load gun graphics----------------------");
 	}
 	maxShots1 = maxShots2 = 1;
-
+	type1 = type2 = normal;
 	bulletWidth = 3;
 	return true;
 }
 
-void ModuleGun::AddBullet(p2Point<int> startPoint, int player)
+void ModuleGun::AddBullet(p2Point<int> startPoint, int player, int _type)
 {
 
 	Bullet* b = new Bullet();
@@ -52,6 +52,7 @@ void ModuleGun::AddBullet(p2Point<int> startPoint, int player)
 	b->end = startPoint;
 	b->end.x = startPoint.x - bulletWidth / 2;
 	b->end.y -= 24;
+	b->type = _type;
 
 	//Creating the rectangle references
 	b->start_rect.x = b->start.x;
@@ -76,7 +77,7 @@ void ModuleGun::Shoot(p2Point<int> startPoint, int player)
 	{
 		if (activeBullet1.count() < maxShots1)
 		{
-			AddBullet(startPoint, player);
+			AddBullet(startPoint, player, type1);
 			if (activeBullet1.count() == maxShots1)
 				shootAvailable1 = false;
 		}
@@ -85,12 +86,11 @@ void ModuleGun::Shoot(p2Point<int> startPoint, int player)
 	{
 		if (activeBullet2.count() < maxShots2)
 		{
-			AddBullet(startPoint, player);
+			AddBullet(startPoint, player, type2);
 			if (activeBullet2.count() == maxShots2)
 				shootAvailable2 = false;
 		}
 	}
-
 }
 
 update_status ModuleGun::Update()
@@ -150,27 +150,30 @@ bool Bullet::Update(Application* app, int player)
 	bool ret = true;
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
 	{
-		ret = false;
+		if (type != stayingHook)
+			ret = false;
 		int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];
 		if (num != 1 && num != 2 && num != 0)
 		{
+			ret = false;
 			BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
 		}
 
 	}
 	else
 	{
-		end.y-=2;
-		end_rect.h-=2;
+		end.y -= 2;
+		end_rect.h -= 2;
 		app->gun->hook.frames[0].h = -(end.y - start.y);
 		app->gun->hook.frames[1].h = -(end.y - start.y);
-
+	}
 /////////////////////////////////////////////////
-		
+	if (app->maps->map[(end.y - 1) / 8][(end.x + 1) / 8] != 1 || type == stayingHook)
+	{
 		p2List_item<Ball*>* tmp = app->balls->ballsList.getFirst();
 
 		while (tmp != NULL)
-		{	
+		{
 			if (!tmp->data->dead)
 			{
 				if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
@@ -194,10 +197,8 @@ bool Bullet::Update(Application* app, int player)
 
 			tmp = tmp->next;
 		}
-////////////////////////////////////////////////
-
 	}
-
+////////////////////////////////////////////////
 	
 	return ret;
 }
