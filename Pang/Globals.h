@@ -39,7 +39,8 @@ enum Boosts
 	doubleHook,
 	life,
 	pause,
-	bomb
+	bomb,
+	shield,
 };
 
 

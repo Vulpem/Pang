@@ -107,7 +107,7 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 	b->lifeTime = 0;
 
 	if (boostType == none)
-		type = rand() % 100 + 1;
+		type = rand() % 120 + 1;
 	else
 		type = boostType;
 
@@ -128,6 +128,17 @@ void ModuleBoost::AddBoost(int x, int y, Boosts boostType)
 		b->anim.frames.PushBack({ 48, 0, 16, 16 }); 
 		b->anim.frames.PushBack({ 64, 0, 16, 16 });
 		b->anim.speed = 10.0f;
+	}
+	else if (type <= 90)
+	{
+		b->type = shield;
+		b->anim.frames.PushBack({ 128, 0, 16, 16 });
+		b->anim.frames.PushBack({ 144, 0, 16, 16 });
+		b->anim.frames.PushBack({ 160, 0, 16, 16 });
+		b->anim.frames.PushBack({ 176, 0, 16, 16 });
+		b->anim.frames.PushBack({ 160, 0, 16, 16 });
+		b->anim.frames.PushBack({ 144, 0, 16, 16 });
+		b->anim.speed = 0.2f;
 	}
 	else
 	{
@@ -181,6 +192,10 @@ bool Boost::Update(Application* app)
 		{
 			app->balls->BombBoost();
 		}
+		case shield:
+		{
+			app->player2->shieldOn = true;
+		}
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);
 		return false;
@@ -205,6 +220,10 @@ bool Boost::Update(Application* app)
 		case bomb:
 		{
 			app->balls->BombBoost();
+		}
+		case shield:
+		{
+			app->player->shieldOn = true;
 		}
 		}
 		app->audio->PlayFx(app->boosts->pickedUp);

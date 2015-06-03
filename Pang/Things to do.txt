@@ -5,7 +5,7 @@ SCENE TRANSITION:
 	Map between stages appears without joystick image
 
 PLAYERS:
-	Blue has to die before pink
+
 
 SOUNDS:
 	Fix level sound with 3 seconds delay
@@ -28,7 +28,9 @@ _____________________________________________________________
 
 ALPHA REQUIREMENTS
 	Three levels: easy(without blocks), medium (with blocks) and hard (with blocks and stairs) ---> done
-	Items: (hook), (2x hook), hook that stays in place, the gun, (lives), shield
+	Items: (hook), (2x hook), hook that stays in place, the gun, (lives), (shield)
 	Two players ---> done
 
 
+
+github reference: https://github.com/jonkey17/Pang/tree/master/Assets/Imagenes

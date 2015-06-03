@@ -34,6 +34,8 @@ public:
 	///////////////////////
 
 	int boost = none;
+	bool shieldOn = false;
+	int shieldDelay = 0;
 	int prevBoost = none;
 	int playerState = standing2;
 	int fallCounter = 0;
@@ -73,6 +75,7 @@ public:
 
 	p2Point<int> position;
 	SDL_Texture* graphics;
+	SDL_Texture* shieldTexture;
 
 	Animation* current_animation = NULL;
 
@@ -86,6 +89,9 @@ public:
 	Animation shot2;
 	Animation killDead;
 	Animation killDead2;
+
+	Animation* shieldAnim = NULL;
+	Animation shield;
 
 private:
 

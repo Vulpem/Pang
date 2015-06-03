@@ -57,7 +57,7 @@ ModulePlayer::~ModulePlayer()
 
 bool ModulePlayer::Init()
 {
-
+	shieldAnim = &shield;
 	score = 0;
 	digitNumber = 0;
 	pausePlayer = false;
@@ -137,6 +137,9 @@ bool ModulePlayer::Init()
 	//killDead front
 	killDead2.frames.PushBack({ 129, 112, 47, 32 });
 
+	shield.frames.PushBack({ 0, 0, 33, 43 });
+	shield.frames.PushBack({ 35, 0, 34, 43 });
+	shield.speed = 0.2f;
 	return true;
 }
 
@@ -148,6 +151,7 @@ bool ModulePlayer::Start()
 	LOG("--Starting player");
 	bool ret = true;
 	graphics = App->scenePlay->livesGraphics;
+	shieldTexture = App->textures->Load("./Image_Sources/Shield.png");
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -168,6 +172,10 @@ update_status ModulePlayer::Update()
 {
 	Reset();
 
+	if (shieldDelay > 0)
+	{
+		shieldDelay--;
+	}
 	if (App->scenePlay->debugMode == true)
 	{
 		PrintDebugMode();
@@ -175,10 +183,14 @@ update_status ModulePlayer::Update()
 
 	PrintInterface();
 
-
+	if (shieldOn)
+	{
+		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
+	}
 	if (current_animation != NULL)
 	{
-		App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
+		if ((shieldDelay / 4) % 2 == 0)
+			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 	}
 	//////////////////////
 
@@ -561,17 +573,27 @@ void ModulePlayer::CheckBallCollision()
 		p2List_item<Ball*>* tmp = App->balls->ballsList.getFirst();
 		while (tmp != NULL && !dead)
 		{
-			if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
-				(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
-				((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
-				(tmp->data->position.x - tmp->data->radius) < position.x + 20)
+			if (!tmp->data->dead)
 			{
-				if (undying == false)
+				if ((tmp->data->position.y + tmp->data->radius >= position.y + 5) &&
+					(tmp->data->position.y - tmp->data->radius <= position.y + 27) &&
+					((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
+					(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 				{
-					dead = true;
-					Kill(tmp->data->position.x);
+					if (shieldOn == true)
+					{
+						shieldDelay = 120;
+						shieldOn = false;
+						tmp->data->dead = true;
+					}
+					else if (!undying && shieldDelay == 0)
+					{
+						dead = true;
+						Kill(tmp->data->position.x);
+					}
 				}
 			}
+
 			tmp = tmp->next;
 		}
 	}

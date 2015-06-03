@@ -163,7 +163,7 @@ update_status ModuleSceneTransition::Update()
 			else
 			{
 				App->render->Blit(graphics2, 0, 0, NULL);
-				if ((timeCounter / 2) % 2 == 0)
+				if ((timeCounter / 10) % 2 == 0)
 					selectedRect.y = 0;
 				else
 					selectedRect.y = 15;
