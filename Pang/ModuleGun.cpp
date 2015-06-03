@@ -50,7 +50,7 @@ bool ModuleGun::Init()
 	staying_animation1 = &staying1;
 	staying_animation2 = &staying2;
 
-	bulletRect = { 0, 0, 8, 8 };
+	bulletRect = { 0, 0, 4, 8 };
 	return true;
 }
 
@@ -156,8 +156,8 @@ update_status ModuleGun::Update()
 					App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &staying_animation1->GetCurrentFrame());
 				else if (tmp->data->type == SMG)
 				{
-					App->render->Blit(bulletTexture, tmp->data->end.x - 10, tmp->data->end.y, &bulletRect);
-					App->render->Blit(bulletTexture, tmp->data->end.x + 4,tmp->data->end.y, &bulletRect);
+					App->render->Blit(bulletTexture, tmp->data->end.x - 6, tmp->data->end.y, &bulletRect);
+					App->render->Blit(bulletTexture, tmp->data->end.x + 3,tmp->data->end.y, &bulletRect);
 				}
 
 				//	App->render->DrawQuad(bulletRect, 0, 0, 255, 255);
@@ -293,8 +293,8 @@ bool Bullet::Update(Application* app, int player)
 				{
 					if ((tmp->data->position.y + tmp->data->radius >= end.y) &&
 						(tmp->data->position.y <= end.y + 8) &&
-						((tmp->data->position.x - tmp->data->radius) < end.x + 10) &&
-						(tmp->data->position.x + tmp->data->radius) > end.x - 8)
+						((tmp->data->position.x - tmp->data->radius) < end.x + 7) &&
+						(tmp->data->position.x + tmp->data->radius) > end.x - 6)
 
 					{
 						tmp->data->dead = true;

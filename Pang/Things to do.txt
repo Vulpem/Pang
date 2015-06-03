@@ -1,5 +1,7 @@
 IMPORTANT BUGS:
-	Sometimes both players are paused when death by ball
+	Sometimes both players are paused when death by ball (probably gone)
+	Lagging maybe?
+	Reset shield
 
 SCENE TRANSITION:
 	Map between stages appears without joystick image

@@ -360,13 +360,13 @@ void ModulePlayer::Shoot()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			pausePlayer = true;
 			p2Point<int> offset;
 			offset.y = 32;
 			offset.x = 11.5 + (2.5 * movementDirection);
 
 			if (playerState != climbing)
 			{
+				pausePlayer = true;
 				if (movementDirection == 1)
 				{
 					current_animation = &shot;
