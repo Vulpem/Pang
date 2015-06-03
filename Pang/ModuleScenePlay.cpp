@@ -42,6 +42,7 @@ bool ModuleScenePlay::Init()
 // Load assets
 bool ModuleScenePlay::Start(int level)
 {
+	App->player->shieldOn = false;
 	currentLvl = level;
 	timer = 6180;
 	startTimerEvent = timer - 180;
