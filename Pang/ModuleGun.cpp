@@ -187,9 +187,9 @@ update_status ModuleGun::Update()
 
 		else
 		{
-			if (tmp->data->pathDone)
+			if (tmp2->data->pathDone)
 			{
-				App->render->Blit(graphics, tmp->data->end.x - 2, tmp->data->end.y, &hookStickRect);
+				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &hookStickRect);
 			}
 			else
 			{
