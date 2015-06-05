@@ -27,7 +27,7 @@ SPRITES:
 		Particle hook shot
 
 BALLS:
-	Adjust that awful first bounce
+	Adjust small balls first bounce
 
 _____________________________________________________________
 
