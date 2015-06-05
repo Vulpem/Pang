@@ -606,129 +606,148 @@ void ModuleMaps::LoadMap(int nMap)
 	App->balls->Disable();
 	App->gun->Disable();
 
-	for (int h = 0; h < 26; h++)
+	if (nMap == -1)
 	{
+		for (int h = 0; h < 26; h++)
+		{
+			for (int w = 0; w < 48; w++)
+			{
+				map[h][w] = 0;
+			}
+		}
+		//Setting the floor
 		for (int w = 0; w < 48; w++)
 		{
-			if (lvl[nMap][h][w] == 0 || lvl[nMap][h][w] == 2)
+			map[26][w] = 1;
+		}
+	}
+	else if (nMap >= 0)
+	{
+		for (int h = 0; h < 26; h++)
+		{
+			for (int w = 0; w < 48; w++)
 			{
-				map[h][w] = lvl[nMap][h][w];
+				if (lvl[nMap][h][w] == 0 || lvl[nMap][h][w] == 2)
+				{
+					map[h][w] = lvl[nMap][h][w];
+				}
+				else
+				{
+					map[h][w] = 1;
+				}
 			}
-			else
-			{
-				map[h][w] = 1;
-			}
+		}
+
+		App->gun->Enable();
+		App->boosts->Enable();
+		App->balls->Enable();
+
+		if (nMap % 2 == 1)
+		{
+			App->scenePlay->background.x = 8;
+		}
+		else
+		{
+			App->scenePlay->background.x = 16 + SCREEN_WIDTH;
+		}
+
+		App->scenePlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
+
+		App->player->position.x = 18 * TILE;
+		App->player->position.y = 21 * TILE;
+		switch (nMap)
+		{
+		case 0:
+		{
+			App->balls->AddBall(50, 50, little, blue, 1);
+			App->player->position.x = 1 * TILE;
+			App->player->position.y = 23 * TILE;
+			App->audio->PlayMusic("./Sounds/MtKeirin.wav", 1);
+			break;
+		}
+		case 1:
+		{
+			App->balls->AddBall(8 * TILE, 4 * TILE, huge, red, -1);
+			App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
+			break;
+		}
+		case 2:
+		{
+			App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
+			App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
+			break;
+		}
+		case 3:
+		{
+			App->balls->AddBall(6 * TILE, 4 * TILE, huge, green, 1);
+			App->balls->AddBall(25 * TILE, 12 * TILE, medium, green, 1);
+			App->player->position.x = 22 * TILE;
+			App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
+			break;
+		}
+		case 4:
+		{
+			App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
+			App->player->position.x = 20 * TILE;
+			App->player->position.y = 15 * TILE;
+			App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+			break;
+		}
+		case 5:
+		{
+			App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
+			App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
+			App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+			break;
+		}
+		case 6:
+		{
+			App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
+			App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
+			App->player->position.x = 10 * TILE;
+			App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
+			break;
+		}
+		case 7:
+		{
+			App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
+			App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
+			App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
+			break;
+		}
+		case 8:
+		{
+			App->balls->AddBall(18 * TILE, 4 * TILE, big, blue, 1);
+			App->balls->AddBall(27 * TILE, 4 * TILE, big, blue, -1);
+			App->player->position.x = 12 * TILE;
+			App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
+			break;
+		}
+		case 9:
+		{
+			App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
+			App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
+			App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
+			App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
+			App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
+			App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
+			App->player->position.x = 3 * TILE;
+			App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
+			break;
+		}
+		default:
+		{
+			App->balls->AddBall(25 * TILE, 4 * TILE, huge, green, 1);
+			App->audio->PlayMusic("./Sounds/Barcelona.wav", 1);
+			break;
+		}
+
+		App->scenePlay->startTimerEvent = App->scenePlay->timer - 180;
+
+
 		}
 	}
 
-	App->gun->Enable();
-	App->boosts->Enable();
-	App->balls->Enable();
-
-	if (nMap % 2 == 1)
-	{
-		App->scenePlay->background.x = 8;
-	}
-	else
-	{
-		App->scenePlay->background.x = 16 + SCREEN_WIDTH;
-	}
-
-	App->scenePlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
-
-	App->player->position.x = 18 * TILE;
-	App->player->position.y = 21 * TILE;
-	switch (nMap)
-	{
-	case 0:
-	{
-		App->balls->AddBall(50, 50, little, blue, 1);
-		App->player->position.x = 1 * TILE;
-		App->player->position.y = 23 * TILE;
-		App->audio->PlayMusic("./Sounds/MtKeirin.wav", 1);
-		break;
-	}
-	case 1:
-	{
-		App->balls->AddBall(8 * TILE, 4 * TILE, huge, red, -1);
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
-		break;
-	}
-	case 2:
-	{
-		App->balls->AddBall(16 * TILE, 4 * TILE, huge, blue, 1);
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
-		break;
-	}
-	case 3:
-	{
-		App->balls->AddBall(6 * TILE, 4 * TILE, huge, green, 1);
-		App->balls->AddBall(25 * TILE, 12 * TILE, medium, green, 1);
-		App->player->position.x = 22 * TILE;
-		App->audio->PlayMusic("./Sounds/1Mt_Fuji.wav", 1);
-		break;
-	}
-	case 4:
-	{
-		App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
-		App->player->position.x = 20 * TILE;
-		App->player->position.y = 15 * TILE;
-		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-		break;
-	}
-	case 5:
-	{
-		App->balls->AddBall(4 * TILE, 4 * TILE, huge, blue, 1);
-		App->balls->AddBall(25 * TILE, 9 * TILE, big, blue, -1);
-		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-		break;
-	}
-	case 6:
-	{
-		App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
-		App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
-		App->player->position.x = 10 * TILE;
-		App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
-		break;
-	}
-	case 7:
-	{
-		App->balls->AddBall(20 * TILE, 9 * TILE, big, red, 1);
-		App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
-		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
-		break;
-	}
-	case 8:
-	{
-		App->balls->AddBall(18 * TILE, 4 * TILE, big, blue, 1);
-		App->balls->AddBall(27 * TILE, 4 * TILE, big, blue, -1);
-		App->player->position.x = 12 * TILE;
-		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
-		break;
-	}
-	case 9:
-	{
-		App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
-		App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
-		App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
-		App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
-		App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
-		App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
-		App->player->position.x = 3 * TILE;
-		App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
-		break;
-	}
-	default:
-	{
-		App->balls->AddBall(25 * TILE, 4 * TILE, huge, green, 1);
-		App->audio->PlayMusic("./Sounds/Barcelona.wav", 1);
-		break;
-	}
-
-	App->scenePlay->startTimerEvent = App->scenePlay->timer - 180;
-
-
-	}
 }
 
 //Quan estas dins del joc, si apretes la "R" aniras a un mapa bo per probar el renderitzat

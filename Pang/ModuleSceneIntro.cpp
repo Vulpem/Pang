@@ -22,9 +22,10 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 
-	LOG("--Initializing Intro");
+  	LOG("--Initializing Intro");
 	bool ret = true;
 	mapOn = false;
+	App->maps->LoadMap(-1);
 	paused = false;
 	boolAnimation = true;
 	selectedRect = { 0, 15, 15, 15 };

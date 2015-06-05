@@ -43,6 +43,8 @@ bool ModuleScenePlay::Init()
 bool ModuleScenePlay::Start(int level)
 {
 	App->player->shieldOn = false;
+	App->player2->shieldOn = false;
+
 	currentLvl = level;
 	timer = 6180;
 	startTimerEvent = timer - 180;
@@ -271,7 +273,6 @@ update_status ModuleScenePlay::PostUpdate()
 bool ModuleScenePlay::CleanUp()
 {
 	App->textures->Unload(backgroundGraphics);
-
 	App->particles->Disable();
 	App->gun->Disable();
 	App->player->Disable();

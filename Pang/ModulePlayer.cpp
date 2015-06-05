@@ -613,6 +613,7 @@ void ModulePlayer::Reset()
 		{
 			App->scenePlay->Disable();
 			App->player2->Disable();
+			App->maps->LoadMap(1);
 			App->sceneIntro->Enable();
 		}
 	}
