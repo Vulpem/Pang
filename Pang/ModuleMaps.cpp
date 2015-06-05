@@ -600,12 +600,7 @@ bool ModuleMaps::CleanUp()
 
 void ModuleMaps::LoadMap(int nMap)
 {
-	App->player->boost = none;
-	App->particles->Clear();
-	App->boosts->Disable();
-	App->balls->Disable();
-	App->gun->Disable();
-
+	//Creating the intro map
 	if (nMap == -1)
 	{
 		for (int h = 0; h < 26; h++)
@@ -621,8 +616,16 @@ void ModuleMaps::LoadMap(int nMap)
 			map[26][w] = 1;
 		}
 	}
+
+	//Creating a normal map
 	else if (nMap >= 0)
 	{
+		App->player->boost = none;
+		App->particles->Clear();
+		App->boosts->Disable();
+		App->balls->Disable();
+		App->gun->Disable();
+
 		for (int h = 0; h < 26; h++)
 		{
 			for (int w = 0; w < 48; w++)

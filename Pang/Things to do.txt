@@ -1,10 +1,11 @@
 IMPORTANT BUGS:
+	Player 2 boost appears at player 1 boost position 
 	Sometimes both players are paused when death by ball // happens with one player also
 	Player speed at 2 when it shouldnt be
 	Player 2 not detecting ball collision
 	Player 2 texture failure
 	Reset shield after passing lvl
-	Disable player when restarting game
+	Disable player2 when restarting game
 	Lagging maybe?
 	Dr.Memory crashing?
 	Clean disables / enables with maps and scenes
