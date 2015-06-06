@@ -6,6 +6,7 @@ IMPORTANT BUGS:
 	Player 2 texture failure
 	Reset shield after passing lvl
 	Disable player2 when restarting game
+	No tornar al menú inicial quan només un dels dos jugadors s'ha quedat sense vides
 	Lagging maybe?
 	Dr.Memory crashing?
 	Clean disables / enables with maps and scenes
