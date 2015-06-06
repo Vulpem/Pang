@@ -1,5 +1,5 @@
 IMPORTANT BUGS:
-	Player 2 boost appears at player 1 boost position 
+	Done -> Player 2 boost appears at player 1 boost position 
 	Sometimes both players are paused when death by ball // happens with one player also
 	Player speed at 2 when it shouldnt be
 	Player 2 not detecting ball collision
@@ -8,7 +8,7 @@ IMPORTANT BUGS:
 	Disable player2 when restarting game
 	No tornar al menú inicial quan només un dels dos jugadors s'ha quedat sense vides
 	Lagging maybe?
-	Dr.Memory crashing?
+	David: a mi no em peta -> Dr.Memory crashing?
 	Clean disables / enables with maps and scenes
 
 SCENE TRANSITION:
