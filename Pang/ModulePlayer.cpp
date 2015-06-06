@@ -580,7 +580,7 @@ void ModulePlayer::CheckBallCollision()
 					((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
 					(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 				{
-					if (shieldOn == true)
+					if (shieldOn == true && !undying)
 					{
 						shieldDelay = 120;
 						shieldOn = false;
