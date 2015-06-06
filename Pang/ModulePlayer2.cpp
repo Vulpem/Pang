@@ -585,7 +585,7 @@ void ModulePlayer2::CheckBallCollision()
 					((tmp->data->position.x + tmp->data->radius) > position.x + 4) &&
 					(tmp->data->position.x - tmp->data->radius) < position.x + 20)
 				{
-					if (shieldOn == true)
+					if (shieldOn == true && !undying)
 					{
 						shieldDelay = 120;
 						shieldOn = false;
@@ -776,8 +776,8 @@ void ModulePlayer2::UpdateBoosts()
 		}
 		case SMG:
 		{
-			App->gun->type1 = SMG;
-			App->gun->maxShots1 = 50;
+			App->gun->type2 = SMG;
+			App->gun->maxShots2 = 50;
 			break;
 		}
 		}
