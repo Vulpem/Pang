@@ -102,9 +102,9 @@ update_status ModuleScenePlay::Update()
 	}
 	if (timer <= 0 && App->player->dead == false)
 	{
-		App->player->Kill(0);
+		App->player->Kill(-1);
 		if (App->player2->IsEnabled())
-			App->player2->Kill(0);
+			App->player2->Kill(-1);
 	}
 	if (App->balls->ballsList.count() == 0)
 	{

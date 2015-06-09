@@ -231,9 +231,10 @@ update_status ModulePlayer::Update()
 				deadCounter = 0;
 			}
 		}
+		CheckBallCollision();
 	}
 
-	CheckBallCollision();
+//	CheckBallCollision();
 
 
 	return UPDATE_CONTINUE;
@@ -526,7 +527,7 @@ void ModulePlayer::Kill(int xBallPos)
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
 
-	if (xBallPos != 0)
+	if (xBallPos != -1)
 	{
 		if (App->player2->IsEnabled())
 			if (App->player2->current_animation != &App->player2->climb)
@@ -536,17 +537,7 @@ void ModulePlayer::Kill(int xBallPos)
 
 	else
 		xBallPos = 1;
-	/*if (xBallPos == 0)
-	{
-		pausePlayer = true;
-		for (int timer = 0; timer < 180; timer++)
-		{
-			//Render text "Time Out!"
-		}
-		deadAnimEnd = true;
-	}
-	else
-	{*/
+
 		dead = true;
 		App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
@@ -562,7 +553,6 @@ void ModulePlayer::Kill(int xBallPos)
 			deadAnimXSpeed = -1;
 		}	
 		deadAnimYSpeed = -4;
-	//}
 
 }
 

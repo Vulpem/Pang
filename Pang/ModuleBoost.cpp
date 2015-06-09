@@ -60,40 +60,47 @@ update_status ModuleBoost::Update()
 		tmp = tmp_next;
 	}
 	// Rendering current boost
-	switch (App->player->boost)
+	if (App->player->IsEnabled())
 	{
-	case doubleHook:
-		player1Boost = { 16, 0, 16, 16 };
-		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
-		break;
-	case stayingHook:
-		player1Boost = { 0, 0, 16, 16 };
-		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
-		break;
-	case SMG:
-		player1Boost = { 192, 0, 16, 16 };
-		App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
-		break;
-	default:
-		break;
+		switch (App->player->boost)
+		{
+		case doubleHook:
+			player1Boost = { 16, 0, 16, 16 };
+			App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+			break;
+		case stayingHook:
+			player1Boost = { 0, 0, 16, 16 };
+			App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+			break;
+		case SMG:
+			player1Boost = { 192, 0, 16, 16 };
+			App->render->Blit(graphics, 14 * TILE, 28 * TILE, &player1Boost);
+			break;
+		default:
+			break;
+		}
 	}
-	switch (App->player2->boost)
+	if (App->player2->IsEnabled())
 	{
-	case doubleHook:
-		player2Boost = { 16, 0, 16, 16 };
-		App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
-		break;
-	case stayingHook:
-		player2Boost = { 0, 0, 16, 16 };
-		App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
-		break;
-	case SMG:
-		player2Boost = { 192, 0, 16, 16 };
-		App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
-		break;
-	default:
-		break;
+		switch (App->player2->boost)
+		{
+		case doubleHook:
+			player2Boost = { 16, 0, 16, 16 };
+			App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
+			break;
+		case stayingHook:
+			player2Boost = { 0, 0, 16, 16 };
+			App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
+			break;
+		case SMG:
+			player2Boost = { 192, 0, 16, 16 };
+			App->render->Blit(graphics, 44 * TILE, 28 * TILE, &player2Boost);
+			break;
+		default:
+			break;
+		}
 	}
+
 
 	return UPDATE_CONTINUE;
 }

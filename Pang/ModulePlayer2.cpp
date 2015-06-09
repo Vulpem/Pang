@@ -249,7 +249,11 @@ update_status ModulePlayer2::Update()
 
 update_status ModulePlayer2::PostUpdate()
 {
+	if (!pausePlayer)
+	{
 	CheckBallCollision();
+	}
+
 	return UPDATE_CONTINUE;
 }
 bool ModulePlayer2::CleanUp()
@@ -540,7 +544,7 @@ void ModulePlayer2::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
-	if (xBallPos != 0)
+	if (xBallPos != -1)
 	{
 		if (App->player->current_animation != &App->player->climb)
 			App->player->current_animation = &App->player->idle;
@@ -575,8 +579,6 @@ void ModulePlayer2::Kill(int xBallPos)
 		deadAnimXSpeed = -1;
 	}
 	deadAnimYSpeed = -4;
-	//}
-
 }
 
 void ModulePlayer2::CheckBallCollision()
