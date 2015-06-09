@@ -159,6 +159,8 @@ bool ModulePlayer2::Start()
 update_status ModulePlayer2::Update()
 {
 
+	Reset();
+
 	if (!App->player->IsEnabled())
 	{
 		App->player->PrintInterface();
@@ -172,7 +174,11 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
-	Reset();
+	if (current_animation != NULL)
+	{
+		if ((shieldDelay / 4) % 2 == 0)
+			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
+	}
 
 	if (!timeOut)
 	{
@@ -181,11 +187,6 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
 		}
 
-		if (current_animation != NULL)
-		{
-			if ((shieldDelay / 4) % 2 == 0)
-				App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
-		}
 		//////////////////////
 
 		if (current_animation == &shot || current_animation == &shot2)
@@ -653,12 +654,12 @@ void ModulePlayer2::Reset()
 		}
 		else if (App->scenePlay->lives2 <= 0)
 		{
+			App->player->timeOutDelay = 0;
+			App->player->timeOut = false;
 			App->scenePlay->player2Enabled = false;
 			if (App->player->IsEnabled())
 				if (App->scenePlay->lives1 > 0)
 				{
-					App->player->timeOutDelay = 0;
-					App->player->timeOut = false;
 					App->scenePlay->lives1 -= 1;
 					App->player->Disable();
 					App->scenePlay->Disable();

@@ -82,6 +82,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	App->render->DrawQuad({ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT}, 0, 0, 0, 255);
 	timeCounter++;
 
 	// Draw everything --------------------------------------
@@ -160,6 +161,7 @@ update_status ModuleSceneIntro::Update()
 			timeCounter = 0;
 			App->balls->Disable();
 			Disable();
+			App->scenePlay->lives1 = App->scenePlay->lives2 = 2;
 			App->scenePlay->Enable(nextLevel * 3 - 2);
 		}
 		else
