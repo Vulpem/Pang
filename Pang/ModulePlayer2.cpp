@@ -125,6 +125,11 @@ update_status ModulePlayer2::Update()
 		shieldDelay--;
 	}
 
+	if (timeOut && !App->player->IsEnabled())
+	{
+		App->render->Blit(App->player->timeOutTexture, SCREEN_WIDTH / 2 - App->player->timeOutRect.w / 2, SCREEN_HEIGHT / 2 - App->player->timeOutRect.h / 2, &App->player->timeOutRect);
+	}
+
 	if (!App->player->IsEnabled())
 	{
 		App->player->PrintInterface();

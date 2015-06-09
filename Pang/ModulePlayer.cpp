@@ -69,6 +69,7 @@ bool ModulePlayer::Init()
 	{
 		uiText[i] = NULL;
 	}
+	timeOutRect = { 0, 0, 142, 13 };
 	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL);
 	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL);
 	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL);
@@ -152,6 +153,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->scenePlay->livesGraphics;
 	shieldTexture = App->textures->Load("./Image_Sources/Shield.png");
+	timeOutTexture = App->textures->Load("./Image_Sources/Time_Out.png");
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -182,6 +184,10 @@ update_status ModulePlayer::Update()
 	}
 	PrintInterface();
 
+	if (timeOut)
+	{
+		App->render->Blit(timeOutTexture, SCREEN_WIDTH / 2 - timeOutRect.w / 2, SCREEN_HEIGHT / 2 - timeOutRect.h / 2, &timeOutRect);
+	}
 	if (shieldOn && !timeOut)
 	{
 		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());

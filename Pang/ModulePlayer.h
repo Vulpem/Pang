@@ -106,12 +106,14 @@ public:
 	SDL_Texture** uiText;
 	SDL_Rect* rectText;
 	SDL_Rect textRect;
+	SDL_Rect timeOutRect;
 
 	//////////////////////
 
 	p2Point<int> position;
 	SDL_Texture* graphics;
 	SDL_Texture* shieldTexture;
+	SDL_Texture* timeOutTexture;
 
 	Animation* current_animation = NULL;
 
