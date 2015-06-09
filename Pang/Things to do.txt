@@ -2,8 +2,8 @@ IMPORTANT BUGS:
 	Sometimes both players are paused when death by ball // happens with one player also
 	Player speed at 2 when it shouldnt be
 	Player 2 not detecting ball collision
-	Player 2 texture failure
-	Clean disables / enables with maps and scenes
+		Player 2 texture failure
+		Clean disables / enables with maps and scenes
 
 SCENE TRANSITION:
 	Map between stages appears without joystick image
