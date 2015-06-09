@@ -534,10 +534,6 @@ void ModulePlayer::Kill(int xBallPos)
 				App->player2->current_animation = &App->player2->idle;
 			App->player2->pausePlayer = true;
 	}
-
-	else
-		xBallPos = 1;
-
 		dead = true;
 		App->audio->PlayMusic("./Sounds/Death.wav", 1);
 

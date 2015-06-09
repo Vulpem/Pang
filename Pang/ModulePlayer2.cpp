@@ -550,20 +550,6 @@ void ModulePlayer2::Kill(int xBallPos)
 			App->player->current_animation = &App->player->idle;
 		App->player->pausePlayer = true;
 	}
-
-	else
-		xBallPos = 1;
-	/*if (xBallPos == 0)
-	{
-	pausePlayer = true;
-	for (int timer = 0; timer < 180; timer++)
-	{
-	//Render text "Time Out!"
-	}
-	deadAnimEnd = true;
-	}
-	else
-	{*/
 	dead = true;
 	App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
