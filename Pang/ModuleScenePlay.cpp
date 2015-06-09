@@ -106,6 +106,7 @@ update_status ModuleScenePlay::Update()
 		if (App->player2->IsEnabled())
 			App->player2->Kill(-1);
 	}
+	/*
 	if (App->balls->ballsList.count() == 0)
 	{
 		timeBonus = timer / FPS * 10;
@@ -117,8 +118,10 @@ update_status ModuleScenePlay::Update()
 		if (App->player2->IsEnabled())
 			App->player2->score += timeBonus;
 	}
+	
 	else
 	{
+	*/
 		// Draw everything --------------------------------------
 
 		//Setting timer images
@@ -157,7 +160,7 @@ update_status ModuleScenePlay::Update()
 		}
 
 		UpdateInterface();
-	}
+//	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && !App->player->IsEnabled())
 	{
