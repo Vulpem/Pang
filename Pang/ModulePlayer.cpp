@@ -180,61 +180,67 @@ update_status ModulePlayer::Update()
 	{
 		PrintDebugMode();
 	}
-
 	PrintInterface();
 
-	if (shieldOn)
-	{
-		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
-	}
 	if (current_animation != NULL)
 	{
 		if ((shieldDelay / 4) % 2 == 0)
 			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 	}
-	//////////////////////
 
-	if (current_animation == &shot  || current_animation == &shot2)
+	if (!timeOut)
 	{
-		shotDelay++;
-	}
-
-	if (shotDelay >= 3)
-	{
-		shotDelay = 0;
-		pausePlayer = false;
-	}
-
-	if (!pausePlayer)
-	{
-		if (dead == false)
+		if (shieldOn)
 		{
-			SecurityPosition();
-			IsFalling();
-			EndClimbUp();
-			StartClimbDown();
-			Climb();
-			Movement();
-			Shoot();
-			Fall();
-			UpdateBoosts();
+			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
 		}
-		else
+
+		//////////////////////
+
+		if (current_animation == &shot  || current_animation == &shot2)
 		{
-			position.x += deadAnimXSpeed;
-			position.y += deadAnimYSpeed;
-			deadAnimYSpeed += 0.2;
-			deadCounter++;
-			if (deadCounter >= 150)
+			shotDelay++;
+		}
+
+		if (shotDelay >= 3)
+		{
+			shotDelay = 0;
+			pausePlayer = false;
+		}
+
+		if (!pausePlayer)
+		{
+			if (dead == false)
 			{
-				deadAnimEnd = true;
-				deadCounter = 0;
+				SecurityPosition();
+				IsFalling();
+				EndClimbUp();
+				StartClimbDown();
+				Climb();
+				Movement();
+				Shoot();
+				Fall();
+				UpdateBoosts();
 			}
+			else
+			{
+				position.x += deadAnimXSpeed;
+				position.y += deadAnimYSpeed;
+				deadAnimYSpeed += 0.2;
+				deadCounter++;
+				if (deadCounter >= 150)
+				{
+					deadAnimEnd = true;
+					deadCounter = 0;
+				}
+			}
+			CheckBallCollision();
 		}
-		CheckBallCollision();
 	}
-
-//	CheckBallCollision();
+	else
+	{
+		//Print "time out" sprite
+	}
 
 
 	return UPDATE_CONTINUE;
@@ -526,30 +532,33 @@ void ModulePlayer::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
+	dead = true;
+	App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
 	if (xBallPos != -1)
 	{
 		if (App->player2->IsEnabled())
 			if (App->player2->current_animation != &App->player2->climb)
 				App->player2->current_animation = &App->player2->idle;
-			App->player2->pausePlayer = true;
-	}
-		dead = true;
-		App->audio->PlayMusic("./Sounds/Death.wav", 1);
+		App->player2->pausePlayer = true;
 
-
-		if (xBallPos < position.x+16)
+		if (xBallPos < position.x + 16)
 		{
-				current_animation = &killDead2;
-				deadAnimXSpeed = 1;
+			current_animation = &killDead2;
+			deadAnimXSpeed = 1;
 		}
 		else
 		{
 			current_animation = &killDead;
 			deadAnimXSpeed = -1;
-		}	
+		}
 		deadAnimYSpeed = -4;
-
+	}
+	else
+	{
+		pausePlayer = true;
+		timeOut = true;
+	}
 }
 
 void ModulePlayer::CheckBallCollision()
@@ -587,6 +596,10 @@ void ModulePlayer::CheckBallCollision()
 
 void ModulePlayer::Reset()
 {
+	if (timeOut)
+	{
+		timeOutDelay++;
+	}
 	if (deadAnimEnd == true)
 	{
 		if (App->scenePlay->lives1 > 0)
@@ -609,6 +622,25 @@ void ModulePlayer::Reset()
 				App->scenePlay->player1Enabled = false;
 				App->scenePlay->Disable();
 				App->scenePlay->Enable(App->scenePlay->currentLvl);
+			}
+		}
+	}
+	if (timeOutDelay == 180)
+	{
+		timeOutDelay = 0;
+		timeOut = false;
+		if (!App->player2->IsEnabled())
+		{
+			if (App->scenePlay->lives1 > 0)
+			{
+				App->scenePlay->lives1 -= 1;
+				App->scenePlay->Disable();
+				App->scenePlay->Enable(App->scenePlay->currentLvl);
+			}
+			else
+			{
+				App->scenePlay->Disable();
+				App->sceneIntro->Enable();
 			}
 		}
 	}

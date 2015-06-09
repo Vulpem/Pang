@@ -158,6 +158,7 @@ bool ModulePlayer2::Start()
 
 update_status ModulePlayer2::Update()
 {
+
 	if (!App->player->IsEnabled())
 	{
 		App->player->PrintInterface();
@@ -170,61 +171,63 @@ update_status ModulePlayer2::Update()
 			App->player->PrintDebugMode();
 		}
 	}
+
 	Reset();
 
-
-	PrintInterface();
-
-	if (shieldOn)
+	if (!timeOut)
 	{
-		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
-	}
-
-	if (current_animation != NULL)
-	{
-		if ((shieldDelay / 4) % 2 == 0)
-			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
-	}
-	//////////////////////
-
-	if (current_animation == &shot || current_animation == &shot2)
-	{
-		shotDelay++;
-	}
-
-	if (shotDelay >= 3)
-	{
-		shotDelay = 0;
-		pausePlayer = false;
-	}
-
-	if (!pausePlayer)
-	{
-		if (dead == false)
+		if (shieldOn)
 		{
-			SecurityPosition();
-			IsFalling();
-			EndClimbUp();
-			StartClimbDown();
-			Climb();
-			Movement();
-			Shoot();
-			Fall();
-			UpdateBoosts();
+			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
 		}
-		else
+
+		if (current_animation != NULL)
 		{
-			position.x += deadAnimXSpeed;
-			position.y += deadAnimYSpeed;
-			deadAnimYSpeed += 0.2;
-			deadCounter++;
-			if (deadCounter >= 150)
+			if ((shieldDelay / 4) % 2 == 0)
+				App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
+		}
+		//////////////////////
+
+		if (current_animation == &shot || current_animation == &shot2)
+		{
+			shotDelay++;
+		}
+
+		if (shotDelay >= 3)
+		{
+			shotDelay = 0;
+			pausePlayer = false;
+		}
+
+		if (!pausePlayer)
+		{
+			if (dead == false)
 			{
-				deadAnimEnd = true;
-				deadCounter = 0;
+				SecurityPosition();
+				IsFalling();
+				EndClimbUp();
+				StartClimbDown();
+				Climb();
+				Movement();
+				Shoot();
+				Fall();
+				UpdateBoosts();
+			}
+			else
+			{
+				position.x += deadAnimXSpeed;
+				position.y += deadAnimYSpeed;
+				deadAnimYSpeed += 0.2;
+				deadCounter++;
+				if (deadCounter >= 150)
+				{
+					deadAnimEnd = true;
+					deadCounter = 0;
+				}
 			}
 		}
 	}
+
 
 //	CheckBallCollision();
 
@@ -529,27 +532,33 @@ void ModulePlayer2::Kill(int xBallPos)
 {
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
+	dead = true;
+	App->audio->PlayMusic("./Sounds/Death.wav", 1);
+
 	if (xBallPos != -1)
 	{
 		if (App->player->current_animation != &App->player->climb)
 			App->player->current_animation = &App->player->idle;
 		App->player->pausePlayer = true;
-	}
-	dead = true;
-	App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
-
-	if (xBallPos < position.x + 16)
-	{
-		current_animation = &killDead2;
-		deadAnimXSpeed = 1;
+		if (xBallPos < position.x + 16)
+		{
+			current_animation = &killDead2;
+			deadAnimXSpeed = 1;
+		}
+		else
+		{
+			current_animation = &killDead;
+			deadAnimXSpeed = -1;
+		}
+		deadAnimYSpeed = -4;
 	}
 	else
 	{
-		current_animation = &killDead;
-		deadAnimXSpeed = -1;
+		pausePlayer = true;
+		timeOut = true;
 	}
-	deadAnimYSpeed = -4;
+
 }
 
 void ModulePlayer2::CheckBallCollision()
@@ -587,6 +596,11 @@ void ModulePlayer2::CheckBallCollision()
 
 void ModulePlayer2::Reset()
 {
+	if (timeOut)
+	{
+		timeOutDelay++;
+	}
+
 	if (deadAnimEnd == true)
 	{
 		if (App->scenePlay->lives2 > 0)
@@ -605,12 +619,57 @@ void ModulePlayer2::Reset()
 			}
 			else
 			{
+				App->player->timeOutDelay = 0;
+				App->player->timeOut = false;
 				App->scenePlay->Disable();
-				Disable();	
+				Disable();
 				App->scenePlay->player2Enabled = false;
 				App->scenePlay->Enable(App->scenePlay->currentLvl);
 			}
 
+		}
+	}
+	else if (timeOutDelay == 180)
+	{
+		timeOutDelay = 0;
+		timeOut = false;
+		if (App->scenePlay->lives2 > 0)
+		{
+			App->scenePlay->lives2 -= 1;
+			if (App->player->IsEnabled())
+			{
+				if (App->scenePlay->lives1 > 0)
+					App->scenePlay->lives1 -= 1;
+				else
+				{
+					App->player->Disable();
+					App->scenePlay->player1Enabled = false;
+				}
+
+			}
+
+			App->scenePlay->Disable();
+			App->scenePlay->Enable(App->scenePlay->currentLvl);
+		}
+		else if (App->scenePlay->lives2 <= 0)
+		{
+			App->scenePlay->player2Enabled = false;
+			if (App->player->IsEnabled())
+				if (App->scenePlay->lives1 > 0)
+				{
+					App->player->timeOutDelay = 0;
+					App->player->timeOut = false;
+					App->scenePlay->lives1 -= 1;
+					App->player->Disable();
+					App->scenePlay->Disable();
+					App->scenePlay->Enable(App->scenePlay->currentLvl);
+				}
+
+				else
+				{
+					App->scenePlay->Disable();
+					App->sceneIntro->Enable();
+				}
 		}
 	}
 }

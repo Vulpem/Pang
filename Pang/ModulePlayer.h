@@ -84,11 +84,12 @@ public:
 	bool undying = true;
 	bool dead = false;
 	bool deadAnimEnd = false;
+	bool timeOut = false;
 	float deadAnimYSpeed;
 	int deadAnimXSpeed;
 
 	int shotDelay = 0;
-
+	int timeOutDelay = 0;
 	///////////////////////
 
 
