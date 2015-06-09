@@ -173,12 +173,20 @@ bool ModulePlayer2::Start()
 
 update_status ModulePlayer2::Update()
 {
+	if (!App->player->IsEnabled())
+	{
+		App->player->PrintInterface();
+		if (App->scenePlay->timer / 20 % 2 == 0)
+		{
+			App->render->Blit(App->player->uiText[UI_Player_PUSHBUTTON], 2 * TILE,  28 * TILE, &App->player->rectText[UI_Player_PUSHBUTTON]);
+		}
+		if (App->scenePlay->debugMode == true)
+		{
+			App->player->PrintDebugMode();
+		}
+	}
 	Reset();
 
-	if (App->scenePlay->debugMode == true)
-	{
-		PrintDebugMode();
-	}
 
 	PrintInterface();
 
@@ -616,9 +624,20 @@ void ModulePlayer2::Reset()
 		}
 		else
 		{
-			App->scenePlay->player2Enabled = false;
-			App->scenePlay->Disable();
-			App->sceneIntro->Enable();
+			if (!App->player->IsEnabled())
+			{
+				App->scenePlay->player2Enabled = false;
+				App->scenePlay->Disable();
+				App->sceneIntro->Enable();
+			}
+			else
+			{
+				App->scenePlay->Disable();
+				Disable();	
+				App->scenePlay->player2Enabled = false;
+				App->scenePlay->Enable(App->scenePlay->currentLvl);
+			}
+
 		}
 	}
 }

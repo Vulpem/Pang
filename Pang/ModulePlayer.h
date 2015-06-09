@@ -61,6 +61,8 @@ public:
 	bool CleanUp();
 	void Kill(int);
 	bool pausePlayer;
+	void PrintInterface();
+	void PrintDebugMode();
 
 public:
 
@@ -164,8 +166,7 @@ private:
 	//////////////////////
 	//Interface
 
-	void PrintInterface();
-	void PrintDebugMode();
+
 
 
 };

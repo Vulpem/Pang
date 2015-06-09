@@ -72,8 +72,8 @@ bool ModuleScenePlay::Start(int level)
 		return false;
 	}
 	App->maps->Enable();
-	
-	App->player->Enable();
+	if (player1Enabled)
+		App->player->Enable();
 
 	if (player2Enabled)
 	{
@@ -157,8 +157,16 @@ update_status ModuleScenePlay::Update()
 		UpdateInterface();
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && !App->player->IsEnabled())
 	{
+		lives1 = 2;
+		player1Enabled = true;
+		App->player->Enable();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && !App->player2->IsEnabled())
+	{
+		lives2 = 2;
 		player2Enabled = true;
 		App->player2->Enable();
 	}

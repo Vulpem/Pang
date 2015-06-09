@@ -611,9 +611,18 @@ void ModulePlayer::Reset()
 		}
 		else
 		{
-			App->scenePlay->player2Enabled = false;
-			App->scenePlay->Disable();
-			App->sceneIntro->Enable();
+			if (!App->player2->IsEnabled())
+			{
+				App->scenePlay->player2Enabled = false;
+				App->scenePlay->Disable();
+				App->sceneIntro->Enable();
+			}
+			else
+				Disable();
+				App->scenePlay->player1Enabled = false;
+				App->scenePlay->Disable();
+				App->scenePlay->Enable(App->scenePlay->currentLvl);
+
 		}
 	}
 }

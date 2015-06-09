@@ -37,7 +37,7 @@ public:
 	int timeBonus;
 
 	bool player2Enabled;
-
+	bool player1Enabled = true;
 	bool debugMode = false;
 
 	ModuleScenePlay(Application* app, bool start_enabled = true);
