@@ -56,12 +56,12 @@ bool ModuleGun::Init()
 
 bool ModuleGun::Start()
 {
-	graphics = App->textures->Load("./Image_Sources/Hook.png");
+	graphics = App->textures->Load("./Image_Sources/Hook2.png");
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load gun graphics----------------------");
 	}
-	graphics2 = App->textures->Load("./Image_Sources/Hook.png");
+	graphics2 = App->textures->Load("./Image_Sources/Hook2.png");
 
 	bulletTexture = App->textures->Load("./Image_Sources/Bullet.png");
 	if (bulletTexture == NULL)
@@ -193,10 +193,15 @@ update_status ModuleGun::Update()
 			}
 			else
 			{
-				if(tmp2->data->type != staying)
-				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &normal_animation2->GetCurrentFrame());
-				else
-				App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &staying_animation2->GetCurrentFrame());
+				if (tmp2->data->type != staying && tmp2->data->type != SMG)
+					App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &normal_animation1->GetCurrentFrame());
+				else if (tmp2->data->type == staying)
+					App->render->Blit(graphics, tmp2->data->end.x - 2, tmp2->data->end.y, &staying_animation1->GetCurrentFrame());
+				else if (tmp2->data->type == SMG)
+				{
+					App->render->Blit(bulletTexture, tmp2->data->end.x - 6, tmp2->data->end.y, &bulletRect);
+					App->render->Blit(bulletTexture, tmp2->data->end.x + 3, tmp2->data->end.y, &bulletRect);
+				}
 			}
 
 		}

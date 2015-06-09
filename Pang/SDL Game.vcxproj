@@ -121,7 +121,6 @@
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Punctuation.txt" />
     <Text Include="Things to do.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
