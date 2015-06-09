@@ -174,6 +174,11 @@ update_status ModulePlayer2::Update()
 		}
 	}
 
+	if (shieldOn && !timeOut)
+	{
+		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
+	}
+
 	if (current_animation != NULL)
 	{
 		if ((shieldDelay / 4) % 2 == 0)
@@ -182,11 +187,6 @@ update_status ModulePlayer2::Update()
 
 	if (!timeOut)
 	{
-		if (shieldOn)
-		{
-			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
-		}
-
 		//////////////////////
 
 		if (current_animation == &shot || current_animation == &shot2)

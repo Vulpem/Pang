@@ -1,6 +1,5 @@
 IMPORTANT BUGS:
 	Sometimes both players are paused when death by ball // happens with one player also
-	Time lost -> only player2 life lost
 	Hook image appearing from the bottom of the screen
 	Player 2 not detecting ball collision
 	Level 1 you can pass the lvl with shield and colliding with ball 1 // Probably related with not detecting ball collision
@@ -14,6 +13,7 @@ PLAYERS:
 
 
 SOUNDS:
+	Adjust sounds "relative" volume
 	Fix level sound with 3 seconds delay
 	Sounds to get:
 		Sticky hook reaching the top
