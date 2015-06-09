@@ -65,24 +65,8 @@ bool ModulePlayer2::Init()
 	digitNumber = 0;
 	pausePlayer = false;
 	graphics = NULL;
-	/*
-	//Loading UI Textures
-	uiText = new SDL_Texture*[UI_Player_MAX];
-	for (int i = 0; i < UI_Player_MAX; i++)
-	{
-		uiText[i] = NULL;
-	}
-	uiText[UI_Player_FPS] = App->fonts->PrintText("FPS: ", { 255, 167, 16 }, NULL);
-	uiText[UI_Player_Frames] = App->fonts->PrintText("Frames: ", { 255, 167, 16 }, NULL);
-	uiText[UI_Player_Time] = App->fonts->PrintText("Time: ", { 255, 167, 16 }, NULL);
 
-	uiText[UI_Player_Player1] = App->fonts->PrintText("PLAYER-1", { 255, 255, 255 }, NULL);
-	uiText[UI_Player_Player2] = App->fonts->PrintText("PLAYER-2", { 255, 255, 255 }, NULL);
 
-	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL);
-	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL);
-	uiText[UI_Player_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
-	*/
 	//////////////
 	//Animations//
 	//////////////
@@ -150,6 +134,7 @@ bool ModulePlayer2::Init()
 
 bool ModulePlayer2::Start()
 {
+	speed = 2;
 	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;

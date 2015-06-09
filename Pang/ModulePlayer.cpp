@@ -146,7 +146,7 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
-
+	speed = 2;
 	current_animation = &idle;
 	LOG("--Starting player");
 	bool ret = true;
