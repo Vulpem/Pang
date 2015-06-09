@@ -942,16 +942,20 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
 
 	//Printing score
-	digitNumber = CountDigits(score);
-
-	for (int i = 1; i <= digitNumber; i++)
+	if (IsEnabled())
 	{
-		rest = score % (int)(pow(10.0, i));
-		div = pow(10.0, (i - 1));
-		index = rest / div;
+		digitNumber = CountDigits(score);
 
-		App->render->Blit(App->maps->textNumW[index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+		for (int i = 1; i <= digitNumber; i++)
+		{
+			rest = score % (int)(pow(10.0, i));
+			div = pow(10.0, (i - 1));
+			index = rest / div;
+
+			App->render->Blit(App->maps->textNumW[index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+		}
 	}
+
 	//Player 2 score
 	if (App->player2->IsEnabled())
 	{

@@ -11,51 +11,10 @@
 ModulePlayer2::ModulePlayer2(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
-	/*
-	//Setting UI Rects
-	rectText = new SDL_Rect[UI_Player_MAX];
-	rectText[UI_Player_FPS] = { 0, 0, 34, 8 };
-	rectText[UI_Player_Frames] = { 0, 0, 68, 8 };
-	rectText[UI_Player_Time] = { 0, 0, 42.5, 8 };
-
-	rectText[UI_Player_Player1] = { 0, 0, 68, 8 };
-	rectText[UI_Player_Player2] = { 0, 0, 68, 8 };
-
-	rectText[UI_Player_DASH] = { 0, 0, 8.5, 8 };
-	rectText[UI_Player_STAGE] = { 0, 0, 42.5, 8 };
-	rectText[UI_Player_PUSHBUTTON] = { 0, 0, 93.5, 8 };
-
-	rectText[UI_Player_MTFUJI] = { 0, 0, 61, 8 };
-	rectText[UI_Player_MTKEIRIN] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_EMERALD] = { 0, 0, 59.5, 8 };
-	rectText[UI_Player_TEMPLE] = { 0, 0, 51, 8 };
-	rectText[UI_Player_ANKOR_WATT] = { 0, 0, 95, 8 };
-	rectText[UI_Player_AUSTRALIA] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_TAJ_MAHAL] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_LENINGRAD] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_PARIS] = { 0, 0, 42.5, 8 };
-	rectText[UI_Player_LONDON] = { 0, 0, 51, 8 };
-	rectText[UI_Player_BARCELONA] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_ATHENS] = { 0, 0, 51, 8 };
-	rectText[UI_Player_EGYPT] = { 0, 0, 42.5, 8 };
-	rectText[UI_Player_KENYA] = { 0, 0, 42.5, 8 };
-	rectText[UI_Player_NEW_YORK] = { 0, 0, 68, 8 };
-	rectText[UI_Player_MAYA] = { 0, 0, 34, 8 };
-	rectText[UI_Player_ANTARTICA] = { 0, 0, 76.5, 8 };
-	rectText[UI_Player_EASTER] = { 0, 0, 51, 8 };
-	rectText[UI_Player_ISLAND] = { 0, 0, 51, 8 };
-	*/
 }
 
 ModulePlayer2::~ModulePlayer2()
 {
-	/*
-	for (int i = 0; i < UI_Player_MAX; i++)
-	{
-		SDL_DestroyTexture(uiText[i]);
-	}
-	delete[]uiText;
-	*/
 }
 
 bool ModulePlayer2::Init()
