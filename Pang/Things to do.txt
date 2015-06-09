@@ -1,6 +1,8 @@
 IMPORTANT BUGS:
 	Sometimes both players are paused when death by ball // happens with one player also
 	Player speed at 2 when it shouldnt be
+	Time lost -> only player2 life lost
+	Hook image appearing from the bottom of the screen
 	Player 2 not detecting ball collision
 	Level 1 you can pass the lvl with shield and colliding with ball 1
 		Player 2 texture failure
