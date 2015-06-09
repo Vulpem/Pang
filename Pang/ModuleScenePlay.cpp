@@ -134,9 +134,13 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
-			timerNumRect1.x = ((timer / FPS / 100) % 10) * 13;
-			timerNumRect2.x = ((timer / FPS / 10) % 10) * 13;
-			timerNumRect3.x = ((timer / FPS) % 10) * 13;
+			if (!App->player->dead && !App->player2->dead)
+			{
+				timerNumRect1.x = ((timer / FPS / 100) % 10) * 13;
+				timerNumRect2.x = ((timer / FPS / 10) % 10) * 13;
+				timerNumRect3.x = ((timer / FPS) % 10) * 13;
+			}
+
 		}
 
 		//////////////////////
