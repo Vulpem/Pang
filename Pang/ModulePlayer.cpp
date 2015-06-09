@@ -611,9 +611,8 @@ void ModulePlayer::Reset()
 		}
 		else
 		{
+			App->scenePlay->player2Enabled = false;
 			App->scenePlay->Disable();
-			App->player2->Disable();
-			App->maps->LoadMap(1);
 			App->sceneIntro->Enable();
 		}
 	}

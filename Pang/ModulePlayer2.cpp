@@ -616,6 +616,7 @@ void ModulePlayer2::Reset()
 		}
 		else
 		{
+			App->scenePlay->player2Enabled = false;
 			App->scenePlay->Disable();
 			App->sceneIntro->Enable();
 		}

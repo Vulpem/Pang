@@ -274,6 +274,7 @@ bool ModuleScenePlay::CleanUp()
 {
 	App->textures->Unload(backgroundGraphics);
 	App->particles->Disable();
+	App->boosts->Disable();
 	App->gun->Disable();
 	App->player->Disable();
 	if (App->player2->IsEnabled())
