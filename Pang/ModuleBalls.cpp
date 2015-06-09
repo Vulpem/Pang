@@ -145,7 +145,7 @@ update_status ModuleBalls::Update()
 		//If the ball has to be destroyed, we divide it
 		if (pointer->data->dead == true)
 		{
-			LOG("-- Destroying ball --\n");
+ 			LOG("-- Destroying ball --\n");
 			//Ball subdivision
 			if (pointer->data->divisible)
 			{
