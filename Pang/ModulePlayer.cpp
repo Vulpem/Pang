@@ -604,11 +604,12 @@ void ModulePlayer::Reset()
 				App->sceneIntro->Enable();
 			}
 			else
+			{
 				Disable();
 				App->scenePlay->player1Enabled = false;
 				App->scenePlay->Disable();
 				App->scenePlay->Enable(App->scenePlay->currentLvl);
-
+			}
 		}
 	}
 }
