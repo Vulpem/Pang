@@ -115,7 +115,7 @@ update_status ModuleScenePlay::Update()
 		Disable();
 		App->sceneTransition->Enable(++currentLvl);
 		App->player->score += timeBonus;
-		if (App->player2->IsEnabled())
+		if (player2Enabled)
 			App->player2->score += timeBonus;
 	}
 	
