@@ -585,7 +585,6 @@ void ModulePlayer2::CheckBallCollision()
 					{
 						shieldDelay = 120;
 						shieldOn = false;
-						sentinel = 1;
 						tmp->data->shieldKill = true;
 					}
 					else if (!undying && shieldDelay == 0)

@@ -32,7 +32,6 @@ public:
 
 	// Movement variables//
 	///////////////////////
-	int sentinel = 0;
 
 	int boost = none;
 	bool shieldOn = false;

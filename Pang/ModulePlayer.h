@@ -68,8 +68,6 @@ public:
 
 	// Movement variables//
 	///////////////////////
-	int sentinel1 = 0;
-
 	int boost = none;
 	bool shieldOn = false;
 	int shieldDelay = 0;

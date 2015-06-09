@@ -24,7 +24,7 @@ SPRITES:
 	Get all arcade game sprites:
 		Hook
 		Boosts
-		Scene trasnition
+		Scene trasnition, map without joystick and "animation" images
 		Particle hook shot
 
 BALLS:
