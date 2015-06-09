@@ -139,7 +139,6 @@ update_status Application::Update()
 
 		
 		item = list_modules.getFirst();
-
 		while (item != NULL && ret == UPDATE_CONTINUE)
 		{
 			if (item->data->IsEnabled())

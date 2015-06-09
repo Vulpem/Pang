@@ -161,6 +161,11 @@ update_status ModulePlayer2::Update()
 
 	Reset();
 
+	if (shieldDelay > 0)
+	{
+		shieldDelay--;
+	}
+
 	if (!App->player->IsEnabled())
 	{
 		App->player->PrintInterface();
@@ -580,7 +585,8 @@ void ModulePlayer2::CheckBallCollision()
 					{
 						shieldDelay = 120;
 						shieldOn = false;
-						tmp->data->dead = true;
+						sentinel = 1;
+						tmp->data->shieldKill = true;
 					}
 					else if (!undying && shieldDelay == 0)
 					{

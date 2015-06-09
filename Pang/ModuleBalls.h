@@ -15,6 +15,7 @@ public:
 	int type;
 	int color;
 	bool dead = false;
+	bool shieldKill = false;
 
 	bool divisible = true;
 	int offset;

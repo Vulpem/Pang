@@ -124,7 +124,11 @@ update_status ModuleBalls::PreUpdate()
 		{
 			//	delete ball;	
 			delete pointer->data;
-			ballsList.del(pointer);
+ 			ballsList.del(pointer);
+		}
+ 		else if (pointer->data->shieldKill == true)
+		{
+			pointer->data->dead = true;
 		}
 		pointer = pointer2;
 	}
