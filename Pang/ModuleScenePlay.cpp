@@ -109,6 +109,8 @@ update_status ModuleScenePlay::Update()
 	if (App->balls->ballsList.count() == 0)
 	{
 		timeBonus = timer / FPS * 10;
+		App->player->shieldDelay = 0;
+		App->player2->shieldDelay = 0;
 		Disable();
 		App->sceneTransition->Enable(++currentLvl);
 		App->player->score += timeBonus;

@@ -3,9 +3,7 @@ IMPORTANT BUGS:
 	Player speed at 2 when it shouldnt be
 	Player 2 not detecting ball collision
 	Player 2 texture failure
-	No tornar al menú inicial quan només un dels dos jugadors s'ha quedat sense vides
 	Clean disables / enables with maps and scenes
-	When loosing shield and finishing scene, players blink at the next level
 
 SCENE TRANSITION:
 	Map between stages appears without joystick image
