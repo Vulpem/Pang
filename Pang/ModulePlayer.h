@@ -80,6 +80,7 @@ public:
 	int finishClimbCounter = 0;
 	int deadCounter = 0;
 	int lastHitBall;
+	int multiplier;
 
 	int speed = 2;
 	bool undying = true;

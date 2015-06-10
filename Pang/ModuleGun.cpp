@@ -306,6 +306,7 @@ bool Bullet::Update(Application* app, int player)
 						tmp->data->dead = true;
 						if (player == 1)
 						{
+							
 							app->player->score += (50 * (4 - tmp->data->type));
 						}
 						else if (player == 2)
