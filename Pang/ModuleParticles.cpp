@@ -71,21 +71,17 @@ bool ModuleParticles::Init()
 		breakingBrick[n].anim.frames.PushBack({ 113 + n * 8, 96, 8, 8 });
 		breakingBrick[n].anim.frames.PushBack({ 145 + n * 8, 96, 8, 8 });
 	}
+	//Points
 	for (int n = 0; n < 8; n++)
 	{
 		points[n].anim.loop = false;
 		points[n].anim.speed = 0.1f;
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 7 });
 		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
 		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 9 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 10 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 11 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 12 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 13 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 14 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 15 });
-		points[n].anim.frames.PushBack({ n * 16, 104, 16, 16 });
+		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
+		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
+		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
+		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
 	}
 
 	return true;

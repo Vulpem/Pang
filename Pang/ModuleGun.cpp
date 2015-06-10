@@ -306,11 +306,17 @@ bool Bullet::Update(Application* app, int player)
 						tmp->data->dead = true;
 						if (player == 1)
 						{
-							IncreaseScore(app->player, tmp->data->type);
+							if (IncreaseScore(app->player, tmp->data->type))
+							{
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+							}
 						}
 						else if (player == 2)
 						{
-							IncreaseScore(app->player2, tmp->data->type);
+							if(IncreaseScore(app->player2, tmp->data->type))
+							{
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+							}
 						}
 
 						return false;
@@ -327,11 +333,17 @@ bool Bullet::Update(Application* app, int player)
 						tmp->data->dead = true;
 						if (player == 1)
 						{
-							IncreaseScore(app->player, tmp->data->type);
+							if (IncreaseScore(app->player, tmp->data->type))
+							{
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+							}
 						}
 						else if (player == 2)
 						{
-							IncreaseScore(app->player2, tmp->data->type);
+							if (IncreaseScore(app->player2, tmp->data->type))
+							{
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+							}
 						}
 
 						return false;
@@ -348,8 +360,9 @@ bool Bullet::Update(Application* app, int player)
 	return ret;
 }
 
-void Bullet::IncreaseScore(ModulePlayer* player, int ballType)
+bool Bullet::IncreaseScore(ModulePlayer* player, int ballType)
 {
+	bool ret = false;
 	if (ballType != player->lastHitBall)
 	{
 		player->lastHitBall = ballType;
@@ -361,12 +374,15 @@ void Bullet::IncreaseScore(ModulePlayer* player, int ballType)
 		{
 			player->multiplier = player->multiplier * 2;
 		}
+		ret = true;
 	}
 	player->score += (50 * (4 - ballType) * player->multiplier);
+	return ret;
 }
 
-void Bullet::IncreaseScore(ModulePlayer2* player, int ballType)
+bool Bullet::IncreaseScore(ModulePlayer2* player, int ballType)
 {
+	bool ret = false;
 	if (ballType != player->lastHitBall)
 	{
 		player->lastHitBall = ballType;
@@ -378,8 +394,94 @@ void Bullet::IncreaseScore(ModulePlayer2* player, int ballType)
 		{
 			player->multiplier = player->multiplier * 2;
 		}
+		ret = true;
 	}
 	player->score += (50 * (4 - ballType) * player->multiplier);
+	return ret;
+}
+
+void Bullet::RenderScore(Application* App, p2Point<float>& point, int ballType, int multiplier)
+{
+	switch (ballType)
+	{
+		case huge:
+		{
+			switch (multiplier)
+			{
+			case 2:
+			{
+				App->particles->AddParticle(App->particles->points[0], point.x, point.y, 6, 16); break;
+			}
+			case 4:
+			{
+				App->particles->AddParticle(App->particles->points[1], point.x, point.y, 6, 16); break;
+			}
+			case 8:
+			{
+				App->particles->AddParticle(App->particles->points[3], point.x, point.y, 6, 16); break;
+			}
+			}
+			break;
+		}
+		case big:
+		{
+			switch (multiplier)
+			{
+			case 2:
+			{
+				App->particles->AddParticle(App->particles->points[1], point.x, point.y, 6, 12); break;
+			}
+			case 4:
+			{
+				App->particles->AddParticle(App->particles->points[3], point.x, point.y, 6, 12); break;
+			}
+			case 8:
+			{
+				App->particles->AddParticle(App->particles->points[5], point.x, point.y, 6, 12); break;
+			}
+			}
+			break;
+		}
+		case medium:
+		{
+			switch (multiplier)
+			{
+			case 2:
+			{
+				App->particles->AddParticle(App->particles->points[2], point.x, point.y, 6, 8); break;
+			}
+			case 4:
+			{
+				App->particles->AddParticle(App->particles->points[4], point.x, point.y, 6, 8); break;
+			}
+			case 8:
+			{
+				App->particles->AddParticle(App->particles->points[6], point.x, point.y, 8, 8); break;
+			}
+			}
+			break;
+		}
+		case little:
+		{
+			switch (multiplier)
+			{
+			case 2:
+			{
+				App->particles->AddParticle(App->particles->points[3], point.x, point.y, 6, 4); break;
+			}
+			case 4:
+			{
+				App->particles->AddParticle(App->particles->points[5], point.x, point.y, 6, 4); break;
+			}
+			case 8:
+			{
+				App->particles->AddParticle(App->particles->points[7], point.x, point.y, 8, 4); break;
+			}
+			}
+			break;
+		}
+	}
+
 }
 
 bool ModuleGun::CleanUp()
