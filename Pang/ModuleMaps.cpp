@@ -731,8 +731,8 @@ void ModuleMaps::LoadMap(int nMap)
 		}
 		case 9:
 		{
-			App->balls->AddBall(38 * TILE, 38 * TILE, little, green, 1);
-			App->balls->AddBall(39 * TILE, 39 * TILE, little, green, 1);
+			App->balls->AddBall(38 * TILE, 20 * TILE, little, green, -1);
+			App->balls->AddBall(39 * TILE, 23 * TILE, little, green, 1);
 			App->balls->AddBall(2 * TILE, 3 * TILE, medium, green, 1);
 			App->balls->AddBall(4 * TILE, 2 * TILE, little, green, 1);
 			App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
