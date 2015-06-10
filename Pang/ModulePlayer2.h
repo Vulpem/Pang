@@ -55,6 +55,7 @@ public:
 	int shotDelay = 0;
 	int timeOutDelay = 0;
 
+	bool waitingContinue = false;
 	///////////////////////
 
 

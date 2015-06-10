@@ -31,6 +31,7 @@ public:
 
 	SDL_Texture** textNumW;
 	SDL_Texture** textNumY;
+	SDL_Texture** textNumR;
 	SDL_Rect rectNum;
 
 	SDL_Texture* ladderGraphics;

@@ -44,6 +44,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	rectText[UI_Player_ANTARTICA] = { 0, 0, 76.5, 8 };
 	rectText[UI_Player_EASTER] = { 0, 0, 51, 8 };
 	rectText[UI_Player_ISLAND] = { 0, 0, 51, 8 };
+	rectText[UI_Player_CONTINUE] = { 0, 0, 68, 8 };
 }
 
 ModulePlayer::~ModulePlayer()
@@ -80,6 +81,8 @@ bool ModulePlayer::Init()
 	uiText[UI_Player_DASH] = App->fonts->PrintText("-", { 255, 255, 255 }, NULL);
 	uiText[UI_Player_STAGE] = App->fonts->PrintText("STAGE", { 255, 255, 255 }, NULL);
 	uiText[UI_Player_PUSHBUTTON] = App->fonts->PrintText("PUSH BUTTON", { 255, 255, 255 }, NULL);
+
+	uiText[UI_Player_CONTINUE] = App->fonts->PrintText("CONTINUE", { 255, 255, 255 }, NULL);
 
 	//////////////
 	//Animations//
@@ -182,6 +185,11 @@ update_status ModulePlayer::Update()
 {
 	Reset();
 
+	if (!App->player2->IsEnabled() && App->player2->dead && App->player2->deadAnimEnd && player2DeadTimer >= 0)
+	{
+		player2DeadTimer--;
+	}
+
 	if (shieldDelay > 0)
 	{
 		shieldDelay--;
@@ -192,73 +200,74 @@ update_status ModulePlayer::Update()
 	}
 	PrintInterface();
 
-	if (timeOut)
+	if (waitingContinue)
 	{
-		App->render->Blit(timeOutTexture, SCREEN_WIDTH / 2 - timeOutRect.w / 2, SCREEN_HEIGHT / 2 - timeOutRect.h / 2, &timeOutRect);
+		player1DeadTimer--;
 	}
-	if (shieldOn && !timeOut)
+	if (!waitingContinue)
 	{
-		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
-	}
-
-	if (current_animation != NULL)
-	{
-		if ((shieldDelay / 4) % 2 == 0)
-			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
-	}
-
-	if (!timeOut)
-	{
-
-
-		//////////////////////
-
-		if (current_animation == &shot  || current_animation == &shot2)
+		if (timeOut)
 		{
-			shotDelay++;
+			App->render->Blit(timeOutTexture, SCREEN_WIDTH / 2 - timeOutRect.w / 2, SCREEN_HEIGHT / 2 - timeOutRect.h / 2, &timeOutRect);
+		}
+		if (shieldOn && !timeOut)
+		{
+			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
 		}
 
-		if (shotDelay >= 3)
+		if (current_animation != NULL)
 		{
-			shotDelay = 0;
-			pausePlayer = false;
+			if ((shieldDelay / 4) % 2 == 0)
+				App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 		}
 
-		if (!pausePlayer)
+		if (!timeOut)
 		{
-			if (dead == false)
+
+
+			//////////////////////
+
+			if (current_animation == &shot  || current_animation == &shot2)
 			{
-				SecurityPosition();
-				IsFalling();
-				EndClimbUp();
-				StartClimbDown();
-				Climb();
-				Movement();
-				Shoot();
-				Fall();
-				UpdateBoosts();
+				shotDelay++;
 			}
-			else
+
+			if (shotDelay >= 3)
 			{
-				position.x += deadAnimXSpeed;
-				position.y += deadAnimYSpeed;
-				deadAnimYSpeed += 0.2;
-				deadCounter++;
-				if (deadCounter >= 150)
+				shotDelay = 0;
+				pausePlayer = false;
+			}
+
+			if (!pausePlayer)
+			{
+				if (dead == false)
 				{
-					deadAnimEnd = true;
-					deadCounter = 0;
+					SecurityPosition();
+					IsFalling();
+					EndClimbUp();
+					StartClimbDown();
+					Climb();
+					Movement();
+					Shoot();
+					Fall();
+					UpdateBoosts();
 				}
+				else
+				{
+					position.x += deadAnimXSpeed;
+					position.y += deadAnimYSpeed;
+					deadAnimYSpeed += 0.2;
+					deadCounter++;
+					if (deadCounter >= 150)
+					{
+						deadAnimEnd = true;
+						deadCounter = 0;
+					}
+				}
+				CheckBallCollision();
 			}
-			CheckBallCollision();
 		}
 	}
-	else
-	{
-		//Print "time out" sprite
-	}
-
-
 	return UPDATE_CONTINUE;
 }
 
@@ -549,6 +558,7 @@ void ModulePlayer::Kill(int xBallPos)
 	LOG("Player has died\n");
 	App->balls->pauseBalls = true;
 	dead = true;
+	player1DeadTimer = 601;
 	App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
 	if (xBallPos != -1)
@@ -617,6 +627,11 @@ void ModulePlayer::Reset()
 	{
 		timeOutDelay++;
 	}
+	if (waitingContinue && player1DeadTimer <= 0)
+	{
+					App->scenePlay->player1Enabled = false;
+					Disable();
+	}
 	if (deadAnimEnd == true)
 	{
 		if (App->scenePlay->lives1 > 0)
@@ -629,16 +644,25 @@ void ModulePlayer::Reset()
 		{
 			if (!App->player2->IsEnabled())
 			{
-				App->scenePlay->player2Enabled = false;
-				App->scenePlay->Disable();
-				App->sceneIntro->Enable();
+				if (player1DeadTimer <= 0)
+				{
+					waitingContinue = false;
+					App->scenePlay->player2Enabled = false;
+					App->scenePlay->Disable();
+					App->sceneIntro->Enable();
+				}
+				else
+				{
+					waitingContinue = true;
+				}
 			}
 			else
 			{
-				Disable();
-				App->scenePlay->player1Enabled = false;
+				waitingContinue = true;
 				App->scenePlay->Disable();
 				App->scenePlay->Enable(App->scenePlay->currentLvl);
+				if (player1DeadTimer > 0) 
+					player1DeadTimer--;
 			}
 		}
 	}
@@ -879,11 +903,52 @@ void ModulePlayer::PrintInterface()
 
 	if (!App->player2->IsEnabled())
 	{
-		if (App->scenePlay->timer / 20 % 2 == 0)
+		if (App->scenePlay->timer / 20 % 2 == 0 && !App->player2->dead)
 		{
 			App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
 		}
 	}
+	if (App->player2->waitingContinue)
+	{
+			if (player2DeadTimer > 0 && player2DeadTimer <= 600)
+			{
+				continueNumber = CountDigits(player2DeadTimer / 60);
+
+				for (int i = 1; i <= continueNumber; i++)
+				{
+					rest = (player2DeadTimer / 60) % (int)(pow(10.0, i));
+					div = pow(10.0, (i - 1));
+					index = rest / div;
+
+					App->render->Blit(App->maps->textNumR[index], 362 - (10 * (i - 1)), 28 * TILE, &App->maps->rectNum);
+				}
+				App->render->Blit(App->player->uiText[UI_Player_CONTINUE], 280, 28 * TILE, &App->player->rectText[UI_Player_CONTINUE]);
+
+			}
+	}
+
+
+	if (waitingContinue)
+	{
+		if (waitingContinue)
+		{
+			if (player1DeadTimer > 0 && player1DeadTimer <= 600)
+			{
+				continueNumber = CountDigits(player1DeadTimer / 60);
+
+				for (int i = 1; i <= continueNumber; i++)
+				{
+					rest = (player1DeadTimer / 60) % (int)(pow(10.0, i));
+					div = pow(10.0, (i - 1));
+					index = rest / div;
+
+					App->render->Blit(App->maps->textNumR[index], 100 - (10 * (i - 1)), 28 * TILE, &App->maps->rectNum);
+				}
+				App->render->Blit(App->player->uiText[UI_Player_CONTINUE], 2 * TILE, 28 * TILE, &App->player->rectText[UI_Player_CONTINUE]);
+			}
+		}
+	}
+
 
 
 	//PrintTexting interface//

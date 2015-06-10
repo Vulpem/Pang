@@ -36,6 +36,7 @@ enum UI_Player_messages
 	UI_Player_DASH,
 	UI_Player_STAGE,
 	UI_Player_PUSHBUTTON,
+	UI_Player_CONTINUE,
 	UI_Player_MAX
 };
 
@@ -89,11 +90,17 @@ public:
 
 	int shotDelay = 0;
 	int timeOutDelay = 0;
+	int player1DeadTimer = 601;
+	int player2DeadTimer = 601;
+
+	bool waitingContinue = false;
 	///////////////////////
 
 
 	int score;
 	int digitNumber;
+
+	int continueNumber;
 
 	float rest;
 	float div;

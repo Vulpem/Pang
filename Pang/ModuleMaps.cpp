@@ -16,6 +16,7 @@ ModuleMaps::~ModuleMaps()
 	{
 		SDL_DestroyTexture(textNumW[i]);
 		SDL_DestroyTexture(textNumY[i]);
+		SDL_DestroyTexture(textNumR[i]);
 	}
 	delete[]textNumW;
 	delete[]textNumY;
@@ -27,6 +28,7 @@ bool ModuleMaps::Init()
 
 	textNumW = new SDL_Texture*[10];
 	textNumY = new SDL_Texture*[10];
+	textNumR = new SDL_Texture*[10];
 
 	textNumW[0] = App->fonts->PrintText("0", { 255, 255, 255 }, NULL);
 	textNumW[1] = App->fonts->PrintText("1", { 255, 255, 255 }, NULL);
@@ -49,6 +51,17 @@ bool ModuleMaps::Init()
 	textNumY[7] = App->fonts->PrintText("7", { 255, 167, 16 }, NULL);
 	textNumY[8] = App->fonts->PrintText("8", { 255, 167, 16 }, NULL);
 	textNumY[9] = App->fonts->PrintText("9", { 255, 167, 16 }, NULL);
+
+	textNumR[0] = App->fonts->PrintText("0", { 255, 0, 0 }, NULL);
+	textNumR[1] = App->fonts->PrintText("1", { 255, 0, 0 }, NULL);
+	textNumR[2] = App->fonts->PrintText("2", { 255, 0, 0 }, NULL);
+	textNumR[3] = App->fonts->PrintText("3", { 255, 0, 0 }, NULL);
+	textNumR[4] = App->fonts->PrintText("4", { 255, 0, 0 }, NULL);
+	textNumR[5] = App->fonts->PrintText("5", { 255, 0, 0 }, NULL);
+	textNumR[6] = App->fonts->PrintText("6", { 255, 0, 0 }, NULL);
+	textNumR[7] = App->fonts->PrintText("7", { 255, 0, 0 }, NULL);
+	textNumR[8] = App->fonts->PrintText("8", { 255, 0, 0 }, NULL);
+	textNumR[9] = App->fonts->PrintText("9", { 255, 0, 0 }, NULL);
 
 	/////////////////////
 	//Animations Bricks//

@@ -148,13 +148,15 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
-			if (!App->player->dead && !App->player2->dead)
+			if (App->player->IsEnabled() || App->player2->IsEnabled())
 			{
-				timerNumRect1.x = ((timer / FPS / 100) % 10) * 13;
-				timerNumRect2.x = ((timer / FPS / 10) % 10) * 13;
-				timerNumRect3.x = ((timer / FPS) % 10) * 13;
+				if ((!App->player2->IsEnabled() && !App->player->dead) || (!App->player->IsEnabled() && !App->player2->dead) || (!App->player->dead && !App->player2->dead))
+				{
+					timerNumRect1.x = ((timer / FPS / 100) % 10) * 13;
+					timerNumRect2.x = ((timer / FPS / 10) % 10) * 13;
+					timerNumRect3.x = ((timer / FPS) % 10) * 13;
+				}
 			}
-
 		}
 
 		//////////////////////
@@ -180,17 +182,33 @@ update_status ModuleScenePlay::Update()
 		UpdateInterface();
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && !App->player->IsEnabled())
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && App->player->IsEnabled() && App->player->player1DeadTimer > 0 && App->player->waitingContinue)
 	{
+		if (!App->player2->IsEnabled())
+		{
+			Disable();
+			Enable(currentLvl);
+		}
+		App->player->score = 0;
 		lives1 = 2;
 		player1Enabled = true;
+		App->player->waitingContinue = false;
+		App->player->Disable();
 		App->player->Enable();
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && !App->player2->IsEnabled())
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && (!App->player2->IsEnabled() || (App->player->player2DeadTimer > 0)))
 	{
+		if (!App->player->IsEnabled())
+		{
+			Disable();
+			Enable(currentLvl);
+		}
+		App->player2->score = 0;
+		App->player2->waitingContinue = false;
 		lives2 = 2;
 		player2Enabled = true;
+		App->player2->Disable();
 		App->player2->Enable();
 	}
 

@@ -136,80 +136,84 @@ update_status ModulePlayer2::Update()
 		App->render->Blit(App->player->timeOutTexture, SCREEN_WIDTH / 2 - App->player->timeOutRect.w / 2, SCREEN_HEIGHT / 2 - App->player->timeOutRect.h / 2, &App->player->timeOutRect);
 	}
 
+	if (waitingContinue)
+	{
+		App->player->player2DeadTimer--;
+	}
 	if (!App->player->IsEnabled())
 	{
 		App->player->PrintInterface();
-		if (App->scenePlay->timer / 20 % 2 == 0)
-		{
-			App->render->Blit(App->player->uiText[UI_Player_PUSHBUTTON], 2 * TILE,  28 * TILE, &App->player->rectText[UI_Player_PUSHBUTTON]);
-		}
 		if (App->scenePlay->debugMode == true)
 		{
 			App->player->PrintDebugMode();
 		}
 	}
 
-	if (shieldOn && !timeOut)
+	if (!waitingContinue)
 	{
-		App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
-	}
-
-	if (current_animation != NULL)
-	{
-		if ((shieldDelay / 4) % 2 == 0)
-			App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
-	}
-
-	if (!timeOut)
-	{
-		//////////////////////
-
-		if (current_animation == &shot || current_animation == &shot2)
+		if (shieldOn && !timeOut)
 		{
-			shotDelay++;
+			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
 		}
 
-		if (shotDelay >= 3)
+		if (current_animation != NULL)
 		{
-			shotDelay = 0;
-			pausePlayer = false;
+			if ((shieldDelay / 4) % 2 == 0)
+				App->render->Blit(graphics, position.x - 2, position.y, &current_animation->GetCurrentFrame());
 		}
 
-		if (!pausePlayer)
+		if (!timeOut)
 		{
-			if (dead == false)
+			//////////////////////
+
+			if (current_animation == &shot || current_animation == &shot2)
 			{
-				SecurityPosition();
-				IsFalling();
-				EndClimbUp();
-				StartClimbDown();
-				Climb();
-				Movement();
-				Shoot();
-				Fall();
-				UpdateBoosts();
+				shotDelay++;
 			}
-			else
+
+			if (shotDelay >= 3)
 			{
-				position.x += deadAnimXSpeed;
-				position.y += deadAnimYSpeed;
-				deadAnimYSpeed += 0.2;
-				deadCounter++;
-				if (deadCounter >= 150)
+				shotDelay = 0;
+				pausePlayer = false;
+			}
+
+			if (!pausePlayer)
+			{
+				if (dead == false)
 				{
-					deadAnimEnd = true;
-					deadCounter = 0;
+					SecurityPosition();
+					IsFalling();
+					EndClimbUp();
+					StartClimbDown();
+					Climb();
+					Movement();
+					Shoot();
+					Fall();
+					UpdateBoosts();
+				}
+				else
+				{
+					position.x += deadAnimXSpeed;
+					position.y += deadAnimYSpeed;
+					deadAnimYSpeed += 0.2;
+					deadCounter++;
+					if (deadCounter >= 150)
+					{
+						deadAnimEnd = true;
+						deadCounter = 0;
+					}
 				}
 			}
 		}
 	}
+
 
 	return UPDATE_CONTINUE;
 }
 
 update_status ModulePlayer2::PostUpdate()
 {
-	if (!pausePlayer)
+	if (!pausePlayer && !waitingContinue)
 	{
 	CheckBallCollision();
 	}
@@ -506,7 +510,7 @@ void ModulePlayer2::Kill(int xBallPos)
 	App->balls->pauseBalls = true;
 	dead = true;
 	App->audio->PlayMusic("./Sounds/Death.wav", 1);
-
+	App->player->player2DeadTimer = 601;
 	if (xBallPos != -1)
 	{
 		if (App->player->current_animation != &App->player->climb)
@@ -586,18 +590,40 @@ void ModulePlayer2::Reset()
 		{
 			if (!App->player->IsEnabled())
 			{
-				App->scenePlay->player2Enabled = false;
-				App->scenePlay->Disable();
-				App->sceneIntro->Enable();
+				if (App->player->player2DeadTimer <= 0)
+				{
+					waitingContinue = false;
+					App->scenePlay->player2Enabled = false;
+					App->player->timeOutDelay = 0;
+					App->player->timeOut = false;
+					App->scenePlay->Disable();
+					Disable();
+					App->scenePlay->player2Enabled = false;
+					App->sceneIntro->Enable();
+				}
+				else
+					waitingContinue = true;
 			}
 			else
 			{
+				waitingContinue = true;
+ 				App->scenePlay->Disable();
+				App->scenePlay->Enable(App->scenePlay->currentLvl);
+				if (App->player->player2DeadTimer <= 0)
+				{
+					App->scenePlay->player2Enabled = false;
+					Disable();
+				}
+				else
+					App->player->player2DeadTimer--;
+				/*
 				App->player->timeOutDelay = 0;
 				App->player->timeOut = false;
 				App->scenePlay->Disable();
 				Disable();
 				App->scenePlay->player2Enabled = false;
 				App->scenePlay->Enable(App->scenePlay->currentLvl);
+				*/
 			}
 
 		}
@@ -808,146 +834,4 @@ void ModulePlayer2::UpdateBoosts()
 		}
 	}
 	prevBoost = boost;
-}
-
-void ModulePlayer2::PrintDebugMode()
-{
-	/*
-	//Debug stats
-
-	//FPS text
-	App->render->Blit(uiText[UI_Player_FPS], 150, 232, &rectText[UI_Player_FPS]);
-
-	//FPS number
-	if ((double)App->frames / (SDL_GetTicks() / 1000.0) >= 10)
-	{
-		App->render->Blit(App->maps->textNumY[(int)(App->frames / (SDL_GetTicks() / 1000.0) / 10)], 180, 232, &App->maps->rectNum);
-		App->render->Blit(App->maps->textNumY[(int)(App->frames / (int)(SDL_GetTicks() / 1000.0) % 10)], 190, 232, &App->maps->rectNum);
-	}
-	else
-		App->render->Blit(App->maps->textNumY[(int)(App->frames / (SDL_GetTicks() / 1000.0))], 180, 232, &App->maps->rectNum);
-
-
-	//Frames text
-	App->render->Blit(uiText[UI_Player_Frames], 28 * TILE - 10, 29 * TILE, &rectText[UI_Player_Frames]);
-
-	//Frames number
-
-	if (App->frames % (int)FPS >= 10)
-	{
-		App->render->Blit(App->maps->textNumY[(App->frames % (int)FPS) / 10], 276, 232, &App->maps->rectNum);
-		App->render->Blit(App->maps->textNumY[App->frames % (int)FPS % 10], 286, 232, &App->maps->rectNum);
-	}
-	else
-		App->render->Blit(App->maps->textNumY[App->frames % (int)FPS], 286, 232, &App->maps->rectNum);
-
-
-	//Time text
-	App->render->Blit(uiText[UI_Player_Time], 307, 232, &rectText[UI_Player_Time]);
-	//Time number
-	digitNumber = CountDigits(SDL_GetTicks() / 1000);
-	for (int i = 1; i <= digitNumber; i++)
-	{
-		rest = SDL_GetTicks() / 1000 % (int)(pow(10.0, i));
-		div = pow(10.0, (i - 1));
-		index = rest / div;
-
-		App->render->Blit(App->maps->textNumY[index], 345 + (10 * (digitNumber - i)), 232, &App->maps->rectNum);
-	}
-	*/
-}
-
-void ModulePlayer2::PrintInterface()
-{
-	/*
-	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
-	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
-
-	if (App->scenePlay->timer / 20 % 2 == 0)
-	{
-		App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
-	}
-
-	//PrintTexting interface//
-
-	//Level name
-
-	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
-	{
-		if (uiText[UI_Player_EMERALD] == NULL)
-		{
-			uiText[UI_Player_EMERALD] = App->fonts->PrintText("EMERALD", { 255, 255, 255 }, NULL);
-		}
-		App->render->Blit(uiText[UI_Player_EMERALD], 24 * TILE - rectText[UI_Player_EMERALD].w / 2, 26 * TILE, &rectText[UI_Player_EMERALD]);
-
-		if (uiText[UI_Player_TEMPLE] == NULL)
-		{
-			uiText[UI_Player_TEMPLE] = App->fonts->PrintText("TEMPLE", { 255, 255, 255 }, NULL);
-		}
-		App->render->Blit(uiText[UI_Player_TEMPLE], 24 * TILE - rectText[UI_Player_TEMPLE].w / 2, 27 * TILE, &rectText[UI_Player_TEMPLE]);
-	}
-	else if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 17)
-	{
-		if (uiText[UI_Player_EASTER] == NULL)
-		{
-			uiText[UI_Player_EASTER] = App->fonts->PrintText("EASTER", { 255, 255, 255 }, NULL);
-		}
-		App->render->Blit(uiText[UI_Player_EASTER], 24 * TILE - rectText[UI_Player_EASTER].w / 2, 26 * TILE, &rectText[UI_Player_EASTER]);
-
-		if (uiText[UI_Player_ISLAND] == NULL)
-		{
-			uiText[UI_Player_ISLAND] = App->fonts->PrintText("ISLAND", { 255, 255, 255 }, NULL);
-		}
-		App->render->Blit(uiText[UI_Player_ISLAND], 24 * TILE - rectText[UI_Player_ISLAND].w / 2, 27 * TILE, &rectText[UI_Player_ISLAND]);
-	}
-
-	else
-	{
-		if (uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] == NULL)
-		{
-			uiText[(App->scenePlay->currentLvl - 1) / 3 + 1] = App->fonts->PrintText(App->maps->GetLevelName(App->scenePlay->currentLvl), { 255, 255, 255 }, NULL);
-		}
-		App->render->Blit(uiText[(App->scenePlay->currentLvl - 1) / 3 + 1], 24 * TILE - rectText[(App->scenePlay->currentLvl - 1) / 3 + 1].w / 2, 26 * TILE, &rectText[(App->scenePlay->currentLvl - 1) / 3 + 1]);
-
-
-
-	}
-
-	//Level info
-
-	//Stage number
-	if ((App->scenePlay->currentLvl / 3 + 1) >= 10)
-	{
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) / 10], 146, 224, &App->maps->rectNum);
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl / 3 + 1) % 10], 156, 224, &App->maps->rectNum);
-	}
-	else
-		App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl / 3 + 1], 156, 224, &App->maps->rectNum);
-
-	//Dash
-	App->render->Blit(uiText[UI_Player_DASH], 166, 28 * TILE, &rectText[UI_Player_DASH]);
-
-	//Level number
-	if ((App->scenePlay->currentLvl) >= 10)
-	{
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl) / 10], 176, 224, &App->maps->rectNum);
-		App->render->Blit(App->maps->textNumW[(App->scenePlay->currentLvl) % 10], 186, 224, &App->maps->rectNum);
-	}
-	else
-		App->render->Blit(App->maps->textNumW[App->scenePlay->currentLvl], 176, 224, &App->maps->rectNum);
-
-	App->render->Blit(uiText[UI_Player_STAGE], 196, 28 * TILE, &rectText[UI_Player_STAGE]);
-
-	//Printing score
-	digitNumber = CountDigits(score);
-
-	for (int i = 1; i <= digitNumber; i++)
-	{
-		rest = score % (int)(pow(10.0, i));
-		div = pow(10.0, (i - 1));
-		index = rest / div;
-
-		App->render->Blit(App->maps->textNumW[index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
-	}
-	*/
 }
