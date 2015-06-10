@@ -145,7 +145,11 @@ bool ModulePlayer::Init()
 	shield.frames.PushBack({ 35, 0, 34, 43 });
 	shield.speed = 0.2f;
 
-	deadFlashRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 4 * TILE };
+	deadFlashAnim.frames.PushBack({ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 4 * TILE });
+	deadFlashAnim.frames.PushBack({ SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 4 * TILE });
+	deadFlashAnim.frames.PushBack({ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 4 * TILE });
+	deadFlashAnim.speed = 0.3f;
+	deadFlashAnim.loop = false;
 	return true;
 }
 
@@ -181,6 +185,8 @@ bool ModulePlayer::Start()
 	timeOut = false;
 	boost = none;
 
+	deadFlashAnim.ResetLoops();
+	deadFlashAnim.Reset();
 	return ret;
 }
 
@@ -188,7 +194,11 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	Reset();
-
+	if (dead)
+	{
+		if (!deadFlashAnim.Finished())
+		App->render->Blit(deadFlash, 0, 0, &deadFlashAnim.GetCurrentFrame(), NULL);
+	}
 	if (shieldDelay > 0)
 	{
 		shieldDelay--;
@@ -607,7 +617,6 @@ void ModulePlayer::CheckBallCollision()
 					{
 						dead = true;
 						Kill(tmp->data->position.x);
-						App->render->Blit(deadFlash, 0, 0, &deadFlashRect);
 					}
 				}
 			}

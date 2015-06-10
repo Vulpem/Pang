@@ -120,6 +120,8 @@ bool ModulePlayer2::Start()
 	deadAnimEnd = false;
 	boost = none;
 
+	App->player->deadFlashAnim.ResetLoops();
+	App->player->deadFlashAnim.Reset();
 	return ret;
 }
 
@@ -128,6 +130,12 @@ update_status ModulePlayer2::Update()
 {
 
 	Reset();
+
+	if (dead)
+	{
+		if (!App->player->deadFlashAnim.Finished())
+			App->render->Blit(App->player->deadFlash, 0, 0, &App->player->deadFlashAnim.GetCurrentFrame(), NULL);
+	}
 
 	if (shieldDelay > 0)
 	{
@@ -568,7 +576,7 @@ void ModulePlayer2::CheckBallCollision()
 					{
 						dead = true;
 						Kill(tmp->data->position.x);
-						App->render->Blit(App->player->deadFlash, 0, 0, &App->player->deadFlashRect);
+
 					}
 				}
 			}
