@@ -338,7 +338,6 @@ bool ModulePlayer::MiddleLadder()
 		return false;
 }
 
-
 void ModulePlayer::Movement()
 {
 	if (playerState != climbing && playerState != climbingUp && playerState != climbingDown)
@@ -635,6 +634,9 @@ void ModulePlayer::Reset()
 	}
 	if (waitingContinue && player1DeadTimer <= 0)
 	{
+		waitingContinue = false;
+		App->scenePlay->Disable();
+		App->scenePlay->Enable(App->scenePlay->currentLvl);
 		App->scenePlay->player1Enabled = false;
 		Disable();
 	}
@@ -642,6 +644,7 @@ void ModulePlayer::Reset()
 	{
 		if (App->scenePlay->lives1 > 0)
 		{
+			dead = false;
 			App->scenePlay->lives1 -= 1;
 			App->scenePlay->Disable();
 			App->scenePlay->Enable(App->scenePlay->currentLvl);

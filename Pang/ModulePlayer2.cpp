@@ -627,7 +627,7 @@ void ModulePlayer2::Reset()
 			else
 			{
 				waitingContinue = true;
-				if (!App->player->deadAnimEnd)
+				if (App->player->player2DeadTimer <= 0)
 				{
  					App->scenePlay->Disable();
 					App->scenePlay->Enable(App->scenePlay->currentLvl);

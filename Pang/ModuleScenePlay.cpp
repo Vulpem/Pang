@@ -195,11 +195,8 @@ update_status ModuleScenePlay::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && App->player->IsEnabled() && App->player->player1DeadTimer > 0 && App->player->waitingContinue)
 	{
-		if (!App->player2->IsEnabled())
-		{
-			Disable();
-			Enable(currentLvl);
-		}
+		Disable();
+		Enable(currentLvl);
 		App->player->score = 0;
 		lives1 = 2;
 		player1Enabled = true;
@@ -210,7 +207,7 @@ update_status ModuleScenePlay::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && ((!App->player2->IsEnabled() && !App->player2->dead) || (App->player->player2DeadTimer > 0 && App->player2->waitingContinue)))
 	{
-		if (!App->player->IsEnabled())
+		if (App->player2->waitingContinue)
 		{
 			Disable();
 			Enable(currentLvl);
