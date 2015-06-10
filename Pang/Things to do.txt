@@ -26,8 +26,6 @@ SPRITES:
 		Scene trasnition, map without joystick and "animation" images
 		Particle hook shot
 
-BALLS:
-	Adjust small balls first bounce
 
 _____________________________________________________________
 
