@@ -27,13 +27,15 @@ public:
 		}
 	}
 
-	void Disable()
+	bool Disable()
 	{
+		bool ret = true;
 		if (enabled == true)
 		{
 			enabled = false;
-			CleanUp();
+			ret = CleanUp();
 		}
+		return ret;
 	}
 
 	virtual bool Init() 
