@@ -16,6 +16,7 @@ ModuleSceneTransition::~ModuleSceneTransition()
 		SDL_DestroyTexture(uiText[i]);
 	}
 	delete[]uiText;
+	delete[] rectText;
 }
 
 bool ModuleSceneTransition::Init()

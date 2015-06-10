@@ -315,7 +315,7 @@ bool Bullet::Update(Application* app, int player)
 						{
 							if(IncreaseScore(app->player2, tmp->data->type))
 							{
-								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player2->multiplier);
 							}
 						}
 
@@ -342,7 +342,7 @@ bool Bullet::Update(Application* app, int player)
 						{
 							if (IncreaseScore(app->player2, tmp->data->type))
 							{
-								RenderScore(app, tmp->data->position, tmp->data->type, app->player->multiplier);
+								RenderScore(app, tmp->data->position, tmp->data->type, app->player2->multiplier);
 							}
 						}
 

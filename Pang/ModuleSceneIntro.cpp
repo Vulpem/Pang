@@ -77,7 +77,7 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("--Cleanup Intro scene")
  	App->textures->Unload(graphics);
-
+	delete[] rectText;
 	return true;
 }
 
