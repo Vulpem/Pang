@@ -15,7 +15,6 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	{
 		SDL_DestroyTexture(uiText[i]);
 	}
-	delete[]uiText;
 }
 
 // Load assets
@@ -78,6 +77,7 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("--Cleanup Intro scene")
  	App->textures->Unload(graphics);
 	delete[] rectText;
+	delete[]uiText;
 	return true;
 }
 
