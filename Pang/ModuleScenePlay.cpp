@@ -101,7 +101,7 @@ update_status ModuleScenePlay::Update()
 	{
 		timer--;
 	}
-	if (timer <= 300)
+	if (timer <= 300 && timer >= 60)
 	{
 		if (timer % 60 == 0)
 			App->audio->PlayFx(timerAudio, 0);
@@ -300,8 +300,7 @@ bool ModuleScenePlay::CleanUp()
 	App->boosts->Disable();
 	App->gun->Disable();
 	App->player->Disable();
-	if (App->player2->IsEnabled())
-		App->player2->Disable();
+	App->player2->Disable();
 	App->maps->Disable();
 
 	App->textures->Unload(livesGraphics);
