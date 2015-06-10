@@ -45,6 +45,8 @@ bool ModuleScenePlay::Start(int level)
 	continueAudio = false;
 	App->player->shieldOn = false;
 	App->player2->shieldOn = false;
+	App->player->waitingContinue = false;
+	App->player2->waitingContinue = false;
 
 	currentLvl = level;
 	timer = 6180;

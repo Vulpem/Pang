@@ -28,6 +28,8 @@ bool ModuleSceneIntro::Start()
 	App->maps->LoadMap(-1);
 	paused = false;
 	boolAnimation = true;
+	App->player->waitingContinue = false;
+	App->player2->waitingContinue = false;
 	selectedRect = { 0, 15, 15, 15 };
 	timerRect = { 0, 0, 26, 38};
 	animationRect = { 0, 0, 384, 240 };
@@ -161,6 +163,8 @@ update_status ModuleSceneIntro::Update()
 			timeCounter = 0;
 			App->balls->Disable();
 			Disable();
+			App->player2->dead = false;
+			App->scenePlay->player1Enabled = true;
 			App->scenePlay->lives1 = App->scenePlay->lives2 = 2;
 			App->scenePlay->Enable(nextLevel * 3 - 2);
 		}

@@ -159,6 +159,8 @@ bool ModulePlayer::Start()
 	endclimb.speed = 0.0f;
 	shield.speed = 0.2f;
 
+	movementDirection = 1;
+
 	lastHitBall = -1;
 	speed = 2;
 	current_animation = &idle;
@@ -176,6 +178,7 @@ bool ModulePlayer::Start()
 	ladderAlign = false;
 	dead = false;
 	deadAnimEnd = false;
+	timeOut = false;
 	boost = none;
 
 	return ret;
@@ -557,8 +560,7 @@ void ModulePlayer::Kill(int xBallPos)
 	if (xBallPos != -1)
 	{
 		if (App->player2->IsEnabled())
-			if (App->player2->current_animation != &App->player2->climb)
-				App->player2->current_animation = &App->player2->idle;
+			App->player2->current_animation->speed = 0;
 		App->player2->pausePlayer = true;
 
 		if (xBallPos < position.x + 16)

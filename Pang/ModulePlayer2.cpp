@@ -101,6 +101,8 @@ bool ModulePlayer2::Start()
 	endclimb.speed = 0.0f;
 	shield.speed = 0.2f;
 
+	movementDirection = 1;
+
 	lastHitBall = -1;
 	speed = 2;
 	current_animation = &idle;
@@ -518,8 +520,7 @@ void ModulePlayer2::Kill(int xBallPos)
 	App->player->player2DeadTimer = 601;
 	if (xBallPos != -1)
 	{
-		if (App->player->current_animation != &App->player->climb)
-			App->player->current_animation = &App->player->idle;
+		App->player->current_animation->speed = 0;
 		App->player->pausePlayer = true;
 
 		if (xBallPos < position.x + 16)
