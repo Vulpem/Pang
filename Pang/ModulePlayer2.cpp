@@ -567,6 +567,7 @@ void ModulePlayer2::CheckBallCollision()
 					{
 						dead = true;
 						Kill(tmp->data->position.x);
+						App->render->Blit(App->player->deadFlash, 0, 0, &App->player->deadFlashRect);
 					}
 				}
 			}

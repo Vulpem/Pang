@@ -144,6 +144,8 @@ bool ModulePlayer::Init()
 	shield.frames.PushBack({ 0, 0, 33, 43 });
 	shield.frames.PushBack({ 35, 0, 34, 43 });
 	shield.speed = 0.2f;
+
+	deadFlashRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 4 * TILE };
 	return true;
 }
 
@@ -165,6 +167,7 @@ bool ModulePlayer::Start()
 	graphics = App->scenePlay->livesGraphics;
 	shieldTexture = App->textures->Load("./Image_Sources/Shield.png");
 	timeOutTexture = App->textures->Load("./Image_Sources/Time_Out.png");
+	deadFlash = App->textures->Load("./Image_Sources/DeadFlash.png");
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -602,6 +605,7 @@ void ModulePlayer::CheckBallCollision()
 					{
 						dead = true;
 						Kill(tmp->data->position.x);
+						App->render->Blit(deadFlash, 0, 0, &deadFlashRect);
 					}
 				}
 			}
