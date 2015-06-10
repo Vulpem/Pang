@@ -43,6 +43,7 @@ public:
 	int movementDirection = 1;
 	int finishClimbCounter = 0;
 	int deadCounter = 0;
+	int lastHitBall;
 
 	int speed = 2;
 	bool undying = true;

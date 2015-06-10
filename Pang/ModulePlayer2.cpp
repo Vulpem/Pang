@@ -101,7 +101,7 @@ bool ModulePlayer2::Start()
 	endclimb.speed = 0.0f;
 	shield.speed = 0.2f;
 
-
+	lastHitBall = -1;
 	speed = 2;
 	current_animation = &idle;
 	LOG("--Starting player");
