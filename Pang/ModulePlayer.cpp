@@ -147,6 +147,14 @@ bool ModulePlayer::Init()
 
 bool ModulePlayer::Start()
 {
+	//Animation speed
+	forward.speed = 0.32f;
+	backward.speed = 0.32f;
+	climb.speed = 0.16f;
+	endclimb.speed = 0.0f;
+	shield.speed = 0.2f;
+
+
 	speed = 2;
 	current_animation = &idle;
 	LOG("--Starting player");
@@ -499,7 +507,7 @@ bool ModulePlayer::EndClimbUp()
 	if (playerState == climbingUp)
 	{
 		current_animation = &endclimb;
-		if (finishClimbCounter < 7)
+		if (finishClimbCounter < 4)
 		{
 			finishClimbCounter++;
 		}
@@ -564,6 +572,7 @@ void ModulePlayer::Kill(int xBallPos)
 	}
 	else
 	{
+		current_animation->speed = 0;
 		pausePlayer = true;
 		timeOut = true;
 	}

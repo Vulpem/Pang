@@ -204,7 +204,7 @@ bool Boost::Update(Application* app)
 		lifeTime = 0;
 		Fall(app);
 	}
-	if (app->player2->position.x + 15 > position.x && app->player2->position.x + 15 < position.x + 32 && app->player2->position.y + 20 > position.y - 16 && app->player2->position.y + 20 < position.y + 16)
+	if (app->player2->IsEnabled() && app->player2->position.x + 15 > position.x && app->player2->position.x + 15 < position.x + 32 && app->player2->position.y + 20 > position.y - 16 && app->player2->position.y + 20 < position.y + 16)
 	{
 		app->player2->score += 100;
 		switch (type)
@@ -241,7 +241,7 @@ bool Boost::Update(Application* app)
 		app->audio->PlayFx(app->boosts->pickedUp);
 		return false;
 	}
-	if (app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
+	if (app->player->IsEnabled() && app->player->position.x + 15 > position.x && app->player->position.x + 15 < position.x + 32 && app->player->position.y + 20 > position.y - 16 && app->player->position.y + 20 < position.y + 16)
 	{
 		app->player->score += 100;
 		switch (type)

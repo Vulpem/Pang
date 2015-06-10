@@ -60,6 +60,7 @@ bool ModuleScenePlay::Start(int level)
 	timerImage = App->textures->Load("./Image_Sources/Timer_Photo.png");
 	ready = App->textures->Load("./Image_Sources/Ready.png");
 	timerNum =  App->textures->Load("./Image_Sources/Timer_Numbers.png");
+	timerAudio = App->audio->LoadFx("./Sounds/Timer.wav");
 
 	if (timerImage == NULL)
 	{
@@ -99,6 +100,11 @@ update_status ModuleScenePlay::Update()
 	if (timer >= 0)
 	{
 		timer--;
+	}
+	if (timer <= 300)
+	{
+		if (timer % 60 == 0)
+			App->audio->PlayFx(timerAudio, 1);
 	}
 	if (timer <= 0 && App->player->dead == false)
 	{

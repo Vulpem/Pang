@@ -28,6 +28,8 @@ public:
 	SDL_Rect timerNumRect3;
 
 	SDL_Rect player1Rect;
+
+	int timerAudio;
 	int lives1;
 	int lives2;
 	int currentLvl;

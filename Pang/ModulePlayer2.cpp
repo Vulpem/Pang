@@ -93,6 +93,14 @@ bool ModulePlayer2::Init()
 
 bool ModulePlayer2::Start()
 {
+	//Animation speed
+	forward.speed = 0.32f;
+	backward.speed = 0.32f;
+	climb.speed = 0.16f;
+	endclimb.speed = 0.0f;
+	shield.speed = 0.2f;
+
+
 	speed = 2;
 	current_animation = &idle;
 	LOG("--Starting player");
@@ -104,8 +112,6 @@ bool ModulePlayer2::Start()
 		LOG("------------------Could not load player graphics----------------------");
 	}
 	playerState = standing;
-	position.x = TILE;
-	position.y = 21 * TILE;
 	ladderAlign = false;
 	dead = false;
 	deadAnimEnd = false;
@@ -197,10 +203,6 @@ update_status ModulePlayer2::Update()
 			}
 		}
 	}
-
-
-//	CheckBallCollision();
-
 
 	return UPDATE_CONTINUE;
 }
@@ -461,7 +463,7 @@ bool ModulePlayer2::EndClimbUp()
 	if (playerState == climbingUp)
 	{
 		current_animation = &endclimb;
-		if (finishClimbCounter < 7)
+		if (finishClimbCounter < 4)
 		{
 			finishClimbCounter++;
 		}
@@ -525,6 +527,7 @@ void ModulePlayer2::Kill(int xBallPos)
 	}
 	else
 	{
+		current_animation->speed = 0;
 		pausePlayer = true;
 		timeOut = true;
 	}

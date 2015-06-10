@@ -17,7 +17,6 @@ SOUNDS:
 	Sounds to get:
 		Sticky hook reaching the top
 		Pistol
-		Intro timer
 		Life up
 		Shield going down
 
