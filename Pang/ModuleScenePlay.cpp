@@ -115,6 +115,15 @@ update_status ModuleScenePlay::Update()
 	
 	if (App->balls->ballsList.count() == 0)
 	{
+		endingCounter++;
+
+	}
+	else
+	{
+		endingCounter = 0;
+	}
+	if (endingCounter > 5)
+	{
 		timeBonus = timer / FPS * 10;
 		App->player->shieldDelay = 0;
 		App->player2->shieldDelay = 0;
@@ -124,7 +133,6 @@ update_status ModuleScenePlay::Update()
 		if (player2Enabled)
 			App->player2->score += timeBonus;
 	}
-	
 	else
 	{
 	

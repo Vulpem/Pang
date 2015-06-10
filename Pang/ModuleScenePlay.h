@@ -37,6 +37,7 @@ public:
 	int timer;
 	int startTimerEvent;
 	int timeBonus;
+	int endingCounter;
 
 	bool player2Enabled;
 	bool player1Enabled = true;
