@@ -194,6 +194,8 @@ update_status ModuleSceneIntro::Update()
 		//Print map with stages
 		if (mapOn)
 		{
+			if (timeCounter <= 600 && timeCounter % 60 == 0)
+				App->audio->PlayMusic("./Sounds/Timer.wav", 1);
 			App->render->Blit(map, 0, 0, NULL);
 			//Drawing time counter
 			timerRect.x = (timeCounter / 60) * 27;

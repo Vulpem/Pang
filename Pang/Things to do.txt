@@ -19,7 +19,7 @@ SOUNDS:
 		Pistol
 		Intro timer
 		Life up
-
+		Shield going down
 
 SPRITES:
 	Get all arcade game sprites:
