@@ -657,14 +657,14 @@ void ModuleMaps::LoadMap(int nMap)
 		App->scenePlay->background.y = ((nMap - 1) / 2) * (SCREEN_HEIGHT - 3 * TILE) + 8;
 
 		App->player->position.x = 18 * TILE;
-		App->player->position.y = 21 * TILE;
+		App->player2->position.x = 26 * TILE;
+		App->player->position.y = App->player2->position.y = 21 * TILE;
 		switch (nMap)
 		{
 		case 0:
 		{
 			App->balls->AddBall(50, 50, little, blue, 1);
 			App->player->position.x = 1 * TILE;
-			App->player->position.y = 23 * TILE;
 			App->audio->PlayMusic("./Sounds/MtKeirin.wav", 1);
 			break;
 		}
@@ -690,9 +690,10 @@ void ModuleMaps::LoadMap(int nMap)
 		}
 		case 4:
 		{
-			App->balls->AddBall(20 * TILE, 4 * TILE, huge, red, 1);
+			App->balls->AddBall(24 * TILE, 4 * TILE, huge, red, 1);
 			App->player->position.x = 20 * TILE;
-			App->player->position.y = 15 * TILE;
+			App->player2->position.x = 25 * TILE;
+			App->player->position.y = App->player2->position.y = 15 * TILE;
 			App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
 			break;
 		}
@@ -708,6 +709,7 @@ void ModuleMaps::LoadMap(int nMap)
 			App->balls->AddBall(19 * TILE, 4 * TILE, huge, green, -1);
 			App->balls->AddBall(27 * TILE, 4 * TILE, huge, green, 1);
 			App->player->position.x = 10 * TILE;
+			App->player2->position.x = 36 * TILE;
 			App->audio->PlayMusic("./Sounds/2MtKeirin.wav", 1);
 			break;
 		}
@@ -723,6 +725,7 @@ void ModuleMaps::LoadMap(int nMap)
 			App->balls->AddBall(18 * TILE, 4 * TILE, big, blue, 1);
 			App->balls->AddBall(27 * TILE, 4 * TILE, big, blue, -1);
 			App->player->position.x = 12 * TILE;
+			App->player2->position.x = 34 * TILE;
 			App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
 			break;
 		}
@@ -735,6 +738,7 @@ void ModuleMaps::LoadMap(int nMap)
 			App->balls->AddBall(6 * TILE, 1 * TILE, medium, green, 1);
 			App->balls->AddBall(23 * TILE, 4 * TILE, huge, green, 1);
 			App->player->position.x = 3 * TILE;
+			App->player2->position.x = 7 * TILE;
 			App->audio->PlayMusic("./Sounds/3Emerald_Temple.wav", 1);
 			break;
 		}
