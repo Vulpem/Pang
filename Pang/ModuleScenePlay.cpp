@@ -42,6 +42,7 @@ bool ModuleScenePlay::Init()
 // Load assets
 bool ModuleScenePlay::Start(int level)
 {
+	continueAudio = false;
 	App->player->shieldOn = false;
 	App->player2->shieldOn = false;
 
@@ -97,6 +98,14 @@ bool ModuleScenePlay::Start(int level)
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
+	if ((App->player->waitingContinue && App->player2->waitingContinue) || (App->player->waitingContinue && !App->player2->IsEnabled()) || (!App->player->IsEnabled() && App->player2->waitingContinue))
+		if (!continueAudio)
+		{
+			App->audio->PlayMusic("./Sounds/Continue.wav", 1);
+			continueAudio = true;
+		}
+
+
 	if (timer >= 0)
 	{
 		timer--;
@@ -197,15 +206,16 @@ update_status ModuleScenePlay::Update()
 		App->player->Enable();
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && (!App->player2->IsEnabled() || (App->player->player2DeadTimer > 0)))
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && ((!App->player2->IsEnabled() && !App->player2->dead) || (App->player->player2DeadTimer > 0 && App->player2->waitingContinue)))
 	{
 		if (!App->player->IsEnabled())
 		{
 			Disable();
 			Enable(currentLvl);
 		}
+		App->player2->dead = false;
 		App->player2->score = 0;
-		App->player2->waitingContinue = false;
+		App->player2->waitingContinue = false; 
 		lives2 = 2;
 		player2Enabled = true;
 		App->player2->Disable();

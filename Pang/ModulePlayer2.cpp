@@ -25,6 +25,7 @@ bool ModulePlayer2::Init()
 	pausePlayer = false;
 	graphics = NULL;
 
+	dead = false;
 
 	//////////////
 	//Animations//
@@ -113,7 +114,7 @@ bool ModulePlayer2::Start()
 	}
 	playerState = standing;
 	ladderAlign = false;
-	dead = false;
+
 	deadAnimEnd = false;
 	boost = none;
 
@@ -151,6 +152,10 @@ update_status ModulePlayer2::Update()
 
 	if (!waitingContinue)
 	{
+		if (timeOut)
+		{
+			App->render->Blit(App->player->timeOutTexture, SCREEN_WIDTH / 2 - App->player->timeOutRect.w / 2, SCREEN_HEIGHT / 2 - App->player->timeOutRect.h / 2, &App->player->timeOutRect);
+		}
 		if (shieldOn && !timeOut)
 		{
 			App->render->Blit(shieldTexture, position.x - 6, position.y - 8, &shieldAnim->GetCurrentFrame());
@@ -577,11 +582,16 @@ void ModulePlayer2::Reset()
 	{
 		timeOutDelay++;
 	}
-
+	if (waitingContinue && App->player->player2DeadTimer <= 0)
+	{
+		App->scenePlay->player2Enabled = false;
+		Disable();
+	}
 	if (deadAnimEnd == true)
 	{
 		if (App->scenePlay->lives2 > 0)
 		{
+			dead = false;
 			App->scenePlay->lives2 -= 1;
 			App->scenePlay->Disable();
 			App->scenePlay->Enable(App->scenePlay->currentLvl);
@@ -607,69 +617,21 @@ void ModulePlayer2::Reset()
 			else
 			{
 				waitingContinue = true;
- 				App->scenePlay->Disable();
-				App->scenePlay->Enable(App->scenePlay->currentLvl);
-				if (App->player->player2DeadTimer <= 0)
+				if (!App->player->deadAnimEnd)
 				{
-					App->scenePlay->player2Enabled = false;
-					Disable();
+ 					App->scenePlay->Disable();
+					App->scenePlay->Enable(App->scenePlay->currentLvl);
 				}
-				else
-					App->player->player2DeadTimer--;
-				/*
-				App->player->timeOutDelay = 0;
-				App->player->timeOut = false;
-				App->scenePlay->Disable();
-				Disable();
-				App->scenePlay->player2Enabled = false;
-				App->scenePlay->Enable(App->scenePlay->currentLvl);
-				*/
 			}
-
 		}
 	}
 	else if (timeOutDelay == 180)
 	{
+		if (App->player->IsEnabled() && !App->player->waitingContinue)
+			App->scenePlay->lives1--;
 		timeOutDelay = 0;
 		timeOut = false;
-		if (App->scenePlay->lives2 > 0)
-		{
-			App->scenePlay->lives2 -= 1;
-			if (App->player->IsEnabled())
-			{
-				if (App->scenePlay->lives1 > 0)
-					App->scenePlay->lives1 -= 1;
-				else
-				{
-					App->player->Disable();
-					App->scenePlay->player1Enabled = false;
-				}
-
-			}
-
-			App->scenePlay->Disable();
-			App->scenePlay->Enable(App->scenePlay->currentLvl);
-		}
-		else if (App->scenePlay->lives2 <= 0)
-		{
-			App->player->timeOutDelay = 0;
-			App->player->timeOut = false;
-			App->scenePlay->player2Enabled = false;
-			if (App->player->IsEnabled())
-				if (App->scenePlay->lives1 > 0)
-				{
-					App->scenePlay->lives1 -= 1;
-					App->player->Disable();
-					App->scenePlay->Disable();
-					App->scenePlay->Enable(App->scenePlay->currentLvl);
-				}
-
-				else
-				{
-					App->scenePlay->Disable();
-					App->sceneIntro->Enable();
-				}
-		}
+		deadAnimEnd = true;
 	}
 }
 

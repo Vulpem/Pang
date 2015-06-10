@@ -30,6 +30,7 @@ public:
 	SDL_Rect player1Rect;
 
 	int timerAudio;
+	bool continueAudio;
 	int lives1;
 	int lives2;
 	int currentLvl;

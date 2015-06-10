@@ -170,8 +170,6 @@ bool ModulePlayer::Start()
 		LOG("------------------Could not load player graphics----------------------");
 	}
 	playerState = standing;
-	position.x = TILE;
-	position.y = 21 * TILE;
 	ladderAlign = false;
 	dead = false;
 	deadAnimEnd = false;
@@ -184,11 +182,6 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	Reset();
-
-	if (!App->player2->IsEnabled() && App->player2->dead && App->player2->deadAnimEnd && player2DeadTimer >= 0)
-	{
-		player2DeadTimer--;
-	}
 
 	if (shieldDelay > 0)
 	{
@@ -222,10 +215,7 @@ update_status ModulePlayer::Update()
 		}
 
 		if (!timeOut)
-		{
-
-
-			//////////////////////
+		{			//////////////////////
 
 			if (current_animation == &shot  || current_animation == &shot2)
 			{
@@ -629,10 +619,10 @@ void ModulePlayer::Reset()
 	}
 	if (waitingContinue && player1DeadTimer <= 0)
 	{
-					App->scenePlay->player1Enabled = false;
-					Disable();
+		App->scenePlay->player1Enabled = false;
+		Disable();
 	}
-	if (deadAnimEnd == true)
+	if (deadAnimEnd == true )
 	{
 		if (App->scenePlay->lives1 > 0)
 		{
@@ -659,31 +649,19 @@ void ModulePlayer::Reset()
 			else
 			{
 				waitingContinue = true;
-				App->scenePlay->Disable();
-				App->scenePlay->Enable(App->scenePlay->currentLvl);
-				if (player1DeadTimer > 0) 
-					player1DeadTimer--;
+				if (player1DeadTimer <= 0)
+				{
+					App->scenePlay->Disable();
+					App->scenePlay->Enable(App->scenePlay->currentLvl);
+				}
 			}
 		}
 	}
 	if (timeOutDelay == 180)
 	{
+		deadAnimEnd = true;
 		timeOutDelay = 0;
 		timeOut = false;
-		if (!App->player2->IsEnabled())
-		{
-			if (App->scenePlay->lives1 > 0)
-			{
-				App->scenePlay->lives1 -= 1;
-				App->scenePlay->Disable();
-				App->scenePlay->Enable(App->scenePlay->currentLvl);
-			}
-			else
-			{
-				App->scenePlay->Disable();
-				App->sceneIntro->Enable();
-			}
-		}
 	}
 }
 
@@ -901,9 +879,9 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 
-	if (!App->player2->IsEnabled())
+	if (!App->player2->IsEnabled() && !App->player2->dead)
 	{
-		if (App->scenePlay->timer / 20 % 2 == 0 && !App->player2->dead)
+		if (App->scenePlay->timer / 20 % 2 == 0)
 		{
 			App->render->Blit(uiText[UI_Player_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Player_PUSHBUTTON]);
 		}
