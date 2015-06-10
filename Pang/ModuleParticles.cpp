@@ -82,6 +82,7 @@ bool ModuleParticles::Init()
 		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
 		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
 		points[n].anim.frames.PushBack({ n * 16, 104, 16, 8 });
+		
 	}
 
 	return true;
