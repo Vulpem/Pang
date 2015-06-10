@@ -29,6 +29,8 @@ struct Bullet
 
 	//Methods
 	bool Update(Application* app, int);
+	void IncreaseScore(ModulePlayer* player, int ballType);
+	void IncreaseScore(ModulePlayer2* player, int ballType);
 	void BreakingBrick(int num, int w, int h, Application* App);
 
 };

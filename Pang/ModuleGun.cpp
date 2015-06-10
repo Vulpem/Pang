@@ -306,12 +306,11 @@ bool Bullet::Update(Application* app, int player)
 						tmp->data->dead = true;
 						if (player == 1)
 						{
-							
-							app->player->score += (50 * (4 - tmp->data->type));
+							IncreaseScore(app->player, tmp->data->type);
 						}
 						else if (player == 2)
 						{
-							app->player2->score += (50 * (4 - tmp->data->type));
+							IncreaseScore(app->player2, tmp->data->type);
 						}
 
 						return false;
@@ -328,11 +327,11 @@ bool Bullet::Update(Application* app, int player)
 						tmp->data->dead = true;
 						if (player == 1)
 						{
-							app->player->score += (50 * (4 - tmp->data->type));
+							IncreaseScore(app->player, tmp->data->type);
 						}
 						else if (player == 2)
 						{
-							app->player2->score += (50 * (4 - tmp->data->type));
+							IncreaseScore(app->player2, tmp->data->type);
 						}
 
 						return false;
@@ -347,6 +346,40 @@ bool Bullet::Update(Application* app, int player)
 ////////////////////////////////////////////////
 	
 	return ret;
+}
+
+void Bullet::IncreaseScore(ModulePlayer* player, int ballType)
+{
+	if (ballType != player->lastHitBall)
+	{
+		player->lastHitBall = ballType;
+		player->multiplier = 1;
+	}
+	else
+	{
+		if (player->multiplier < 8)
+		{
+			player->multiplier = player->multiplier * 2;
+		}
+	}
+	player->score += (50 * (4 - ballType) * player->multiplier);
+}
+
+void Bullet::IncreaseScore(ModulePlayer2* player, int ballType)
+{
+	if (ballType != player->lastHitBall)
+	{
+		player->lastHitBall = ballType;
+		player->multiplier = 1;
+	}
+	else
+	{
+		if (player->multiplier < 8)
+		{
+			player->multiplier = player->multiplier * 2;
+		}
+	}
+	player->score += (50 * (4 - ballType) * player->multiplier);
 }
 
 bool ModuleGun::CleanUp()
