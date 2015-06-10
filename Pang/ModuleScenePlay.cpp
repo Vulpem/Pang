@@ -194,11 +194,11 @@ update_status ModuleScenePlay::Update()
 		App->player2->pausePlayer = false;
 		App->balls->pauseBalls = false;
 	}
-	if (timer == startTimerEvent * 0.4)
+	if (timer == startTimerEvent * 0.5)
 	{
 		App->audio->PlayMusic("./Sounds/Getting_late.wav", 1);
 	}
-	if (timer == startTimerEvent * 0.15)
+	if (timer == startTimerEvent * 0.20)
 	{
 		App->audio->PlayMusic("./Sounds/out_of_time.wav", 1);
 	}
