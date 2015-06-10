@@ -104,7 +104,7 @@ update_status ModuleScenePlay::Update()
 	if (timer <= 300)
 	{
 		if (timer % 60 == 0)
-			App->audio->PlayFx(timerAudio, 1);
+			App->audio->PlayFx(timerAudio, 0);
 	}
 	if (timer <= 0 && App->player->dead == false)
 	{
