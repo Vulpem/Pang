@@ -94,7 +94,7 @@ bool ModuleSceneTransition::Start(int _nextLevel)
 	LOG("Scene Transition");
 	bool ret = true;
 	graphics = App->textures->Load("./Image_Sources/TransitionScene.png");
-	graphics2 = App->textures->Load("./Image_Sources/IntroMap.png");
+	graphics2 = App->textures->Load("./Image_Sources/TransitionMap.png");
 	selected = App->textures->Load("./Image_Sources/LevelSelected.png");
 
 	return ret;

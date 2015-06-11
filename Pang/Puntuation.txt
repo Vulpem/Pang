@@ -1,7 +1,0 @@
-Balls
-	Big:	50
-	Medium: 100
-	Litle:	150
-	Tiny:	200
-
-PowerUps:	100

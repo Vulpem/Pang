@@ -1,29 +1,15 @@
 IMPORTANT BUGS:
 		Clean disables / enables with maps and scenes... and basically all the code xD
 		Quan tens més de 4 vides, el número que indica la quantitat de vides no apareix
-
-SCENE TRANSITION:
-	Map between stages appears without joystick image
-
 PLAYERS:
 
 
-SOUNDS:  (STIL NOT ONE FUCKING SOUND ADDED)
+SOUNDS:
 	Adjust sounds "relative" volume
-	Fix level sound with 3 seconds delay
 	Gun shoot doesnt always sound
 
 SPRITES:
 	Get all arcade game sprites:
 		Hook
 		Boosts
-		Scene trasnition, map without joystick and "animation" images
 		Particle hook shot
-
-
-_____________________________________________________________
-
-ALPHA REQUIREMENTS (all done)
-	Three levels: easy(without blocks), medium (with blocks) and hard (with blocks and stairs) ---> done
-	Items: (hook), (2x hook), (hook that stays in place), the gun, (lives), (shield)
-	Two players ---> done
