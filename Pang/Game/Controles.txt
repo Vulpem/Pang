@@ -1,0 +1,22 @@
+Player 1:
+	Walk: [A][D]
+	Climb stairs: [W][S]
+	Shoot / Start: [SPACE]
+Player 2:
+	Walk: [Left Arrow][Right Arrow]
+	Climb stairs: [Upper Arrow][Bottom Arrow]
+	Shoot / Start: [ENTER]
+
+Enable debug mode: [N]
+Commands for debug mode:
+	Spawn a huge ball: [1]
+	Spawn a big ball: [2]
+	Spawn a medium ball: [3]
+	Spawn a little ball: [4]
+	Teleport to tests level: [R]
+	Set timer to "4": [T]
+	Pause / Un-pause balls: [P]
+	Spawn a random Boost: [L]
+	Bomb Boost (once): [V]
+	Next level: [z]
+	
