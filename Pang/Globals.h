@@ -49,7 +49,7 @@ enum Boosts
 
 // Configuration -----------
 #define TILE 8
-
+#define LEVELS_NUMBER 9
 #define FPS 60
 #define SCREEN_WIDTH 384
 #define SCREEN_HEIGHT 240

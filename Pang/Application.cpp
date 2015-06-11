@@ -10,10 +10,10 @@ Application::Application()
 	audio = new ModuleAudio(this);
 	fonts = new ModuleFonts(this, true);
 
-	sceneIntro = new ModuleSceneIntro(this, false);
+	sceneIntro = new ModuleSceneIntro(this, true);
 	scenePlay = new ModuleScenePlay(this, false);
 	sceneTransition = new ModuleSceneTransition(this, false);
-	sceneEnd = new ModuleSceneEnd(this, true);
+	sceneEnd = new ModuleSceneEnd(this, false);
 
 	player2 = new ModulePlayer2(this, false);
 	player = new ModulePlayer(this, false);

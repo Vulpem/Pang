@@ -133,16 +133,23 @@ update_status ModuleScenePlay::Update()
 	{
 		endingCounter = 0;
 	}
-	if (endingCounter > 5)
+	if (endingCounter > 180)
 	{
-		timeBonus = timer / FPS * 10;
+		timeBonus = (timer / FPS * 10) + 30;
 		App->player->shieldDelay = 0;
 		App->player2->shieldDelay = 0;
 		Disable();
-		App->sceneTransition->Enable(++currentLvl);
 		App->player->score += timeBonus;
 		if (player2Enabled)
 			App->player2->score += timeBonus;
+		if (currentLvl == LEVELS_NUMBER)
+		{
+			App->sceneEnd->Enable();
+		}
+		else
+		{
+			App->sceneTransition->Enable(++currentLvl);
+		}
 	}
 	else
 	{
@@ -159,7 +166,7 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
-			if (App->player->IsEnabled() || App->player2->IsEnabled())
+			if ((App->player->IsEnabled() || App->player2->IsEnabled()) && App->balls->ballsList.count() > 0)
 			{
 				if ((!App->player2->IsEnabled() && !App->player->dead) || (!App->player->IsEnabled() && !App->player2->dead) || (!App->player->dead && !App->player2->dead))
 				{
@@ -314,7 +321,10 @@ update_status ModuleScenePlay::Update()
 		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 		{
 			Disable();
-			App->sceneTransition->Enable(++currentLvl);
+			if (currentLvl >= LEVELS_NUMBER)
+				App->sceneEnd->Enable();
+			else
+				App->sceneTransition->Enable(++currentLvl);
 		}
 		if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		{
