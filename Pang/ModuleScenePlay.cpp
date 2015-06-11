@@ -195,30 +195,52 @@ update_status ModuleScenePlay::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && App->player->IsEnabled() && App->player->player1DeadTimer > 0 && App->player->waitingContinue)
 	{
-		Disable();
-		Enable(currentLvl);
-		App->player->score = 0;
-		lives1 = 2;
-		player1Enabled = true;
-		App->player->waitingContinue = false;
-		App->player->Disable();
-		App->player->Enable();
+		if ((!App->player->timeOut && !App->player2->timeOutContinue) || player2ToEnable)
+		{
+			Disable();
+			Enable(currentLvl);
+			ResetPlayer1();
+			if (player2ToEnable)
+				ResetPlayer2();
+		}
+		else 
+			player1ToEnable = true;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && ((!App->player2->IsEnabled() && !App->player2->dead) || (App->player->player2DeadTimer > 0 && App->player2->waitingContinue)))
 	{
-		if (App->player2->waitingContinue)
+		if ((!App->player->timeOut && !App->player2->timeOutContinue) || player1ToEnable)
 		{
+			if (App->player2->dead)
+			{
+				Disable();
+				Enable(currentLvl);
+			}
+			ResetPlayer2();
+			if (player1ToEnable)
+				ResetPlayer1();
+		}
+		else
+			player2ToEnable = true;
+	}
+
+	if ((App->player->timeOutContinue && App->player->player1DeadTimer <= 0) || (App->player2->timeOutContinue && App->player->player2DeadTimer <= 0))
+	{
+		if (player1ToEnable || player2ToEnable)
+		{
+			App->player->timeOut = false;
+			App->player2->timeOut = false;
 			Disable();
 			Enable(currentLvl);
+			if (player1ToEnable)
+			{
+				ResetPlayer1();
+			}
+			if (player2ToEnable)
+			{
+				ResetPlayer2();
+			}
 		}
-		App->player2->dead = false;
-		App->player2->score = 0;
-		App->player2->waitingContinue = false; 
-		lives2 = 2;
-		player2Enabled = true;
-		App->player2->Disable();
-		App->player2->Enable();
 	}
 
 	if ((timer > startTimerEvent + 60 || timer / 5 % 2 == 0) && timer > startTimerEvent)
@@ -355,4 +377,28 @@ void ModuleScenePlay::Enable(int level)
 			enabled = true;
 			Start(level);
 		}
+}
+
+void ModuleScenePlay::ResetPlayer1()
+{
+	player1ToEnable = false;
+	App->player->dead = false;
+	App->player->score = 0;
+	lives1 = 2;
+	player1Enabled = true;
+	App->player->waitingContinue = false;
+	App->player->Disable();
+	App->player->Enable();
+}
+
+void ModuleScenePlay::ResetPlayer2()
+{
+	player2ToEnable = false;
+	App->player2->dead = false;
+	App->player2->score = 0;
+	App->player2->waitingContinue = false;
+	lives2 = 2;
+	player2Enabled = true;
+	App->player2->Disable();
+	App->player2->Enable();
 }

@@ -641,6 +641,8 @@ void ModulePlayer2::Reset()
 			App->scenePlay->lives1--;
 		timeOutDelay = 0;
 		timeOut = false;
+		if (App->scenePlay->lives2 == 0)
+			timeOutContinue = true;
 		deadAnimEnd = true;
 	}
 }

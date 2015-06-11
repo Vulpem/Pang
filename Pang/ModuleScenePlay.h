@@ -42,6 +42,10 @@ public:
 
 	bool player2Enabled;
 	bool player1Enabled = true;
+
+	bool player1ToEnable = false;
+	bool player2ToEnable = false;
+
 	bool debugMode = false;
 
 	ModuleScenePlay(Application* app, bool start_enabled = true);
@@ -55,5 +59,7 @@ public:
 	void Enable(int level);
 
 	void UpdateInterface();
+	void ResetPlayer1();
+	void ResetPlayer2();
 
 };

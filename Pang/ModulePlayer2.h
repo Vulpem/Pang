@@ -51,6 +51,7 @@ public:
 	bool dead = false;
 	bool deadAnimEnd = false;
 	bool timeOut = false;
+	bool timeOutContinue = false;
 	float deadAnimYSpeed;
 	int deadAnimXSpeed;
 
