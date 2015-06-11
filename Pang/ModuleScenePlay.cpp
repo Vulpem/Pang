@@ -197,11 +197,13 @@ update_status ModuleScenePlay::Update()
 	{
 		if ((!App->player->timeOut && !App->player2->timeOutContinue) || player2ToEnable)
 		{
-			Disable();
-			Enable(currentLvl);
+
 			ResetPlayer1();
 			if (player2ToEnable)
-				ResetPlayer2();
+			ResetPlayer2();
+			Disable();
+			Enable(currentLvl);
+
 		}
 		else 
 			player1ToEnable = true;
@@ -211,14 +213,14 @@ update_status ModuleScenePlay::Update()
 	{
 		if ((!App->player->timeOut && !App->player2->timeOutContinue) || player1ToEnable)
 		{
+			ResetPlayer2();
+			if (player1ToEnable)
+				ResetPlayer1();
 			if (App->player2->dead)
 			{
 				Disable();
 				Enable(currentLvl);
 			}
-			ResetPlayer2();
-			if (player1ToEnable)
-				ResetPlayer1();
 		}
 		else
 			player2ToEnable = true;
@@ -230,8 +232,7 @@ update_status ModuleScenePlay::Update()
 		{
 			App->player->timeOut = false;
 			App->player2->timeOut = false;
-			Disable();
-			Enable(currentLvl);
+
 			if (player1ToEnable)
 			{
 				ResetPlayer1();
@@ -240,6 +241,8 @@ update_status ModuleScenePlay::Update()
 			{
 				ResetPlayer2();
 			}
+			Disable();
+			Enable(currentLvl);
 		}
 	}
 
