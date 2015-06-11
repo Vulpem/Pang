@@ -117,7 +117,7 @@ update_status ModuleSceneTransition::Update()
 	timeCounter++;
 
 	//Change to next level after animation
-	if (timeCounter >= 180 || (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && timeCounter >= 50))
+	if (timeCounter >= 180 || ((App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP) && timeCounter >= 50))
 	{
 		timeCounter = 0;
 		if (nextLevel <= 10)
