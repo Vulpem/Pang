@@ -561,36 +561,40 @@ bool ModulePlayer::StartClimbDown()
 
 void ModulePlayer::Kill(int xBallPos)
 {
-	LOG("Player has died\n");
-	App->balls->pauseBalls = true;
-	dead = true;
-	player1DeadTimer = 601;
-	App->audio->PlayMusic("./Sounds/Death.wav", 1);
-
-	if (xBallPos != -1)
+	if (!dead)
 	{
-		if (App->player2->IsEnabled())
-			App->player2->current_animation->speed = 0;
-		App->player2->pausePlayer = true;
+		LOG("Player has died\n");
+		App->balls->pauseBalls = true;
+		dead = true;
+		player1DeadTimer = 601;
+		App->audio->PlayMusic("./Sounds/Death.wav", 1);
 
-		if (xBallPos < position.x + 16)
+		if (xBallPos != -1)
 		{
-			current_animation = &killDead2;
-			deadAnimXSpeed = 1;
+			if (App->player2->IsEnabled())
+				App->player2->current_animation->speed = 0;
+			App->player2->pausePlayer = true;
+
+			if (xBallPos < position.x + 16)
+			{
+				current_animation = &killDead2;
+				deadAnimXSpeed = 1;
+			}
+			else
+			{
+				current_animation = &killDead;
+				deadAnimXSpeed = -1;
+			}
+			deadAnimYSpeed = -4;
 		}
 		else
 		{
-			current_animation = &killDead;
-			deadAnimXSpeed = -1;
+			current_animation->speed = 0;
+			pausePlayer = true;
+			timeOut = true;
 		}
-		deadAnimYSpeed = -4;
 	}
-	else
-	{
-		current_animation->speed = 0;
-		pausePlayer = true;
-		timeOut = true;
-	}
+
 }
 
 void ModulePlayer::CheckBallCollision()
@@ -615,7 +619,6 @@ void ModulePlayer::CheckBallCollision()
 					}
 					else if (!undying && shieldDelay == 0)
 					{
-						dead = true;
 						Kill(tmp->data->position.x);
 					}
 				}
