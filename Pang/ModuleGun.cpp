@@ -71,6 +71,7 @@ bool ModuleGun::Start()
 	maxShots1 = maxShots2 = 1;
 	type1 = type2 = normal;
 	bulletWidth = 3;
+	hookPathDone = App->audio->LoadFx("Sounds/hook_enganxat.wav");
 	return true;
 }
 
@@ -100,7 +101,14 @@ void ModuleGun::AddBullet(p2Point<int> startPoint, int player, int _type)
 		activeBullet1.add(b);
 	else
 		activeBullet2.add(b);
-	App->particles->AddParticle(App->particles->shot, startPoint.x, startPoint.y - TILE * 4, 8, 8);
+	if (_type == SMG)
+	{
+		App->particles->AddParticle(App->particles->gunShot, startPoint.x, startPoint.y - TILE * 4, 8, 8);
+	}
+	else
+	{
+		App->particles->AddParticle(App->particles->shot, startPoint.x, startPoint.y - TILE * 4, 8, 8);
+	}
 }
 
 void ModuleGun::Shoot(p2Point<int> startPoint, int player)
@@ -226,6 +234,10 @@ bool Bullet::Update(Application* app, int player)
 	bool ret = true;
 	if (pathDone)
 	{
+		if (stickTimer == 0)
+		{
+			app->audio->PlayFx(app->gun->hookPathDone);
+		}
 		stickTimer++;
 		if (stickTimer >= 360)
 			return false;
@@ -233,9 +245,13 @@ bool Bullet::Update(Application* app, int player)
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1)/ 8] == 1)
 	{
 		if (type == stayingHook)
+		{
 			pathDone = true;
+		}
 		else
+		{
 			ret = false;
+		}
 		if (type != gun)
 		{
 			int num = app->maps->lvl[app->scenePlay->currentLvl][(end.y - 1) / 8][end.x / 8];

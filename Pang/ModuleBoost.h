@@ -38,4 +38,5 @@ public:
 	p2List<Boost*> activeBoost;
 	SDL_Texture* graphics;
 	unsigned int pickedUp;
+	unsigned int pickedUpLife;
 };

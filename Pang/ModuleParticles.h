@@ -44,6 +44,7 @@ public:
 
 	Particle explosion[3][4];
 	Particle shot;
+	Particle gunShot;
 	Particle breakingBrick[5];
 	Particle points[8];
 

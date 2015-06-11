@@ -24,7 +24,8 @@ bool ModuleBoost::Start()
 		LOG("Could not load boosts graphics");
 		return false;
 	}
-	pickedUp = App->audio->LoadFx("./Sounds/Coin.wav");
+	pickedUp = App->audio->LoadFx("./Sounds/BoostPickUp.wav");
+	pickedUpLife = App->audio->LoadFx("./Sounds/Life_Up.wav");
 	return true;
 }
 
@@ -215,19 +216,19 @@ bool Boost::Update(Application* app)
 		}
 		case doubleHook:
 		{
-			app->player2->boost = doubleHook; break;
+			app->player2->boost = doubleHook;  break;
 		}
 		case gun:
 		{
-			app->player2->boost = SMG; break;
+			app->player2->boost = SMG; ; break;
 		}
 		case life:
 		{
-			app->scenePlay->lives2 += 1; break;
+			app->scenePlay->lives2 += 1; app->audio->PlayFx(app->boosts->pickedUpLife); break;
 		}
 		case pause:
 		{
-			app->balls->PauseBoost(); break;
+			app->balls->PauseBoost();  break;
 		}
 		case bomb:
 		{
@@ -260,7 +261,7 @@ bool Boost::Update(Application* app)
 		}
 		case life:
 		{
-			app->scenePlay->lives1 += 1; break;
+			app->scenePlay->lives1 += 1; app->audio->PlayFx(app->boosts->pickedUpLife); break;
 		}
 		case pause:
 		{

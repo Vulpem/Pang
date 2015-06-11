@@ -12,7 +12,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Init()
 {
 	
-	// Explosion particle
+//Hook shot particle	
 	shot.anim.frames.PushBack({ 0, 90, 16, 16 });
 	shot.anim.frames.PushBack({ 16, 90, 16, 16 });
 	shot.anim.frames.PushBack({ 32, 90, 16, 16 });
@@ -21,6 +21,16 @@ bool ModuleParticles::Init()
 	shot.anim.speed = 0.4f;
 	shot.fx = App->audio->LoadFx("Sounds/Hook.wav");
 
+//Gun shot particle
+	gunShot.anim.frames.PushBack({ 0, 90, 16, 16 });
+	gunShot.anim.frames.PushBack({ 16, 90, 16, 16 });
+	gunShot.anim.frames.PushBack({ 32, 90, 16, 16 });
+	gunShot.anim.frames.PushBack({ 48, 90, 16, 16 });
+	gunShot.anim.loop = false;
+	gunShot.anim.speed = 0.4f;
+	gunShot.fx = App->audio->LoadFx("Sounds/BulletShot.wav");
+
+// Explosion particle
 	explosion[0][0].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	for (int n = 0; n < 3; n++)
 	{
