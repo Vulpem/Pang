@@ -133,7 +133,7 @@ update_status ModuleScenePlay::Update()
 	{
 		endingCounter = 0;
 	}
-	if (endingCounter > 180)
+	if (endingCounter > 90)
 	{
 		timeBonus = (timer / FPS * 10) + 30;
 		App->player->shieldDelay = 0;
