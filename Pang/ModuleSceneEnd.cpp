@@ -47,7 +47,7 @@ update_status ModuleSceneEnd::Update()
 	App->render->Blit(text1Text, 50, 170, &text1Rect);
 	App->render->Blit(text2Text, 50, 190, &text2Rect);
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
 	{
 		Disable();
 		App->sceneIntro->Enable();
