@@ -59,6 +59,6 @@ enum Boosts
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Buster Bros"
+#define TITLE "Pang"
 
 # define PAUSE_BOOST_TIME 4.0f
