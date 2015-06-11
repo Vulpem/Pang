@@ -65,21 +65,27 @@ bool ModuleParticles::Init()
 	//Animations Bricks//
 	/////////////////////
 
-	for (int n = 0; n++; n < 5)
-	{
-		breakingBrick[n].anim.loop = false;
-		breakingBrick[n].anim.speed = 0.2f;
-		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
-	}
-	//brick frames
+
+	breakingBrick[0].anim.frames.PushBack({ 65, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 65, 96, 8, 8 });
 	breakingBrick[0].anim.frames.PushBack({ 65, 96, 8, 8 });
 	breakingBrick[0].anim.frames.PushBack({ 73, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 73, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 73, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 81, 96, 8, 8 });
+	breakingBrick[0].anim.frames.PushBack({ 81, 96, 8, 8 });
 	breakingBrick[0].anim.frames.PushBack({ 81, 96, 8, 8 });
 	for (int n = 1; n < 5; n++)
 	{
 		breakingBrick[n].anim.frames.PushBack({ 81 + n * 8, 96, 8, 8 });
 		breakingBrick[n].anim.frames.PushBack({ 113 + n * 8, 96, 8, 8 });
 		breakingBrick[n].anim.frames.PushBack({ 145 + n * 8, 96, 8, 8 });
+	}
+	for (int n = 0; n++; n < 5)
+	{
+		breakingBrick[n].anim.loop = false;
+		breakingBrick[n].anim.speed = 0.1f;
+		breakingBrick[n].fx = App->audio->LoadFx("Sounds/Explosion.ogg");
 	}
 	//Points
 	for (int n = 0; n < 8; n++)
