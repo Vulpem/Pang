@@ -309,7 +309,7 @@ bool Bullet::Update(Application* app, int player)
 			end.y -= 4;
 		}
 	}
-/////////////////////////////////////////////////.
+	/////////////////////////////////////////////////.
 	//Checking collisions with balls
 	if (app->maps->map[(end.y - 1) / 8][(end.x + 1) / 8] != 1 || type == stayingHook)
 	{
@@ -317,7 +317,7 @@ bool Bullet::Update(Application* app, int player)
 
 		while (tmp != NULL)
 		{
-			if (!tmp->data->dead)
+			if (tmp->data->dead == false)
 			{
 				if (type != gun)
 				{
