@@ -100,7 +100,7 @@ bool ModuleScenePlay::Start(int level)
 // Update: draw background
 update_status ModuleScenePlay::Update()
 {
-	if ((App->player->waitingContinue && App->player2->waitingContinue) || (App->player->waitingContinue && !App->player2->IsEnabled()) || (!App->player->IsEnabled() && App->player2->waitingContinue))
+	if ((App->player->waitingContinue || App->player2->waitingContinue))
 		if (!continueAudio)
 		{
 			App->audio->PlayMusic("./Sounds/Continue.wav", 1);
