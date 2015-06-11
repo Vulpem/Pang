@@ -625,6 +625,7 @@ void ModulePlayer::CheckBallCollision()
 					}
 					else if (!undying && shieldDelay == 0)
 					{
+						pausePlayer = false;
 						Kill(tmp->data->position.x);
 					}
 				}
