@@ -72,6 +72,7 @@ public:
 	int boost = none;
 	bool shieldOn = false;
 	int shieldDelay = 0;
+	int shieldSound = 2;
 	int prevBoost = none;
 	int playerState = standing;
 	int fallCounter = 0;

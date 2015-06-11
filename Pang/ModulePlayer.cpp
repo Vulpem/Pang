@@ -175,6 +175,7 @@ bool ModulePlayer::Start()
 	shieldTexture = App->textures->Load("./Image_Sources/Shield.png");
 	timeOutTexture = App->textures->Load("./Image_Sources/Time_Out.png");
 	deadFlash = App->textures->Load("./Image_Sources/DeadFlash.png");
+	shieldSound = App->audio->LoadFx("./Sounds/Shield loss.wav");
 	if (graphics == NULL)
 	{
 		LOG("------------------Could not load player graphics----------------------");
@@ -613,6 +614,7 @@ void ModulePlayer::CheckBallCollision()
 				{
 					if (shieldOn == true && !undying)
 					{
+						App->audio->PlayFx(shieldSound, 1);
 						shieldDelay = 120;
 						shieldOn = false;
 						tmp->data->shieldKill = true;
