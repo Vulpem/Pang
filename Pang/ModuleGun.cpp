@@ -399,7 +399,10 @@ bool Bullet::IncreaseScore(ModulePlayer* player, int ballType)
 		}
 		ret = true;
 	}
-	player->score += (50 * (4 - ballType) * player->multiplier);
+	if (player->multiplier > 0)
+	{
+		player->score += (50 * (4 - ballType) * player->multiplier);
+	}
 	return ret;
 }
 

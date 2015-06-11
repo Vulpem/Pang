@@ -140,7 +140,8 @@ update_status ModuleScenePlay::Update()
 		App->player2->shieldDelay = 0;
 		Disable();
 		App->sceneTransition->Enable(++currentLvl);
-		App->player->score += timeBonus;
+		if (player1Enabled)
+			App->player->score += timeBonus;
 		if (player2Enabled)
 			App->player2->score += timeBonus;
 	}
