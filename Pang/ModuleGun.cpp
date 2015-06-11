@@ -263,6 +263,14 @@ bool Bullet::Update(Application* app, int player)
 			{
 				ret = false;
 				BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
+				if (player == 1)
+				{
+					app->player->score += 100;
+				}
+				else
+				{
+					app->player2->score += 100;
+				}
 				app->audio->PlayFx(app->gun->breakingBrick);
 			}
 		}
