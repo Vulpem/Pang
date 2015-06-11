@@ -72,6 +72,8 @@ bool ModuleGun::Start()
 	type1 = type2 = normal;
 	bulletWidth = 3;
 	hookPathDone = App->audio->LoadFx("Sounds/hook_enganxat.wav");
+	breakingBrick = App->audio->LoadFx("Sounds/BreakingBrick.wav");
+	bulletHitBrick = App->audio->LoadFx("Sounds/bulletHitBrick.wav");
 	return true;
 }
 
@@ -251,6 +253,10 @@ bool Bullet::Update(Application* app, int player)
 		else
 		{
 			ret = false;
+			if (type == gun)
+			{
+				app->audio->PlayFx(app->gun->bulletHitBrick);
+			}
 		}
 		if (type != gun)
 		{
@@ -259,6 +265,7 @@ bool Bullet::Update(Application* app, int player)
 			{
 				ret = false;
 				BreakingBrick(num, end.x / 8, (end.y - 1) / 8, app);
+				app->audio->PlayFx(app->gun->breakingBrick);
 			}
 		}
 

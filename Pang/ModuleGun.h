@@ -56,6 +56,8 @@ public:
 	int maxShots2;
 	int bulletWidth;
 	unsigned int hookPathDone;
+	unsigned int breakingBrick;
+	unsigned int bulletHitBrick;
 
 	//Graphics atributes
 	SDL_Rect bulletRect;
