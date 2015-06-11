@@ -195,7 +195,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	Reset();
-	if (dead)
+	if (dead && !timeOut)
 	{
 		if (!deadFlashAnim.Finished())
 		App->render->Blit(deadFlash, 0, 0, &deadFlashAnim.GetCurrentFrame(), NULL);
