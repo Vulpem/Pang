@@ -11,12 +11,7 @@ PLAYERS:
 SOUNDS:  (STIL NOT ONE FUCKING SOUND ADDED)
 	Adjust sounds "relative" volume
 	Fix level sound with 3 seconds delay
-	Sounds to get:
-		Breaking brick
-		Sticky hook reaching the top
-		Pistol
-		Life up
-		Shield going down
+	Gun shoot doesnt always sound
 
 SPRITES:
 	Get all arcade game sprites:
