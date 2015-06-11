@@ -1,9 +1,5 @@
 IMPORTANT BUGS:
 		Clean disables / enables with maps and scenes... and basically all the code xD
-		Quan tens més de 4 vides, el número que indica la quantitat de vides no apareix
-PLAYERS:
-
-
 SOUNDS:
 	Adjust sounds "relative" volume
 	Gun shoot doesnt always sound

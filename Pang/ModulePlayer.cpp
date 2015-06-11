@@ -921,6 +921,7 @@ void ModulePlayer::PrintInterface()
 	App->render->Blit(uiText[UI_Player_Player1], 2 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 	App->render->Blit(uiText[UI_Player_Player2], 35 * TILE, 26 * TILE, &rectText[UI_Player_Player1]);
 
+	//Printing "Continue?" or PUSHBUTTON
 	if (!App->player2->IsEnabled() && !App->player2->dead)
 	{
 		if (App->scenePlay->timer / 20 % 2 == 0)
@@ -973,6 +974,19 @@ void ModulePlayer::PrintInterface()
 
 	//PrintTexting interface//
 
+	//Lifes
+	if (App->scenePlay->lives1 > 4)
+	{
+		if (App->scenePlay->lives1 >= 10)
+			App->render->Blit(App->maps->textNumW[App->scenePlay->lives1 / 10], 10 * TILE, 29 * TILE, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[App->scenePlay->lives1 % 10], 11 * TILE, 29 * TILE, &App->maps->rectNum);
+	}
+	if (App->scenePlay->lives2 > 4)
+	{
+		if (App->scenePlay->lives2 >= 10)
+			App->render->Blit(App->maps->textNumW[App->scenePlay->lives2 / 10], 43 * TILE, 29 * TILE, &App->maps->rectNum);
+		App->render->Blit(App->maps->textNumW[App->scenePlay->lives2 % 10], 44 * TILE, 29 * TILE, &App->maps->rectNum);
+	}
 	//Level name
 
 	if ((App->scenePlay->currentLvl - 1) / 3 + 1 == 3)
