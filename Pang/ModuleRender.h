@@ -9,7 +9,7 @@ class ModuleRender : public Module
 private:
 	TTF_Font* font;
 	TTF_Font* fontInit;
-
+	TTF_Font* fontEnd;
 	SDL_Color textColor;
 
 public:

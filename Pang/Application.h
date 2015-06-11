@@ -11,6 +11,7 @@
 #include "ModuleScenePlay.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneTransition.h"
+#include "ModuleSceneEnd.h"
 
 #include "ModulePlayer.h"
 #include "ModulePlayer2.h"
@@ -35,6 +36,7 @@ public:
 	ModuleSceneIntro* sceneIntro;
 	ModuleScenePlay* scenePlay;
 	ModuleSceneTransition* sceneTransition;
+	ModuleSceneEnd* sceneEnd;
 
 	ModulePlayer* player;
 	ModulePlayer2* player2;

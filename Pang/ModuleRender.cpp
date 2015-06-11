@@ -19,7 +19,7 @@ bool ModuleRender::Init()
 {
 	fontInit = NULL;
 	font = NULL;
-
+	fontEnd = NULL;
 	LOG("Creating Renderer context");
 	bool ret = true;
 	Uint32 flags = 0;

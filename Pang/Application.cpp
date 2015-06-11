@@ -10,9 +10,10 @@ Application::Application()
 	audio = new ModuleAudio(this);
 	fonts = new ModuleFonts(this, true);
 
-	sceneIntro = new ModuleSceneIntro(this, true);
+	sceneIntro = new ModuleSceneIntro(this, false);
 	scenePlay = new ModuleScenePlay(this, false);
 	sceneTransition = new ModuleSceneTransition(this, false);
+	sceneEnd = new ModuleSceneEnd(this, true);
 
 	player2 = new ModulePlayer2(this, false);
 	player = new ModulePlayer(this, false);
@@ -36,6 +37,7 @@ Application::Application()
 	AddModule(sceneIntro);
 	AddModule(scenePlay);
 	AddModule(sceneTransition);
+	AddModule(sceneEnd);
 
 	AddModule(maps);
 	
@@ -61,6 +63,7 @@ Application::~Application()
 	delete gun;
 	delete maps;
 	
+	delete sceneEnd;
 	delete sceneTransition;
 	delete scenePlay;
 	delete sceneIntro;

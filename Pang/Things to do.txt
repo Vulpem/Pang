@@ -1,6 +1,7 @@
 IMPORTANT BUGS:
 		Clean disables / enables with maps and scenes... and basically all the code xD
 		Player was paused when killed by a ball...
+		Unload all textures
 SOUNDS:
 	Adjust sounds "relative" volume
 	Gun shoot doesnt always sound
