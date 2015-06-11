@@ -216,11 +216,11 @@ update_status ModuleScenePlay::Update()
 			ResetPlayer2();
 			if (player1ToEnable)
 				ResetPlayer1();
-			if (App->player2->dead)
-			{
+//			if (App->player2->dead)
+	//		{
 				Disable();
 				Enable(currentLvl);
-			}
+		//	}
 		}
 		else
 			player2ToEnable = true;
