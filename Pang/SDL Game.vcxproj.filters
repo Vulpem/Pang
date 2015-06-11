@@ -93,6 +93,9 @@
     <ClInclude Include="ModulePlayer2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneEnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

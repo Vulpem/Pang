@@ -74,6 +74,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ModulePlayer2.h" />
+    <ClInclude Include="ModuleSceneEnd.h" />
     <ClInclude Include="ModuleSceneTransition.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="ModuleAnimation.h" />
