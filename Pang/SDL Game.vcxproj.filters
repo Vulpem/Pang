@@ -163,5 +163,6 @@
     <Text Include="Things to do.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Controles.txt" />
   </ItemGroup>
 </Project>
