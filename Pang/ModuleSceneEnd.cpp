@@ -54,22 +54,22 @@ update_status ModuleSceneEnd::Update()
 	}
 
 	//Printing players score
-	if (App->player->score > 0)
+
+	App->render->Blit(App->player->uiText[UI_Player_Player1], 50, 220, &App->player->rectText[UI_Player_Player1]);
+	App->player->digitNumber = CountDigits(App->player->score);
+
+	for (int i = 1; i <= App->player->digitNumber; i++)
 	{
-		App->player->digitNumber = CountDigits(App->player->score);
+		App->player->rest = App->player->score % (int)(pow(10.0, i));
+		App->player->div = pow(10.0, (i - 1));
+		App->player->index = App->player->rest / App->player->div;
 
-		for (int i = 1; i <= App->player->digitNumber; i++)
-		{
-			App->player->rest = App->player->score % (int)(pow(10.0, i));
-			App->player->div = pow(10.0, (i - 1));
-			App->player->index = App->player->rest / App->player->div;
-
-			App->render->Blit(App->maps->textNumW[App->player->index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
-		}
+		App->render->Blit(App->maps->textNumW[App->player->index], 200 - (10 * (i - 1)), 220, &App->maps->rectNum);
 	}
 
 	if (App->player2->score > 0)
 	{
+		App->render->Blit(App->player->uiText[UI_Player_Player2], 220, 220, &App->player->rectText[UI_Player_Player2]);
 		App->player2->digitNumber = CountDigits(App->player2->score);
 
 		for (int i = 1; i <= App->player2->digitNumber; i++)
@@ -78,7 +78,7 @@ update_status ModuleSceneEnd::Update()
 			App->player2->div = pow(10.0, (i - 1));
 			App->player2->index = App->player2->rest / App->player2->div;
 
-			App->render->Blit(App->maps->textNumW[App->player2->index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+			App->render->Blit(App->maps->textNumW[App->player2->index], 370  - (10 * (i - 1)), 220, &App->maps->rectNum);
 		}
 	}
 

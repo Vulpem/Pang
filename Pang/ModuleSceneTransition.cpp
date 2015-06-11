@@ -190,7 +190,7 @@ void ModuleSceneTransition::Enable(int nextLevel)
 void ModuleSceneTransition::PrintStats()
 {
 	//Push button
-	if (timeCounter / 20 % 2 == 0)
+	if (timeCounter / 20 % 2 == 0 && (!App->scenePlay->player2Enabled && !App->player2->dead))         
 	{
 		App->render->Blit(uiText[UI_Transition_PUSHBUTTON], 280, 28 * TILE, &rectText[UI_Transition_PUSHBUTTON]);
 	}
