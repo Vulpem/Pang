@@ -572,7 +572,7 @@ void ModulePlayer2::CheckBallCollision()
 				{
 					if (shieldOn == true && !undying)
 					{
-						App->audio->PlayFx(App->player->shieldSound, 1);
+						App->audio->PlayFx(App->player->shieldSound);
 						shieldDelay = 120;
 						shieldOn = false;
 						tmp->data->shieldKill = true;
