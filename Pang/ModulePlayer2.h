@@ -73,8 +73,6 @@ public:
 	//Printing variables//
 	SDL_Texture* textText;
 
-//	SDL_Texture** uiText;
-//	SDL_Rect* rectText;
 	SDL_Rect textRect;
 
 	//////////////////////

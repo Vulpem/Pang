@@ -125,7 +125,7 @@ bool ModulePlayer::Init()
 	// shot2 animation
 	shot2.frames.PushBack({ 44, 179, 32, 32 });
 
-	// climb animation
+	// climb animation6
 	climb.frames.PushBack({ 80, 36, 30, 32 });
 	climb.frames.PushBack({ 47, 77, 30, 32 });
 	climb.frames.PushBack({ 114, 36, 30, 32 });
@@ -282,6 +282,10 @@ update_status ModulePlayer::Update()
 bool ModulePlayer::CleanUp()
 {
 	LOG("--Cleanup Player");
+	App->textures->Unload(graphics);
+	App->textures->Unload(shieldTexture);
+	App->textures->Unload(timeOutTexture);
+	App->textures->Unload(deadFlash);
 	return true;
 }
 

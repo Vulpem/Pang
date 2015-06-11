@@ -229,8 +229,6 @@ update_status ModuleGun::Update()
 	return UPDATE_CONTINUE;
 }
 
-
-
 bool Bullet::Update(Application* app, int player)
 {
 	bool ret = true;
@@ -532,6 +530,8 @@ bool ModuleGun::CleanUp()
 	shootAvailable1 = true;
 	shootAvailable2 = true;
 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
+	App->textures->Unload(bulletTexture);
 	return true;
 }
 

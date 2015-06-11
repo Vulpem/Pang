@@ -104,7 +104,9 @@ bool ModuleSceneTransition::CleanUp()
 
 {
 	LOG("--Cleanup Transition scene")
-		App->textures->Unload(graphics);
+	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
+	App->textures->Unload(selected);
 
 	return true;
 }

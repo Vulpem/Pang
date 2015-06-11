@@ -238,6 +238,8 @@ update_status ModulePlayer2::PostUpdate()
 bool ModulePlayer2::CleanUp()
 {
 	LOG("--Cleanup Player");
+	App->textures->Unload(graphics);
+	App->textures->Unload(shieldTexture);
 	return true;
 }
 

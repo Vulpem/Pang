@@ -20,6 +20,7 @@ ModuleMaps::~ModuleMaps()
 	}
 	delete[]textNumW;
 	delete[]textNumY;
+	delete[]textNumR;
 }
 
 bool ModuleMaps::Init()

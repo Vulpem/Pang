@@ -359,14 +359,17 @@ update_status ModuleScenePlay::PostUpdate()
 bool ModuleScenePlay::CleanUp()
 {
 	App->textures->Unload(backgroundGraphics);
+	App->textures->Unload(livesGraphics);
+	App->textures->Unload(timerImage);
+	App->textures->Unload(timerNum);
+	App->textures->Unload(ready);
+
 	App->particles->Disable();
 	App->boosts->Disable();
 	App->gun->Disable();
 	App->player->Disable();
 	App->player2->Disable();
 	App->maps->Disable();
-
-	App->textures->Unload(livesGraphics);
 
 	return true;
 }
