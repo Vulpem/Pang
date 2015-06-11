@@ -52,5 +52,35 @@ update_status ModuleSceneEnd::Update()
 		Disable();
 		App->sceneIntro->Enable();
 	}
+
+	//Printing players score
+	if (App->player->score > 0)
+	{
+		App->player->digitNumber = CountDigits(App->player->score);
+
+		for (int i = 1; i <= App->player->digitNumber; i++)
+		{
+			App->player->rest = App->player->score % (int)(pow(10.0, i));
+			App->player->div = pow(10.0, (i - 1));
+			App->player->index = App->player->rest / App->player->div;
+
+			App->render->Blit(App->maps->textNumW[App->player->index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+		}
+	}
+
+	if (App->player2->score > 0)
+	{
+		App->player2->digitNumber = CountDigits(App->player2->score);
+
+		for (int i = 1; i <= App->player2->digitNumber; i++)
+		{
+			App->player2->rest = App->player2->score % (int)(pow(10.0, i));
+			App->player2->div = pow(10.0, (i - 1));
+			App->player2->index = App->player2->rest / App->player2->div;
+
+			App->render->Blit(App->maps->textNumW[App->player2->index], 120 - (10 * (i - 1)), 216, &App->maps->rectNum);
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
