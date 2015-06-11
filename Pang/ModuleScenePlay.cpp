@@ -135,7 +135,7 @@ update_status ModuleScenePlay::Update()
 	}
 	if (endingCounter > 180)
 	{
-		timeBonus = timer / FPS * 10;
+		timeBonus = (timer / FPS * 10) + 30;
 		App->player->shieldDelay = 0;
 		App->player2->shieldDelay = 0;
 		Disable();
@@ -159,7 +159,7 @@ update_status ModuleScenePlay::Update()
 		}
 		else
 		{
-			if (App->player->IsEnabled() || App->player2->IsEnabled())
+			if ((App->player->IsEnabled() || App->player2->IsEnabled()) && App->balls->ballsList.count() > 0)
 			{
 				if ((!App->player2->IsEnabled() && !App->player->dead) || (!App->player->IsEnabled() && !App->player2->dead) || (!App->player->dead && !App->player2->dead))
 				{
