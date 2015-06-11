@@ -637,56 +637,72 @@ void ModulePlayer::Reset()
 	}
 	if (waitingContinue && player1DeadTimer <= 0)
 	{
+		if (App->player2->IsEnabled())
+		{
 		waitingContinue = false;
 		App->scenePlay->Disable();
 		App->scenePlay->Enable(App->scenePlay->currentLvl);
 		App->scenePlay->player1Enabled = false;
 		Disable();
-	}
-	if (deadAnimEnd == true )
-	{
-		if (App->scenePlay->lives1 > 0)
-		{
-			dead = false;
-			App->scenePlay->lives1 -= 1;
-			App->scenePlay->Disable();
-			App->scenePlay->Enable(App->scenePlay->currentLvl);
 		}
+
 		else
 		{
-			if (!App->player2->IsEnabled())
+			waitingContinue = false;
+			App->scenePlay->Disable();
+			App->sceneIntro->Enable();
+			App->scenePlay->player1Enabled = false;
+			Disable();
+		}
+	}
+	else
+	{
+		if (deadAnimEnd == true )
+		{
+			if (App->scenePlay->lives1 > 0)
 			{
-				if (player1DeadTimer <= 0)
+				dead = false;
+				App->scenePlay->lives1 -= 1;
+				App->scenePlay->Disable();
+				App->scenePlay->Enable(App->scenePlay->currentLvl);
+			}
+			else
+			{
+				if (!App->player2->IsEnabled())
 				{
-					waitingContinue = false;
-					App->scenePlay->player2Enabled = false;
-					App->scenePlay->Disable();
-					App->sceneIntro->Enable();
+					if (player1DeadTimer <= 0)
+					{
+						waitingContinue = false;
+						App->scenePlay->player2Enabled = false;
+						App->scenePlay->Disable();
+						App->sceneIntro->Enable();
+					}
+					else
+					{
+						waitingContinue = true;
+					}
 				}
 				else
 				{
 					waitingContinue = true;
-				}
-			}
-			else
-			{
-				waitingContinue = true;
-				if (player1DeadTimer <= 0)
-				{
-					App->scenePlay->Disable();
-					App->scenePlay->Enable(App->scenePlay->currentLvl);
+					if (player1DeadTimer <= 0)
+					{
+						App->scenePlay->Disable();
+						App->scenePlay->Enable(App->scenePlay->currentLvl);
+					}
 				}
 			}
 		}
+		if (timeOutDelay == 180)
+		{
+			deadAnimEnd = true;
+			timeOutDelay = 0;
+			timeOut = false;
+			if (App->scenePlay->lives1 == 0)
+				timeOutContinue = true;
+		}
 	}
-	if (timeOutDelay == 180)
-	{
-		deadAnimEnd = true;
-		timeOutDelay = 0;
-		timeOut = false;
-		if (App->scenePlay->lives1 == 0)
-			timeOutContinue = true;
-	}
+
 }
 
 bool ModulePlayer::LadderUpEnds()
